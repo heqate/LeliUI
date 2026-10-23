@@ -3097,69 +3097,6 @@ Core Rules:
       cmdInput.addEventListener('input', (e) => filterCommandPalette(e.target.value));
     }
 
-    /* ====================================================================
-       THEME & COLOR CUSTOMIZER LOGIC
-       ==================================================================== */
-    let currentCustomTheme = {
-      primary: '#f472b6',
-      radius: '0.5rem'
-    };
-
-    function openThemeCustomizer() {
-      const dlg = document.getElementById('leliThemeDialog');
-      if (dlg) {
-        if (typeof dlg.showModal === 'function') dlg.showModal();
-        else dlg.setAttribute('open', '');
-      }
-    }
-
-    function closeThemeCustomizer() {
-      const dlg = document.getElementById('leliThemeDialog');
-      if (dlg) {
-        if (typeof dlg.close === 'function') dlg.close();
-        else dlg.removeAttribute('open');
-      }
-    }
-
-    function applyBrandAccent(hex, name, btn) {
-      currentCustomTheme.primary = hex;
-      document.documentElement.style.setProperty('--leli-primary', hex);
-      document.documentElement.style.setProperty('--leli-focus', hex);
-
-      document.querySelectorAll('.color-swatch-btn').forEach(b => b.classList.remove('is-active'));
-      if (btn) btn.classList.add('is-active');
-
-      updateThemeCodePreview();
-      LeliUI.Toast.show({ title: 'Brand Accent Updated', message: 'Theme set to ' + name, type: 'primary', duration: 2000 });
-    }
-
-    function applyRadius(val) {
-      currentCustomTheme.radius = val;
-      document.documentElement.style.setProperty('--leli-radius-md', val);
-      document.documentElement.style.setProperty('--leli-radius-lg', val === '0px' ? '0px' : 'calc(' + val + ' * 1.5)');
-      updateThemeCodePreview();
-    }
-
-    function updateThemeCodePreview() {
-      const code = document.getElementById('themeTokensCode');
-      if (code) {
-        code.textContent = `:root {\n  --leli-primary: ${currentCustomTheme.primary};\n  --leli-focus: ${currentCustomTheme.primary};\n  --leli-radius-md: ${currentCustomTheme.radius};\n}`;
-      }
-    }
-
-    function resetThemeDefaults() {
-      applyBrandAccent('#f472b6', 'Sakura Pink (Default)', null);
-      applyRadius('0.5rem');
-      document.querySelectorAll('.color-swatch-btn').forEach((b, i) => b.classList.toggle('is-active', i === 0));
-    }
-
-    function copyCustomCssTokens(btn) {
-      const code = `:root {\n  --leli-primary: ${currentCustomTheme.primary};\n  --leli-focus: ${currentCustomTheme.primary};\n  --leli-radius-md: ${currentCustomTheme.radius};\n}`;
-      navigator.clipboard.writeText(code);
-      const old = btn.textContent;
-      btn.textContent = 'Copied!';
-      setTimeout(() => (btn.textContent = old), 1200);
-    }
 
     /* ====================================================================
        INTERACTIVE PLAYGROUND CONTROLLER
