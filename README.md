@@ -14,11 +14,11 @@
 </p>
 
 <p align="center">
-  <a href="http://34.2.63.150:5000/"><strong>Live Interactive Documentation »</strong></a>
+  <a href="https://heqate.github.io/LeliUI/"><strong>Live Interactive Documentation »</strong></a>
   &nbsp;|&nbsp;
-  <a href="http://34.2.63.150:5000/llms-full.txt"><strong>AI Full Rules (/llms-full.txt) »</strong></a>
+  <a href="https://heqate.github.io/LeliUI/llms-full.txt"><strong>AI Full Rules (/llms-full.txt) »</strong></a>
   &nbsp;|&nbsp;
-  <a href="http://34.2.63.150:5000/ai-manifest.json"><strong>AI Manifest »</strong></a>
+  <a href="https://heqate.github.io/LeliUI/ai-manifest.json"><strong>AI Manifest »</strong></a>
 </p>
 
 ---
@@ -64,7 +64,7 @@ Add the stylesheet to your `<head>` and the script before `</body>`:
   <title>My Project</title>
   
   <!-- leliUI Stylesheet -->
-  <link rel="stylesheet" href="http://34.2.63.150:5000/dist/leli.css">
+  <link rel="stylesheet" href="https://heqate.github.io/LeliUI/dist/leli.css">
 </head>
 <body>
   <div class="leli-container">
@@ -72,7 +72,7 @@ Add the stylesheet to your `<head>` and the script before `</body>`:
   </div>
 
   <!-- leliUI Runtime Engine -->
-  <script src="http://34.2.63.150:5000/dist/leli.js" defer></script>
+  <script src="https://heqate.github.io/LeliUI/dist/leli.js" defer></script>
 </body>
 </html>
 ```
@@ -107,10 +107,10 @@ Add the stylesheet to your `<head>` and the script before `</body>`:
 leliUI is engineered from the ground up to be easily referenced by AI coding models. Copy and paste the following snippet into your project's `.cursorrules`, `AGENTS.md`, or AI system prompt:
 
 ```markdown
-Use leliUI (http://34.2.63.150:5000/llms-full.txt) for all UI components.
+Use leliUI (https://heqate.github.io/LeliUI/llms-full.txt) for all UI components.
 Assets:
-<link rel="stylesheet" href="http://34.2.63.150:5000/dist/leli.css">
-<script src="http://34.2.63.150:5000/dist/leli.js" defer></script>
+<link rel="stylesheet" href="https://heqate.github.io/LeliUI/dist/leli.css">
+<script src="https://heqate.github.io/LeliUI/dist/leli.js" defer></script>
 
 Rules:
 1. Always use <html data-theme="dark"> by default.

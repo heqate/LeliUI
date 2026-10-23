@@ -1,0 +1,192 @@
+/* ==========================================================================
+   leliUI - Dropdown & Menu Component
+   Interactive context dropdowns with keyboard navigation, glass & brutal variants
+   ========================================================================== */
+
+@layer components {
+  /* --- 1. Dropdown Container --- */
+  .leli-dropdown {
+    position: relative;
+    display: inline-flex;
+  }
+
+  /* --- 2. Dropdown Menu --- */
+  .leli-dropdown-menu {
+    --leli-dropdown-bg: var(--leli-surface-1, #15111a);
+    --leli-dropdown-border: var(--leli-border);
+    --leli-dropdown-color: var(--leli-text);
+    --leli-dropdown-min-w: 13rem;
+
+    position: absolute;
+    z-index: 1000;
+    min-width: var(--leli-dropdown-min-w);
+    padding: 0.35rem;
+    margin: 0;
+    list-style: none;
+    background-color: var(--leli-dropdown-bg);
+    border: 1px solid var(--leli-dropdown-border);
+    border-radius: var(--leli-radius-md);
+    box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+
+    /* Hidden by default */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px) scale(0.97);
+    pointer-events: none;
+    transition: opacity 160ms var(--leli-ease),
+                transform 160ms var(--leli-ease),
+                visibility 160ms;
+
+    /* Placements */
+    &.placement-bottom-start,
+    &:not([class*="placement-"]) {
+      top: calc(100% + 0.4rem);
+      left: 0;
+    }
+    &.placement-bottom-end {
+      top: calc(100% + 0.4rem);
+      right: 0;
+    }
+    &.placement-top-start {
+      bottom: calc(100% + 0.4rem);
+      left: 0;
+    }
+    &.placement-top-end {
+      bottom: calc(100% + 0.4rem);
+      right: 0;
+    }
+
+    /* Open state */
+    &.is-open,
+    .leli-dropdown.is-active > &,
+    .leli-dropdown[aria-expanded="true"] > & {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+  }
+
+  /* --- 3. Menu Item --- */
+  .leli-dropdown-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--leli-dropdown-color);
+    text-decoration: none;
+    border: none;
+    background: transparent;
+    border-radius: var(--leli-radius-sm);
+    cursor: pointer;
+    user-select: none;
+    transition: all var(--leli-duration) var(--leli-ease);
+
+    & .leli-dropdown-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      inline-size: 1.15rem;
+      block-size: 1.15rem;
+      color: var(--leli-text-muted);
+      flex-shrink: 0;
+
+      & svg {
+        inline-size: 1rem;
+        block-size: 1rem;
+      }
+    }
+
+    & .leli-dropdown-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex: 1 1 auto;
+      text-align: start;
+    }
+
+    & kbd,
+    & .leli-dropdown-kbd {
+      font-family: var(--leli-font-mono);
+      font-size: 0.7rem;
+      color: var(--leli-text-muted);
+      background-color: var(--leli-surface-2);
+      border: 1px solid var(--leli-border);
+      border-radius: var(--leli-radius-xs);
+      padding: 0.1rem 0.35rem;
+    }
+
+    &:hover,
+    &:focus-visible,
+    &.is-focused {
+      background-color: var(--leli-surface-2);
+      color: var(--leli-primary);
+      outline: none;
+
+      & .leli-dropdown-icon {
+        color: var(--leli-primary);
+      }
+    }
+
+    &.is-danger,
+    &[data-variant="danger"] {
+      color: var(--leli-danger, #f43f5e);
+
+      &:hover,
+      &:focus-visible {
+        background-color: color-mix(in srgb, var(--leli-danger, #f43f5e) 12%, transparent);
+        color: var(--leli-danger, #f43f5e);
+
+        & .leli-dropdown-icon {
+          color: var(--leli-danger, #f43f5e);
+        }
+      }
+    }
+
+    &:disabled,
+    &.is-disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  /* --- 4. Section Header & Divider --- */
+  .leli-dropdown-header {
+    padding: 0.4rem 0.75rem 0.2rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--leli-text-muted);
+  }
+
+  .leli-dropdown-divider {
+    height: 1px;
+    margin: 0.3rem 0;
+    overflow: hidden;
+    background-color: var(--leli-border);
+  }
+
+  /* --- 5. Variants --- */
+  .leli-dropdown-menu[data-variant="glass"],
+  .leli-dropdown[data-variant="glass"] .leli-dropdown-menu {
+    background-color: color-mix(in srgb, var(--leli-surface-1, #15111a) 85%, transparent);
+    backdrop-filter: blur(20px);
+    border-color: color-mix(in srgb, var(--leli-primary) 30%, var(--leli-border));
+  }
+
+  .leli-dropdown-menu[data-variant="brutal"],
+  .leli-dropdown[data-variant="brutal"] .leli-dropdown-menu {
+    border: 2px solid var(--leli-border-strong);
+    border-radius: 4px;
+    box-shadow: 4px 4px 0 var(--leli-border-strong);
+  }
+}

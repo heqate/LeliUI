@@ -1,0 +1,207 @@
+/* ==========================================================================
+   leliUI - Tooltip & Popover Component
+   Zero-JS attribute tooltips + accessible interactive popovers
+   ========================================================================== */
+
+@layer components {
+  /* --- 1. Pure CSS Attribute Tooltip --- */
+  [data-tooltip] {
+    --leli-tooltip-bg: var(--leli-surface-3, #2a2233);
+    --leli-tooltip-color: #ffffff;
+    --leli-tooltip-arrow: 5px;
+    --leli-tooltip-font: 0.76rem;
+
+    position: relative;
+
+    &::before,
+    &::after {
+      position: absolute;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 150ms var(--leli-ease),
+                  transform 150ms var(--leli-ease),
+                  visibility 150ms;
+      z-index: 10000;
+    }
+
+    /* Tooltip Bubble */
+    &::before {
+      content: attr(data-tooltip);
+      padding: 0.35rem 0.65rem;
+      font-family: var(--leli-font-sans);
+      font-size: var(--leli-tooltip-font);
+      font-weight: 500;
+      line-height: 1.25;
+      white-space: nowrap;
+      color: var(--leli-tooltip-color);
+      background-color: var(--leli-tooltip-bg);
+      border-radius: var(--leli-radius-sm);
+      border: 1px solid var(--leli-border);
+      box-shadow: 0 8px 24px -3px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Tooltip Arrow */
+    &::after {
+      content: "";
+      border: var(--leli-tooltip-arrow) solid transparent;
+    }
+
+    /* Default Position: Top */
+    &:not([data-tooltip-pos]),
+    &[data-tooltip-pos="top"] {
+      &::before {
+        bottom: calc(100% + var(--leli-tooltip-arrow) + 3px);
+        left: 50%;
+        transform: translateX(-50%) translateY(4px);
+      }
+      &::after {
+        bottom: calc(100% + 3px - var(--leli-tooltip-arrow));
+        left: 50%;
+        transform: translateX(-50%) translateY(4px);
+        border-top-color: var(--leli-tooltip-bg);
+      }
+
+      &:hover::before,
+      &:focus-visible::before {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+      }
+      &:hover::after,
+      &:focus-visible::after {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    /* Position: Bottom */
+    &[data-tooltip-pos="bottom"] {
+      &::before {
+        top: calc(100% + var(--leli-tooltip-arrow) + 3px);
+        left: 50%;
+        transform: translateX(-50%) translateY(-4px);
+      }
+      &::after {
+        top: calc(100% + 3px - var(--leli-tooltip-arrow));
+        left: 50%;
+        transform: translateX(-50%) translateY(-4px);
+        border-bottom-color: var(--leli-tooltip-bg);
+      }
+
+      &:hover::before,
+      &:focus-visible::before {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+      }
+      &:hover::after,
+      &:focus-visible::after {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    /* Position: Left */
+    &[data-tooltip-pos="left"] {
+      &::before {
+        right: calc(100% + var(--leli-tooltip-arrow) + 3px);
+        top: 50%;
+        transform: translateY(-50%) translateX(4px);
+      }
+      &::after {
+        right: calc(100% + 3px - var(--leli-tooltip-arrow));
+        top: 50%;
+        transform: translateY(-50%) translateX(4px);
+        border-left-color: var(--leli-tooltip-bg);
+      }
+
+      &:hover::before,
+      &:focus-visible::before {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(-50%) translateX(0);
+      }
+      &:hover::after,
+      &:focus-visible::after {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(-50%) translateX(0);
+      }
+    }
+
+    /* Position: Right */
+    &[data-tooltip-pos="right"] {
+      &::before {
+        left: calc(100% + var(--leli-tooltip-arrow) + 3px);
+        top: 50%;
+        transform: translateY(-50%) translateX(-4px);
+      }
+      &::after {
+        left: calc(100% + 3px - var(--leli-tooltip-arrow));
+        top: 50%;
+        transform: translateY(-50%) translateX(-4px);
+        border-right-color: var(--leli-tooltip-bg);
+      }
+
+      &:hover::before,
+      &:focus-visible::before {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(-50%) translateX(0);
+      }
+      &:hover::after,
+      &:focus-visible::after {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(-50%) translateX(0);
+      }
+    }
+  }
+
+  /* --- 2. Interactive Popover Card --- */
+  .leli-popover {
+    position: relative;
+    display: inline-flex;
+
+    & .leli-popover-content {
+      position: absolute;
+      z-index: 1000;
+      width: 18rem;
+      padding: 1rem;
+      background-color: var(--leli-surface-1, #16121c);
+      border: 1px solid var(--leli-border);
+      border-radius: var(--leli-radius-md);
+      box-shadow: 0 16px 40px -6px rgba(0, 0, 0, 0.75);
+      top: calc(100% + 0.5rem);
+      left: 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(6px);
+      transition: all 180ms var(--leli-ease);
+      pointer-events: none;
+    }
+
+    &.is-open .leli-popover-content {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    & .leli-popover-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--leli-text);
+      margin: 0 0 0.35rem 0;
+    }
+
+    & .leli-popover-body {
+      font-size: 0.825rem;
+      color: var(--leli-text-muted);
+      line-height: 1.45;
+    }
+  }
+}

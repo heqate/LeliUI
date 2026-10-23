@@ -177,6 +177,46 @@ const COMPONENT_META = [
     shapes: ['circle', 'rounded', 'squircle', 'square'],
     sizes: ['xs', 'sm', 'md', 'lg', 'xl'],
     description: 'User avatars with online/busy/away status indicators, fallback initials, and overlapping avatar stack groups.'
+  },
+  {
+    name: 'dropdown',
+    title: 'Dropdown & Menu',
+    category: 'Overlays & Feedback',
+    file: 'components/dropdown.css',
+    jsRequired: true,
+    variants: ['placement-bottom-start', 'placement-bottom-end', 'placement-top-start', 'placement-top-end', 'glass', 'brutal', 'headers', 'shortcuts'],
+    sizes: ['sm', 'md', 'lg'],
+    description: 'Keyboard-navigable contextual dropdown menu with shortcut hints, divider sections, glassmorphism, and auto-dismiss.'
+  },
+  {
+    name: 'tooltip',
+    title: 'Tooltip & Popover',
+    category: 'Overlays & Feedback',
+    file: 'components/tooltip.css',
+    jsRequired: false,
+    variants: ['top', 'bottom', 'left', 'right', 'glass', 'brutal', 'popover'],
+    sizes: ['sm', 'md', 'lg'],
+    description: 'Zero-JS micro-interactions with pure CSS [data-tooltip] positions, delayed transitions, and rich interactive .leli-popover cards.'
+  },
+  {
+    name: 'drawer',
+    title: 'Drawer & Sheet',
+    category: 'Overlays & Feedback',
+    file: 'components/drawer.css',
+    jsRequired: true,
+    variants: ['placement-right', 'placement-left', 'placement-bottom', 'placement-top', 'glass', 'brutal'],
+    sizes: ['sm', 'md', 'lg', 'xl', 'full'],
+    description: 'Slide-in offcanvas drawers and mobile bottom sheets using native <dialog> with smooth @starting-style animations and backdrop blur.'
+  },
+  {
+    name: 'alert',
+    title: 'Alert & Banner',
+    category: 'Overlays & Feedback',
+    file: 'components/alert.css',
+    jsRequired: true,
+    variants: ['primary', 'success', 'warning', 'danger', 'info', 'glass', 'brutal', 'banner'],
+    sizes: ['md'],
+    description: 'Contextual notification banners with semantic accents, icons, and smooth animated dismissal.'
   }
 ];
 
@@ -230,7 +270,7 @@ fs.copyFileSync(path.join(SRC, 'js/leli.js'), path.join(DIST, 'leli.js'));
 fs.writeFileSync(path.join(REGISTRY, 'components.json'), JSON.stringify(registryData, null, 2), 'utf8');
 
 // 5. Generate AI-Discovery Files (llms.txt, llms-full.txt, ai-manifest.json)
-const SERVER_URL = 'http://34.2.63.150:5000';
+const SERVER_URL = 'https://heqate.github.io/LeliUI';
 
 const llmsTxt = `# leliUI v${VERSION} — AI-First & Educational HTML/CSS/JS Component Library
 
@@ -488,6 +528,83 @@ Variants: \`default\`, \`striped\`, \`hoverable\`, \`bordered\`, \`glass\`, \`br
 - Progress: \`<div class="leli-progress" data-variant="striped animated" style="--progress-value: 75%;"><div class="leli-progress-bar"></div></div>\`
 - Skeleton: \`<span class="leli-skeleton" data-shape="circle"></span>\`, \`data-shape="title | text | media | button"\`
 - Avatar: \`<div class="leli-avatar" data-variant="solid" data-status="online">SJ</div>\`
+
+### 14. Dropdown & Context Menu (dropdown)
+Variants: \`placement-bottom-start\`, \`placement-bottom-end\`, \`placement-top-start\`, \`placement-top-end\`, \`glass\`, \`brutal\`
+Features: Keyboard arrow navigation (ArrowDown/ArrowUp), Escape dismiss, outside click dismiss.
+\`\`\`html
+<div class="leli-dropdown">
+  <button class="leli-btn leli-dropdown-trigger" data-variant="outlined">
+    Options <span class="leli-dropdown-chevron">&#9662;</span>
+  </button>
+  <div class="leli-dropdown-menu placement-bottom-start">
+    <div class="leli-dropdown-header">Actions</div>
+    <a href="#" class="leli-dropdown-item">
+      <span>Edit Profile</span>
+      <kbd class="leli-kbd">&#8984;E</kbd>
+    </a>
+    <a href="#" class="leli-dropdown-item">
+      <span>Duplicate</span>
+      <kbd class="leli-kbd">&#8984;D</kbd>
+    </a>
+    <div class="leli-dropdown-divider"></div>
+    <a href="#" class="leli-dropdown-item is-danger">Delete</a>
+  </div>
+</div>
+\`\`\`
+
+### 15. Tooltip & Popover (tooltip)
+Pure CSS micro-interactions via \`data-tooltip\` attribute and rich \`.leli-popover\` cards:
+\`\`\`html
+<!-- Pure CSS Tooltip -->
+<button class="leli-btn" data-tooltip="Copy link to clipboard" data-tooltip-pos="top">
+  Share
+</button>
+
+<!-- Interactive Rich Popover -->
+<div class="leli-popover-wrapper">
+  <button class="leli-btn" data-variant="outlined">Hover Info</button>
+  <div class="leli-popover placement-top">
+    <h4 class="leli-popover-title">Instant Insight</h4>
+    <p class="leli-popover-text">Zero-runtime CSS container with subtle Sakura Pink glow and rounded corners.</p>
+  </div>
+</div>
+\`\`\`
+
+### 16. Drawer & Sheet (drawer)
+Accessible slide-in panel / offcanvas sheet using HTML5 \`<dialog>\`:
+\`\`\`html
+<!-- Trigger -->
+<button class="leli-btn" data-variant="solid" data-drawer-target="cartDrawer">View Cart</button>
+
+<!-- Slide-in Drawer -->
+<dialog id="cartDrawer" class="leli-drawer placement-right">
+  <div class="leli-drawer-header">
+    <h3 class="leli-drawer-title">Shopping Cart</h3>
+    <button type="button" class="leli-drawer-close" aria-label="Close drawer">&times;</button>
+  </div>
+  <div class="leli-drawer-body">
+    <p>Your cart items appear here with smooth 60fps hardware-accelerated animations.</p>
+  </div>
+  <div class="leli-drawer-footer">
+    <button class="leli-btn" data-variant="outlined" data-drawer-close="cartDrawer">Cancel</button>
+    <button class="leli-btn" data-variant="solid">Checkout</button>
+  </div>
+</dialog>
+\`\`\`
+
+### 17. Alert & Banner (alert)
+Contextual message banners with semantic accents and smooth dismissal:
+\`\`\`html
+<div class="leli-alert" data-accent="primary">
+  <span class="leli-alert-icon">&#9733;</span>
+  <div class="leli-alert-content">
+    <h4 class="leli-alert-title">Wave 2 Update Live</h4>
+    <p class="leli-alert-description">Dropdowns, Tooltips, Drawers, and Alert banners are now fully available.</p>
+  </div>
+  <button type="button" class="leli-alert-close" aria-label="Dismiss alert">&times;</button>
+</div>
+\`\`\`
 `;
 
 const aiManifest = {
@@ -496,7 +613,7 @@ const aiManifest = {
   name_for_model: 'leli_ui',
   version: VERSION,
   description_for_model:
-    'Zero-dependency multi-variant HTML/CSS/JS UI component library with Sakura Pink theme and dark mode default. Use leliUI classes (.leli-container, .leli-row, .leli-col-*, .leli-bento, .leli-navbar, .leli-btn, .leli-input, .leli-switch, .leli-checkbox, .leli-badge, .leli-modal, .leli-toast, .leli-card, .leli-tabs, .leli-accordion, .leli-table, .leli-pagination, .leli-progress, .leli-skeleton, .leli-avatar) and data-variant attributes to build clean responsive interfaces.',
+    'Zero-dependency multi-variant HTML/CSS/JS UI component library with Sakura Pink theme and dark mode default. Use leliUI classes (.leli-container, .leli-row, .leli-col-*, .leli-bento, .leli-navbar, .leli-btn, .leli-input, .leli-switch, .leli-checkbox, .leli-badge, .leli-modal, .leli-toast, .leli-card, .leli-tabs, .leli-accordion, .leli-table, .leli-pagination, .leli-progress, .leli-skeleton, .leli-avatar, .leli-dropdown, [data-tooltip], .leli-popover, .leli-drawer, .leli-alert) and data-variant attributes to build clean responsive interfaces.',
   endpoints: {
     llms_txt: `${SERVER_URL}/llms.txt`,
     llms_full_txt: `${SERVER_URL}/llms-full.txt`,

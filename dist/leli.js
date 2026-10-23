@@ -428,6 +428,147 @@
   };
 
   /**
+   * 10. Dropdown Component Controller
+   * Interactive dropdown context menus with keyboard accessibility, escape dismiss, and event dispatch
+   */
+  const Dropdown = {
+    open(dropdownEl) {
+      if (!dropdownEl) return;
+      Dropdown.closeAll(dropdownEl);
+      dropdownEl.classList.add('is-open');
+      const trigger = dropdownEl.querySelector('.leli-dropdown-trigger, button, [data-dropdown-toggle]');
+      if (trigger) trigger.setAttribute('aria-expanded', 'true');
+      const menu = dropdownEl.querySelector('.leli-dropdown-menu');
+      if (menu) menu.setAttribute('aria-hidden', 'false');
+      dropdownEl.dispatchEvent(new CustomEvent('leli:dropdown-open', { bubbles: true }));
+    },
+
+    close(dropdownEl) {
+      if (!dropdownEl) return;
+      dropdownEl.classList.remove('is-open');
+      const trigger = dropdownEl.querySelector('.leli-dropdown-trigger, button, [data-dropdown-toggle]');
+      if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      const menu = dropdownEl.querySelector('.leli-dropdown-menu');
+      if (menu) menu.setAttribute('aria-hidden', 'true');
+      dropdownEl.dispatchEvent(new CustomEvent('leli:dropdown-close', { bubbles: true }));
+    },
+
+    toggle(dropdownEl) {
+      if (!dropdownEl) return;
+      if (dropdownEl.classList.contains('is-open')) {
+        Dropdown.close(dropdownEl);
+      } else {
+        Dropdown.open(dropdownEl);
+      }
+    },
+
+    closeAll(exceptEl = null) {
+      document.querySelectorAll('.leli-dropdown.is-open').forEach((el) => {
+        if (el !== exceptEl && !el.contains(exceptEl)) {
+          Dropdown.close(el);
+        }
+      });
+    }
+  };
+
+  /**
+   * 11. Drawer & Sheet Component Controller
+   * Manages slide-in offcanvas panels (HTML5 <dialog> and standard elements)
+   */
+  const Drawer = {
+    open(target) {
+      const drawer = typeof target === 'string' ? document.getElementById(target) : target;
+      if (!drawer) return;
+
+      if (drawer.tagName === 'DIALOG' && typeof drawer.showModal === 'function') {
+        if (!drawer.open) drawer.showModal();
+      } else {
+        drawer.classList.add('is-open');
+        const backdrop = drawer.dataset.backdrop
+          ? document.getElementById(drawer.dataset.backdrop)
+          : document.querySelector(`.leli-drawer-backdrop[data-drawer-for="${drawer.id}"]`);
+        if (backdrop) backdrop.classList.add('is-open');
+      }
+
+      document.body.style.overflow = 'hidden';
+      drawer.dispatchEvent(new CustomEvent('leli:drawer-open', { bubbles: true }));
+    },
+
+    close(target) {
+      const drawer = typeof target === 'string' ? document.getElementById(target) : target;
+      if (!drawer) return;
+
+      if (drawer.tagName === 'DIALOG' && typeof drawer.close === 'function') {
+        if (drawer.open) drawer.close();
+      } else {
+        drawer.classList.remove('is-open');
+        const backdrop = drawer.dataset.backdrop
+          ? document.getElementById(drawer.dataset.backdrop)
+          : document.querySelector(`.leli-drawer-backdrop[data-drawer-for="${drawer.id}"]`);
+        if (backdrop) backdrop.classList.remove('is-open');
+      }
+
+      const anyOtherOpen = document.querySelector('dialog[open], .leli-drawer.is-open');
+      if (!anyOtherOpen) {
+        document.body.style.overflow = '';
+      }
+      drawer.dispatchEvent(new CustomEvent('leli:drawer-close', { bubbles: true }));
+    },
+
+    toggle(target) {
+      const drawer = typeof target === 'string' ? document.getElementById(target) : target;
+      if (!drawer) return;
+      const isOpen = drawer.tagName === 'DIALOG' ? drawer.open : drawer.classList.contains('is-open');
+      if (isOpen) {
+        Drawer.close(drawer);
+      } else {
+        Drawer.open(drawer);
+      }
+    },
+
+    init(root = document) {
+      root.querySelectorAll('dialog.leli-drawer').forEach((drawer) => {
+        if (drawer.dataset.leliBound) return;
+        drawer.dataset.leliBound = 'true';
+
+        drawer.addEventListener('click', (e) => {
+          const rect = drawer.getBoundingClientRect();
+          const clickedOutside =
+            e.clientX < rect.left ||
+            e.clientX > rect.right ||
+            e.clientY < rect.top ||
+            e.clientY > rect.bottom;
+          if (clickedOutside) {
+            Drawer.close(drawer);
+          }
+        });
+
+        drawer.addEventListener('close', () => {
+          const anyOtherOpen = document.querySelector('dialog[open], .leli-drawer.is-open');
+          if (!anyOtherOpen) {
+            document.body.style.overflow = '';
+          }
+        });
+      });
+    }
+  };
+
+  /**
+   * 12. Alert Component Controller
+   * Handles dismissible alert banners with smooth collapsing animations
+   */
+  const Alert = {
+    dismiss(alertEl) {
+      if (!alertEl) return;
+      alertEl.classList.add('is-dismissing');
+      alertEl.dispatchEvent(new CustomEvent('leli:alert-dismiss', { bubbles: true }));
+      setTimeout(() => {
+        alertEl.remove();
+      }, 240);
+    }
+  };
+
+  /**
    * Global Event Delegation for Zero-Config Component Usage
    */
   function bindGlobalEvents() {
@@ -484,10 +625,98 @@
         }
         return;
       }
+
+      // 6. Dropdown Trigger Click
+      const dropdownTrigger = e.target.closest('.leli-dropdown-trigger, [data-dropdown-toggle]');
+      if (dropdownTrigger) {
+        const dropdown = dropdownTrigger.closest('.leli-dropdown') ||
+          (dropdownTrigger.dataset.dropdownToggle ? document.getElementById(dropdownTrigger.dataset.dropdownToggle) : null);
+        if (dropdown) {
+          e.preventDefault();
+          Dropdown.toggle(dropdown);
+          return;
+        }
+      }
+
+      // 7. Dropdown Outside Click Dismiss
+      if (!e.target.closest('.leli-dropdown')) {
+        Dropdown.closeAll();
+      }
+
+      // 8. Drawer Open Trigger Click
+      const drawerOpenTrigger = e.target.closest('[data-drawer-target], [data-drawer-open]');
+      if (drawerOpenTrigger) {
+        const targetId = drawerOpenTrigger.dataset.drawerTarget || drawerOpenTrigger.dataset.drawerOpen;
+        if (targetId) {
+          e.preventDefault();
+          Drawer.open(targetId);
+        }
+        return;
+      }
+
+      // 9. Drawer Close Trigger Click
+      const drawerCloseTrigger = e.target.closest('.leli-drawer-close, [data-drawer-close]');
+      if (drawerCloseTrigger) {
+        const drawer = drawerCloseTrigger.closest('.leli-drawer, dialog.leli-drawer') ||
+          (drawerCloseTrigger.dataset.drawerClose ? document.getElementById(drawerCloseTrigger.dataset.drawerClose) : null);
+        if (drawer) {
+          e.preventDefault();
+          Drawer.close(drawer);
+        }
+        return;
+      }
+
+      // 10. Drawer Standalone Backdrop Click
+      if (e.target.matches && e.target.matches('.leli-drawer-backdrop')) {
+        const targetDrawerId = e.target.dataset.drawerFor;
+        if (targetDrawerId) {
+          Drawer.close(targetDrawerId);
+        } else {
+          document.querySelectorAll('.leli-drawer.is-open').forEach((d) => Drawer.close(d));
+        }
+        return;
+      }
+
+      // 11. Alert Dismiss Button Click
+      const alertCloseBtn = e.target.closest('.leli-alert-close, [data-alert-dismiss]');
+      if (alertCloseBtn) {
+        const alertEl = alertCloseBtn.closest('.leli-alert');
+        if (alertEl) {
+          e.preventDefault();
+          Alert.dismiss(alertEl);
+        }
+        return;
+      }
     });
 
-    // Keyboard navigation for Tabs (ArrowLeft, ArrowRight, ArrowUp, ArrowDown, Home, End)
+    // Keyboard navigation (Escape to dismiss, Arrow keys for Tabs & Dropdown items)
     document.addEventListener('keydown', (e) => {
+      // Escape key handler
+      if (e.key === 'Escape') {
+        Dropdown.closeAll();
+        document.querySelectorAll('.leli-drawer.is-open').forEach((d) => Drawer.close(d));
+        return;
+      }
+
+      // Dropdown arrow navigation
+      const activeDropdown = document.querySelector('.leli-dropdown.is-open');
+      if (activeDropdown && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
+        const items = Array.from(activeDropdown.querySelectorAll('.leli-dropdown-item:not(:disabled)'));
+        if (items.length > 0) {
+          e.preventDefault();
+          const currentIndex = items.indexOf(document.activeElement);
+          let nextIndex = 0;
+          if (e.key === 'ArrowDown') {
+            nextIndex = currentIndex === -1 || currentIndex === items.length - 1 ? 0 : currentIndex + 1;
+          } else {
+            nextIndex = currentIndex <= 0 ? items.length - 1 : currentIndex - 1;
+          }
+          items[nextIndex].focus();
+          return;
+        }
+      }
+
+      // Tabs arrow navigation
       const tabBtn = e.target.closest('.leli-tab');
       if (!tabBtn) return;
 
@@ -524,6 +753,7 @@
     Tabs.init(root);
     Table.init(root);
     Modal.init(root);
+    Drawer.init(root);
     FormValidation.init(root);
     bindGlobalEvents();
   }
@@ -537,7 +767,7 @@
   }
 
   return {
-    version: '1.0.6',
+    version: '1.0.15',
     init: initAll,
     Tabs,
     Table,
@@ -545,6 +775,9 @@
     Progress,
     Modal,
     Toast,
+    Dropdown,
+    Drawer,
+    Alert,
     Theme,
     FormValidation
   };

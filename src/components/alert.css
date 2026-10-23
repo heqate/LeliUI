@@ -1,0 +1,204 @@
+/* ==========================================================================
+   leliUI - Alert & Banner Component
+   Contextual notification banners with semantic accents, icons, and dismiss animations
+   ========================================================================== */
+
+@layer components {
+  /* --- 1. Alert Base --- */
+  .leli-alert {
+    --leli-alert-bg: var(--leli-surface-1, #15111a);
+    --leli-alert-border: var(--leli-border, rgba(255, 255, 255, 0.1));
+    --leli-alert-color: var(--leli-text, #f4f2f7);
+    --leli-alert-accent: var(--leli-primary, #f472b6);
+    --leli-alert-radius: var(--leli-radius-md, 0.5rem);
+
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: 0.85rem 1.15rem;
+    background-color: var(--leli-alert-bg);
+    border: 1px solid var(--leli-alert-border);
+    border-radius: var(--leli-alert-radius);
+    color: var(--leli-alert-color);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    overflow: hidden;
+    transition: opacity 200ms var(--leli-ease),
+                transform 200ms var(--leli-ease),
+                max-height 240ms ease,
+                margin 240ms ease,
+                padding 240ms ease;
+
+    /* Left accent border bar */
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 3.5px;
+      background-color: var(--leli-alert-accent);
+    }
+  }
+
+  /* --- 2. Sub-components --- */
+  .leli-alert-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 1.35rem;
+    height: 1.35rem;
+    color: var(--leli-alert-accent);
+    font-size: 1.1rem;
+    margin-top: 0.1rem;
+
+    & svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      stroke: currentColor;
+      fill: none;
+    }
+  }
+
+  .leli-alert-content {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .leli-alert-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--leli-text-emphasis, #ffffff);
+    margin: 0 0 0.2rem 0;
+    line-height: 1.35;
+  }
+
+  .leli-alert-description {
+    font-size: 0.865rem;
+    color: var(--leli-text-muted, #a19ba8);
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  .leli-alert-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    padding: 0;
+    margin: -0.2rem -0.4rem 0 0;
+    background: transparent;
+    border: none;
+    border-radius: var(--leli-radius-sm, 0.375rem);
+    color: var(--leli-text-muted);
+    cursor: pointer;
+    font-size: 1.2rem;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: all 140ms var(--leli-ease);
+
+    &:hover {
+      background-color: var(--leli-surface-3, rgba(255, 255, 255, 0.08));
+      color: var(--leli-text-emphasis, #ffffff);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--leli-focus);
+      outline-offset: 1px;
+    }
+  }
+
+  /* Dismissing Animation State */
+  .leli-alert.is-dismissing {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+    max-height: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-width: 0;
+    pointer-events: none;
+  }
+
+  /* --- 3. Semantic Color Accents --- */
+  /* Primary (Sakura Pink) */
+  .leli-alert-primary,
+  .leli-alert[data-accent="primary"] {
+    --leli-alert-accent: var(--leli-primary, #f472b6);
+    --leli-alert-bg: rgba(244, 114, 182, 0.08);
+    --leli-alert-border: rgba(244, 114, 182, 0.25);
+  }
+
+  /* Success (Emerald) */
+  .leli-alert-success,
+  .leli-alert[data-accent="success"] {
+    --leli-alert-accent: var(--leli-success, #34d399);
+    --leli-alert-bg: rgba(52, 211, 153, 0.08);
+    --leli-alert-border: rgba(52, 211, 153, 0.25);
+  }
+
+  /* Warning (Amber) */
+  .leli-alert-warning,
+  .leli-alert[data-accent="warning"] {
+    --leli-alert-accent: var(--leli-warning, #fbbf24);
+    --leli-alert-bg: rgba(251, 191, 36, 0.08);
+    --leli-alert-border: rgba(251, 191, 36, 0.25);
+  }
+
+  /* Danger (Rose) */
+  .leli-alert-danger,
+  .leli-alert[data-accent="danger"] {
+    --leli-alert-accent: var(--leli-danger, #f43f5e);
+    --leli-alert-bg: rgba(244, 63, 94, 0.08);
+    --leli-alert-border: rgba(244, 63, 94, 0.25);
+  }
+
+  /* Info (Sky) */
+  .leli-alert-info,
+  .leli-alert[data-accent="info"] {
+    --leli-alert-accent: var(--leli-info, #38bdf8);
+    --leli-alert-bg: rgba(56, 189, 248, 0.08);
+    --leli-alert-border: rgba(56, 189, 248, 0.25);
+  }
+
+  /* --- 4. Style Variants --- */
+  /* Glass Variant */
+  .leli-alert[data-variant~="glass"],
+  .leli-alert-glass {
+    --leli-alert-bg: rgba(21, 17, 26, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  /* Neo-Brutalist Variant */
+  .leli-alert[data-variant~="brutal"],
+  .leli-alert-brutal {
+    --leli-alert-border: #ffffff;
+    border-width: 2px;
+    border-radius: 0;
+    box-shadow: 4px 4px 0 0 #000000;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  /* Banner Full-Width Style */
+  .leli-alert-banner,
+  .leli-alert[data-variant~="banner"] {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    justify-content: center;
+    text-align: center;
+    padding: 0.65rem 1rem;
+
+    &::before {
+      display: none;
+    }
+  }
+}

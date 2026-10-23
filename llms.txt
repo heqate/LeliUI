@@ -1,13 +1,13 @@
-# leliUI v1.0.14 — AI-First & Educational HTML/CSS/JS Component Library
+# leliUI v1.0.15 — AI-First & Educational HTML/CSS/JS Component Library
 
 > leliUI is a zero-dependency, multi-variant UI and layout library built with modern CSS (@layer, @container, light-dark(), :user-valid, :has()) and a lightweight accessible JavaScript engine. It is designed both for humans learning modern web architecture and for AI coding agents (Cursor, Windsurf, Claude, ChatGPT, Antigravity) to generate clean UI with minimal tokens.
 
 ## Quick CDN & Direct Pull URLs (For AI Agents & Humans)
-- Full CSS Bundle: http://34.2.63.150:5000/dist/leli.css
-- Full JS Runtime: http://34.2.63.150:5000/dist/leli.js
-- Full AI Context & Source Rules: http://34.2.63.150:5000/llms-full.txt
-- Machine-Readable Component Registry: http://34.2.63.150:5000/registry/components.json
-- AI Manifest: http://34.2.63.150:5000/ai-manifest.json
+- Full CSS Bundle: https://heqate.github.io/LeliUI/dist/leli.css
+- Full JS Runtime: https://heqate.github.io/LeliUI/dist/leli.js
+- Full AI Context & Source Rules: https://heqate.github.io/LeliUI/llms-full.txt
+- Machine-Readable Component Registry: https://heqate.github.io/LeliUI/registry/components.json
+- AI Manifest: https://heqate.github.io/LeliUI/ai-manifest.json
 
 ## Terminal CLI Usage
 ```bash
@@ -21,8 +21,8 @@ npx leli grid navbar button input modal toast
 ## Core Architecture Rules for AI Agents
 1. **Include Assets**:
    ```html
-   <link rel="stylesheet" href="http://34.2.63.150:5000/dist/leli.css">
-   <script src="http://34.2.63.150:5000/dist/leli.js" defer></script>
+   <link rel="stylesheet" href="https://heqate.github.io/LeliUI/dist/leli.css">
+   <script src="https://heqate.github.io/LeliUI/dist/leli.js" defer></script>
    ```
 2. **Theme System**: Defaults to Dark Mode (`<html data-theme="dark">`). Switch to light mode with `data-theme="light"` or `LeliUI.Theme.toggle()`.
 3. **Universal Attributes**:
@@ -30,52 +30,64 @@ npx leli grid navbar button input modal toast
    - `data-size="sm | md | lg | xl"`: Adjusts component density and scale.
    - `data-accent="primary | success | warning | danger | info"`: Applies semantic brand accents.
 
-## Available Modules (16)
+## Available Modules (20)
 - **grid** (Grid & Layout System): Centered container, 12-column row/col grid, responsive auto-fit CSS grid, Bento grid, and holy-grail page shells.
   - Variants: `container`, `12-col`, `responsive (sm/md/lg/xl)`, `gutters`, `css-grid`, `bento`, `flex-layouts`
-  - Direct CSS: http://34.2.63.150:5000/src/components/grid.css
+  - Direct CSS: https://heqate.github.io/LeliUI/src/components/grid.css
 - **navbar** (Header & Navigation Bar): Brand header with navigation links, search trigger, action buttons, glassmorphism, and responsive wrapping.
   - Variants: `default`, `glass`, `elevated`, `floating`, `contrast`, `brutal`
-  - Direct CSS: http://34.2.63.150:5000/src/components/navbar.css
+  - Direct CSS: https://heqate.github.io/LeliUI/src/components/navbar.css
 - **button** (Button & Button Group): Interactive button system with spinner loading state, icon buttons, Sakura Pink focus rings, and joined button groups.
   - Variants: `solid`, `outlined`, `soft`, `ghost`, `glass`, `gradient`, `brutal`, `link`
-  - Direct CSS: http://34.2.63.150:5000/src/components/button.css
+  - Direct CSS: https://heqate.github.io/LeliUI/src/components/button.css
 - **input** (Form Inputs & Floating Labels): Form inputs, textarea, select dropdowns, input groups with addons/icons, and :user-valid / :user-invalid state validation.
   - Variants: `default`, `glass`, `soft`, `brutal`, `floating-label`, `input-group`
-  - Direct CSS: http://34.2.63.150:5000/src/components/input.css
+  - Direct CSS: https://heqate.github.io/LeliUI/src/components/input.css
 - **form-controls** (Switch, Checkbox & Radio): Custom accessible toggle switches, checkboxes with indeterminate state, radio buttons, and interactive choice cards.
   - Variants: `switch`, `checkbox`, `radio`, `choice-card`, `brutal`
-  - Direct CSS: http://34.2.63.150:5000/src/components/form-controls.css
+  - Direct CSS: https://heqate.github.io/LeliUI/src/components/form-controls.css
 - **badge** (Badge & Status Indicator): Pill tags, status indicators, live pulsing dots, removable badges, and semantic color accents.
   - Variants: `solid`, `soft`, `outlined`, `glass`, `brutal`, `pill`, `dot`
-  - Direct CSS: http://34.2.63.150:5000/src/components/badge.css
+  - Direct CSS: https://heqate.github.io/LeliUI/src/components/badge.css
 - **modal** (Modal & Dialog): Accessible HTML5 <dialog> modal with @starting-style animations, light-dismiss backdrop, escape key handler, and clean layout.
   - Variants: `default`, `glass`, `brutal`, `accent-top`
-  - Direct CSS: http://34.2.63.150:5000/src/components/modal.css
+  - Direct CSS: https://heqate.github.io/LeliUI/src/components/modal.css
 - **toast** (Toast Notification): Floating notification alerts with auto-dismiss countdown bar, corner positioning, and event-driven JavaScript engine.
   - Variants: `primary`, `success`, `warning`, `danger`, `glass`, `brutal`
-  - Direct CSS: http://34.2.63.150:5000/src/components/toast.css
+  - Direct CSS: https://heqate.github.io/LeliUI/src/components/toast.css
 - **card** (Card Component): Flexible content containers with header, body, footer, glassmorphism, neo-brutalist border, and gradient rims.
   - Variants: `elevated`, `outlined`, `soft`, `glass`, `gradient`, `brutal`, `accent-top`, `horizontal`
-  - Direct CSS: http://34.2.63.150:5000/src/components/card.css
+  - Direct CSS: https://heqate.github.io/LeliUI/src/components/card.css
 - **tabs** (Tabs Navigation): Accessible tabs with arrow-key keyboard navigation, find-in-page hidden="until-found" integration, and modern active states.
   - Variants: `underline`, `pills`, `segmented`, `soft`, `lifted`, `brutal`, `vertical`
-  - Direct CSS: http://34.2.63.150:5000/src/components/tabs.css
+  - Direct CSS: https://heqate.github.io/LeliUI/src/components/tabs.css
 - **accordion** (Accordion & Collapse): Native <details name="..."> accordions with zero mandatory JavaScript, animated chevron indicators, and card styling.
   - Variants: `bordered`, `separated`, `flush`, `soft`, `glass`, `brutal`
-  - Direct CSS: http://34.2.63.150:5000/src/components/accordion.css
+  - Direct CSS: https://heqate.github.io/LeliUI/src/components/accordion.css
 - **table** (Responsive Data Table): Sticky-header data table with column click sorting and container query (@container) mobile card transformation.
   - Variants: `default`, `striped`, `hoverable`, `bordered`, `glass`, `brutal`
-  - Direct CSS: http://34.2.63.150:5000/src/components/table.css
+  - Direct CSS: https://heqate.github.io/LeliUI/src/components/table.css
 - **pagination** (Pagination Bar): Page switcher controls with active states, previous/next handlers, and joined or rounded pill shapes.
   - Variants: `default`, `pills`, `outlined`, `minimal`, `joined`, `brutal`
-  - Direct CSS: http://34.2.63.150:5000/src/components/pagination.css
+  - Direct CSS: https://heqate.github.io/LeliUI/src/components/pagination.css
 - **progress** (Progress Bar): Linear progress bars with striped animations, indeterminate loading states, and glowing Sakura Pink styling.
   - Variants: `solid`, `gradient`, `striped`, `animated`, `indeterminate`, `glow`, `brutal`
-  - Direct CSS: http://34.2.63.150:5000/src/components/progress.css
+  - Direct CSS: https://heqate.github.io/LeliUI/src/components/progress.css
 - **skeleton** (Skeleton Loader): Shimmer and pulse skeleton placeholders preserving page layout while content loads.
   - Variants: `shimmer`, `pulse`, `static`, `brutal`
-  - Direct CSS: http://34.2.63.150:5000/src/components/skeleton.css
+  - Direct CSS: https://heqate.github.io/LeliUI/src/components/skeleton.css
 - **avatar** (Avatar & Avatar Group): User avatars with online/busy/away status indicators, fallback initials, and overlapping avatar stack groups.
   - Variants: `soft`, `solid`, `outlined`, `ring`, `gradient`, `brutal`
-  - Direct CSS: http://34.2.63.150:5000/src/components/avatar.css
+  - Direct CSS: https://heqate.github.io/LeliUI/src/components/avatar.css
+- **dropdown** (Dropdown & Menu): Keyboard-navigable contextual dropdown menu with shortcut hints, divider sections, glassmorphism, and auto-dismiss.
+  - Variants: `placement-bottom-start`, `placement-bottom-end`, `placement-top-start`, `placement-top-end`, `glass`, `brutal`, `headers`, `shortcuts`
+  - Direct CSS: https://heqate.github.io/LeliUI/src/components/dropdown.css
+- **tooltip** (Tooltip & Popover): Zero-JS micro-interactions with pure CSS [data-tooltip] positions, delayed transitions, and rich interactive .leli-popover cards.
+  - Variants: `top`, `bottom`, `left`, `right`, `glass`, `brutal`, `popover`
+  - Direct CSS: https://heqate.github.io/LeliUI/src/components/tooltip.css
+- **drawer** (Drawer & Sheet): Slide-in offcanvas drawers and mobile bottom sheets using native <dialog> with smooth @starting-style animations and backdrop blur.
+  - Variants: `placement-right`, `placement-left`, `placement-bottom`, `placement-top`, `glass`, `brutal`
+  - Direct CSS: https://heqate.github.io/LeliUI/src/components/drawer.css
+- **alert** (Alert & Banner): Contextual notification banners with semantic accents, icons, and smooth animated dismissal.
+  - Variants: `primary`, `success`, `warning`, `danger`, `info`, `glass`, `brutal`, `banner`
+  - Direct CSS: https://heqate.github.io/LeliUI/src/components/alert.css

@@ -526,7 +526,7 @@
           Copy AI Prompt
         </button>
 
-        <span class="leli-badge" id="leliVersionBadge">v1.0.14</span>
+        <span class="leli-badge" id="leliVersionBadge">v1.0.15</span>
 
         <a href="https://github.com/heqate/LeliUI" target="_blank" rel="noopener noreferrer" class="theme-switch-btn" title="View on GitHub (heqate/LeliUI)" aria-label="GitHub Repository">
           <svg viewBox="0 0 24 24" fill="currentColor">
@@ -579,8 +579,12 @@
 
       <div class="docs-nav-section">
         <div class="docs-nav-heading">Overlays & Feedback</div>
+        <button type="button" class="docs-nav-item" data-doc-page="dropdown">Dropdown & Menu</button>
+        <button type="button" class="docs-nav-item" data-doc-page="tooltip">Tooltip & Popover</button>
+        <button type="button" class="docs-nav-item" data-doc-page="drawer">Drawer & Sheet</button>
         <button type="button" class="docs-nav-item" data-doc-page="modal">Modal Dialog</button>
         <button type="button" class="docs-nav-item" data-doc-page="toast">Toast Notification</button>
+        <button type="button" class="docs-nav-item" data-doc-page="alert">Alert & Banner</button>
         <button type="button" class="docs-nav-item" data-doc-page="badge">Badges & Tags</button>
       </div>
 
@@ -594,6 +598,14 @@
         <button type="button" class="docs-nav-item" data-doc-page="progress">Progress</button>
         <button type="button" class="docs-nav-item" data-doc-page="skeleton">Skeleton</button>
         <button type="button" class="docs-nav-item" data-doc-page="avatar">Avatar</button>
+      </div>
+
+      <div class="docs-nav-section">
+        <div class="docs-nav-heading">Blocks & Templates</div>
+        <button type="button" class="docs-nav-item" data-doc-page="blocks-hero">Hero Sections</button>
+        <button type="button" class="docs-nav-item" data-doc-page="blocks-pricing">Pricing Tables</button>
+        <button type="button" class="docs-nav-item" data-doc-page="blocks-auth">Auth & Login</button>
+        <button type="button" class="docs-nav-item" data-doc-page="blocks-dashboard">Dashboard Shell</button>
       </div>
     </aside>
 
@@ -682,7 +694,7 @@
           <section class="leli-doc-section" id="sec-cdn">
             <h2 class="leli-doc-heading">2. Direct CDN / HTML Include</h2>
             <p class="leli-doc-text">Link <code>leli.css</code> inside your <code>&lt;head&gt;</code> and include <code>leli.js</code> before closing <code>&lt;/body&gt;</code>:</p>
-            ${exampleBox('', `<!DOCTYPE html>\n<html lang="en" data-theme="dark">\n<head>\n  <link rel="stylesheet" href="http://34.2.63.150:5000/dist/leli.css">\n</head>\n<body>\n  <div class="leli-container">\n    <h1>Hello, leliUI!</h1>\n  </div>\n  <script src="http://34.2.63.150:5000/dist/leli.js" defer><\/script>\n</body>\n</html>`, 'html')}
+            ${exampleBox('', `<!DOCTYPE html>\n<html lang="en" data-theme="dark">\n<head>\n  <link rel="stylesheet" href="https://heqate.github.io/LeliUI/dist/leli.css">\n</head>\n<body>\n  <div class="leli-container">\n    <h1>Hello, leliUI!</h1>\n  </div>\n  <script src="https://heqate.github.io/LeliUI/dist/leli.js" defer><\/script>\n</body>\n</html>`, 'html')}
           </section>
         `
       },
@@ -738,10 +750,10 @@
             <p class="leli-doc-text">Copy the prompt below and paste it into ChatGPT, Claude, or your project's <code>.cursorrules</code> / <code>AGENTS.md</code> file so the AI automatically builds interfaces using <strong>leliUI</strong>:</p>
             ${exampleBox('', `You are building a web interface using leliUI (v1.0).
 Always load the official stylesheet and script from:
-<link rel="stylesheet" href="http://34.2.63.150:5000/dist/leli.css">
-<script src="http://34.2.63.150:5000/dist/leli.js" defer><\/script>
+<link rel="stylesheet" href="https://heqate.github.io/LeliUI/dist/leli.css">
+<script src="https://heqate.github.io/LeliUI/dist/leli.js" defer><\/script>
 
-Full documentation & component rules for AI: http://34.2.63.150:5000/llms-full.txt
+Full documentation & component rules for AI: https://heqate.github.io/LeliUI/llms-full.txt
 
 Core Rules:
 1. Default to <html lang="en" data-theme="dark">.
@@ -1794,6 +1806,558 @@ Core Rules:
         `
       }
 
+
+      dropdown: {
+        category: 'Overlays & Feedback',
+        title: 'Dropdown & Context Menu',
+        lead: 'Keyboard-navigable contextual dropdown menu with shortcut hints, divider sections, glassmorphism, and auto-dismiss.',
+        content: `
+          <section class="leli-doc-section" id="sec-dropdown-basic">
+            <h2 class="leli-doc-heading">1. Interactive Dropdown Menu</h2>
+            <p class="leli-doc-text">Click the button below to toggle the context menu. Press <kbd class="leli-kbd">Esc</kbd> or click outside to dismiss, or use <kbd class="leli-kbd">&darr;</kbd> <kbd class="leli-kbd">&uarr;</kbd> arrow keys to navigate:</p>
+            ${exampleBox(
+              `<div class="leli-dropdown" id="demoDropdown">
+                <button type="button" class="leli-btn leli-dropdown-trigger" data-variant="solid">
+                  <span>Workspace Actions</span>
+                  <span class="leli-dropdown-chevron">&#9662;</span>
+                </button>
+                <div class="leli-dropdown-menu placement-bottom-start">
+                  <div class="leli-dropdown-header">Manage Project</div>
+                  <a href="javascript:void(0)" class="leli-dropdown-item">
+                    <span>Edit Settings</span>
+                    <kbd class="leli-kbd">&#8984;E</kbd>
+                  </a>
+                  <a href="javascript:void(0)" class="leli-dropdown-item">
+                    <span>Duplicate</span>
+                    <kbd class="leli-kbd">&#8984;D</kbd>
+                  </a>
+                  <a href="javascript:void(0)" class="leli-dropdown-item">
+                    <span>Export ZIP</span>
+                    <kbd class="leli-kbd">&#8984;S</kbd>
+                  </a>
+                  <div class="leli-dropdown-divider"></div>
+                  <div class="leli-dropdown-header">Danger Zone</div>
+                  <a href="javascript:void(0)" class="leli-dropdown-item is-danger">
+                    <span>Archive Project</span>
+                  </a>
+                </div>
+              </div>`,
+              `<div class="leli-dropdown">\n  <button class="leli-btn leli-dropdown-trigger" data-variant="solid">\n    <span>Workspace Actions</span>\n    <span class="leli-dropdown-chevron">&#9662;</span>\n  </button>\n  <div class="leli-dropdown-menu placement-bottom-start">\n    <div class="leli-dropdown-header">Manage Project</div>\n    <a href="#" class="leli-dropdown-item">\n      <span>Edit Settings</span>\n      <kbd class="leli-kbd">&#8984;E</kbd>\n    </a>\n    <a href="#" class="leli-dropdown-item">\n      <span>Duplicate</span>\n      <kbd class="leli-kbd">&#8984;D</kbd>\n    </a>\n    <div class="leli-dropdown-divider"></div>\n    <a href="#" class="leli-dropdown-item is-danger">Archive Project</a>\n  </div>\n</div>`
+            )}
+          </section>
+
+          <section class="leli-doc-section" id="sec-dropdown-variants">
+            <h2 class="leli-doc-heading">2. Glassmorphism & Neo-Brutalist Variants</h2>
+            <p class="leli-doc-text">Add <code>data-variant="glass"</code> for frosted blur backdrop, or <code>data-variant="brutal"</code> for sharp high-contrast border styling:</p>
+            ${exampleBox(
+              `<div class="leli-cluster">
+                <div class="leli-dropdown">
+                  <button type="button" class="leli-btn leli-dropdown-trigger" data-variant="glass">
+                    <span>Glass Menu</span>
+                    <span class="leli-dropdown-chevron">&#9662;</span>
+                  </button>
+                  <div class="leli-dropdown-menu" data-variant="glass">
+                    <a href="javascript:void(0)" class="leli-dropdown-item">Analytics View</a>
+                    <a href="javascript:void(0)" class="leli-dropdown-item">Live Insights</a>
+                  </div>
+                </div>
+
+                <div class="leli-dropdown">
+                  <button type="button" class="leli-btn leli-dropdown-trigger" data-variant="brutal">
+                    <span>Brutal Menu</span>
+                    <span class="leli-dropdown-chevron">&#9662;</span>
+                  </button>
+                  <div class="leli-dropdown-menu" data-variant="brutal">
+                    <a href="javascript:void(0)" class="leli-dropdown-item">Raw Terminal</a>
+                    <a href="javascript:void(0)" class="leli-dropdown-item">System Logs</a>
+                  </div>
+                </div>
+              </div>`,
+              `<div class="leli-dropdown">\n  <button class="leli-btn leli-dropdown-trigger" data-variant="glass">Glass Menu</button>\n  <div class="leli-dropdown-menu" data-variant="glass">...</div>\n</div>\n\n<div class="leli-dropdown">\n  <button class="leli-btn leli-dropdown-trigger" data-variant="brutal">Brutal Menu</button>\n  <div class="leli-dropdown-menu" data-variant="brutal">...</div>\n</div>`
+            )}
+          </section>
+        `
+      },
+
+      tooltip: {
+        category: 'Overlays & Feedback',
+        title: 'Tooltip & Popover',
+        lead: 'Zero-JS micro-interactions with pure CSS [data-tooltip] positions, delayed transitions, and rich interactive .leli-popover cards.',
+        content: `
+          <section class="leli-doc-section" id="sec-tooltip-basic">
+            <h2 class="leli-doc-heading">1. Pure CSS Micro-Tooltips</h2>
+            <p class="leli-doc-text">Simply add <code>data-tooltip="..."</code> and optional <code>data-tooltip-pos="top | bottom | left | right"</code> to any element. No JavaScript required:</p>
+            ${exampleBox(
+              `<div class="leli-cluster leli-items-center">
+                <button type="button" class="leli-btn" data-variant="outlined" data-tooltip="Tooltip above" data-tooltip-pos="top">Tooltip Top</button>
+                <button type="button" class="leli-btn" data-variant="outlined" data-tooltip="Tooltip below" data-tooltip-pos="bottom">Tooltip Bottom</button>
+                <button type="button" class="leli-btn" data-variant="outlined" data-tooltip="Tooltip to the left" data-tooltip-pos="left">Tooltip Left</button>
+                <button type="button" class="leli-btn" data-variant="outlined" data-tooltip="Tooltip to the right" data-tooltip-pos="right">Tooltip Right</button>
+              </div>`,
+              `<button class="leli-btn" data-tooltip="Tooltip above" data-tooltip-pos="top">Tooltip Top</button>\n<button class="leli-btn" data-tooltip="Tooltip below" data-tooltip-pos="bottom">Tooltip Bottom</button>\n<button class="leli-btn" data-tooltip="Tooltip to the left" data-tooltip-pos="left">Tooltip Left</button>\n<button class="leli-btn" data-tooltip="Tooltip to the right" data-tooltip-pos="right">Tooltip Right</button>`
+            )}
+          </section>
+
+          <section class="leli-doc-section" id="sec-popover-interactive">
+            <h2 class="leli-doc-heading">2. Interactive Popover Card</h2>
+            <p class="leli-doc-text">Wrap elements with <code>.leli-popover-wrapper</code> for hoverable floating cards with rich HTML content:</p>
+            ${exampleBox(
+              `<div class="leli-cluster">
+                <div class="leli-popover-wrapper">
+                  <button type="button" class="leli-btn" data-variant="soft">Hover for Details</button>
+                  <div class="leli-popover placement-top">
+                    <h4 class="leli-popover-title">Instant Insight</h4>
+                    <p class="leli-popover-text">Zero-runtime CSS container with subtle Sakura Pink glow and rounded corners.</p>
+                  </div>
+                </div>
+              </div>`,
+              `<div class="leli-popover-wrapper">\n  <button class="leli-btn" data-variant="soft">Hover for Details</button>\n  <div class="leli-popover placement-top">\n    <h4 class="leli-popover-title">Instant Insight</h4>\n    <p class="leli-popover-text">Zero-runtime CSS container with subtle Sakura Pink glow.</p>\n  </div>\n</div>`
+            )}
+          </section>
+        `
+      },
+
+      drawer: {
+        category: 'Overlays & Feedback',
+        title: 'Drawer & Sheet',
+        lead: 'Slide-in offcanvas drawers and mobile bottom sheets using native <dialog> with smooth @starting-style animations and backdrop blur.',
+        content: `
+          <section class="leli-doc-section" id="sec-drawer-interactive">
+            <h2 class="leli-doc-heading">1. Slide-in Drawers (Right & Left)</h2>
+            <p class="leli-doc-text">Open full-height side panels with <code>data-drawer-target="drawerId"</code>. Built on native HTML5 <code>&lt;dialog&gt;</code> with automatic focus trapping and escape dismiss:</p>
+            ${exampleBox(
+              `<div class="leli-cluster">
+                <button type="button" class="leli-btn" data-variant="solid" data-drawer-target="docDrawerRight">Open Right Drawer</button>
+                <button type="button" class="leli-btn" data-variant="outlined" data-drawer-target="docDrawerLeft">Open Left Drawer</button>
+                <button type="button" class="leli-btn" data-variant="soft" data-drawer-target="docDrawerBottom">Open Bottom Sheet</button>
+
+                <!-- Right Drawer -->
+                <dialog id="docDrawerRight" class="leli-drawer placement-right">
+                  <div class="leli-drawer-header">
+                    <div>
+                      <h3 class="leli-drawer-title">Shopping Cart</h3>
+                      <p class="leli-drawer-subtitle">3 items in your cart</p>
+                    </div>
+                    <button type="button" class="leli-drawer-close" data-drawer-close="docDrawerRight">&times;</button>
+                  </div>
+                  <div class="leli-drawer-body">
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                      <div class="leli-card" data-variant="outlined" data-size="sm">
+                        <div class="leli-card-body">
+                          <strong>leliUI Pro License</strong>
+                          <div style="color: var(--leli-text-muted); font-size: 0.85rem;">Unlimited Developer Seats &middot; $79</div>
+                        </div>
+                      </div>
+                      <div class="leli-card" data-variant="outlined" data-size="sm">
+                        <div class="leli-card-body">
+                          <strong>Figma UI Kit</strong>
+                          <div style="color: var(--leli-text-muted); font-size: 0.85rem;">Lifetime Updates &middot; $39</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="leli-drawer-footer">
+                    <button type="button" class="leli-btn" data-variant="outlined" data-drawer-close="docDrawerRight">Cancel</button>
+                    <button type="button" class="leli-btn" data-variant="solid">Checkout Now</button>
+                  </div>
+                </dialog>
+
+                <!-- Left Drawer -->
+                <dialog id="docDrawerLeft" class="leli-drawer placement-left">
+                  <div class="leli-drawer-header">
+                    <h3 class="leli-drawer-title">Navigation Menu</h3>
+                    <button type="button" class="leli-drawer-close" data-drawer-close="docDrawerLeft">&times;</button>
+                  </div>
+                  <div class="leli-drawer-body">
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem;">
+                      <li><a href="#grid" class="leli-btn" data-variant="ghost" style="width: 100%; justify-content: flex-start;">Grid & Layout</a></li>
+                      <li><a href="#navbar" class="leli-btn" data-variant="ghost" style="width: 100%; justify-content: flex-start;">Header & Navbar</a></li>
+                      <li><a href="#button" class="leli-btn" data-variant="ghost" style="width: 100%; justify-content: flex-start;">Buttons & Actions</a></li>
+                    </ul>
+                  </div>
+                </dialog>
+
+                <!-- Bottom Sheet -->
+                <dialog id="docDrawerBottom" class="leli-drawer placement-bottom">
+                  <div class="leli-drawer-handle"></div>
+                  <div class="leli-drawer-header">
+                    <h3 class="leli-drawer-title">Share Project</h3>
+                    <button type="button" class="leli-drawer-close" data-drawer-close="docDrawerBottom">&times;</button>
+                  </div>
+                  <div class="leli-drawer-body">
+                    <p style="color: var(--leli-text-muted);">Share this component library with your engineering team or AI coding agent.</p>
+                    <div class="leli-input-group">
+                      <input type="text" class="leli-input" value="https://heqate.github.io/LeliUI" readonly>
+                      <button class="leli-btn" data-variant="solid" onclick="navigator.clipboard.writeText('https://heqate.github.io/LeliUI'); LeliUI.Toast.success('Link copied!')">Copy</button>
+                    </div>
+                  </div>
+                </dialog>
+              </div>`,
+              `<!-- Trigger Button -->\n<button class="leli-btn" data-variant="solid" data-drawer-target="myDrawer">Open Drawer</button>\n\n<!-- Slide-in Dialog Drawer -->\n<dialog id="myDrawer" class="leli-drawer placement-right">\n  <div class="leli-drawer-header">\n    <h3 class="leli-drawer-title">Shopping Cart</h3>\n    <button type="button" class="leli-drawer-close" data-drawer-close="myDrawer">&times;</button>\n  </div>\n  <div class="leli-drawer-body">\n    <p>Drawer content goes here...</p>\n  </div>\n  <div class="leli-drawer-footer">\n    <button class="leli-btn" data-variant="outlined" data-drawer-close="myDrawer">Close</button>\n    <button class="leli-btn" data-variant="solid">Confirm</button>\n  </div>\n</dialog>`
+            )}
+          </section>
+        `
+      },
+
+      alert: {
+        category: 'Overlays & Feedback',
+        title: 'Alert & Banner',
+        lead: 'Contextual notification banners with semantic accents, icons, and smooth animated dismissal.',
+        content: `
+          <section class="leli-doc-section" id="sec-alert-accents">
+            <h2 class="leli-doc-heading">1. Semantic Color Accents</h2>
+            <p class="leli-doc-text">Communicate state clearly using <code>data-accent="primary | success | warning | danger | info"</code>:</p>
+            ${exampleBox(
+              `<div style="display: flex; flex-direction: column; gap: 0.85rem;">
+                <div class="leli-alert" data-accent="primary">
+                  <span class="leli-alert-icon">&#9733;</span>
+                  <div class="leli-alert-content">
+                    <h4 class="leli-alert-title">Sakura Pink Release v1.0.15</h4>
+                    <p class="leli-alert-description">Dropdowns, Tooltips, Drawers, and Alert components are now live in the global bundle.</p>
+                  </div>
+                  <button type="button" class="leli-alert-close" aria-label="Dismiss">&times;</button>
+                </div>
+
+                <div class="leli-alert" data-accent="success">
+                  <span class="leli-alert-icon">&#10003;</span>
+                  <div class="leli-alert-content">
+                    <h4 class="leli-alert-title">Deployment Complete</h4>
+                    <p class="leli-alert-description">All assets synchronized with zero downtime across GitHub Pages HTTPS CDN.</p>
+                  </div>
+                  <button type="button" class="leli-alert-close" aria-label="Dismiss">&times;</button>
+                </div>
+
+                <div class="leli-alert" data-accent="warning">
+                  <span class="leli-alert-icon">&#9888;</span>
+                  <div class="leli-alert-content">
+                    <h4 class="leli-alert-title">Storage Warning</h4>
+                    <p class="leli-alert-description">Your team has reached 85% of monthly bandwidth quota.</p>
+                  </div>
+                  <button type="button" class="leli-alert-close" aria-label="Dismiss">&times;</button>
+                </div>
+
+                <div class="leli-alert" data-accent="danger">
+                  <span class="leli-alert-icon">&#10005;</span>
+                  <div class="leli-alert-content">
+                    <h4 class="leli-alert-title">Database Disconnected</h4>
+                    <p class="leli-alert-description">Could not establish SSL connection with primary replica. Retrying in 5s...</p>
+                  </div>
+                  <button type="button" class="leli-alert-close" aria-label="Dismiss">&times;</button>
+                </div>
+              </div>`,
+              `<div class="leli-alert" data-accent="primary">\n  <span class="leli-alert-icon">&#9733;</span>\n  <div class="leli-alert-content">\n    <h4 class="leli-alert-title">Update Available</h4>\n    <p class="leli-alert-description">Click to review latest changes.</p>\n  </div>\n  <button type="button" class="leli-alert-close">&times;</button>\n</div>`
+            )}
+          </section>
+
+          <section class="leli-doc-section" id="sec-alert-variants">
+            <h2 class="leli-doc-heading">2. Glassmorphism & Neo-Brutalist Alerts</h2>
+            <p class="leli-doc-text">Match your layout style with <code>data-variant="glass"</code> or <code>data-variant="brutal"</code>:</p>
+            ${exampleBox(
+              `<div style="display: flex; flex-direction: column; gap: 0.85rem;">
+                <div class="leli-alert" data-variant="glass" data-accent="primary">
+                  <span class="leli-alert-icon">&#10024;</span>
+                  <div class="leli-alert-content">
+                    <h4 class="leli-alert-title">Glassmorphism Alert</h4>
+                    <p class="leli-alert-description">Frosted background with backdrop blur effect.</p>
+                  </div>
+                  <button type="button" class="leli-alert-close">&times;</button>
+                </div>
+
+                <div class="leli-alert" data-variant="brutal">
+                  <span class="leli-alert-icon">&#9632;</span>
+                  <div class="leli-alert-content">
+                    <h4 class="leli-alert-title">Neo-Brutalist Notice</h4>
+                    <p class="leli-alert-description">Thick 2px borders with solid retro offset shadow.</p>
+                  </div>
+                  <button type="button" class="leli-alert-close">&times;</button>
+                </div>
+              </div>`,
+              `<div class="leli-alert" data-variant="glass" data-accent="primary">...</div>\n<div class="leli-alert" data-variant="brutal">...</div>`
+            )}
+          </section>
+        `
+      },
+
+      'blocks-hero': {
+        category: 'Blocks & Templates',
+        title: 'Hero Sections',
+        lead: 'High-converting hero headers with Sakura Pink gradient typography, dual action buttons, status pill badge, and Bento showcase grid.',
+        content: `
+          <section class="leli-doc-section" id="sec-block-hero-saas">
+            <h2 class="leli-doc-heading">1. SaaS Hero with Bento Grid</h2>
+            <p class="leli-doc-text">Complete, ready-to-use landing page hero section designed for modern software products:</p>
+            ${exampleBox(
+              `<div class="leli-card" data-variant="glass" style="padding: 3rem 1.5rem; text-align: center; overflow: hidden; position: relative;">
+                <div style="max-width: 44rem; margin: 0 auto;">
+                  <span class="leli-badge is-pill" data-accent="primary" style="margin-bottom: 1.25rem;">
+                    <span class="leli-dot"></span> Next-Gen UI System &middot; v1.0
+                  </span>
+                  <h1 style="font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800; line-height: 1.15; margin: 0 0 1.25rem 0; letter-spacing: -0.02em;">
+                    Design System for <span style="background: linear-gradient(135deg, #f472b6 0%, #fb7185 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Humans & AI Agents</span>
+                  </h1>
+                  <p style="font-size: 1.1rem; color: var(--leli-text-muted); line-height: 1.6; margin: 0 auto 2.25rem auto; max-width: 34rem;">
+                    Zero runtime overhead, multi-variant design tokens, and Sakura Pink aesthetics engineered for lightning-fast modern web applications.
+                  </p>
+                  <div style="display: flex; gap: 0.85rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem;">
+                    <button class="leli-btn leli-btn-lg" data-variant="solid">Get Started Free</button>
+                    <button class="leli-btn leli-btn-lg" data-variant="outlined">Browse 20 Components</button>
+                  </div>
+                </div>
+
+                <div class="leli-bento" style="text-align: left; max-width: 54rem; margin: 0 auto;">
+                  <div class="leli-bento-item leli-bento-hero leli-card" data-variant="outlined" style="padding: 1.5rem;">
+                    <span class="leli-badge" data-accent="primary" style="margin-bottom: 0.75rem;">CSS @layer</span>
+                    <h3 class="leli-card-title">Zero Style Collision</h3>
+                    <p style="color: var(--leli-text-muted); font-size: 0.875rem;">Structured cascade layers prevent specificity wars in large codebases.</p>
+                  </div>
+                  <div class="leli-bento-item leli-card" data-variant="outlined" style="padding: 1.25rem;">
+                    <span class="leli-badge" data-accent="success" style="margin-bottom: 0.5rem;">AI Ready</span>
+                    <h4 class="leli-card-title" style="font-size: 1rem;">/llms.txt Hub</h4>
+                    <p style="color: var(--leli-text-muted); font-size: 0.825rem;">Prompt-optimized endpoints for Claude & Cursor.</p>
+                  </div>
+                  <div class="leli-bento-item leli-card" data-variant="outlined" style="padding: 1.25rem;">
+                    <span class="leli-badge" data-accent="info" style="margin-bottom: 0.5rem;">Zero JS Base</span>
+                    <h4 class="leli-card-title" style="font-size: 1rem;">HTML5 &lt;dialog&gt;</h4>
+                    <p style="color: var(--leli-text-muted); font-size: 0.825rem;">Accessible modals with native @starting-style.</p>
+                  </div>
+                </div>
+              </div>`,
+              `<section class="leli-container" style="padding: 5rem 1rem; text-align: center;">\n  <span class="leli-badge is-pill" data-accent="primary">✨ v1.0 Released</span>\n  <h1 style="font-size: 3.2rem; font-weight: 800; letter-spacing: -0.02em;">\n    Design System for <span style="color: #f472b6;">Humans & AI Agents</span>\n  </h1>\n  <p style="font-size: 1.15rem; color: var(--leli-text-muted); max-width: 36rem; margin: 1.5rem auto 2.5rem auto;">\n    Zero runtime overhead, multi-variant design tokens, and Sakura Pink aesthetics.\n  </p>\n  <div style="display: flex; gap: 0.85rem; justify-content: center;">\n    <button class="leli-btn leli-btn-lg" data-variant="solid">Get Started Free</button>\n    <button class="leli-btn leli-btn-lg" data-variant="outlined">Explore Components</button>\n  </div>\n</section>`
+            )}
+          </section>
+        `
+      },
+
+      'blocks-pricing': {
+        category: 'Blocks & Templates',
+        title: 'Pricing Tables',
+        lead: '3-Tier SaaS pricing matrix with monthly/annual billing switch, highlighted Pro card with glowing Sakura border, and feature checklists.',
+        content: `
+          <section class="leli-doc-section" id="sec-block-pricing-table">
+            <h2 class="leli-doc-heading">1. 3-Tier SaaS Pricing Matrix</h2>
+            <p class="leli-doc-text">Clean, conversion-optimized pricing layout with highlighted popular card and feature items:</p>
+            ${exampleBox(
+              `<div class="leli-row leli-g-3" style="align-items: stretch;">
+                <!-- Starter Tier -->
+                <div class="leli-col-12 leli-col-md-4">
+                  <div class="leli-card" data-variant="outlined" style="height: 100%; display: flex; flex-direction: column;">
+                    <div class="leli-card-header">
+                      <div>
+                        <h3 class="leli-card-title">Starter</h3>
+                        <p class="leli-card-subtitle">For hobbyists & prototypes</p>
+                      </div>
+                    </div>
+                    <div class="leli-card-body" style="flex: 1;">
+                      <div style="font-size: 2.25rem; font-weight: 800; margin-bottom: 1.25rem;">$0 <span style="font-size: 0.85rem; color: var(--leli-text-muted); font-weight: 400;">/month</span></div>
+                      <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.65rem; font-size: 0.875rem;">
+                        <li><span style="color: var(--leli-success);">&#10003;</span> All 20 Core Components</li>
+                        <li><span style="color: var(--leli-success);">&#10003;</span> Light & Dark Theme Support</li>
+                        <li><span style="color: var(--leli-success);">&#10003;</span> Unlimited Personal Projects</li>
+                        <li style="color: var(--leli-text-muted);"><span style="color: var(--leli-border);">&times;</span> Figma UI Token Kit</li>
+                      </ul>
+                    </div>
+                    <div class="leli-card-footer">
+                      <button class="leli-btn" data-variant="outlined" style="width: 100%;">Get Started</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Pro Tier (Highlighted) -->
+                <div class="leli-col-12 leli-col-md-4">
+                  <div class="leli-card" data-variant="glass" style="height: 100%; display: flex; flex-direction: column; border-color: var(--leli-primary); box-shadow: 0 0 35px -5px rgba(244, 114, 182, 0.25);">
+                    <div class="leli-card-header">
+                      <div>
+                        <h3 class="leli-card-title" style="color: var(--leli-primary);">Pro</h3>
+                        <p class="leli-card-subtitle">For fast-growing SaaS products</p>
+                      </div>
+                      <span class="leli-badge" data-accent="primary">Most Popular</span>
+                    </div>
+                    <div class="leli-card-body" style="flex: 1;">
+                      <div style="font-size: 2.25rem; font-weight: 800; margin-bottom: 1.25rem; color: var(--leli-primary);">$29 <span style="font-size: 0.85rem; color: var(--leli-text-muted); font-weight: 400;">/month</span></div>
+                      <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.65rem; font-size: 0.875rem;">
+                        <li><span style="color: var(--leli-success);">&#10003;</span> Everything in Starter</li>
+                        <li><span style="color: var(--leli-success);">&#10003;</span> Pre-built Blocks & Templates</li>
+                        <li><span style="color: var(--leli-success);">&#10003;</span> Official Figma UI Kit</li>
+                        <li><span style="color: var(--leli-success);">&#10003;</span> AI Coding Agent Context Feed</li>
+                      </ul>
+                    </div>
+                    <div class="leli-card-footer">
+                      <button class="leli-btn" data-variant="solid" style="width: 100%;">Upgrade to Pro</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Enterprise Tier -->
+                <div class="leli-col-12 leli-col-md-4">
+                  <div class="leli-card" data-variant="outlined" style="height: 100%; display: flex; flex-direction: column;">
+                    <div class="leli-card-header">
+                      <div>
+                        <h3 class="leli-card-title">Enterprise</h3>
+                        <p class="leli-card-subtitle">For organizations & agencies</p>
+                      </div>
+                    </div>
+                    <div class="leli-card-body" style="flex: 1;">
+                      <div style="font-size: 2.25rem; font-weight: 800; margin-bottom: 1.25rem;">Custom</div>
+                      <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.65rem; font-size: 0.875rem;">
+                        <li><span style="color: var(--leli-success);">&#10003;</span> Dedicated Design Token Audit</li>
+                        <li><span style="color: var(--leli-success);">&#10003;</span> Custom White-label Styling</li>
+                        <li><span style="color: var(--leli-success);">&#10003;</span> 24/7 SLA Technical Support</li>
+                      </ul>
+                    </div>
+                    <div class="leli-card-footer">
+                      <button class="leli-btn" data-variant="outlined" style="width: 100%;">Contact Sales</button>
+                    </div>
+                  </div>
+                </div>
+              </div>`,
+              `<div class="leli-row leli-g-3">\n  <div class="leli-col-12 leli-col-md-4">\n    <div class="leli-card" data-variant="outlined">...</div>\n  </div>\n  <div class="leli-col-12 leli-col-md-4">\n    <div class="leli-card" data-variant="glass" style="border-color: var(--leli-primary);">...</div>\n  </div>\n  <div class="leli-col-12 leli-col-md-4">\n    <div class="leli-card" data-variant="outlined">...</div>\n  </div>\n</div>`
+            )}
+          </section>
+        `
+      },
+
+      'blocks-auth': {
+        category: 'Blocks & Templates',
+        title: 'Auth & Login Cards',
+        lead: 'Polished authentication card with Sakura Pink floating labels, social login buttons, remember me checkbox, and password reset link.',
+        content: `
+          <section class="leli-doc-section" id="sec-block-auth-card">
+            <h2 class="leli-doc-heading">1. Modern Authentication Card</h2>
+            <p class="leli-doc-text">Clean authentication box with floating labels and Sakura Pink action buttons:</p>
+            ${exampleBox(
+              `<div style="max-width: 26rem; margin: 0 auto;">
+                <div class="leli-card" data-variant="glass" style="padding: 1rem;">
+                  <div class="leli-card-header" style="text-align: center; display: block; border-bottom: none; padding-bottom: 0.5rem;">
+                    <div style="width: 3rem; height: 3rem; border-radius: var(--leli-radius-md); background: linear-gradient(135deg, #f472b6, #fb7185); margin: 0 auto 1rem auto; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.4rem; color: #fff;">L</div>
+                    <h3 class="leli-card-title" style="font-size: 1.35rem; margin-bottom: 0.25rem;">Welcome back</h3>
+                    <p class="leli-card-subtitle">Sign in to your leliUI developer dashboard</p>
+                  </div>
+                  <div class="leli-card-body">
+                    <form onsubmit="event.preventDefault(); LeliUI.Toast.success('Signed in successfully!');" style="display: flex; flex-direction: column; gap: 1rem;">
+                      <div class="leli-field-floating">
+                        <input type="email" id="authEmail" class="leli-input" placeholder="name@domain.com" required>
+                        <label class="leli-label" for="authEmail">Email Address</label>
+                      </div>
+
+                      <div class="leli-field-floating">
+                        <input type="password" id="authPass" class="leli-input" placeholder="Password" required>
+                        <label class="leli-label" for="authPass">Password</label>
+                      </div>
+
+                      <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">
+                        <label class="leli-checkbox">
+                          <input type="checkbox" checked>
+                          <span>Remember me</span>
+                        </label>
+                        <a href="javascript:void(0)" style="color: var(--leli-primary); text-decoration: none;">Forgot password?</a>
+                      </div>
+
+                      <button type="submit" class="leli-btn leli-btn-lg" data-variant="solid" style="width: 100%;">Sign In</button>
+                    </form>
+                  </div>
+                  <div class="leli-card-footer" style="justify-content: center; border-top: 1px solid var(--leli-border); font-size: 0.85rem; color: var(--leli-text-muted);">
+                    Don't have an account? <a href="javascript:void(0)" style="color: var(--leli-primary); margin-left: 0.35rem; text-decoration: none; font-weight: 600;">Sign up</a>
+                  </div>
+                </div>
+              </div>`,
+              `<div class="leli-card" data-variant="glass">\n  <div class="leli-card-header">\n    <h3 class="leli-card-title">Welcome back</h3>\n  </div>\n  <div class="leli-card-body">\n    <form>\n      <div class="leli-field-floating">\n        <input type="email" id="email" class="leli-input" placeholder="Email" required>\n        <label class="leli-label" for="email">Email</label>\n      </div>\n      <div class="leli-field-floating">\n        <input type="password" id="pwd" class="leli-input" placeholder="Password" required>\n        <label class="leli-label" for="pwd">Password</label>\n      </div>\n      <button type="submit" class="leli-btn" data-variant="solid" style="width: 100%;">Sign In</button>\n    </form>\n  </div>\n</div>`
+            )}
+          </section>
+        `
+      },
+
+      'blocks-dashboard': {
+        category: 'Blocks & Templates',
+        title: 'Dashboard Shell',
+        lead: 'Complete SaaS application shell with compact sidebar navigation, top header bar, 3 KPI metric cards, and responsive data table.',
+        content: `
+          <section class="leli-doc-section" id="sec-block-dashboard-shell">
+            <h2 class="leli-doc-heading">1. SaaS Analytics Dashboard Shell</h2>
+            <p class="leli-doc-text">High-density dashboard with stat counters, pill indicators, and sortable data table:</p>
+            ${exampleBox(
+              `<div class="leli-card" data-variant="outlined" style="overflow: hidden;">
+                <!-- Header -->
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; border-bottom: 1px solid var(--leli-border); background-color: var(--leli-surface-2);">
+                  <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <div class="leli-avatar" data-variant="solid" data-size="sm">A</div>
+                    <div>
+                      <strong style="font-size: 0.95rem;">Acme Analytics</strong>
+                      <div style="font-size: 0.75rem; color: var(--leli-text-muted);">Production Cluster &middot; US-East</div>
+                    </div>
+                  </div>
+                  <div style="display: flex; gap: 0.5rem;">
+                    <button class="leli-btn leli-btn-sm" data-variant="outlined">Export CSV</button>
+                    <button class="leli-btn leli-btn-sm" data-variant="solid">+ New Project</button>
+                  </div>
+                </div>
+
+                <!-- KPI Metric Cards -->
+                <div style="padding: 1.25rem;">
+                  <div class="leli-row leli-g-2" style="margin-bottom: 1.25rem;">
+                    <div class="leli-col-12 leli-col-md-4">
+                      <div class="leli-card" data-variant="glass" style="padding: 1rem;">
+                        <div style="font-size: 0.8rem; color: var(--leli-text-muted); margin-bottom: 0.25rem;">Monthly Recurring Revenue</div>
+                        <div style="font-size: 1.6rem; font-weight: 700;">$48,250</div>
+                        <div style="font-size: 0.75rem; color: var(--leli-success); margin-top: 0.35rem;">&#8593; 14.8% vs last month</div>
+                      </div>
+                    </div>
+                    <div class="leli-col-12 leli-col-md-4">
+                      <div class="leli-card" data-variant="glass" style="padding: 1rem;">
+                        <div style="font-size: 0.8rem; color: var(--leli-text-muted); margin-bottom: 0.25rem;">Active Subscriptions</div>
+                        <div style="font-size: 1.6rem; font-weight: 700;">1,429</div>
+                        <div style="font-size: 0.75rem; color: var(--leli-success); margin-top: 0.35rem;">&#8593; 8.2% vs last month</div>
+                      </div>
+                    </div>
+                    <div class="leli-col-12 leli-col-md-4">
+                      <div class="leli-card" data-variant="glass" style="padding: 1rem;">
+                        <div style="font-size: 0.8rem; color: var(--leli-text-muted); margin-bottom: 0.25rem;">Avg Response Time</div>
+                        <div style="font-size: 1.6rem; font-weight: 700;">42ms</div>
+                        <div style="font-size: 0.75rem; color: var(--leli-info); margin-top: 0.35rem;">Global edge latency</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Data Table -->
+                  <div class="leli-table-wrapper">
+                    <table class="leli-table" data-variant="striped hoverable">
+                      <thead>
+                        <tr>
+                          <th data-sortable="true">Customer</th>
+                          <th data-sortable="true">Plan</th>
+                          <th data-sortable="true">Status</th>
+                          <th data-sortable="true">Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th>Stripe Inc.</th>
+                          <td>Enterprise</td>
+                          <td><span class="leli-badge is-pill" data-accent="success"><span class="leli-dot"></span> Active</span></td>
+                          <td>$2,400 /mo</td>
+                        </tr>
+                        <tr>
+                          <th>Vercel Labs</th>
+                          <td>Pro Team</td>
+                          <td><span class="leli-badge is-pill" data-accent="success"><span class="leli-dot"></span> Active</span></td>
+                          <td>$480 /mo</td>
+                        </tr>
+                        <tr>
+                          <th>Supabase Corp</th>
+                          <td>Developer</td>
+                          <td><span class="leli-badge is-pill" data-accent="warning"><span class="leli-dot"></span> Pending</span></td>
+                          <td>$99 /mo</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>`,
+              `<!-- Dashboard Metric Cards & Table -->\n<div class="leli-row leli-g-2">\n  <div class="leli-col-12 leli-col-md-4">\n    <div class="leli-card" data-variant="glass">...</div>\n  </div>\n</div>\n\n<div class="leli-table-wrapper">\n  <table class="leli-table" data-variant="striped hoverable">...</table>\n</div>`
+            )}
+          </section>
+        `
+      },
+
     };
 
     const PAGE_KEYS = Object.keys(PAGES);
@@ -1894,7 +2458,7 @@ Core Rules:
     }
 
     function copyAiSystemPrompt(btn) {
-      const prompt = `Use leliUI (http://34.2.63.150:5000/llms-full.txt) for all HTML/CSS/JS UI components.\nInclude:\n<link rel="stylesheet" href="http://34.2.63.150:5000/dist/leli.css">\n<script src="http://34.2.63.150:5000/dist/leli.js" defer><\/script>\nUse <html data-theme="dark">, .leli-container, .leli-row > .leli-col-*, .leli-bento, .leli-navbar, .leli-card, .leli-tabs, .leli-accordion, and .leli-table.`;
+      const prompt = `Use leliUI (https://heqate.github.io/LeliUI/llms-full.txt) for all HTML/CSS/JS UI components.\nInclude:\n<link rel="stylesheet" href="https://heqate.github.io/LeliUI/dist/leli.css">\n<script src="https://heqate.github.io/LeliUI/dist/leli.js" defer><\/script>\nUse <html data-theme="dark">, .leli-container, .leli-row > .leli-col-*, .leli-bento, .leli-navbar, .leli-card, .leli-tabs, .leli-accordion, and .leli-table.`;
       navigator.clipboard.writeText(prompt);
       const old = btn.textContent;
       btn.textContent = 'AI Prompt Copied!';

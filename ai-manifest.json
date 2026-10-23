@@ -2,14 +2,14 @@
   "schema_version": "1.0",
   "name_for_human": "leliUI Component Library",
   "name_for_model": "leli_ui",
-  "version": "1.0.14",
-  "description_for_model": "Zero-dependency multi-variant HTML/CSS/JS UI component library with Sakura Pink theme and dark mode default. Use leliUI classes (.leli-container, .leli-row, .leli-col-*, .leli-bento, .leli-navbar, .leli-btn, .leli-input, .leli-switch, .leli-checkbox, .leli-badge, .leli-modal, .leli-toast, .leli-card, .leli-tabs, .leli-accordion, .leli-table, .leli-pagination, .leli-progress, .leli-skeleton, .leli-avatar) and data-variant attributes to build clean responsive interfaces.",
+  "version": "1.0.15",
+  "description_for_model": "Zero-dependency multi-variant HTML/CSS/JS UI component library with Sakura Pink theme and dark mode default. Use leliUI classes (.leli-container, .leli-row, .leli-col-*, .leli-bento, .leli-navbar, .leli-btn, .leli-input, .leli-switch, .leli-checkbox, .leli-badge, .leli-modal, .leli-toast, .leli-card, .leli-tabs, .leli-accordion, .leli-table, .leli-pagination, .leli-progress, .leli-skeleton, .leli-avatar, .leli-dropdown, [data-tooltip], .leli-popover, .leli-drawer, .leli-alert) and data-variant attributes to build clean responsive interfaces.",
   "endpoints": {
-    "llms_txt": "http://34.2.63.150:5000/llms.txt",
-    "llms_full_txt": "http://34.2.63.150:5000/llms-full.txt",
-    "registry_json": "http://34.2.63.150:5000/registry/components.json",
-    "css_bundle": "http://34.2.63.150:5000/dist/leli.css",
-    "js_bundle": "http://34.2.63.150:5000/dist/leli.js"
+    "llms_txt": "https://heqate.github.io/LeliUI/llms.txt",
+    "llms_full_txt": "https://heqate.github.io/LeliUI/llms-full.txt",
+    "registry_json": "https://heqate.github.io/LeliUI/registry/components.json",
+    "css_bundle": "https://heqate.github.io/LeliUI/dist/leli.css",
+    "js_bundle": "https://heqate.github.io/LeliUI/dist/leli.js"
   },
   "components": [
     {
@@ -26,7 +26,7 @@
         "flex-layouts"
       ],
       "jsRequired": false,
-      "css_url": "http://34.2.63.150:5000/src/components/grid.css"
+      "css_url": "https://heqate.github.io/LeliUI/src/components/grid.css"
     },
     {
       "name": "navbar",
@@ -41,7 +41,7 @@
         "brutal"
       ],
       "jsRequired": false,
-      "css_url": "http://34.2.63.150:5000/src/components/navbar.css"
+      "css_url": "https://heqate.github.io/LeliUI/src/components/navbar.css"
     },
     {
       "name": "button",
@@ -58,7 +58,7 @@
         "link"
       ],
       "jsRequired": false,
-      "css_url": "http://34.2.63.150:5000/src/components/button.css"
+      "css_url": "https://heqate.github.io/LeliUI/src/components/button.css"
     },
     {
       "name": "input",
@@ -73,7 +73,7 @@
         "input-group"
       ],
       "jsRequired": true,
-      "css_url": "http://34.2.63.150:5000/src/components/input.css"
+      "css_url": "https://heqate.github.io/LeliUI/src/components/input.css"
     },
     {
       "name": "form-controls",
@@ -87,7 +87,7 @@
         "brutal"
       ],
       "jsRequired": false,
-      "css_url": "http://34.2.63.150:5000/src/components/form-controls.css"
+      "css_url": "https://heqate.github.io/LeliUI/src/components/form-controls.css"
     },
     {
       "name": "badge",
@@ -103,7 +103,7 @@
         "dot"
       ],
       "jsRequired": false,
-      "css_url": "http://34.2.63.150:5000/src/components/badge.css"
+      "css_url": "https://heqate.github.io/LeliUI/src/components/badge.css"
     },
     {
       "name": "modal",
@@ -116,7 +116,7 @@
         "accent-top"
       ],
       "jsRequired": true,
-      "css_url": "http://34.2.63.150:5000/src/components/modal.css"
+      "css_url": "https://heqate.github.io/LeliUI/src/components/modal.css"
     },
     {
       "name": "toast",
@@ -131,7 +131,7 @@
         "brutal"
       ],
       "jsRequired": true,
-      "css_url": "http://34.2.63.150:5000/src/components/toast.css"
+      "css_url": "https://heqate.github.io/LeliUI/src/components/toast.css"
     },
     {
       "name": "card",
@@ -148,7 +148,7 @@
         "horizontal"
       ],
       "jsRequired": false,
-      "css_url": "http://34.2.63.150:5000/src/components/card.css"
+      "css_url": "https://heqate.github.io/LeliUI/src/components/card.css"
     },
     {
       "name": "tabs",
@@ -164,7 +164,7 @@
         "vertical"
       ],
       "jsRequired": true,
-      "css_url": "http://34.2.63.150:5000/src/components/tabs.css"
+      "css_url": "https://heqate.github.io/LeliUI/src/components/tabs.css"
     },
     {
       "name": "accordion",
@@ -179,7 +179,7 @@
         "brutal"
       ],
       "jsRequired": false,
-      "css_url": "http://34.2.63.150:5000/src/components/accordion.css"
+      "css_url": "https://heqate.github.io/LeliUI/src/components/accordion.css"
     },
     {
       "name": "table",
@@ -194,7 +194,7 @@
         "brutal"
       ],
       "jsRequired": true,
-      "css_url": "http://34.2.63.150:5000/src/components/table.css"
+      "css_url": "https://heqate.github.io/LeliUI/src/components/table.css"
     },
     {
       "name": "pagination",
@@ -209,7 +209,7 @@
         "brutal"
       ],
       "jsRequired": true,
-      "css_url": "http://34.2.63.150:5000/src/components/pagination.css"
+      "css_url": "https://heqate.github.io/LeliUI/src/components/pagination.css"
     },
     {
       "name": "progress",
@@ -225,7 +225,7 @@
         "brutal"
       ],
       "jsRequired": false,
-      "css_url": "http://34.2.63.150:5000/src/components/progress.css"
+      "css_url": "https://heqate.github.io/LeliUI/src/components/progress.css"
     },
     {
       "name": "skeleton",
@@ -238,7 +238,7 @@
         "brutal"
       ],
       "jsRequired": false,
-      "css_url": "http://34.2.63.150:5000/src/components/skeleton.css"
+      "css_url": "https://heqate.github.io/LeliUI/src/components/skeleton.css"
     },
     {
       "name": "avatar",
@@ -253,7 +253,72 @@
         "brutal"
       ],
       "jsRequired": false,
-      "css_url": "http://34.2.63.150:5000/src/components/avatar.css"
+      "css_url": "https://heqate.github.io/LeliUI/src/components/avatar.css"
+    },
+    {
+      "name": "dropdown",
+      "title": "Dropdown & Menu",
+      "category": "Overlays & Feedback",
+      "variants": [
+        "placement-bottom-start",
+        "placement-bottom-end",
+        "placement-top-start",
+        "placement-top-end",
+        "glass",
+        "brutal",
+        "headers",
+        "shortcuts"
+      ],
+      "jsRequired": true,
+      "css_url": "https://heqate.github.io/LeliUI/src/components/dropdown.css"
+    },
+    {
+      "name": "tooltip",
+      "title": "Tooltip & Popover",
+      "category": "Overlays & Feedback",
+      "variants": [
+        "top",
+        "bottom",
+        "left",
+        "right",
+        "glass",
+        "brutal",
+        "popover"
+      ],
+      "jsRequired": false,
+      "css_url": "https://heqate.github.io/LeliUI/src/components/tooltip.css"
+    },
+    {
+      "name": "drawer",
+      "title": "Drawer & Sheet",
+      "category": "Overlays & Feedback",
+      "variants": [
+        "placement-right",
+        "placement-left",
+        "placement-bottom",
+        "placement-top",
+        "glass",
+        "brutal"
+      ],
+      "jsRequired": true,
+      "css_url": "https://heqate.github.io/LeliUI/src/components/drawer.css"
+    },
+    {
+      "name": "alert",
+      "title": "Alert & Banner",
+      "category": "Overlays & Feedback",
+      "variants": [
+        "primary",
+        "success",
+        "warning",
+        "danger",
+        "info",
+        "glass",
+        "brutal",
+        "banner"
+      ],
+      "jsRequired": true,
+      "css_url": "https://heqate.github.io/LeliUI/src/components/alert.css"
     }
   ]
 }

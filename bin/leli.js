@@ -126,7 +126,7 @@ function cmdInit(args) {
       configPath,
       JSON.stringify(
         {
-          $schema: 'https://34.2.63.150:5000/schema.json',
+          $schema: 'https://heqate.github.io/LeliUI/schema.json',
           outDir: path.relative(process.cwd(), targetDir) || './leli-ui',
           defaultTheme: 'dark',
           installedComponents: []

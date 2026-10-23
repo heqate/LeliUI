@@ -1,6 +1,6 @@
 {
   "name": "leli-ui",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Zero-dependency, multi-variant, AI-first HTML/CSS/JS UI library with Sakura Pink & Dark Mode aesthetics",
   "main": "dist/leli.js",
   "style": "dist/leli.css",
@@ -12,7 +12,16 @@
     "type": "git",
     "url": "git+https://github.com/heqate/LeliUI.git"
   },
-  "homepage": "http://34.2.63.150:5000",
+  "homepage": "https://heqate.github.io/LeliUI",
+  "files": [
+    "dist",
+    "bin",
+    "registry",
+    "src",
+    "README.md",
+    "LICENSE",
+    "favicon.svg"
+  ],
   "bugs": {
     "url": "https://github.com/heqate/LeliUI/issues"
   },
