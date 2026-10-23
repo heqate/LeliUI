@@ -5,7 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- MANDATORY: Declare support for both light and dark themes -->
   <meta name="color-scheme" content="dark light">
-  <title>leliUI — Documentation & AI-Ready Component Library</title>
+  <!-- Primary Meta Tags -->
+  <title>leliUI — Zero-Dependency Modern UI Library for Humans & AI Agents</title>
+  <meta name="title" content="leliUI — Zero-Dependency Modern UI Library for Humans & AI Agents">
+  <meta name="description" content="Zero-dependency multi-variant HTML/CSS/JS UI library with Sakura Pink aesthetics, 20 accessible components, Spotlight Command Palette (Ctrl+K), and live syntax sandbox.">
+  <meta name="keywords" content="leliUI, UI library, css framework, design system, zero dependency, sakura pink, bento grid, ai ready, llms-txt">
+  <meta name="author" content="heqate">
+
+  <!-- Open Graph / Facebook / Discord / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://heqate.github.io/LeliUI/">
+  <meta property="og:title" content="leliUI — Zero-Dependency Modern UI Library">
+  <meta property="og:description" content="Zero-dependency multi-variant HTML/CSS/JS UI library with Sakura Pink aesthetics, 20 accessible components, and live playground.">
+  <meta property="og:image" content="https://heqate.github.io/LeliUI/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter / X -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://heqate.github.io/LeliUI/">
+  <meta property="twitter:title" content="leliUI — Zero-Dependency Modern UI Library">
+  <meta property="twitter:description" content="Zero-dependency multi-variant HTML/CSS/JS UI library with Sakura Pink aesthetics, 20 accessible components, and live playground.">
+  <meta property="twitter:image" content="https://heqate.github.io/LeliUI/og-image.png">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <link rel="stylesheet" href="./dist/leli.css">
   <!-- AI & LLM Discovery Metadata -->
@@ -904,7 +925,7 @@
           Copy AI Prompt
         </button>
 
-        <span class="leli-badge" id="leliVersionBadge">v1.0.20</span>
+        <span class="leli-badge" id="leliVersionBadge">v1.0.21</span>
 
         <a href="https://github.com/heqate/LeliUI" target="_blank" rel="noopener noreferrer" class="theme-switch-btn" title="View on GitHub (heqate/LeliUI)" aria-label="GitHub Repository">
           <svg viewBox="0 0 24 24" fill="currentColor">
@@ -1075,7 +1096,10 @@
           ` : ''}
           <div class="leli-doc-code-header">
             <span class="leli-doc-code-lang">${lang}</span>
-            <button type="button" class="leli-btn leli-btn-sm" data-raw="${encodedRaw}" onclick="copyRawCode(this)">Copy code</button>
+            <div style="display: flex; gap: 0.45rem; align-items: center;">
+              ${lang === 'html' ? `<button type="button" class="leli-btn leli-btn-sm" data-variant="ghost" data-raw="${encodedRaw}" onclick="openInPlayground(this)" title="Test and customize live in Playground">Playground &nearr;</button>` : ''}
+              <button type="button" class="leli-btn leli-btn-sm" data-raw="${encodedRaw}" onclick="copyRawCode(this)">Copy code</button>
+            </div>
           </div>
           <pre class="leli-doc-code-block"><code>${highlightHtml(rawCode.trim())}</code></pre>
         </div>
@@ -2996,6 +3020,24 @@ Core Rules:
         searchInput.focus();
       }
     });
+
+    function openInPlayground(btn) {
+      const raw = decodeURIComponent(btn.dataset.raw || '');
+      navigateDoc('playground');
+      setTimeout(() => {
+        const editor = document.getElementById('playgroundEditor');
+        if (editor) {
+          editor.value = raw;
+          updatePlaygroundPreview();
+        }
+        LeliUI.Toast.show({
+          title: 'Loaded in Playground',
+          message: 'Component opened for live customization.',
+          type: 'primary',
+          duration: 2000
+        });
+      }, 50);
+    }
 
     function copyRawCode(btn) {
       const raw = decodeURIComponent(btn.dataset.raw || '');
