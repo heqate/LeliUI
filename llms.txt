@@ -1,4 +1,4 @@
-# leliUI v1.0.17 — AI-First & Educational HTML/CSS/JS Component Library
+# leliUI v1.0.18 — AI-First & Educational HTML/CSS/JS Component Library
 
 > leliUI is a zero-dependency, multi-variant UI and layout library built with modern CSS (@layer, @container, light-dark(), :user-valid, :has()) and a lightweight accessible JavaScript engine. It is designed both for humans learning modern web architecture and for AI coding agents (Cursor, Windsurf, Claude, ChatGPT, Antigravity) to generate clean UI with minimal tokens.
 

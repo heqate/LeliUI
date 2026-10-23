@@ -757,36 +757,88 @@
       border: 1px solid var(--leli-border);
       border-radius: var(--leli-radius-md);
       overflow: hidden;
-      background: #0d0a11;
+      background: #09070c;
     }
 
     .playground-editor-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.5rem 1rem;
+      padding: 0.55rem 1rem;
       background: rgba(255,255,255,0.03);
       border-bottom: 1px solid var(--leli-border);
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       font-weight: 600;
       color: var(--leli-text-muted);
     }
 
-    .playground-textarea {
-      flex: 1;
-      width: 100%;
-      height: 100%;
-      min-height: 420px;
-      padding: 1rem;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: #fce7f3;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 0.875rem;
+    .playground-editor-body {
+      position: relative;
+      display: flex;
+      height: 520px;
+      background: #09070c;
+      overflow: hidden;
+    }
+
+    .playground-line-numbers {
+      width: 2.75rem;
+      padding: 1rem 0.5rem 1rem 0;
+      background: #060408;
+      border-right: 1px solid var(--leli-border);
+      color: rgba(255, 255, 255, 0.22);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "JetBrains Mono", monospace;
+      font-size: 13px;
       line-height: 1.6;
-      resize: vertical;
-      tab-size: 2;
+      text-align: right;
+      user-select: none;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .playground-code-area {
+      position: relative;
+      flex: 1;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .playground-highlight-layer,
+    .playground-textarea-layer {
+      position: absolute;
+      inset: 0;
+      margin: 0;
+      padding: 1rem !important;
+      box-sizing: border-box;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "JetBrains Mono", monospace !important;
+      font-size: 13px !important;
+      line-height: 1.6 !important;
+      tab-size: 2 !important;
+      white-space: pre !important;
+      word-wrap: normal !important;
+      word-break: normal !important;
+      overflow: auto !important;
+      border: none !important;
+      outline: none !important;
+    }
+
+    .playground-highlight-layer {
+      z-index: 1;
+      background: transparent;
+      pointer-events: none;
+      color: var(--leli-text);
+    }
+
+    .playground-textarea-layer {
+      z-index: 2;
+      background: transparent;
+      color: transparent;
+      caret-color: var(--leli-primary, #f472b6);
+      resize: none;
+    }
+
+    .playground-textarea-layer::selection {
+      background: rgba(244, 114, 182, 0.35);
+      color: transparent;
     }
 
     .playground-preview-wrap {
@@ -822,146 +874,7 @@
 </head>
 <body>
 
-  <!-- ====================================================================
-       TOP HEADER / NAVBAR (Pink Brand + Getting Started Only)
-       ==================================================================== -->
-  <header class="leli-navbar" data-position="sticky" data-variant="glass">
-    <div class="leli-navbar-inner" style="max-inline-size: 1320px; margin-inline: auto;">
-      <!-- Left: Pink Brand Logo & Getting Started Link -->
-      <div class="leli-d-flex leli-items-center leli-gap-2">
-        <a href="#grid" class="brand-logo">
-          <span class="brand-logo-box">L</span>
-          <span class="brand-logo-text">leli<span>UI</span></span>
-        </a>
-
-        <nav class="leli-navbar-nav" aria-label="Primary Navigation">
-          <button type="button" class="leli-nav-link" id="topInstallLink" onclick="navigateDoc('getting-started')">Getting Started</button>
-          <button type="button" class="leli-nav-link" id="topAiLink" onclick="navigateDoc('ai-hub')">AI & Agents</button>
-          <button type="button" class="leli-nav-link" id="topPlaygroundLink" onclick="navigateDoc('playground')">Playground</button>
-        </nav>
-      </div>
-
-      <!-- Right: Quick Search, Copy AI Prompt, Version Badge & Theme Switch -->
-      <div class="leli-navbar-actions">
-        <div class="leli-navbar-search" onclick="openCommandPalette()" style="cursor: pointer;" title="Search docs & components (Ctrl+K or /)">
-          <input type="search" id="quickSearchInput" placeholder="Quick search docs..." readonly style="pointer-events: none; cursor: pointer;">
-          <kbd style="font-size: 0.72rem; padding: 0.15rem 0.35rem;">⌘K</kbd>
-        </div>
-
-        <button type="button" class="leli-btn leli-btn-sm leli-btn-primary" onclick="copyAiSystemPrompt(this)" title="Copy system prompt for Cursor, Claude, ChatGPT or Windsurf">
-          Copy AI Prompt
-        </button>
-
-        <span class="leli-badge" id="leliVersionBadge">v1.0.17</span>
-
-        <a href="https://github.com/heqate/LeliUI" target="_blank" rel="noopener noreferrer" class="theme-switch-btn" title="View on GitHub (heqate/LeliUI)" aria-label="GitHub Repository">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-          </svg>
-        </a>
-
-        <button type="button" class="theme-switch-btn" onclick="openThemeCustomizer()" title="Customize Brand Colors & Tokens" aria-label="Customize Theme" style="font-size: 1.05rem;">🎨</button>
-        <button type="button" class="theme-switch-btn" onclick="LeliUI.Theme.toggle()" aria-label="Toggle Theme" title="Toggle Light / Dark Theme">
-          <svg class="icon-sun" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="4"></circle>
-            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
-          </svg>
-          <svg class="icon-moon" viewBox="0 0 24 24">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Sub-header Breadcrumb Bar -->
-  <div class="docs-subbar">
-    <div class="docs-subbar-inner">
-      <div class="docs-breadcrumb" id="breadcrumbText">Docs / Layout & Grid / <strong>12-Column Grid</strong></div>
-      <div>Quick CLI Install: <code>npx leli</code></div>
-    </div>
-  </div>
-
-
-  <!-- ====================================================================
-       SPOTLIGHT COMMAND PALETTE DIALOG (Ctrl+K)
-       ==================================================================== -->
-  <dialog id="leliCommandDialog" class="leli-command-dialog" aria-label="Spotlight Command Palette">
-    <div class="cmd-header">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="11" cy="11" r="8"></circle>
-        <path d="m21 21-4.35-4.35"></path>
-      </svg>
-      <input type="text" id="cmdPaletteInput" class="cmd-input" placeholder="Type a component, block, or command..." autocomplete="off">
-      <kbd class="leli-kbd" onclick="closeCommandPalette()" style="cursor: pointer;">ESC</kbd>
-    </div>
-    <div class="cmd-body" id="cmdPaletteResults"></div>
-    <div class="cmd-footer">
-      <div class="cmd-shortcuts">
-        <span><kbd class="leli-kbd">&uarr;&darr;</kbd> Navigate</span>
-        <span><kbd class="leli-kbd">&crarr;</kbd> Select</span>
-        <span><kbd class="leli-kbd">Esc</kbd> Close</span>
-      </div>
-      <span>leliUI Spotlight</span>
-    </div>
-  </dialog>
-
-  <!-- ====================================================================
-       THEME & COLOR CUSTOMIZER DIALOG
-       ==================================================================== -->
-  <dialog id="leliThemeDialog" class="leli-theme-dialog" aria-label="Theme Customizer">
-    <div class="cmd-header" style="justify-content: space-between;">
-      <div style="display: flex; align-items: center; gap: 0.65rem;">
-        <span style="font-size: 1.25rem;">🎨</span>
-        <h3 style="margin: 0; font-size: 1.1rem; font-weight: 700;">Theme Customizer</h3>
-      </div>
-      <button type="button" class="leli-btn leli-btn-sm" data-variant="ghost" onclick="closeThemeCustomizer()">&times;</button>
-    </div>
-    <div style="padding: 1.4rem; display: flex; flex-direction: column; gap: 1.25rem;">
-      <div>
-        <label style="font-size: 0.85rem; font-weight: 600; color: var(--leli-text-emphasis);">Brand Accent Color</label>
-        <div class="color-swatch-grid">
-          <button type="button" class="color-swatch-btn is-active" style="--swatch-color: #f472b6;" onclick="applyBrandAccent('#f472b6', 'Sakura Pink', this)">
-            <span class="swatch-circle"></span> Sakura Pink
-          </button>
-          <button type="button" class="color-swatch-btn" style="--swatch-color: #a855f7;" onclick="applyBrandAccent('#a855f7', 'Cyber Violet', this)">
-            <span class="swatch-circle"></span> Cyber Violet
-          </button>
-          <button type="button" class="color-swatch-btn" style="--swatch-color: #10b981;" onclick="applyBrandAccent('#10b981', 'Emerald', this)">
-            <span class="swatch-circle"></span> Emerald
-          </button>
-          <button type="button" class="color-swatch-btn" style="--swatch-color: #0ea5e9;" onclick="applyBrandAccent('#0ea5e9', 'Ocean Sky', this)">
-            <span class="swatch-circle"></span> Ocean Sky
-          </button>
-          <button type="button" class="color-swatch-btn" style="--swatch-color: #f97316;" onclick="applyBrandAccent('#f97316', 'Neon Sunset', this)">
-            <span class="swatch-circle"></span> Neon Sunset
-          </button>
-          <button type="button" class="color-swatch-btn" style="--swatch-color: #fb7185;" onclick="applyBrandAccent('#fb7185', 'Rose Quartz', this)">
-            <span class="swatch-circle"></span> Rose Quartz
-          </button>
-        </div>
-      </div>
-
-      <div>
-        <label style="font-size: 0.85rem; font-weight: 600; color: var(--leli-text-emphasis); display: block; margin-bottom: 0.5rem;">Corner Radius</label>
-        <div class="leli-btn-group" style="width: 100%;">
-          <button type="button" class="leli-btn" style="flex: 1;" onclick="applyRadius('0px')">Sharp (0px)</button>
-          <button type="button" class="leli-btn is-active" style="flex: 1;" onclick="applyRadius('0.5rem')">Modern (8px)</button>
-          <button type="button" class="leli-btn" style="flex: 1;" onclick="applyRadius('1.25rem')">Pill (20px)</button>
-        </div>
-      </div>
-
-      <div style="padding: 0.85rem; background: var(--leli-surface-2); border: 1px solid var(--leli-border); border-radius: var(--leli-radius-md);">
-        <div style="font-size: 0.78rem; font-weight: 600; color: var(--leli-text-muted); margin-bottom: 0.35rem;">Generated CSS Token Override</div>
-        <pre id="themeTokensCode" style="margin: 0; font-family: monospace; font-size: 0.78rem; color: var(--leli-primary);">:root { --leli-primary: #f472b6; }</pre>
-      </div>
-
-      <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
-        <button type="button" class="leli-btn" data-variant="outlined" onclick="resetThemeDefaults()">Reset Default</button>
-        <button type="button" class="leli-btn" data-variant="solid" onclick="copyCustomCssTokens(this)">Copy :root Tokens</button>
-      </div>
-    </div>
-  </dialog>
+  
 
   <!-- Centered 3-Column Documentation Shell -->
   <div class="docs-shell">
@@ -969,6 +882,7 @@
     <aside class="docs-sidebar" id="sidebarNav">
       <div class="docs-nav-section">
         <div class="docs-nav-heading">Layout & Skeleton</div>
+        <button type="button" class="docs-nav-item" data-doc-page="colors">Colors & Design Tokens</button>
         <button type="button" class="docs-nav-item" data-doc-page="containers">Containers</button>
         <button type="button" class="docs-nav-item is-active" data-doc-page="grid">12-Column Grid</button>
         <button type="button" class="docs-nav-item" data-doc-page="css-grid">CSS Grid & Auto-Fit</button>
@@ -1191,6 +1105,97 @@ Core Rules:
                   <div class="leli-card-body">Uses real <code>&lt;details&gt;</code>, <code>aria-selected</code>, and <code>@container</code> queries.</div>
                 </div>
               </div>
+            </div>
+          </section>
+        `
+      },
+
+
+      colors: {
+        category: 'Design System',
+        title: 'Colors & Design Tokens',
+        lead: 'leliUI is built on an elegant Sakura & Rose-Quartz Pink core with deep plum dark mode surfaces and high-contrast light mode tokens.',
+        content: `
+          <section class="leli-doc-section" id="sec-brand-colors">
+            <h2 class="leli-doc-heading">1. Official Brand Identity (Sakura Pink)</h2>
+            <p class="leli-doc-text">The core brand palette is centered around Sakura Pink (<code>#f472b6</code>) and Rose Quartz (<code>#fb7185</code>) for an unmistakable, premium developer aesthetic:</p>
+            <div class="leli-row leli-g-2" style="margin-top: 1rem;">
+              <div class="leli-col-12 leli-col-md-4">
+                <div class="leli-card" data-variant="outlined" style="overflow: hidden;">
+                  <div style="height: 5rem; background-color: #f472b6;"></div>
+                  <div class="leli-card-body" style="padding: 0.85rem;">
+                    <div style="font-weight: 700; font-size: 0.95rem;">Sakura Pink (Primary)</div>
+                    <code style="font-size: 0.8rem; color: var(--leli-primary);">--leli-primary: #f472b6</code>
+                    <div style="font-size: 0.75rem; color: var(--leli-text-muted); margin-top: 0.35rem;">Buttons, badges, focus rings, brand gradient.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="leli-col-12 leli-col-md-4">
+                <div class="leli-card" data-variant="outlined" style="overflow: hidden;">
+                  <div style="height: 5rem; background-color: #fb7185;"></div>
+                  <div class="leli-card-body" style="padding: 0.85rem;">
+                    <div style="font-weight: 700; font-size: 0.95rem;">Rose Quartz (Hover)</div>
+                    <code style="font-size: 0.8rem; color: var(--leli-primary);">--leli-primary-hover: #fb7185</code>
+                    <div style="font-size: 0.75rem; color: var(--leli-text-muted); margin-top: 0.35rem;">Hover states, active gradient accent.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="leli-col-12 leli-col-md-4">
+                <div class="leli-card" data-variant="outlined" style="overflow: hidden;">
+                  <div style="height: 5rem; background-color: rgba(244, 114, 182, 0.14); border-bottom: 1px solid var(--leli-border);"></div>
+                  <div class="leli-card-body" style="padding: 0.85rem;">
+                    <div style="font-weight: 700; font-size: 0.95rem;">Sakura Tint (Soft)</div>
+                    <code style="font-size: 0.8rem; color: var(--leli-primary);">rgba(244, 114, 182, 0.12)</code>
+                    <div style="font-size: 0.75rem; color: var(--leli-text-muted); margin-top: 0.35rem;">Soft badges, table hover, subtle card glow.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="leli-doc-section" id="sec-dark-surfaces">
+            <h2 class="leli-doc-heading">2. Deep Plum Dark Mode Surfaces</h2>
+            <p class="leli-doc-text">Instead of harsh pitch-black (<code>#000000</code>), leliUI uses calibrated deep plum surfaces that reduce eye strain and pair naturally with Sakura Pink:</p>
+            <div class="leli-row leli-g-2" style="margin-top: 1rem;">
+              <div class="leli-col-12 leli-col-md-4">
+                <div class="leli-card" data-variant="outlined" style="overflow: hidden;">
+                  <div style="height: 4rem; background-color: #0c0a0e; border-bottom: 1px solid var(--leli-border);"></div>
+                  <div class="leli-card-body" style="padding: 0.85rem;">
+                    <strong>Canvas Background</strong>
+                    <div><code>--leli-bg: #0c0a0e</code></div>
+                  </div>
+                </div>
+              </div>
+              <div class="leli-col-12 leli-col-md-4">
+                <div class="leli-card" data-variant="outlined" style="overflow: hidden;">
+                  <div style="height: 4rem; background-color: #15111a; border-bottom: 1px solid var(--leli-border);"></div>
+                  <div class="leli-card-body" style="padding: 0.85rem;">
+                    <strong>Surface 1 (Cards/Menus)</strong>
+                    <div><code>--leli-surface-1: #15111a</code></div>
+                  </div>
+                </div>
+              </div>
+              <div class="leli-col-12 leli-col-md-4">
+                <div class="leli-card" data-variant="outlined" style="overflow: hidden;">
+                  <div style="height: 4rem; background-color: #110e16; border-bottom: 1px solid var(--leli-border);"></div>
+                  <div class="leli-card-body" style="padding: 0.85rem;">
+                    <strong>Surface 2 (Navbar/Inputs)</strong>
+                    <div><code>--leli-surface-2: #110e16</code></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="leli-doc-section" id="sec-semantic-colors">
+            <h2 class="leli-doc-heading">3. Semantic State Accents</h2>
+            <p class="leli-doc-text">Standard semantic status tokens available across Badges, Alerts, and Choice Cards:</p>
+            <div class="leli-cluster leli-items-center" style="margin-top: 1rem;">
+              <span class="leli-badge" data-accent="primary">Primary (#f472b6)</span>
+              <span class="leli-badge" data-accent="success">Success (#34d399)</span>
+              <span class="leli-badge" data-accent="warning">Warning (#fbbf24)</span>
+              <span class="leli-badge" data-accent="danger">Danger (#f43f5e)</span>
+              <span class="leli-badge" data-accent="info">Info (#38bdf8)</span>
             </div>
           </section>
         `
@@ -2241,16 +2246,25 @@ Core Rules:
             <div class="playground-split">
               <div class="playground-editor-wrap">
                 <div class="playground-editor-header">
-                  <span>HTML Source (Editable)</span>
-                  <span style="color: var(--leli-primary);">Instant DOM Sync</span>
+                  <span>HTML Source &middot; Syntax Highlighted</span>
+                  <div style="display: flex; gap: 0.5rem; align-items: center;">
+                    <button type="button" class="leli-btn leli-btn-sm" data-variant="ghost" onclick="formatPlaygroundHtml()" title="Format with 2-space indentation">Beautify</button>
+                    <span class="leli-badge is-pill" data-accent="primary">Live DOM Sync</span>
+                  </div>
                 </div>
-                <textarea id="playgroundEditor" class="playground-textarea" spellcheck="false" oninput="updatePlaygroundPreview()"></textarea>
+                <div class="playground-editor-body">
+                  <div class="playground-line-numbers" id="playgroundLineNumbers">1</div>
+                  <div class="playground-code-area">
+                    <pre class="playground-highlight-layer" aria-hidden="true"><code id="playgroundHighlightCode"></code></pre>
+                    <textarea id="playgroundEditor" class="playground-textarea-layer" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>
+                  </div>
+                </div>
               </div>
 
               <div class="playground-preview-wrap">
                 <div class="playground-preview-header">
                   <span>Live Sandbox Preview</span>
-                  <span class="leli-badge is-pill" data-accent="success"><span class="leli-dot"></span> Live</span>
+                  <span class="leli-badge is-pill" data-accent="success"><span class="leli-dot"></span> 60fps</span>
                 </div>
                 <div id="playgroundPreview" class="playground-preview-canvas"></div>
               </div>
@@ -2923,6 +2937,8 @@ Core Rules:
        SPOTLIGHT COMMAND PALETTE LOGIC (Ctrl+K / Cmd+K)
        ==================================================================== */
     const COMMAND_ITEMS = [
+      // Design System & Basics
+      { title: 'Colors & Design Tokens', page: 'colors', category: 'Design System', icon: '🌸' },
       // Components
       { title: 'Grid & Layout System', page: 'grid', category: 'Layout & Skeleton', icon: '▦' },
       { title: 'CSS Grid & Auto-Fit', page: 'css-grid', category: 'Layout & Skeleton', icon: '⊞' },
@@ -3148,66 +3164,110 @@ Core Rules:
     /* ====================================================================
        INTERACTIVE PLAYGROUND CONTROLLER
        ==================================================================== */
-    const PLAYGROUND_PRESETS = {
-      hero: `<div class="leli-card" data-variant="glass" style="padding: 2.5rem 1.5rem; text-align: center;">
-  <span class="leli-badge is-pill" data-accent="primary" style="margin-bottom: 1rem;">✨ leliUI Live Sandbox</span>
-  <h1 style="font-size: 2.4rem; font-weight: 800; margin: 0 0 1rem 0; letter-spacing: -0.02em;">
-    Design Fast with <span style="color: var(--leli-primary);">Sakura Pink</span>
-  </h1>
-  <p style="color: var(--leli-text-muted); max-width: 32rem; margin: 0 auto 2rem auto;">
-    Zero runtime footprint, modern CSS architecture, and high developer ergonomics.
-  </p>
-  <div style="display: flex; gap: 0.75rem; justify-content: center;">
-    <button class="leli-btn" data-variant="solid">Get Started</button>
-    <button class="leli-btn" data-variant="outlined">Explore Components</button>
+        const PLAYGROUND_PRESETS = {
+      hero: `<div class="leli-card" data-variant="glass">
+  <div class="leli-card-body" style="text-align: center; padding: 3rem 1.5rem;">
+    <span class="leli-badge is-pill" data-accent="primary" style="margin-bottom: 1rem;">
+      <span class="leli-dot"></span> Next-Gen UI
+    </span>
+    <h1 style="font-size: 2.5rem; font-weight: 800; margin: 0 0 1rem 0; letter-spacing: -0.02em;">
+      Design Fast with <span style="color: var(--leli-primary);">Sakura Pink</span>
+    </h1>
+    <p style="color: var(--leli-text-muted); max-width: 32rem; margin: 0 auto 2rem auto; font-size: 1.05rem;">
+      Zero runtime footprint, multi-variant design tokens, and AI-native architecture.
+    </p>
+    <div class="leli-cluster" style="justify-content: center;">
+      <button class="leli-btn leli-btn-lg" data-variant="solid">Get Started Free</button>
+      <button class="leli-btn leli-btn-lg" data-variant="outlined">Explore 20 Components</button>
+    </div>
   </div>
 </div>`,
-      pricing: `<div class="leli-row leli-g-2">
+
+      pricing: `<div class="leli-row leli-g-3">
   <div class="leli-col-12 leli-col-md-6">
     <div class="leli-card" data-variant="outlined">
-      <div class="leli-card-header"><h3 class="leli-card-title">Starter</h3></div>
-      <div class="leli-card-body"><div style="font-size: 2rem; font-weight: 700;">$0</div><p>Free for hobbyists</p></div>
-      <div class="leli-card-footer"><button class="leli-btn" data-variant="outlined" style="width: 100%;">Select</button></div>
+      <div class="leli-card-header">
+        <div>
+          <h3 class="leli-card-title">Starter</h3>
+          <p class="leli-card-subtitle">For personal projects</p>
+        </div>
+      </div>
+      <div class="leli-card-body">
+        <div style="font-size: 2.2rem; font-weight: 800; margin-bottom: 1rem;">$0 /mo</div>
+        <p style="color: var(--leli-text-muted);">Includes all 20 core components and dark mode.</p>
+      </div>
+      <div class="leli-card-footer">
+        <button class="leli-btn" data-variant="outlined" style="width: 100%;">Select Plan</button>
+      </div>
     </div>
   </div>
+
   <div class="leli-col-12 leli-col-md-6">
     <div class="leli-card" data-variant="glass" style="border-color: var(--leli-primary);">
-      <div class="leli-card-header"><h3 class="leli-card-title" style="color: var(--leli-primary);">Pro</h3></div>
-      <div class="leli-card-body"><div style="font-size: 2rem; font-weight: 700;">$29 /mo</div><p>All 20 components & blocks</p></div>
-      <div class="leli-card-footer"><button class="leli-btn" data-variant="solid" style="width: 100%;">Upgrade</button></div>
+      <div class="leli-card-header">
+        <div>
+          <h3 class="leli-card-title" style="color: var(--leli-primary);">Pro</h3>
+          <p class="leli-card-subtitle">For growing SaaS apps</p>
+        </div>
+        <span class="leli-badge" data-accent="primary">Popular</span>
+      </div>
+      <div class="leli-card-body">
+        <div style="font-size: 2.2rem; font-weight: 800; margin-bottom: 1rem; color: var(--leli-primary);">$29 /mo</div>
+        <p style="color: var(--leli-text-muted);">Pre-built templates, priority support, and Figma tokens.</p>
+      </div>
+      <div class="leli-card-footer">
+        <button class="leli-btn" data-variant="solid" style="width: 100%;">Upgrade to Pro</button>
+      </div>
     </div>
   </div>
 </div>`,
-      auth: `<div class="leli-card" data-variant="glass" style="max-width: 24rem; margin: 0 auto; padding: 1.5rem;">
-  <h3 class="leli-card-title" style="text-align: center; margin-bottom: 1.5rem;">Sign In to Account</h3>
-  <div class="leli-field-floating" style="margin-bottom: 1rem;">
-    <input type="email" id="pgEmail" class="leli-input" placeholder="name@domain.com" required>
-    <label class="leli-label" for="pgEmail">Email Address</label>
+
+      auth: `<div class="leli-card" data-variant="glass" style="max-width: 26rem; margin: 0 auto;">
+  <div class="leli-card-header" style="text-align: center; display: block;">
+    <h3 class="leli-card-title">Welcome to leliUI</h3>
+    <p class="leli-card-subtitle">Sign in to your account</p>
   </div>
-  <div class="leli-field-floating" style="margin-bottom: 1.5rem;">
-    <input type="password" id="pgPass" class="leli-input" placeholder="Password" required>
-    <label class="leli-label" for="pgPass">Password</label>
+  <div class="leli-card-body">
+    <form onsubmit="event.preventDefault(); LeliUI.Toast.success('Signed in successfully!');" style="display: flex; flex-direction: column; gap: 1rem;">
+      <div class="leli-field-floating">
+        <input type="email" id="authMail" class="leli-input" placeholder="name@domain.com" required>
+        <label class="leli-label" for="authMail">Email Address</label>
+      </div>
+      <div class="leli-field-floating">
+        <input type="password" id="authPwd" class="leli-input" placeholder="Password" required>
+        <label class="leli-label" for="authPwd">Password</label>
+      </div>
+      <button type="submit" class="leli-btn leli-btn-lg" data-variant="solid" style="width: 100%;">Sign In</button>
+    </form>
   </div>
-  <button class="leli-btn" data-variant="solid" style="width: 100%;" onclick="LeliUI.Toast.success('Signed in!')">Continue</button>
 </div>`,
-      dashboard: `<div class="leli-row leli-g-2">
+
+      dashboard: `<div class="leli-row leli-g-2" style="margin-bottom: 1rem;">
   <div class="leli-col-6">
-    <div class="leli-card" data-variant="glass" style="padding: 1rem;">
-      <div style="font-size: 0.8rem; color: var(--leli-text-muted);">Revenue</div>
-      <div style="font-size: 1.5rem; font-weight: 700;">$24,500</div>
+    <div class="leli-card" data-variant="glass" style="padding: 1.25rem;">
+      <div style="font-size: 0.8rem; color: var(--leli-text-muted);">Monthly Revenue</div>
+      <div style="font-size: 1.8rem; font-weight: 800; margin: 0.25rem 0;">$48,250</div>
+      <span class="leli-badge is-pill" data-accent="success">&uarr; 14% vs last month</span>
     </div>
   </div>
   <div class="leli-col-6">
-    <div class="leli-card" data-variant="glass" style="padding: 1rem;">
-      <div style="font-size: 0.8rem; color: var(--leli-text-muted);">Users</div>
-      <div style="font-size: 1.5rem; font-weight: 700;">1,280</div>
+    <div class="leli-card" data-variant="glass" style="padding: 1.25rem;">
+      <div style="font-size: 0.8rem; color: var(--leli-text-muted);">Active Users</div>
+      <div style="font-size: 1.8rem; font-weight: 800; margin: 0.25rem 0;">1,429</div>
+      <span class="leli-badge is-pill" data-accent="success">&uarr; 8% vs last month</span>
     </div>
   </div>
 </div>`,
-      components: `<div class="leli-cluster">
+
+      components: `<div class="leli-cluster leli-items-center">
+  <!-- Dropdown -->
   <div class="leli-dropdown">
-    <button class="leli-btn leli-dropdown-trigger" data-variant="solid">Actions &#9662;</button>
-    <div class="leli-dropdown-menu">
+    <button class="leli-btn leli-dropdown-trigger" data-variant="solid">
+      <span>Actions</span>
+      <span class="leli-dropdown-chevron">&#9662;</span>
+    </button>
+    <div class="leli-dropdown-menu placement-bottom-start">
+      <div class="leli-dropdown-header">Manage</div>
       <a href="#" class="leli-dropdown-item">New Project</a>
       <a href="#" class="leli-dropdown-item">Settings</a>
       <div class="leli-dropdown-divider"></div>
@@ -3215,8 +3275,15 @@ Core Rules:
     </div>
   </div>
 
-  <button class="leli-btn" data-tooltip="Zero JS tooltip" data-tooltip-pos="top">Hover Tooltip</button>
-  <button class="leli-btn" data-variant="outlined" onclick="LeliUI.Toast.show({title: 'Live Toast', message: 'Hello from Playground!', type: 'primary'})">Trigger Toast</button>
+  <!-- Pure CSS Tooltip -->
+  <button class="leli-btn" data-variant="outlined" data-tooltip="Zero-JS CSS Tooltip" data-tooltip-pos="top">
+    Hover Me
+  </button>
+
+  <!-- Interactive Toast -->
+  <button class="leli-btn" data-variant="soft" onclick="LeliUI.Toast.show({title: 'Live Toast', message: 'Triggered from Playground!', type: 'primary'})">
+    Trigger Toast
+  </button>
 </div>`
     };
 
@@ -3226,15 +3293,69 @@ Core Rules:
       if (!editor.value) {
         editor.value = PLAYGROUND_PRESETS.hero;
       }
+
+      // Tab key support
+      editor.onkeydown = function(e) {
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = this.selectionStart;
+          const end = this.selectionEnd;
+          this.value = this.value.substring(0, start) + '  ' + this.value.substring(end);
+          this.selectionStart = this.selectionEnd = start + 2;
+          updatePlaygroundPreview();
+        }
+      };
+
+      // Synchronized scrolling
+      editor.onscroll = function() {
+        const highlightPre = document.getElementById('playgroundHighlightCode');
+        const lineNums = document.getElementById('playgroundLineNumbers');
+        if (highlightPre) {
+          highlightPre.parentElement.scrollTop = this.scrollTop;
+          highlightPre.parentElement.scrollLeft = this.scrollLeft;
+        }
+        if (lineNums) {
+          lineNums.scrollTop = this.scrollTop;
+        }
+      };
+
+      editor.oninput = function() {
+        updatePlaygroundPreview();
+      };
+
       updatePlaygroundPreview();
     }
 
     function updatePlaygroundPreview() {
       const editor = document.getElementById('playgroundEditor');
       const canvas = document.getElementById('playgroundPreview');
-      if (!editor || !canvas) return;
-      canvas.innerHTML = editor.value;
-      LeliUI.init(canvas);
+      const highlight = document.getElementById('playgroundHighlightCode');
+      const lineNums = document.getElementById('playgroundLineNumbers');
+      if (!editor) return;
+
+      const val = editor.value;
+
+      // 1. Update Syntax Highlight Layer
+      if (highlight) {
+        const lines = val.split('\n');
+        highlight.innerHTML = lines.map(line => highlightLine(line) || '&nbsp;').join('\n');
+      }
+
+      // 2. Update Line Numbers Gutter
+      if (lineNums) {
+        const count = val.split('\n').length;
+        let numsHtml = '';
+        for (let i = 1; i <= count; i++) {
+          numsHtml += '<div>' + i + '</div>';
+        }
+        lineNums.innerHTML = numsHtml;
+      }
+
+      // 3. Update Live DOM Preview
+      if (canvas) {
+        canvas.innerHTML = val;
+        LeliUI.init(canvas);
+      }
     }
 
     function switchPlaygroundPreset(key) {
@@ -3260,6 +3381,39 @@ Core Rules:
         btn.textContent = 'Copied!';
         setTimeout(() => (btn.textContent = old), 1200);
       }
+    }
+
+    function formatPlaygroundHtml() {
+      const editor = document.getElementById('playgroundEditor');
+      if (!editor) return;
+      let htmlStr = editor.value.trim();
+
+      // Simple clean 2-space HTML reformatter
+      let formatted = '';
+      let indent = 0;
+      const tokens = htmlStr.replace(/>\s*</g, '>\n<').split('\n');
+
+      tokens.forEach(line => {
+        const trimmed = line.trim();
+        if (!trimmed) return;
+
+        // Decrease indent for closing tags
+        if (trimmed.match(/^<\/[^>]+>/)) {
+          indent = Math.max(0, indent - 1);
+        }
+
+        formatted += '  '.repeat(indent) + trimmed + '\n';
+
+        // Increase indent for opening tags that are not self-closing or void
+        if (trimmed.match(/^<[^\/!][^>]*[^\/]>$/) &&
+            !trimmed.match(/^<(area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr)/i)) {
+          indent++;
+        }
+      });
+
+      editor.value = formatted.trim();
+      updatePlaygroundPreview();
+      LeliUI.Toast.show({ title: 'Code Formatted', message: 'Indentation beautified.', type: 'primary', duration: 1200 });
     }
 
 
