@@ -28,7 +28,7 @@
 - 🌸 **Aesthetic by Default**: Refined Sakura Pink (`#f472b6`) with warm plum dark background (`#0c0a0e`) and dark-mode-first architecture.
 - ⚡ **Zero Dependencies**: Pure modern HTML, CSS, and vanilla JavaScript. No React, no Tailwind build step, and no heavy runtime required.
 - 🤖 **AI-First & Agent-Ready**: Standardized `/llms.txt`, `/llms-full.txt`, and `/ai-manifest.json` endpoints allow AI coding assistants (Cursor, Windsurf, Claude, ChatGPT) to generate accurate code with minimal tokens.
-- 💻 **Terminal CLI**: Shadcn-style `npx leli` workflow to inspect, pick, and pull components right into your local project.
+- 💻 **Terminal CLI**: Modular on-demand `npx leli` workflow to inspect, pick, and pull components right into your local project.
 - 🧱 **Comprehensive Grid & Bento**: 12-column flexbox grid, auto-fit responsive CSS grid, Bento grid layouts, and page shells.
 - ♿ **Accessible**: WAI-ARIA compliant, native HTML5 `<dialog closedby="any">` modal with light dismiss, arrow-key navigation for tabs, and `:user-valid` form validation.
 

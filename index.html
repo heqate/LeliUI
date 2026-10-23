@@ -13,7 +13,7 @@
   <link rel="alternate" type="application/json" href="/ai-manifest.json" title="leliUI AI Manifest">
   <style>
     /* ======================================================================
-       Bootstrap-Style Documentation Layout (Pink Brand + Syntax Highlighted)
+       leliUI Documentation Shell (Sakura Pink & Dark Theme + Syntax Highlighting)
        ====================================================================== */
 
     /* Soft Pastel Sakura Brand Logo */
@@ -213,14 +213,14 @@
       box-sizing: border-box;
     }
 
-    /* Bootstrap-Style Page Header */
-    .bd-page-header {
+    /* leliUI Documentation Page Header */
+    .leli-doc-page-header {
       margin-block-end: 2.5rem;
       padding-block-end: 1.5rem;
       border-block-end: 1px solid var(--leli-border);
     }
 
-    .bd-eyebrow {
+    .leli-doc-eyebrow {
       display: inline-block;
       font-size: 0.75rem;
       font-weight: 700;
@@ -233,7 +233,7 @@
       margin-block-end: 0.65rem;
     }
 
-    .bd-title {
+    .leli-doc-title {
       margin: 0 0 0.65rem;
       font-size: 2.25rem;
       font-weight: 800;
@@ -242,20 +242,20 @@
       color: var(--leli-text);
     }
 
-    .bd-lead {
+    .leli-doc-lead {
       margin: 0;
       font-size: 1.1rem;
       color: var(--leli-text-muted);
       line-height: 1.65;
     }
 
-    /* Bootstrap-Style Section Headings with # Anchor */
-    .bd-section {
+    /* leliUI Documentation Section Headings with # Anchor */
+    .leli-doc-section {
       margin-block-end: 3rem;
       scroll-margin-block-start: 5.5rem;
     }
 
-    .bd-heading {
+    .leli-doc-heading {
       font-size: 1.4rem;
       font-weight: 700;
       margin: 0 0 0.6rem;
@@ -268,7 +268,7 @@
       color: var(--leli-text);
     }
 
-    .bd-heading::after {
+    .leli-doc-heading::after {
       content: "#";
       color: var(--leli-primary);
       font-weight: 500;
@@ -276,11 +276,11 @@
       font-size: 1.15rem;
     }
 
-    .bd-section:hover .bd-heading::after {
+    .leli-doc-section:hover .leli-doc-heading::after {
       opacity: 1;
     }
 
-    .bd-text {
+    .leli-doc-text {
       margin: 0 0 1.15rem;
       font-size: 0.95rem;
       color: var(--leli-text-muted);
@@ -288,7 +288,7 @@
     }
 
     /* Inline Code Badge inside Paragraphs */
-    .bd-text code,
+    .leli-doc-text code,
     .docs-ref-table td code {
       font-family: var(--leli-font-mono);
       font-size: 0.8125rem;
@@ -299,8 +299,8 @@
       font-weight: 500;
     }
 
-    /* Bootstrap Callout Note Box */
-    .bd-callout {
+    /* leliUI Callout Note Box */
+    .leli-doc-callout {
       padding: 1rem 1.25rem;
       margin-block: 1.25rem;
       border-inline-start: 4px solid var(--leli-primary);
@@ -312,16 +312,16 @@
       color: var(--leli-text-muted);
     }
 
-    .bd-callout strong {
+    .leli-doc-callout strong {
       color: var(--leli-text);
       display: block;
       margin-block-end: 0.2rem;
     }
 
     /* ======================================================================
-       Bootstrap-Style Example Box (Preview + Header Bar + Syntax Highlighted Code)
+       leliUI Interactive Example Box (Preview + Header Bar + Syntax Highlighting)
        ====================================================================== */
-    .bd-example-card {
+    .leli-doc-example-card {
       border: 1px solid var(--leli-border);
       border-radius: var(--leli-radius-lg);
       overflow: hidden;
@@ -330,7 +330,7 @@
       box-shadow: var(--leli-shadow-sm);
     }
 
-    .bd-example-label {
+    .leli-doc-example-label {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -344,12 +344,12 @@
       color: var(--leli-text-muted);
     }
 
-    .bd-example-preview {
+    .leli-doc-example-preview {
       padding: 1.75rem;
       background-color: var(--leli-bg);
     }
 
-    .bd-code-header {
+    .leli-doc-code-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -362,14 +362,14 @@
       color: #a89ba4;
     }
 
-    .bd-code-lang {
+    .leli-doc-code-lang {
       color: #f9a8d4;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.06em;
     }
 
-    .bd-code-block {
+    .leli-doc-code-block {
       background-color: #0e0c12;
       padding: 1.15rem 1.25rem;
       margin: 0;
@@ -525,7 +525,7 @@
           Copy AI Prompt
         </button>
 
-        <span class="leli-badge" id="leliVersionBadge">v1.0.12</span>
+        <span class="leli-badge" id="leliVersionBadge">v1.0.13</span>
 
         <a href="https://github.com/heqate/LeliUI" target="_blank" rel="noopener noreferrer" class="theme-switch-btn" title="View on GitHub (heqate/LeliUI)" aria-label="GitHub Repository">
           <svg viewBox="0 0 24 24" fill="currentColor">
@@ -609,7 +609,7 @@
   <script src="./dist/leli.js"></script>
   <script>
     /**
-     * Helper to build Bootstrap-style Example + Collision-Free Syntax Highlighted Code Card
+     * Helper to build leliUI Interactive Example + Collision-Free Syntax Highlighted Code Card
      */
     function escapeHtml(str) {
       return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -649,19 +649,19 @@
     function exampleBox(previewHtml, rawCode, lang = 'html') {
       const encodedRaw = encodeURIComponent(rawCode.trim());
       return `
-        <div class="bd-example-card">
+        <div class="leli-doc-example-card">
           ${previewHtml ? `
-            <div class="bd-example-label">
+            <div class="leli-doc-example-label">
               <span>Live Example</span>
               <span>Preview</span>
             </div>
-            <div class="bd-example-preview">${previewHtml}</div>
+            <div class="leli-doc-example-preview">${previewHtml}</div>
           ` : ''}
-          <div class="bd-code-header">
-            <span class="bd-code-lang">${lang}</span>
+          <div class="leli-doc-code-header">
+            <span class="leli-doc-code-lang">${lang}</span>
             <button type="button" class="leli-btn leli-btn-sm" data-raw="${encodedRaw}" onclick="copyRawCode(this)">Copy code</button>
           </div>
-          <pre class="bd-code-block"><code>${highlightHtml(rawCode.trim())}</code></pre>
+          <pre class="leli-doc-code-block"><code>${highlightHtml(rawCode.trim())}</code></pre>
         </div>
       `;
     }
@@ -672,15 +672,15 @@
         title: 'Quick Start & Installation',
         lead: 'Install leliUI via CLI in seconds, link directly via CDN, or feed our AI discovery endpoints to your coding assistant.',
         content: `
-          <section class="bd-section" id="sec-cli">
-            <h2 class="bd-heading">1. Install via CLI</h2>
-            <p class="bd-text">Pull the entire library or individual components directly from your terminal using <code>npx leli</code>:</p>
+          <section class="leli-doc-section" id="sec-cli">
+            <h2 class="leli-doc-heading">1. Install via CLI</h2>
+            <p class="leli-doc-text">Pull the entire library or individual components directly from your terminal using <code>npx leli</code>:</p>
             ${exampleBox('', `# Pull the complete bundle\nnpx leli\n\n# Or pull only specific modules\nnpx leli grid navbar card`, 'bash')}
           </section>
 
-          <section class="bd-section" id="sec-cdn">
-            <h2 class="bd-heading">2. Direct CDN / HTML Include</h2>
-            <p class="bd-text">Link <code>leli.css</code> inside your <code>&lt;head&gt;</code> and include <code>leli.js</code> before closing <code>&lt;/body&gt;</code>:</p>
+          <section class="leli-doc-section" id="sec-cdn">
+            <h2 class="leli-doc-heading">2. Direct CDN / HTML Include</h2>
+            <p class="leli-doc-text">Link <code>leli.css</code> inside your <code>&lt;head&gt;</code> and include <code>leli.js</code> before closing <code>&lt;/body&gt;</code>:</p>
             ${exampleBox('', `<!DOCTYPE html>\n<html lang="en" data-theme="dark">\n<head>\n  <link rel="stylesheet" href="http://34.2.63.150:5000/dist/leli.css">\n</head>\n<body>\n  <div class="leli-container">\n    <h1>Hello, leliUI!</h1>\n  </div>\n  <script src="http://34.2.63.150:5000/dist/leli.js" defer><\/script>\n</body>\n</html>`, 'html')}
           </section>
         `
@@ -691,14 +691,14 @@
         title: 'AI Integration & llms.txt Hub',
         lead: 'leliUI is built to be 100% discoverable and parseable by AI coding agents (Cursor, Windsurf, Claude, ChatGPT, Antigravity) while teaching humans clean semantic web architecture.',
         content: `
-          <div class="bd-callout">
+          <div class="leli-doc-callout">
             <strong>Why AI-First Discovery Matters</strong>
             Modern AI agents look for standardized machine-readable endpoints (<code>/llms.txt</code>, <code>/llms-full.txt</code>, and <code>/ai-manifest.json</code>) to learn a library's exact class names and avoid hallucinating CSS rules.
           </div>
 
-          <section class="bd-section" id="sec-ai-endpoints">
-            <h2 class="bd-heading">1. Live AI Discovery Endpoints</h2>
-            <p class="bd-text">Point any AI agent, web scraper, or MCP tool to these live URLs hosted on this server:</p>
+          <section class="leli-doc-section" id="sec-ai-endpoints">
+            <h2 class="leli-doc-heading">1. Live AI Discovery Endpoints</h2>
+            <p class="leli-doc-text">Point any AI agent, web scraper, or MCP tool to these live URLs hosted on this server:</p>
             <table class="docs-ref-table">
               <thead>
                 <tr>
@@ -732,9 +732,9 @@
             </table>
           </section>
 
-          <section class="bd-section" id="sec-ai-prompt">
-            <h2 class="bd-heading">2. Ready-to-Use AI Prompt (.cursorrules / Claude / ChatGPT)</h2>
-            <p class="bd-text">Copy the prompt below and paste it into ChatGPT, Claude, or your project's <code>.cursorrules</code> / <code>AGENTS.md</code> file so the AI automatically builds interfaces using <strong>leliUI</strong>:</p>
+          <section class="leli-doc-section" id="sec-ai-prompt">
+            <h2 class="leli-doc-heading">2. Ready-to-Use AI Prompt (.cursorrules / Claude / ChatGPT)</h2>
+            <p class="leli-doc-text">Copy the prompt below and paste it into ChatGPT, Claude, or your project's <code>.cursorrules</code> / <code>AGENTS.md</code> file so the AI automatically builds interfaces using <strong>leliUI</strong>:</p>
             ${exampleBox('', `You are building a web interface using leliUI (v1.0).
 Always load the official stylesheet and script from:
 <link rel="stylesheet" href="http://34.2.63.150:5000/dist/leli.css">
@@ -748,9 +748,9 @@ Core Rules:
 3. Use .leli-navbar for top headers, .leli-card (data-variant="outlined|soft|elevated|glass") for cards, .leli-tabs for tabs, .leli-accordion for disclosures, and .leli-table-wrapper > .leli-table for tables.`, 'prompt')}
           </section>
 
-          <section class="bd-section" id="sec-learning-anatomy">
-            <h2 class="bd-heading">3. How Humans Learn leliUI (3-Rule Mental Model)</h2>
-            <p class="bd-text">Unlike utility-soup frameworks with 50 classes per element, leliUI teaches clean semantic structure through three predictable layers:</p>
+          <section class="leli-doc-section" id="sec-learning-anatomy">
+            <h2 class="leli-doc-heading">3. How Humans Learn leliUI (3-Rule Mental Model)</h2>
+            <p class="leli-doc-text">Unlike utility-soup frameworks with 50 classes per element, leliUI teaches clean semantic structure through three predictable layers:</p>
             <div class="leli-row leli-g-2">
               <div class="leli-col-12 leli-col-md-4">
                 <div class="leli-card" data-variant="outlined" data-size="sm">
@@ -780,27 +780,27 @@ Core Rules:
         title: 'Containers',
         lead: 'Containers are the fundamental building block of leliUI that center your content horizontally and constrain maximum width across responsive breakpoints.',
         content: `
-          <section class="bd-section" id="sec-default-container">
-            <h2 class="bd-heading">Default Container</h2>
-            <p class="bd-text">Wrap your page sections inside <code>.leli-container</code> to automatically center content with responsive horizontal padding.</p>
+          <section class="leli-doc-section" id="sec-default-container">
+            <h2 class="leli-doc-heading">Default Container</h2>
+            <p class="leli-doc-text">Wrap your page sections inside <code>.leli-container</code> to automatically center content with responsive horizontal padding.</p>
             ${exampleBox(
               `<div class="leli-container"><div class="grid-demo-box">.leli-container (Centered Responsive Wrapper)</div></div>`,
               `<div class="leli-container">\n  <!-- Page content goes here -->\n</div>`
             )}
           </section>
 
-          <section class="bd-section" id="sec-narrow-fluid">
-            <h2 class="bd-heading">Narrow & Fluid Containers</h2>
-            <p class="bd-text">Use <code>.leli-container-narrow</code> (680px max) for centered forms or articles, and <code>.leli-container-fluid</code> for 100% full-viewport layouts.</p>
+          <section class="leli-doc-section" id="sec-narrow-fluid">
+            <h2 class="leli-doc-heading">Narrow & Fluid Containers</h2>
+            <p class="leli-doc-text">Use <code>.leli-container-narrow</code> (680px max) for centered forms or articles, and <code>.leli-container-fluid</code> for 100% full-viewport layouts.</p>
             ${exampleBox(
               `<div class="leli-stack"><div class="leli-container-narrow"><div class="grid-demo-box">.leli-container-narrow (680px max)</div></div><div class="leli-container-fluid"><div class="grid-demo-box">.leli-container-fluid (100% full width)</div></div></div>`,
               `<div class="leli-container-narrow">Centered article container (680px)</div>\n<div class="leli-container-fluid">Full-width 100% container</div>`
             )}
           </section>
 
-          <section class="bd-section" id="sec-container-breakpoints">
-            <h2 class="bd-heading">Responsive Breakpoint Reference</h2>
-            <p class="bd-text">How each container scales across viewport widths:</p>
+          <section class="leli-doc-section" id="sec-container-breakpoints">
+            <h2 class="leli-doc-heading">Responsive Breakpoint Reference</h2>
+            <p class="leli-doc-text">How each container scales across viewport widths:</p>
             <table class="docs-ref-table">
               <thead>
                 <tr>
@@ -829,14 +829,14 @@ Core Rules:
         title: '12-Column Grid System',
         lead: 'Build responsive page layouts of any shape using our 12-column flexbox grid, automatic row columns, responsive breakpoints, gutters, and offsets.',
         content: `
-          <div class="bd-callout">
+          <div class="leli-doc-callout">
             <strong>How the Grid works</strong>
             Rows (<code>.leli-row</code>) are horizontal groups of columns. Content should be placed inside columns (<code>.leli-col-*</code>), and only columns may be immediate children of rows.
           </div>
 
-          <section class="bd-section" id="sec-equal-cols">
-            <h2 class="bd-heading">1. Auto-Layout Equal Columns</h2>
-            <p class="bd-text">Use <code>.leli-col</code> for equal-width columns that automatically divide the available row space:</p>
+          <section class="leli-doc-section" id="sec-equal-cols">
+            <h2 class="leli-doc-heading">1. Auto-Layout Equal Columns</h2>
+            <p class="leli-doc-text">Use <code>.leli-col</code> for equal-width columns that automatically divide the available row space:</p>
             ${exampleBox(
               `<div class="leli-stack">
                 <div class="leli-row">
@@ -853,9 +853,9 @@ Core Rules:
             )}
           </section>
 
-          <section class="bd-section" id="sec-12-col-widths">
-            <h2 class="bd-heading">2. 12-Column Sizing (.leli-col-1 to .leli-col-12)</h2>
-            <p class="bd-text">Specify explicit column spans out of 12 available units per row:</p>
+          <section class="leli-doc-section" id="sec-12-col-widths">
+            <h2 class="leli-doc-heading">2. 12-Column Sizing (.leli-col-1 to .leli-col-12)</h2>
+            <p class="leli-doc-text">Specify explicit column spans out of 12 available units per row:</p>
             ${exampleBox(
               `<div class="leli-stack">
                 <div class="leli-row">
@@ -872,9 +872,9 @@ Core Rules:
             )}
           </section>
 
-          <section class="bd-section" id="sec-responsive-breakpoints">
-            <h2 class="bd-heading">3. Responsive Breakpoints (sm, md, lg)</h2>
-            <p class="bd-text">Stack columns on mobile (<code>.leli-col-12</code>), split into two on tablets (<code>.leli-col-md-6</code>), and display three across on desktops (<code>.leli-col-lg-4</code>):</p>
+          <section class="leli-doc-section" id="sec-responsive-breakpoints">
+            <h2 class="leli-doc-heading">3. Responsive Breakpoints (sm, md, lg)</h2>
+            <p class="leli-doc-text">Stack columns on mobile (<code>.leli-col-12</code>), split into two on tablets (<code>.leli-col-md-6</code>), and display three across on desktops (<code>.leli-col-lg-4</code>):</p>
             ${exampleBox(
               `<div class="leli-row">
                 <div class="leli-col-12 leli-col-md-6 leli-col-lg-4"><div class="grid-demo-box">col-12 / md-6 / lg-4</div></div>
@@ -885,9 +885,9 @@ Core Rules:
             )}
           </section>
 
-          <section class="bd-section" id="sec-row-columns">
-            <h2 class="bd-heading">4. Row Columns (.leli-row-cols-*)</h2>
-            <p class="bd-text">Set the number of columns directly on the parent <code>.leli-row</code> instead of repeating classes on every child:</p>
+          <section class="leli-doc-section" id="sec-row-columns">
+            <h2 class="leli-doc-heading">4. Row Columns (.leli-row-cols-*)</h2>
+            <p class="leli-doc-text">Set the number of columns directly on the parent <code>.leli-row</code> instead of repeating classes on every child:</p>
             ${exampleBox(
               `<div class="leli-row leli-row-cols-2 leli-row-cols-md-4 leli-g-2">
                 <div><div class="grid-demo-box">Item 1</div></div>
@@ -899,9 +899,9 @@ Core Rules:
             )}
           </section>
 
-          <section class="bd-section" id="sec-offsets">
-            <h2 class="bd-heading">5. Offsets & Centering Columns</h2>
-            <p class="bd-text">Push columns to the right using <code>.leli-offset-*</code> classes:</p>
+          <section class="leli-doc-section" id="sec-offsets">
+            <h2 class="leli-doc-heading">5. Offsets & Centering Columns</h2>
+            <p class="leli-doc-text">Push columns to the right using <code>.leli-offset-*</code> classes:</p>
             ${exampleBox(
               `<div class="leli-stack">
                 <div class="leli-row">
@@ -916,8 +916,8 @@ Core Rules:
             )}
           </section>
 
-          <section class="bd-section" id="sec-grid-reference">
-            <h2 class="bd-heading">Class Reference</h2>
+          <section class="leli-doc-section" id="sec-grid-reference">
+            <h2 class="leli-doc-heading">Class Reference</h2>
             <table class="docs-ref-table">
               <thead>
                 <tr><th>Class</th><th>Description</th></tr>
@@ -941,9 +941,9 @@ Core Rules:
         title: 'CSS Grid & Auto-Fit',
         lead: 'Zero-media-query responsive grids and multi-dimensional column/row spanning powered by native CSS Grid.',
         content: `
-          <section class="bd-section" id="sec-autofit">
-            <h2 class="bd-heading">1. Auto-Fit Responsive Grids</h2>
-            <p class="bd-text">Use <code>.leli-grid-auto-sm</code> (180px min), <code>.leli-grid-auto-md</code> (260px min), or <code>.leli-grid-auto-lg</code> (340px min) to automatically fit as many columns as the screen allows:</p>
+          <section class="leli-doc-section" id="sec-autofit">
+            <h2 class="leli-doc-heading">1. Auto-Fit Responsive Grids</h2>
+            <p class="leli-doc-text">Use <code>.leli-grid-auto-sm</code> (180px min), <code>.leli-grid-auto-md</code> (260px min), or <code>.leli-grid-auto-lg</code> (340px min) to automatically fit as many columns as the screen allows:</p>
             ${exampleBox(
               `<div class="leli-grid-auto-sm">
                 <div class="grid-demo-box">Auto Card 1</div>
@@ -955,9 +955,9 @@ Core Rules:
             )}
           </section>
 
-          <section class="bd-section" id="sec-grid-spans">
-            <h2 class="bd-heading">2. Column & Row Spanning</h2>
-            <p class="bd-text">Combine <code>.leli-grid</code> with <code>.leli-span-*</code> and <code>.leli-row-span-*</code>:</p>
+          <section class="leli-doc-section" id="sec-grid-spans">
+            <h2 class="leli-doc-heading">2. Column & Row Spanning</h2>
+            <p class="leli-doc-text">Combine <code>.leli-grid</code> with <code>.leli-span-*</code> and <code>.leli-row-span-*</code>:</p>
             ${exampleBox(
               `<div class="leli-grid leli-grid-cols-4">
                 <div class="grid-demo-box leli-span-2 leli-row-span-2" style="display:flex;align-items:center;justify-content:center;">.leli-span-2 .leli-row-span-2</div>
@@ -976,9 +976,9 @@ Core Rules:
         title: 'Bento Grid System',
         lead: 'Asymmetric dashboard and feature showcase layouts with hero (2x2), wide (2x1), and tall (1x2) cells.',
         content: `
-          <section class="bd-section" id="sec-bento-usage">
-            <h2 class="bd-heading">Bento Grid Layout (.leli-bento)</h2>
-            <p class="bd-text">Place <code>.leli-bento-item</code> cards inside <code>.leli-bento</code> and combine with size modifiers:</p>
+          <section class="leli-doc-section" id="sec-bento-usage">
+            <h2 class="leli-doc-heading">Bento Grid Layout (.leli-bento)</h2>
+            <p class="leli-doc-text">Place <code>.leli-bento-item</code> cards inside <code>.leli-bento</code> and combine with size modifiers:</p>
             ${exampleBox(
               `<div class="leli-bento">
                 <div class="leli-bento-item leli-bento-hero">
@@ -1006,9 +1006,9 @@ Core Rules:
         title: 'Page Shells (Application Layouts)',
         lead: 'Ready-to-use structural page skeletons including Sidebar + Main, Holy Grail 3-Column, and 50/50 Split Screen.',
         content: `
-          <section class="bd-section" id="sec-sidebar-shell">
-            <h2 class="bd-heading">1. Sidebar + Main Content (.leli-layout-sidebar)</h2>
-            <p class="bd-text">Ideal for admin dashboards and documentation portals:</p>
+          <section class="leli-doc-section" id="sec-sidebar-shell">
+            <h2 class="leli-doc-heading">1. Sidebar + Main Content (.leli-layout-sidebar)</h2>
+            <p class="leli-doc-text">Ideal for admin dashboards and documentation portals:</p>
             ${exampleBox(
               `<div class="leli-layout-sidebar" style="--sidebar-width: 170px;">
                 <div class="grid-demo-box" style="padding: 2rem 0.5rem;">Sidebar (250px)</div>
@@ -1018,9 +1018,9 @@ Core Rules:
             )}
           </section>
 
-          <section class="bd-section" id="sec-holy-grail">
-            <h2 class="bd-heading">2. Holy Grail 3-Column (.leli-layout-holy-grail)</h2>
-            <p class="bd-text">Left navigation, fluid center feed, and right context panel:</p>
+          <section class="leli-doc-section" id="sec-holy-grail">
+            <h2 class="leli-doc-heading">2. Holy Grail 3-Column (.leli-layout-holy-grail)</h2>
+            <p class="leli-doc-text">Left navigation, fluid center feed, and right context panel:</p>
             ${exampleBox(
               `<div class="leli-layout-holy-grail" style="grid-template-columns: 130px 1fr 130px;">
                 <div class="grid-demo-box" style="padding: 1.75rem 0.5rem;">Left Nav</div>
@@ -1031,9 +1031,9 @@ Core Rules:
             )}
           </section>
 
-          <section class="bd-section" id="sec-split-shell">
-            <h2 class="bd-heading">3. Split Screen (.leli-layout-split)</h2>
-            <p class="bd-text">50% / 50% balanced layout for login pages and hero sections:</p>
+          <section class="leli-doc-section" id="sec-split-shell">
+            <h2 class="leli-doc-heading">3. Split Screen (.leli-layout-split)</h2>
+            <p class="leli-doc-text">50% / 50% balanced layout for login pages and hero sections:</p>
             ${exampleBox(
               `<div class="leli-layout-split">
                 <div class="grid-demo-box" style="padding: 1.75rem 0.5rem;">Left Pane (50%)</div>
@@ -1050,9 +1050,9 @@ Core Rules:
         title: 'Flex, Stack & Cluster',
         lead: 'Compose vertical stacks, wrapping tag clusters, and flexbox alignments with single-purpose utility classes.',
         content: `
-          <section class="bd-section" id="sec-stack-cluster">
-            <h2 class="bd-heading">1. Vertical Stack & Horizontal Cluster</h2>
-            <p class="bd-text">Use <code>.leli-stack</code> for vertical spacing and <code>.leli-cluster</code> for wrapping pill/button groups:</p>
+          <section class="leli-doc-section" id="sec-stack-cluster">
+            <h2 class="leli-doc-heading">1. Vertical Stack & Horizontal Cluster</h2>
+            <p class="leli-doc-text">Use <code>.leli-stack</code> for vertical spacing and <code>.leli-cluster</code> for wrapping pill/button groups:</p>
             ${exampleBox(
               `<div class="leli-stack">
                 <div class="grid-demo-box">.leli-stack Item 1</div>
@@ -1068,9 +1068,9 @@ Core Rules:
             )}
           </section>
 
-          <section class="bd-section" id="sec-flex-align">
-            <h2 class="bd-heading">2. Flexbox Alignment</h2>
-            <p class="bd-text">Combine <code>.leli-d-flex</code> with <code>.leli-justify-between</code> and <code>.leli-items-center</code>:</p>
+          <section class="leli-doc-section" id="sec-flex-align">
+            <h2 class="leli-doc-heading">2. Flexbox Alignment</h2>
+            <p class="leli-doc-text">Combine <code>.leli-d-flex</code> with <code>.leli-justify-between</code> and <code>.leli-items-center</code>:</p>
             ${exampleBox(
               `<div class="leli-d-flex leli-justify-between leli-items-center" style="padding: 0.75rem; background: var(--leli-surface); border: 1px solid var(--leli-border); border-radius: var(--leli-radius-sm);">
                 <div class="grid-demo-box">Start</div>
@@ -1088,9 +1088,9 @@ Core Rules:
         title: 'Header & Navbar',
         lead: 'Responsive top navigation bars supporting glassmorphism, floating island headers, and dark contrast styles.',
         content: `
-          <section class="bd-section" id="sec-navbar-default">
-            <h2 class="bd-heading">1. Standard Navbar (.leli-navbar)</h2>
-            <p class="bd-text">Includes brand logo (<code>.leli-navbar-brand</code>), navigation links (<code>.leli-navbar-nav</code>), and right action buttons (<code>.leli-navbar-actions</code>):</p>
+          <section class="leli-doc-section" id="sec-navbar-default">
+            <h2 class="leli-doc-heading">1. Standard Navbar (.leli-navbar)</h2>
+            <p class="leli-doc-text">Includes brand logo (<code>.leli-navbar-brand</code>), navigation links (<code>.leli-navbar-nav</code>), and right action buttons (<code>.leli-navbar-actions</code>):</p>
             ${exampleBox(
               `<header class="leli-navbar">
                 <a href="#navbar" class="brand-logo">
@@ -1111,9 +1111,9 @@ Core Rules:
             )}
           </section>
 
-          <section class="bd-section" id="sec-navbar-floating">
-            <h2 class="bd-heading">2. Floating Pill Navbar (data-variant="floating")</h2>
-            <p class="bd-text">Rounded island header for modern landing pages:</p>
+          <section class="leli-doc-section" id="sec-navbar-floating">
+            <h2 class="leli-doc-heading">2. Floating Pill Navbar (data-variant="floating")</h2>
+            <p class="leli-doc-text">Rounded island header for modern landing pages:</p>
             ${exampleBox(
               `<header class="leli-navbar" data-variant="floating">
                 <a href="#navbar" class="leli-navbar-brand">Studio</a>
@@ -1137,9 +1137,9 @@ Core Rules:
         title: 'Card',
         lead: 'Flexible content containers with headers, bodies, footers, and multiple visual variants (outlined, elevated, soft, glass, brutal).',
         content: `
-          <section class="bd-section" id="sec-card-basic">
-            <h2 class="bd-heading">Cards Inside a Grid</h2>
-            <p class="bd-text">Place <code>.leli-card</code> components inside <code>.leli-col-*</code> columns:</p>
+          <section class="leli-doc-section" id="sec-card-basic">
+            <h2 class="leli-doc-heading">Cards Inside a Grid</h2>
+            <p class="leli-doc-text">Place <code>.leli-card</code> components inside <code>.leli-col-*</code> columns:</p>
             ${exampleBox(
               `<div class="leli-row">
                 <div class="leli-col-12 leli-col-md-6">
@@ -1186,9 +1186,9 @@ Core Rules:
         title: 'Tabs',
         lead: 'Accessible tabbed interfaces with keyboard arrow navigation and Find-in-Page support (hidden="until-found").',
         content: `
-          <section class="bd-section" id="sec-tabs-underline">
-            <h2 class="bd-heading">1. Underline & Segmented Tabs</h2>
-            <p class="bd-text">Switch between <code>data-variant="underline"</code>, <code>segmented</code>, or <code>pills</code>:</p>
+          <section class="leli-doc-section" id="sec-tabs-underline">
+            <h2 class="leli-doc-heading">1. Underline & Segmented Tabs</h2>
+            <p class="leli-doc-text">Switch between <code>data-variant="underline"</code>, <code>segmented</code>, or <code>pills</code>:</p>
             ${exampleBox(
               `<div class="leli-tabs" data-variant="underline">
                 <div class="leli-tab-list" role="tablist">
@@ -1211,9 +1211,9 @@ Core Rules:
         title: 'Accordion',
         lead: 'Vertically collapsible disclosure panels built on native HTML <details> and <summary> elements.',
         content: `
-          <section class="bd-section" id="sec-acc-basic">
-            <h2 class="bd-heading">Exclusive Accordion Group</h2>
-            <p class="bd-text">Share the same <code>name</code> attribute across <code>&lt;details&gt;</code> items so opening one automatically closes the others:</p>
+          <section class="leli-doc-section" id="sec-acc-basic">
+            <h2 class="leli-doc-heading">Exclusive Accordion Group</h2>
+            <p class="leli-doc-text">Share the same <code>name</code> attribute across <code>&lt;details&gt;</code> items so opening one automatically closes the others:</p>
             ${exampleBox(
               `<div class="leli-accordion" data-variant="bordered">
                 <details class="leli-accordion-item" name="faq-demo" open>
@@ -1236,9 +1236,9 @@ Core Rules:
         title: 'Table',
         lead: 'Responsive data tables with sticky headers, click-to-sort columns, and automatic mobile card transformation via @container queries.',
         content: `
-          <section class="bd-section" id="sec-table-basic">
-            <h2 class="bd-heading">Sortable & Striped Table</h2>
-            <p class="bd-text">Add <code>data-sortable="true"</code> to any <code>&lt;th&gt;</code> header to enable instant client-side sorting:</p>
+          <section class="leli-doc-section" id="sec-table-basic">
+            <h2 class="leli-doc-heading">Sortable & Striped Table</h2>
+            <p class="leli-doc-text">Add <code>data-sortable="true"</code> to any <code>&lt;th&gt;</code> header to enable instant client-side sorting:</p>
             ${exampleBox(
               `<div tabindex="0" role="region" class="leli-table-wrapper">
                 <table class="leli-table" data-variant="striped hoverable">
@@ -1283,9 +1283,9 @@ Core Rules:
         title: 'Pagination',
         lead: 'Page navigation controls with default, pills, outlined, minimal, and joined variants.',
         content: `
-          <section class="bd-section" id="sec-pagination-basic">
-            <h2 class="bd-heading">Basic Pagination</h2>
-            <p class="bd-text">Interactive pagination items automatically update active state on click:</p>
+          <section class="leli-doc-section" id="sec-pagination-basic">
+            <h2 class="leli-doc-heading">Basic Pagination</h2>
+            <p class="leli-doc-text">Interactive pagination items automatically update active state on click:</p>
             ${exampleBox(
               `<div class="leli-pagination" data-variant="default" data-current-page="2">
                 <button class="leli-page-item" data-page-action="prev">Previous</button>
@@ -1305,9 +1305,9 @@ Core Rules:
         title: 'Progress Bar',
         lead: 'Visual indicators for task completion featuring solid pink, animated stripes, and indeterminate states.',
         content: `
-          <section class="bd-section" id="sec-progress-basic">
-            <h2 class="bd-heading">Progress Variants</h2>
-            <p class="bd-text">Set the completion percentage using the <code>--progress-value</code> CSS custom property:</p>
+          <section class="leli-doc-section" id="sec-progress-basic">
+            <h2 class="leli-doc-heading">Progress Variants</h2>
+            <p class="leli-doc-text">Set the completion percentage using the <code>--progress-value</code> CSS custom property:</p>
             ${exampleBox(
               `<div class="leli-stack">
                 <div class="leli-progress" style="--progress-value: 60%;"><div class="leli-progress-bar"></div></div>
@@ -1324,9 +1324,9 @@ Core Rules:
         title: 'Skeleton Loader',
         lead: 'Placeholder loading previews with shimmer and pulse animations to prevent layout shift.',
         content: `
-          <section class="bd-section" id="sec-skeleton-basic">
-            <h2 class="bd-heading">Skeleton Shapes</h2>
-            <p class="bd-text">Use <code>data-shape="circle | title | text | media | button"</code>:</p>
+          <section class="leli-doc-section" id="sec-skeleton-basic">
+            <h2 class="leli-doc-heading">Skeleton Shapes</h2>
+            <p class="leli-doc-text">Use <code>data-shape="circle | title | text | media | button"</code>:</p>
             ${exampleBox(
               `<div class="leli-d-flex leli-items-center leli-gap-2" style="max-width: 380px;">
                 <span class="leli-skeleton" data-shape="circle"></span>
@@ -1346,9 +1346,9 @@ Core Rules:
         title: 'Avatar & Avatar Group',
         lead: 'User profile badges with status indicators (online, busy, away) and overlapping avatar stacks.',
         content: `
-          <section class="bd-section" id="sec-avatar-basic">
-            <h2 class="bd-heading">Avatars & Status Dots</h2>
-            <p class="bd-text">Combine <code>data-variant="soft | solid | outlined"</code> with <code>data-status="online | busy | away"</code>:</p>
+          <section class="leli-doc-section" id="sec-avatar-basic">
+            <h2 class="leli-doc-heading">Avatars & Status Dots</h2>
+            <p class="leli-doc-text">Combine <code>data-variant="soft | solid | outlined"</code> with <code>data-status="online | busy | away"</code>:</p>
             ${exampleBox(
               `<div class="leli-d-flex leli-items-center leli-gap-2">
                 <div class="leli-avatar" data-variant="soft" data-size="sm">SJ</div>
@@ -1366,9 +1366,9 @@ Core Rules:
         title: 'Button & Button Group',
         lead: 'Multi-variant interactive buttons with Sakura Pink focus states, loading spinners, size scales, and joined button groups.',
         content: `
-          <section class="bd-section" id="sec-btn-variants">
-            <h2 class="bd-heading">1. Button Variants</h2>
-            <p class="bd-text">Switch visual appearances using <code>data-variant="solid | outlined | soft | ghost | glass | brutal"</code>:</p>
+          <section class="leli-doc-section" id="sec-btn-variants">
+            <h2 class="leli-doc-heading">1. Button Variants</h2>
+            <p class="leli-doc-text">Switch visual appearances using <code>data-variant="solid | outlined | soft | ghost | glass | brutal"</code>:</p>
             ${exampleBox(
               `<div class="leli-cluster">
                 <button type="button" class="leli-btn" data-variant="solid">Solid (Brand)</button>
@@ -1382,9 +1382,9 @@ Core Rules:
             )}
           </section>
 
-          <section class="bd-section" id="sec-btn-sizes">
-            <h2 class="bd-heading">2. Button Sizes</h2>
-            <p class="bd-text">Scale buttons uniformly with <code>data-size="sm | md | lg | xl"</code> or use icon buttons:</p>
+          <section class="leli-doc-section" id="sec-btn-sizes">
+            <h2 class="leli-doc-heading">2. Button Sizes</h2>
+            <p class="leli-doc-text">Scale buttons uniformly with <code>data-size="sm | md | lg | xl"</code> or use icon buttons:</p>
             ${exampleBox(
               `<div class="leli-cluster leli-items-center">
                 <button type="button" class="leli-btn" data-variant="solid" data-size="sm">Small</button>
@@ -1396,9 +1396,9 @@ Core Rules:
             )}
           </section>
 
-          <section class="bd-section" id="sec-btn-states">
-            <h2 class="bd-heading">3. States (Loading & Disabled)</h2>
-            <p class="bd-text">Add <code>.is-loading</code> to display an accessible, centered Sakura spinner, or <code>disabled</code> to prevent clicks:</p>
+          <section class="leli-doc-section" id="sec-btn-states">
+            <h2 class="leli-doc-heading">3. States (Loading & Disabled)</h2>
+            <p class="leli-doc-text">Add <code>.is-loading</code> to display an accessible, centered Sakura spinner, or <code>disabled</code> to prevent clicks:</p>
             ${exampleBox(
               `<div class="leli-cluster">
                 <button type="button" class="leli-btn is-loading" data-variant="solid">Saving</button>
@@ -1409,9 +1409,9 @@ Core Rules:
             )}
           </section>
 
-          <section class="bd-section" id="sec-btn-group">
-            <h2 class="bd-heading">4. Button Group</h2>
-            <p class="bd-text">Join multiple buttons together into a single cohesive control group using <code>.leli-btn-group</code>:</p>
+          <section class="leli-doc-section" id="sec-btn-group">
+            <h2 class="leli-doc-heading">4. Button Group</h2>
+            <p class="leli-doc-text">Join multiple buttons together into a single cohesive control group using <code>.leli-btn-group</code>:</p>
             ${exampleBox(
               `<div class="leli-cluster">
                 <div class="leli-btn-group" role="group" aria-label="Action options">
@@ -1431,14 +1431,14 @@ Core Rules:
         title: 'Form Inputs & Floating Labels',
         lead: 'Modern HTML5 form inputs, textareas, custom selects, and input groups with native :user-valid and :user-invalid state feedback.',
         content: `
-          <div class="bd-callout">
+          <div class="leli-doc-callout">
             <strong>Modern Non-Premature Validation</strong>
             leliUI uses modern CSS <code>:user-valid</code> and <code>:user-invalid</code> pseudo-classes. Error states are never shown while the user is first typing—only after blurring or submitting!
           </div>
 
-          <section class="bd-section" id="sec-input-basic">
-            <h2 class="bd-heading">1. Standard Field with Validation</h2>
-            <p class="bd-text">Try typing an invalid email below and clicking away to see the Sakura Pink/Red validation ring and error message:</p>
+          <section class="leli-doc-section" id="sec-input-basic">
+            <h2 class="leli-doc-heading">1. Standard Field with Validation</h2>
+            <p class="leli-doc-text">Try typing an invalid email below and clicking away to see the Sakura Pink/Red validation ring and error message:</p>
             ${exampleBox(
               `<div class="leli-row">
                 <div class="leli-col-12 leli-col-md-6">
@@ -1463,9 +1463,9 @@ Core Rules:
             )}
           </section>
 
-          <section class="bd-section" id="sec-input-groups">
-            <h2 class="bd-heading">2. Input Groups & Addons</h2>
-            <p class="bd-text">Attach prefixes, suffixes, or action buttons directly to inputs with <code>.leli-input-group</code>:</p>
+          <section class="leli-doc-section" id="sec-input-groups">
+            <h2 class="leli-doc-heading">2. Input Groups & Addons</h2>
+            <p class="leli-doc-text">Attach prefixes, suffixes, or action buttons directly to inputs with <code>.leli-input-group</code>:</p>
             ${exampleBox(
               `<div class="leli-stack" style="max-width: 480px;">
                 <div class="leli-input-group">
@@ -1482,9 +1482,9 @@ Core Rules:
             )}
           </section>
 
-          <section class="bd-section" id="sec-input-floating">
-            <h2 class="bd-heading">3. Floating Labels</h2>
-            <p class="bd-text">Labels that glide effortlessly to the top edge when focused using pure modern CSS:</p>
+          <section class="leli-doc-section" id="sec-input-floating">
+            <h2 class="leli-doc-heading">3. Floating Labels</h2>
+            <p class="leli-doc-text">Labels that glide effortlessly to the top edge when focused using pure modern CSS:</p>
             ${exampleBox(
               `<div class="leli-row" style="max-width: 600px;">
                 <div class="leli-col-12 leli-col-md-6">
@@ -1504,9 +1504,9 @@ Core Rules:
             )}
           </section>
 
-          <section class="bd-section" id="sec-select-textarea">
-            <h2 class="bd-heading">4. Custom Select & Textarea</h2>
-            <p class="bd-text">Styled native select with Sakura Pink arrow indicator and resizable textarea:</p>
+          <section class="leli-doc-section" id="sec-select-textarea">
+            <h2 class="leli-doc-heading">4. Custom Select & Textarea</h2>
+            <p class="leli-doc-text">Styled native select with Sakura Pink arrow indicator and resizable textarea:</p>
             ${exampleBox(
               `<div class="leli-row" style="max-width: 600px;">
                 <div class="leli-col-12 leli-col-md-6">
@@ -1538,9 +1538,9 @@ Core Rules:
         title: 'Switch, Checkbox & Radio',
         lead: 'Zero-JS accessible toggles, custom SVG checkboxes, radio buttons, and interactive choice cards.',
         content: `
-          <section class="bd-section" id="sec-switches">
-            <h2 class="bd-heading">1. Toggle Switches (.leli-switch)</h2>
-            <p class="bd-text">Smooth sliding toggle switches available in small, medium, large, and brutal variants:</p>
+          <section class="leli-doc-section" id="sec-switches">
+            <h2 class="leli-doc-heading">1. Toggle Switches (.leli-switch)</h2>
+            <p class="leli-doc-text">Smooth sliding toggle switches available in small, medium, large, and brutal variants:</p>
             ${exampleBox(
               `<div class="leli-stack" style="gap: 1.25rem;">
                 <label class="leli-switch">
@@ -1564,9 +1564,9 @@ Core Rules:
             )}
           </section>
 
-          <section class="bd-section" id="sec-checkboxes-radios">
-            <h2 class="bd-heading">2. Checkboxes & Radio Buttons</h2>
-            <p class="bd-text">Accessible native checkboxes and radios styled with Sakura Pink checkmarks and dots:</p>
+          <section class="leli-doc-section" id="sec-checkboxes-radios">
+            <h2 class="leli-doc-heading">2. Checkboxes & Radio Buttons</h2>
+            <p class="leli-doc-text">Accessible native checkboxes and radios styled with Sakura Pink checkmarks and dots:</p>
             ${exampleBox(
               `<div class="leli-row">
                 <div class="leli-col-12 leli-col-md-6">
@@ -1606,9 +1606,9 @@ Core Rules:
             )}
           </section>
 
-          <section class="bd-section" id="sec-choice-cards">
-            <h2 class="bd-heading">3. Interactive Choice Cards</h2>
-            <p class="bd-text">Selection cards with modern <code>:has()</code> highlight states:</p>
+          <section class="leli-doc-section" id="sec-choice-cards">
+            <h2 class="leli-doc-heading">3. Interactive Choice Cards</h2>
+            <p class="leli-doc-text">Selection cards with modern <code>:has()</code> highlight states:</p>
             ${exampleBox(
               `<div class="leli-row leli-g-2">
                 <div class="leli-col-12 leli-col-md-6">
@@ -1641,14 +1641,14 @@ Core Rules:
         title: 'Modal Dialog Component',
         lead: 'Modern HTML5 <dialog> with smooth @starting-style top-layer entry/exit transitions, light dismiss (closedby="any"), and zero layout reflows.',
         content: `
-          <div class="bd-callout">
+          <div class="leli-doc-callout">
             <strong>Native Top Layer & Light Dismiss</strong>
             leliUI modals use the official browser <code>&lt;dialog&gt;</code> element with <code>closedby="any"</code>. Clicking the blurred backdrop or pressing <kbd>Esc</kbd> automatically dismisses the dialog!
           </div>
 
-          <section class="bd-section" id="sec-modal-demo">
-            <h2 class="bd-heading">1. Interactive Live Modals</h2>
-            <p class="bd-text">Click the buttons below to trigger live dialog modals:</p>
+          <section class="leli-doc-section" id="sec-modal-demo">
+            <h2 class="leli-doc-heading">1. Interactive Live Modals</h2>
+            <p class="leli-doc-text">Click the buttons below to trigger live dialog modals:</p>
             ${exampleBox(
               `<div class="leli-cluster">
                 <button type="button" class="leli-btn" data-variant="solid" data-modal-target="demoModalStandard">Open Standard Modal</button>
@@ -1707,9 +1707,9 @@ Core Rules:
             )}
           </section>
 
-          <section class="bd-section" id="sec-modal-js">
-            <h2 class="bd-heading">2. JavaScript API</h2>
-            <p class="bd-text">Programmatically control modals using <code>LeliUI.Modal</code>:</p>
+          <section class="leli-doc-section" id="sec-modal-js">
+            <h2 class="leli-doc-heading">2. JavaScript API</h2>
+            <p class="leli-doc-text">Programmatically control modals using <code>LeliUI.Modal</code>:</p>
             ${exampleBox('', `// Open a modal\nLeliUI.Modal.open('myDialogId');\n\n// Close a modal (with smooth @starting-style exit animation)\nLeliUI.Modal.close('myDialogId');`, 'javascript')}
           </section>
         `
@@ -1720,9 +1720,9 @@ Core Rules:
         title: 'Toast Notification System',
         lead: 'Lightweight, event-driven floating toast notifications with auto-dismiss countdown progress bar and corner positioning.',
         content: `
-          <section class="bd-section" id="sec-toast-live">
-            <h2 class="bd-heading">1. Interactive Toast Demos</h2>
-            <p class="bd-text">Click any of the buttons below to generate live toasts:</p>
+          <section class="leli-doc-section" id="sec-toast-live">
+            <h2 class="leli-doc-heading">1. Interactive Toast Demos</h2>
+            <p class="leli-doc-text">Click any of the buttons below to generate live toasts:</p>
             ${exampleBox(
               `<div class="leli-cluster">
                 <button type="button" class="leli-btn" data-variant="solid" onclick="LeliUI.Toast.success('Files successfully deployed to GCP VDS.', 'Build Succeeded!')">Show Success Toast</button>
@@ -1734,9 +1734,9 @@ Core Rules:
             )}
           </section>
 
-          <section class="bd-section" id="sec-toast-api">
-            <h2 class="bd-heading">2. Full Configuration API</h2>
-            <p class="bd-text">Customize toast duration, title, type, and screen positioning:</p>
+          <section class="leli-doc-section" id="sec-toast-api">
+            <h2 class="leli-doc-heading">2. Full Configuration API</h2>
+            <p class="leli-doc-text">Customize toast duration, title, type, and screen positioning:</p>
             ${exampleBox('', `LeliUI.Toast.show({\n  title: 'Notification Title',\n  message: 'Your custom notification message here.',\n  type: 'primary', // 'primary' | 'success' | 'warning' | 'danger'\n  duration: 4000,   // milliseconds (0 = sticky / no auto dismiss)\n  position: 'top-right', // 'top-right' | 'top-left' | 'top-center' | 'bottom-right' | 'bottom-left'\n  dismissible: true\n});`, 'javascript')}
           </section>
         `
@@ -1747,9 +1747,9 @@ Core Rules:
         title: 'Badge & Status Indicator',
         lead: 'Pill tags, live pulsing status indicators, count badges, and removable tags with semantic color accents.',
         content: `
-          <section class="bd-section" id="sec-badge-variants">
-            <h2 class="bd-heading">1. Badge Variants</h2>
-            <p class="bd-text">Use <code>data-variant="solid | soft | outlined | glass | brutal"</code>:</p>
+          <section class="leli-doc-section" id="sec-badge-variants">
+            <h2 class="leli-doc-heading">1. Badge Variants</h2>
+            <p class="leli-doc-text">Use <code>data-variant="solid | soft | outlined | glass | brutal"</code>:</p>
             ${exampleBox(
               `<div class="leli-cluster">
                 <span class="leli-badge" data-variant="solid">Solid (Brand)</span>
@@ -1762,9 +1762,9 @@ Core Rules:
             )}
           </section>
 
-          <section class="bd-section" id="sec-badge-accents">
-            <h2 class="bd-heading">2. Semantic Accents & Status Dots</h2>
-            <p class="bd-text">Combine semantic accents with internal dots or standalone pulsing dots:</p>
+          <section class="leli-doc-section" id="sec-badge-accents">
+            <h2 class="leli-doc-heading">2. Semantic Accents & Status Dots</h2>
+            <p class="leli-doc-text">Combine semantic accents with internal dots or standalone pulsing dots:</p>
             ${exampleBox(
               `<div class="leli-cluster leli-items-center">
                 <span class="leli-badge" data-accent="success"><span class="leli-dot"></span> Online</span>
@@ -1778,9 +1778,9 @@ Core Rules:
             )}
           </section>
 
-          <section class="bd-section" id="sec-badge-removable">
-            <h2 class="bd-heading">3. Removable Tag Badges</h2>
-            <p class="bd-text">Include a <code>.leli-badge-remove</code> button for filter tags and interactive chips:</p>
+          <section class="leli-doc-section" id="sec-badge-removable">
+            <h2 class="leli-doc-heading">3. Removable Tag Badges</h2>
+            <p class="leli-doc-text">Include a <code>.leli-badge-remove</code> button for filter tags and interactive chips:</p>
             ${exampleBox(
               `<div class="leli-cluster">
                 <span class="leli-badge" data-variant="soft">React <button type="button" class="leli-badge-remove" onclick="this.parentElement.remove()">&times;</button></span>
@@ -1805,10 +1805,10 @@ Core Rules:
 
       const main = document.getElementById('docsMain');
       main.innerHTML = `
-        <header class="bd-page-header">
-          <span class="bd-eyebrow">${page.category}</span>
-          <h1 class="bd-title">${page.title}</h1>
-          <p class="bd-lead">${page.lead}</p>
+        <header class="leli-doc-page-header">
+          <span class="leli-doc-eyebrow">${page.category}</span>
+          <h1 class="leli-doc-title">${page.title}</h1>
+          <p class="leli-doc-lead">${page.lead}</p>
         </header>
         ${page.content}
         <nav class="docs-pager">
@@ -1839,8 +1839,8 @@ Core Rules:
 
       const tocList = document.getElementById('docsTocList');
       tocList.innerHTML = '';
-      main.querySelectorAll('.bd-section').forEach((sec) => {
-        const h2 = sec.querySelector('.bd-heading');
+      main.querySelectorAll('.leli-doc-section').forEach((sec) => {
+        const h2 = sec.querySelector('.leli-doc-heading');
         if (h2 && sec.id) {
           const li = document.createElement('li');
           li.innerHTML = `<a href="#${sec.id}" onclick="event.preventDefault(); document.getElementById('${sec.id}').scrollIntoView({behavior:'smooth'})">${h2.textContent}</a>`;

@@ -3,7 +3,7 @@
 /**
  * ==========================================================================
  * leliUI CLI Tool (npx leli / node bin/leli.js)
- * Zero-dependency, shadcn-style CLI package manager to initialize and pull
+ * Zero-dependency, modular on-demand CLI package manager to initialize and pull
  * leliUI components into any web project directly from your terminal.
  * ==========================================================================
  */
