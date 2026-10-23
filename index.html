@@ -493,6 +493,331 @@
       padding-block-start: 1.5rem;
       border-block-start: 1px solid var(--leli-border);
     }
+
+    /* ====================================================================
+       SPOTLIGHT COMMAND PALETTE (Ctrl+K)
+       ==================================================================== */
+    dialog.leli-command-dialog {
+      position: fixed;
+      inset: 0;
+      margin: auto;
+      padding: 0;
+      inline-size: min(92vw, 38rem);
+      max-block-size: 75vh;
+      background: var(--leli-surface-1, #15111a);
+      border: 1px solid var(--leli-border, rgba(255,255,255,0.12));
+      border-radius: var(--leli-radius-lg, 0.75rem);
+      color: var(--leli-text);
+      box-shadow: 0 25px 60px -12px rgba(0,0,0,0.85), 0 0 35px -5px rgba(244,114,182,0.22);
+      overflow: hidden;
+      flex-direction: column;
+      z-index: 2000;
+
+      opacity: 0;
+      transform: scale(0.96) translateY(-10px);
+      transition-property: opacity, transform, display, overlay;
+      transition-duration: 200ms;
+      transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+      transition-behavior: allow-discrete;
+
+      &[open] {
+        display: flex;
+        opacity: 1;
+        transform: scale(1) translateY(0);
+
+        @starting-style {
+          opacity: 0;
+          transform: scale(0.96) translateY(-10px);
+        }
+      }
+
+      &::backdrop {
+        background-color: rgba(12, 10, 14, 0.72);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+    }
+
+    .cmd-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--leli-border);
+      background: var(--leli-surface-2, #110e16);
+    }
+
+    .cmd-header svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      color: var(--leli-primary, #f472b6);
+      flex-shrink: 0;
+    }
+
+    .cmd-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--leli-text);
+      font-size: 1.05rem;
+      font-family: inherit;
+    }
+
+    .cmd-input::placeholder {
+      color: var(--leli-text-muted);
+    }
+
+    .cmd-body {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      padding: 0.65rem;
+      max-block-size: 50vh;
+      overscroll-behavior: contain;
+    }
+
+    .cmd-group-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--leli-text-muted);
+      padding: 0.65rem 0.75rem 0.35rem 0.75rem;
+    }
+
+    .cmd-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.65rem 0.85rem;
+      border-radius: var(--leli-radius-md, 0.5rem);
+      cursor: pointer;
+      color: var(--leli-text);
+      font-size: 0.92rem;
+      transition: all 120ms ease;
+
+      &:hover,
+      &.is-selected {
+        background-color: rgba(244, 114, 182, 0.12);
+        color: var(--leli-text-emphasis, #ffffff);
+      }
+    }
+
+    .cmd-item-left {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .cmd-item-icon {
+      font-size: 1rem;
+      color: var(--leli-primary);
+    }
+
+    .cmd-item-meta {
+      font-size: 0.75rem;
+      color: var(--leli-text-muted);
+      background: var(--leli-surface-3, rgba(255,255,255,0.06));
+      padding: 0.15rem 0.45rem;
+      border-radius: var(--leli-radius-sm);
+    }
+
+    .cmd-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.65rem 1.25rem;
+      border-top: 1px solid var(--leli-border);
+      background: var(--leli-surface-2, #110e16);
+      font-size: 0.75rem;
+      color: var(--leli-text-muted);
+    }
+
+    .cmd-shortcuts {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    /* ====================================================================
+       THEME CUSTOMIZER MODAL
+       ==================================================================== */
+    dialog.leli-theme-dialog {
+      position: fixed;
+      inset: 0;
+      margin: auto;
+      padding: 0;
+      inline-size: min(92vw, 32rem);
+      background: var(--leli-surface-1, #15111a);
+      border: 1px solid var(--leli-border);
+      border-radius: var(--leli-radius-lg);
+      color: var(--leli-text);
+      box-shadow: 0 25px 60px -12px rgba(0,0,0,0.85), 0 0 35px -5px rgba(244,114,182,0.22);
+      overflow: hidden;
+      flex-direction: column;
+      z-index: 2000;
+
+      opacity: 0;
+      transform: scale(0.96) translateY(-10px);
+      transition-property: opacity, transform, display, overlay;
+      transition-duration: 200ms;
+      transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+      transition-behavior: allow-discrete;
+
+      &[open] {
+        display: flex;
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+
+      &::backdrop {
+        background-color: rgba(12, 10, 14, 0.72);
+        backdrop-filter: blur(8px);
+      }
+    }
+
+    .color-swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.65rem;
+      margin-top: 0.5rem;
+    }
+
+    .color-swatch-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.6rem 0.75rem;
+      border-radius: var(--leli-radius-md);
+      border: 1px solid var(--leli-border);
+      background: var(--leli-surface-2);
+      color: var(--leli-text);
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-family: inherit;
+      transition: all 140ms ease;
+
+      &:hover {
+        border-color: var(--swatch-color);
+        background: rgba(255,255,255,0.04);
+      }
+
+      &.is-active {
+        border-color: var(--swatch-color);
+        background: rgba(244, 114, 182, 0.12);
+        box-shadow: 0 0 12px -2px var(--swatch-color);
+      }
+    }
+
+    .swatch-circle {
+      width: 1rem;
+      height: 1rem;
+      border-radius: 9999px;
+      background: var(--swatch-color);
+      flex-shrink: 0;
+    }
+
+    /* ====================================================================
+       INTERACTIVE PLAYGROUND LAYOUT
+       ==================================================================== */
+    .playground-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .playground-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: var(--leli-surface-2);
+      border: 1px solid var(--leli-border);
+      border-radius: var(--leli-radius-md);
+    }
+
+    .playground-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      min-height: 480px;
+
+      @media (max-width: 900px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .playground-editor-wrap {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--leli-border);
+      border-radius: var(--leli-radius-md);
+      overflow: hidden;
+      background: #0d0a11;
+    }
+
+    .playground-editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid var(--leli-border);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--leli-text-muted);
+    }
+
+    .playground-textarea {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      min-height: 420px;
+      padding: 1rem;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fce7f3;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      resize: vertical;
+      tab-size: 2;
+    }
+
+    .playground-preview-wrap {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--leli-border);
+      border-radius: var(--leli-radius-md);
+      overflow: hidden;
+      background: var(--leli-surface-1);
+    }
+
+    .playground-preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid var(--leli-border);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--leli-text-muted);
+    }
+
+    .playground-preview-canvas {
+      flex: 1;
+      padding: 1.5rem;
+      overflow-y: auto;
+      background: var(--leli-bg);
+      min-height: 420px;
+    }
+
   </style>
 </head>
 <body>
@@ -511,22 +836,23 @@
 
         <nav class="leli-navbar-nav" aria-label="Primary Navigation">
           <button type="button" class="leli-nav-link" id="topInstallLink" onclick="navigateDoc('getting-started')">Getting Started</button>
-          <button type="button" class="leli-nav-link" id="topAiLink" onclick="navigateDoc('ai-hub')">AI & Agents (llms.txt)</button>
+          <button type="button" class="leli-nav-link" id="topAiLink" onclick="navigateDoc('ai-hub')">AI & Agents</button>
+          <button type="button" class="leli-nav-link" id="topPlaygroundLink" onclick="navigateDoc('playground')">Playground</button>
         </nav>
       </div>
 
       <!-- Right: Quick Search, Copy AI Prompt, Version Badge & Theme Switch -->
       <div class="leli-navbar-actions">
-        <div class="leli-navbar-search">
-          <input type="search" id="quickSearchInput" placeholder="Search docs (e.g. grid, bento, card)..." autocomplete="off">
-          <kbd>/</kbd>
+        <div class="leli-navbar-search" onclick="openCommandPalette()" style="cursor: pointer;" title="Search docs & components (Ctrl+K or /)">
+          <input type="search" id="quickSearchInput" placeholder="Quick search docs..." readonly style="pointer-events: none; cursor: pointer;">
+          <kbd style="font-size: 0.72rem; padding: 0.15rem 0.35rem;">⌘K</kbd>
         </div>
 
         <button type="button" class="leli-btn leli-btn-sm leli-btn-primary" onclick="copyAiSystemPrompt(this)" title="Copy system prompt for Cursor, Claude, ChatGPT or Windsurf">
           Copy AI Prompt
         </button>
 
-        <span class="leli-badge" id="leliVersionBadge">v1.0.16</span>
+        <span class="leli-badge" id="leliVersionBadge">v1.0.17</span>
 
         <a href="https://github.com/heqate/LeliUI" target="_blank" rel="noopener noreferrer" class="theme-switch-btn" title="View on GitHub (heqate/LeliUI)" aria-label="GitHub Repository">
           <svg viewBox="0 0 24 24" fill="currentColor">
@@ -534,6 +860,7 @@
           </svg>
         </a>
 
+        <button type="button" class="theme-switch-btn" onclick="openThemeCustomizer()" title="Customize Brand Colors & Tokens" aria-label="Customize Theme" style="font-size: 1.05rem;">🎨</button>
         <button type="button" class="theme-switch-btn" onclick="LeliUI.Theme.toggle()" aria-label="Toggle Theme" title="Toggle Light / Dark Theme">
           <svg class="icon-sun" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="4"></circle>
@@ -554,6 +881,87 @@
       <div>Quick CLI Install: <code>npx leli</code></div>
     </div>
   </div>
+
+
+  <!-- ====================================================================
+       SPOTLIGHT COMMAND PALETTE DIALOG (Ctrl+K)
+       ==================================================================== -->
+  <dialog id="leliCommandDialog" class="leli-command-dialog" aria-label="Spotlight Command Palette">
+    <div class="cmd-header">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+      </svg>
+      <input type="text" id="cmdPaletteInput" class="cmd-input" placeholder="Type a component, block, or command..." autocomplete="off">
+      <kbd class="leli-kbd" onclick="closeCommandPalette()" style="cursor: pointer;">ESC</kbd>
+    </div>
+    <div class="cmd-body" id="cmdPaletteResults"></div>
+    <div class="cmd-footer">
+      <div class="cmd-shortcuts">
+        <span><kbd class="leli-kbd">&uarr;&darr;</kbd> Navigate</span>
+        <span><kbd class="leli-kbd">&crarr;</kbd> Select</span>
+        <span><kbd class="leli-kbd">Esc</kbd> Close</span>
+      </div>
+      <span>leliUI Spotlight</span>
+    </div>
+  </dialog>
+
+  <!-- ====================================================================
+       THEME & COLOR CUSTOMIZER DIALOG
+       ==================================================================== -->
+  <dialog id="leliThemeDialog" class="leli-theme-dialog" aria-label="Theme Customizer">
+    <div class="cmd-header" style="justify-content: space-between;">
+      <div style="display: flex; align-items: center; gap: 0.65rem;">
+        <span style="font-size: 1.25rem;">🎨</span>
+        <h3 style="margin: 0; font-size: 1.1rem; font-weight: 700;">Theme Customizer</h3>
+      </div>
+      <button type="button" class="leli-btn leli-btn-sm" data-variant="ghost" onclick="closeThemeCustomizer()">&times;</button>
+    </div>
+    <div style="padding: 1.4rem; display: flex; flex-direction: column; gap: 1.25rem;">
+      <div>
+        <label style="font-size: 0.85rem; font-weight: 600; color: var(--leli-text-emphasis);">Brand Accent Color</label>
+        <div class="color-swatch-grid">
+          <button type="button" class="color-swatch-btn is-active" style="--swatch-color: #f472b6;" onclick="applyBrandAccent('#f472b6', 'Sakura Pink', this)">
+            <span class="swatch-circle"></span> Sakura Pink
+          </button>
+          <button type="button" class="color-swatch-btn" style="--swatch-color: #a855f7;" onclick="applyBrandAccent('#a855f7', 'Cyber Violet', this)">
+            <span class="swatch-circle"></span> Cyber Violet
+          </button>
+          <button type="button" class="color-swatch-btn" style="--swatch-color: #10b981;" onclick="applyBrandAccent('#10b981', 'Emerald', this)">
+            <span class="swatch-circle"></span> Emerald
+          </button>
+          <button type="button" class="color-swatch-btn" style="--swatch-color: #0ea5e9;" onclick="applyBrandAccent('#0ea5e9', 'Ocean Sky', this)">
+            <span class="swatch-circle"></span> Ocean Sky
+          </button>
+          <button type="button" class="color-swatch-btn" style="--swatch-color: #f97316;" onclick="applyBrandAccent('#f97316', 'Neon Sunset', this)">
+            <span class="swatch-circle"></span> Neon Sunset
+          </button>
+          <button type="button" class="color-swatch-btn" style="--swatch-color: #fb7185;" onclick="applyBrandAccent('#fb7185', 'Rose Quartz', this)">
+            <span class="swatch-circle"></span> Rose Quartz
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <label style="font-size: 0.85rem; font-weight: 600; color: var(--leli-text-emphasis); display: block; margin-bottom: 0.5rem;">Corner Radius</label>
+        <div class="leli-btn-group" style="width: 100%;">
+          <button type="button" class="leli-btn" style="flex: 1;" onclick="applyRadius('0px')">Sharp (0px)</button>
+          <button type="button" class="leli-btn is-active" style="flex: 1;" onclick="applyRadius('0.5rem')">Modern (8px)</button>
+          <button type="button" class="leli-btn" style="flex: 1;" onclick="applyRadius('1.25rem')">Pill (20px)</button>
+        </div>
+      </div>
+
+      <div style="padding: 0.85rem; background: var(--leli-surface-2); border: 1px solid var(--leli-border); border-radius: var(--leli-radius-md);">
+        <div style="font-size: 0.78rem; font-weight: 600; color: var(--leli-text-muted); margin-bottom: 0.35rem;">Generated CSS Token Override</div>
+        <pre id="themeTokensCode" style="margin: 0; font-family: monospace; font-size: 0.78rem; color: var(--leli-primary);">:root { --leli-primary: #f472b6; }</pre>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
+        <button type="button" class="leli-btn" data-variant="outlined" onclick="resetThemeDefaults()">Reset Default</button>
+        <button type="button" class="leli-btn" data-variant="solid" onclick="copyCustomCssTokens(this)">Copy :root Tokens</button>
+      </div>
+    </div>
+  </dialog>
 
   <!-- Centered 3-Column Documentation Shell -->
   <div class="docs-shell">
@@ -1806,6 +2214,51 @@ Core Rules:
         `
       },
 
+
+      playground: {
+        category: 'Interactive Tools',
+        title: 'Component Playground & Sandbox',
+        lead: 'Edit raw HTML in real-time, test responsive layouts, and preview any leliUI component or block live on the canvas.',
+        content: `
+          <div class="playground-container">
+            <div class="playground-toolbar">
+              <div style="display: flex; align-items: center; gap: 0.65rem;">
+                <label for="playgroundPresetSelect" style="font-weight: 600; font-size: 0.85rem; color: var(--leli-text-emphasis);">Template Preset:</label>
+                <select class="leli-input" style="padding: 0.4rem 0.75rem; font-size: 0.85rem; width: auto;" id="playgroundPresetSelect" onchange="switchPlaygroundPreset(this.value)">
+                  <option value="hero">SaaS Hero Section with Bento</option>
+                  <option value="pricing">3-Tier Pricing Matrix</option>
+                  <option value="auth">Auth & Login Card</option>
+                  <option value="dashboard">SaaS Dashboard Shell</option>
+                  <option value="components">Interactive Dropdown & Drawer</option>
+                </select>
+              </div>
+              <div style="display: flex; gap: 0.5rem;">
+                <button type="button" class="leli-btn leli-btn-sm" data-variant="outlined" onclick="resetPlayground()">Reset</button>
+                <button type="button" class="leli-btn leli-btn-sm" data-variant="solid" onclick="copyPlaygroundCode(this)">Copy HTML</button>
+              </div>
+            </div>
+
+            <div class="playground-split">
+              <div class="playground-editor-wrap">
+                <div class="playground-editor-header">
+                  <span>HTML Source (Editable)</span>
+                  <span style="color: var(--leli-primary);">Instant DOM Sync</span>
+                </div>
+                <textarea id="playgroundEditor" class="playground-textarea" spellcheck="false" oninput="updatePlaygroundPreview()"></textarea>
+              </div>
+
+              <div class="playground-preview-wrap">
+                <div class="playground-preview-header">
+                  <span>Live Sandbox Preview</span>
+                  <span class="leli-badge is-pill" data-accent="success"><span class="leli-dot"></span> Live</span>
+                </div>
+                <div id="playgroundPreview" class="playground-preview-canvas"></div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+
       dropdown: {
         category: 'Overlays & Feedback',
         title: 'Dropdown & Context Menu',
@@ -2413,6 +2866,7 @@ Core Rules:
       });
 
       LeliUI.init(main);
+      if (pageKey === 'playground') { initPlayground(); }
       window.scrollTo(0, 0);
     }
 
@@ -2463,6 +2917,351 @@ Core Rules:
       btn.textContent = 'AI Prompt Copied!';
       setTimeout(() => (btn.textContent = old), 1500);
     }
+
+
+    /* ====================================================================
+       SPOTLIGHT COMMAND PALETTE LOGIC (Ctrl+K / Cmd+K)
+       ==================================================================== */
+    const COMMAND_ITEMS = [
+      // Components
+      { title: 'Grid & Layout System', page: 'grid', category: 'Layout & Skeleton', icon: '▦' },
+      { title: 'CSS Grid & Auto-Fit', page: 'css-grid', category: 'Layout & Skeleton', icon: '⊞' },
+      { title: 'Bento Grid', page: 'bento', category: 'Layout & Skeleton', icon: '🍱' },
+      { title: 'Containers & Widths', page: 'containers', category: 'Layout & Skeleton', icon: '▢' },
+      { title: 'Page Shells & Holy Grail', page: 'page-shells', category: 'Layout & Skeleton', icon: '⬚' },
+      { title: 'Flexbox, Stack & Cluster', page: 'flex', category: 'Layout & Skeleton', icon: '☰' },
+      { title: 'Header & Navbar', page: 'navbar', category: 'Layout & Skeleton', icon: '🧭' },
+      { title: 'Button & Button Group', page: 'button', category: 'Forms & Actions', icon: '🔘' },
+      { title: 'Form Inputs & Floating Labels', page: 'input', category: 'Forms & Actions', icon: '✏️' },
+      { title: 'Switch, Checkbox & Radio', page: 'form-controls', category: 'Forms & Actions', icon: '☑️' },
+      { title: 'Dropdown & Context Menu', page: 'dropdown', category: 'Overlays & Feedback', icon: '▾' },
+      { title: 'Tooltip & Popover', page: 'tooltip', category: 'Overlays & Feedback', icon: '💬' },
+      { title: 'Drawer & Sheet', page: 'drawer', category: 'Overlays & Feedback', icon: '◨' },
+      { title: 'Modal Dialog', page: 'modal', category: 'Overlays & Feedback', icon: '🗗' },
+      { title: 'Toast Notification', page: 'toast', category: 'Overlays & Feedback', icon: '🔔' },
+      { title: 'Alert & Banner', page: 'alert', category: 'Overlays & Feedback', icon: '⚠️' },
+      { title: 'Badges & Status Tags', page: 'badge', category: 'Overlays & Feedback', icon: '🏷️' },
+      { title: 'Card Component', page: 'card', category: 'Data & Layout', icon: '🃏' },
+      { title: 'Tabs Navigation', page: 'tabs', category: 'Data & Layout', icon: '📑' },
+      { title: 'Accordion & Collapse', page: 'accordion', category: 'Data & Layout', icon: '🗂️' },
+      { title: 'Responsive Data Table', page: 'table', category: 'Data & Layout', icon: '📊' },
+      { title: 'Pagination Bar', page: 'pagination', category: 'Data & Layout', icon: '📄' },
+      { title: 'Progress Bar', page: 'progress', category: 'Data & Layout', icon: '📈' },
+      { title: 'Skeleton Loader', page: 'skeleton', category: 'Data & Layout', icon: '🦴' },
+      { title: 'Avatar & Avatar Group', page: 'avatar', category: 'Data & Layout', icon: '👤' },
+      // Blocks
+      { title: 'SaaS Hero Sections', page: 'blocks-hero', category: 'Blocks & Templates', icon: '🚀' },
+      { title: '3-Tier Pricing Tables', page: 'blocks-pricing', category: 'Blocks & Templates', icon: '💎' },
+      { title: 'Auth & Login Cards', page: 'blocks-auth', category: 'Blocks & Templates', icon: '🔐' },
+      { title: 'Analytics Dashboard Shell', page: 'blocks-dashboard', category: 'Blocks & Templates', icon: '🖥️' },
+      // Tools & Ecosystem
+      { title: 'Interactive Code Playground', page: 'playground', category: 'Interactive Tools', icon: '⚡' },
+      { title: 'Quick Start & Installation', page: 'getting-started', category: 'Getting Started', icon: '📦' },
+      { title: 'AI Integration & llms.txt', page: 'ai-hub', category: 'AI Ecosystem', icon: '🤖' }
+    ];
+
+    let selectedCmdIndex = 0;
+    let currentCmdFiltered = [...COMMAND_ITEMS];
+
+    function openCommandPalette() {
+      const dlg = document.getElementById('leliCommandDialog');
+      if (!dlg) return;
+      if (typeof dlg.showModal === 'function') {
+        dlg.showModal();
+      } else {
+        dlg.setAttribute('open', '');
+      }
+      const inp = document.getElementById('cmdPaletteInput');
+      if (inp) {
+        inp.value = '';
+        inp.focus();
+      }
+      filterCommandPalette('');
+    }
+
+    function closeCommandPalette() {
+      const dlg = document.getElementById('leliCommandDialog');
+      if (dlg) {
+        if (typeof dlg.close === 'function') dlg.close();
+        else dlg.removeAttribute('open');
+      }
+    }
+
+    function renderCommandPalette() {
+      const container = document.getElementById('cmdPaletteResults');
+      if (!container) return;
+
+      if (currentCmdFiltered.length === 0) {
+        container.innerHTML = '<div style="padding: 2rem; text-align: center; color: var(--leli-text-muted);">No matching components or templates found.</div>';
+        return;
+      }
+
+      let html = '';
+      let lastCategory = '';
+      currentCmdFiltered.forEach((item, index) => {
+        if (item.category !== lastCategory) {
+          lastCategory = item.category;
+          html += `<div class="cmd-group-label">${item.category}</div>`;
+        }
+        const isSel = index === selectedCmdIndex ? ' is-selected' : '';
+        html += `
+          <div class="cmd-item${isSel}" onclick="selectCommandItem(${index})">
+            <div class="cmd-item-left">
+              <span class="cmd-item-icon">${item.icon}</span>
+              <span>${item.title}</span>
+            </div>
+            <span class="cmd-item-meta">${item.page}</span>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+
+      const selEl = container.querySelector('.cmd-item.is-selected');
+      if (selEl) selEl.scrollIntoView({ block: 'nearest' });
+    }
+
+    function filterCommandPalette(query) {
+      const q = query.trim().toLowerCase();
+      if (!q) {
+        currentCmdFiltered = [...COMMAND_ITEMS];
+      } else {
+        currentCmdFiltered = COMMAND_ITEMS.filter(it =>
+          it.title.toLowerCase().includes(q) ||
+          it.page.toLowerCase().includes(q) ||
+          it.category.toLowerCase().includes(q)
+        );
+      }
+      selectedCmdIndex = 0;
+      renderCommandPalette();
+    }
+
+    function selectCommandItem(index) {
+      const item = currentCmdFiltered[index];
+      if (item) {
+        closeCommandPalette();
+        navigateDoc(item.page);
+      }
+    }
+
+    // Keyboard listener for Command Palette (ArrowUp, ArrowDown, Enter, Esc, Ctrl+K)
+    document.addEventListener('keydown', (e) => {
+      // Open with Ctrl+K or Cmd+K
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) {
+        e.preventDefault();
+        openCommandPalette();
+        return;
+      }
+
+      const dlg = document.getElementById('leliCommandDialog');
+      if (!dlg || !dlg.open) return;
+
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeCommandPalette();
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (currentCmdFiltered.length > 0) {
+          selectedCmdIndex = (selectedCmdIndex + 1) % currentCmdFiltered.length;
+          renderCommandPalette();
+        }
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (currentCmdFiltered.length > 0) {
+          selectedCmdIndex = (selectedCmdIndex - 1 + currentCmdFiltered.length) % currentCmdFiltered.length;
+          renderCommandPalette();
+        }
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        selectCommandItem(selectedCmdIndex);
+      }
+    });
+
+    const cmdInput = document.getElementById('cmdPaletteInput');
+    if (cmdInput) {
+      cmdInput.addEventListener('input', (e) => filterCommandPalette(e.target.value));
+    }
+
+    /* ====================================================================
+       THEME & COLOR CUSTOMIZER LOGIC
+       ==================================================================== */
+    let currentCustomTheme = {
+      primary: '#f472b6',
+      radius: '0.5rem'
+    };
+
+    function openThemeCustomizer() {
+      const dlg = document.getElementById('leliThemeDialog');
+      if (dlg) {
+        if (typeof dlg.showModal === 'function') dlg.showModal();
+        else dlg.setAttribute('open', '');
+      }
+    }
+
+    function closeThemeCustomizer() {
+      const dlg = document.getElementById('leliThemeDialog');
+      if (dlg) {
+        if (typeof dlg.close === 'function') dlg.close();
+        else dlg.removeAttribute('open');
+      }
+    }
+
+    function applyBrandAccent(hex, name, btn) {
+      currentCustomTheme.primary = hex;
+      document.documentElement.style.setProperty('--leli-primary', hex);
+      document.documentElement.style.setProperty('--leli-focus', hex);
+
+      document.querySelectorAll('.color-swatch-btn').forEach(b => b.classList.remove('is-active'));
+      if (btn) btn.classList.add('is-active');
+
+      updateThemeCodePreview();
+      LeliUI.Toast.show({ title: 'Brand Accent Updated', message: 'Theme set to ' + name, type: 'primary', duration: 2000 });
+    }
+
+    function applyRadius(val) {
+      currentCustomTheme.radius = val;
+      document.documentElement.style.setProperty('--leli-radius-md', val);
+      document.documentElement.style.setProperty('--leli-radius-lg', val === '0px' ? '0px' : 'calc(' + val + ' * 1.5)');
+      updateThemeCodePreview();
+    }
+
+    function updateThemeCodePreview() {
+      const code = document.getElementById('themeTokensCode');
+      if (code) {
+        code.textContent = `:root {\n  --leli-primary: ${currentCustomTheme.primary};\n  --leli-focus: ${currentCustomTheme.primary};\n  --leli-radius-md: ${currentCustomTheme.radius};\n}`;
+      }
+    }
+
+    function resetThemeDefaults() {
+      applyBrandAccent('#f472b6', 'Sakura Pink (Default)', null);
+      applyRadius('0.5rem');
+      document.querySelectorAll('.color-swatch-btn').forEach((b, i) => b.classList.toggle('is-active', i === 0));
+    }
+
+    function copyCustomCssTokens(btn) {
+      const code = `:root {\n  --leli-primary: ${currentCustomTheme.primary};\n  --leli-focus: ${currentCustomTheme.primary};\n  --leli-radius-md: ${currentCustomTheme.radius};\n}`;
+      navigator.clipboard.writeText(code);
+      const old = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => (btn.textContent = old), 1200);
+    }
+
+    /* ====================================================================
+       INTERACTIVE PLAYGROUND CONTROLLER
+       ==================================================================== */
+    const PLAYGROUND_PRESETS = {
+      hero: `<div class="leli-card" data-variant="glass" style="padding: 2.5rem 1.5rem; text-align: center;">
+  <span class="leli-badge is-pill" data-accent="primary" style="margin-bottom: 1rem;">✨ leliUI Live Sandbox</span>
+  <h1 style="font-size: 2.4rem; font-weight: 800; margin: 0 0 1rem 0; letter-spacing: -0.02em;">
+    Design Fast with <span style="color: var(--leli-primary);">Sakura Pink</span>
+  </h1>
+  <p style="color: var(--leli-text-muted); max-width: 32rem; margin: 0 auto 2rem auto;">
+    Zero runtime footprint, modern CSS architecture, and high developer ergonomics.
+  </p>
+  <div style="display: flex; gap: 0.75rem; justify-content: center;">
+    <button class="leli-btn" data-variant="solid">Get Started</button>
+    <button class="leli-btn" data-variant="outlined">Explore Components</button>
+  </div>
+</div>`,
+      pricing: `<div class="leli-row leli-g-2">
+  <div class="leli-col-12 leli-col-md-6">
+    <div class="leli-card" data-variant="outlined">
+      <div class="leli-card-header"><h3 class="leli-card-title">Starter</h3></div>
+      <div class="leli-card-body"><div style="font-size: 2rem; font-weight: 700;">$0</div><p>Free for hobbyists</p></div>
+      <div class="leli-card-footer"><button class="leli-btn" data-variant="outlined" style="width: 100%;">Select</button></div>
+    </div>
+  </div>
+  <div class="leli-col-12 leli-col-md-6">
+    <div class="leli-card" data-variant="glass" style="border-color: var(--leli-primary);">
+      <div class="leli-card-header"><h3 class="leli-card-title" style="color: var(--leli-primary);">Pro</h3></div>
+      <div class="leli-card-body"><div style="font-size: 2rem; font-weight: 700;">$29 /mo</div><p>All 20 components & blocks</p></div>
+      <div class="leli-card-footer"><button class="leli-btn" data-variant="solid" style="width: 100%;">Upgrade</button></div>
+    </div>
+  </div>
+</div>`,
+      auth: `<div class="leli-card" data-variant="glass" style="max-width: 24rem; margin: 0 auto; padding: 1.5rem;">
+  <h3 class="leli-card-title" style="text-align: center; margin-bottom: 1.5rem;">Sign In to Account</h3>
+  <div class="leli-field-floating" style="margin-bottom: 1rem;">
+    <input type="email" id="pgEmail" class="leli-input" placeholder="name@domain.com" required>
+    <label class="leli-label" for="pgEmail">Email Address</label>
+  </div>
+  <div class="leli-field-floating" style="margin-bottom: 1.5rem;">
+    <input type="password" id="pgPass" class="leli-input" placeholder="Password" required>
+    <label class="leli-label" for="pgPass">Password</label>
+  </div>
+  <button class="leli-btn" data-variant="solid" style="width: 100%;" onclick="LeliUI.Toast.success('Signed in!')">Continue</button>
+</div>`,
+      dashboard: `<div class="leli-row leli-g-2">
+  <div class="leli-col-6">
+    <div class="leli-card" data-variant="glass" style="padding: 1rem;">
+      <div style="font-size: 0.8rem; color: var(--leli-text-muted);">Revenue</div>
+      <div style="font-size: 1.5rem; font-weight: 700;">$24,500</div>
+    </div>
+  </div>
+  <div class="leli-col-6">
+    <div class="leli-card" data-variant="glass" style="padding: 1rem;">
+      <div style="font-size: 0.8rem; color: var(--leli-text-muted);">Users</div>
+      <div style="font-size: 1.5rem; font-weight: 700;">1,280</div>
+    </div>
+  </div>
+</div>`,
+      components: `<div class="leli-cluster">
+  <div class="leli-dropdown">
+    <button class="leli-btn leli-dropdown-trigger" data-variant="solid">Actions &#9662;</button>
+    <div class="leli-dropdown-menu">
+      <a href="#" class="leli-dropdown-item">New Project</a>
+      <a href="#" class="leli-dropdown-item">Settings</a>
+      <div class="leli-dropdown-divider"></div>
+      <a href="#" class="leli-dropdown-item is-danger">Delete</a>
+    </div>
+  </div>
+
+  <button class="leli-btn" data-tooltip="Zero JS tooltip" data-tooltip-pos="top">Hover Tooltip</button>
+  <button class="leli-btn" data-variant="outlined" onclick="LeliUI.Toast.show({title: 'Live Toast', message: 'Hello from Playground!', type: 'primary'})">Trigger Toast</button>
+</div>`
+    };
+
+    function initPlayground() {
+      const editor = document.getElementById('playgroundEditor');
+      if (!editor) return;
+      if (!editor.value) {
+        editor.value = PLAYGROUND_PRESETS.hero;
+      }
+      updatePlaygroundPreview();
+    }
+
+    function updatePlaygroundPreview() {
+      const editor = document.getElementById('playgroundEditor');
+      const canvas = document.getElementById('playgroundPreview');
+      if (!editor || !canvas) return;
+      canvas.innerHTML = editor.value;
+      LeliUI.init(canvas);
+    }
+
+    function switchPlaygroundPreset(key) {
+      const editor = document.getElementById('playgroundEditor');
+      if (editor && PLAYGROUND_PRESETS[key]) {
+        editor.value = PLAYGROUND_PRESETS[key];
+        updatePlaygroundPreview();
+      }
+    }
+
+    function resetPlayground() {
+      const select = document.getElementById('playgroundPresetSelect');
+      const key = select ? select.value : 'hero';
+      switchPlaygroundPreset(key);
+      LeliUI.Toast.show({ title: 'Playground Reset', message: 'Starter template reloaded.', type: 'primary', duration: 1500 });
+    }
+
+    function copyPlaygroundCode(btn) {
+      const editor = document.getElementById('playgroundEditor');
+      if (editor) {
+        navigator.clipboard.writeText(editor.value);
+        const old = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => (btn.textContent = old), 1200);
+      }
+    }
+
 
     renderPage(location.hash.replace('#', '') || 'grid');
   </script>

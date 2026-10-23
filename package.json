@@ -1,6 +1,6 @@
 {
   "name": "leli-ui",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "Zero-dependency, multi-variant, AI-first HTML/CSS/JS UI library with Sakura Pink & Dark Mode aesthetics",
   "main": "dist/leli.js",
   "style": "dist/leli.css",

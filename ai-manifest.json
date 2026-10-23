@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "name_for_human": "leliUI Component Library",
   "name_for_model": "leli_ui",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description_for_model": "Zero-dependency multi-variant HTML/CSS/JS UI component library with Sakura Pink theme and dark mode default. Use leliUI classes (.leli-container, .leli-row, .leli-col-*, .leli-bento, .leli-navbar, .leli-btn, .leli-input, .leli-switch, .leli-checkbox, .leli-badge, .leli-modal, .leli-toast, .leli-card, .leli-tabs, .leli-accordion, .leli-table, .leli-pagination, .leli-progress, .leli-skeleton, .leli-avatar, .leli-dropdown, [data-tooltip], .leli-popover, .leli-drawer, .leli-alert) and data-variant attributes to build clean responsive interfaces.",
   "endpoints": {
     "llms_txt": "https://heqate.github.io/LeliUI/llms.txt",
