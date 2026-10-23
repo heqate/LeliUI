@@ -1,0 +1,147 @@
+/* ==========================================================================
+   leliUI - Progress Bar Component (Multi-Variant)
+   Variants: solid, gradient, striped, animated, indeterminate, glow, brutal
+   Sizes: xs, sm, md, lg, xl
+   ========================================================================== */
+
+@layer components {
+  .leli-progress-group {
+    --leli-accent: var(--leli-primary);
+    --leli-accent-soft: var(--leli-primary-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    inline-size: 100%;
+  }
+
+  .leli-progress-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--leli-text);
+  }
+
+  .leli-progress-value {
+    font-family: var(--leli-font-mono);
+    font-size: 0.8rem;
+    color: var(--leli-text-muted);
+  }
+
+  .leli-progress {
+    --leli-accent: var(--leli-primary);
+    --leli-accent-soft: var(--leli-primary-soft);
+    --progress-height: 0.65rem;
+    --progress-radius: var(--leli-radius-full);
+    --progress-value: 50%;
+
+    position: relative;
+    inline-size: 100%;
+    block-size: var(--progress-height);
+    background-color: var(--leli-surface-2);
+    border-radius: var(--progress-radius);
+    overflow: hidden;
+
+    /* Sizes */
+    &:where([data-size="xs"], .leli-progress-xs) {
+      --progress-height: 0.25rem;
+    }
+    &:where([data-size="sm"], .leli-progress-sm) {
+      --progress-height: 0.45rem;
+    }
+    &:where([data-size="lg"], .leli-progress-lg) {
+      --progress-height: 1rem;
+    }
+    &:where([data-size="xl"], .leli-progress-xl) {
+      --progress-height: 1.45rem;
+      --progress-radius: var(--leli-radius-md);
+    }
+
+    /* Variant: Brutal */
+    &:where([data-variant~="brutal"], .leli-progress-brutal) {
+      --progress-radius: var(--leli-radius-xs);
+      border: 2px solid var(--leli-border-strong);
+      background-color: var(--leli-surface);
+      box-shadow: 2px 2px 0px var(--leli-border-strong);
+
+      & .leli-progress-bar {
+        border-inline-end: 2px solid var(--leli-border-strong);
+      }
+    }
+
+    /* Variant: Glow */
+    &:where([data-variant~="glow"], .leli-progress-glow) {
+      overflow: visible;
+
+      & .leli-progress-bar {
+        box-shadow: 0 0 14px var(--leli-accent);
+      }
+    }
+  }
+
+  .leli-progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--progress-value);
+    block-size: 100%;
+    background-color: var(--leli-accent);
+    border-radius: inherit;
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    transition: inline-size 400ms var(--leli-ease),
+                background-color var(--leli-duration) var(--leli-ease);
+  }
+
+  /* Variant: Gradient */
+  .leli-progress:where([data-variant~="gradient"], .leli-progress-gradient) .leli-progress-bar {
+    background-image: linear-gradient(90deg, var(--leli-accent), var(--leli-secondary), var(--leli-info));
+  }
+
+  /* Variant: Striped */
+  .leli-progress:where([data-variant~="striped"], .leli-progress-striped) .leli-progress-bar {
+    background-image: linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.22) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.22) 50%,
+      rgba(255, 255, 255, 0.22) 75%,
+      transparent 75%,
+      transparent
+    );
+    background-size: 1.25rem 1.25rem;
+  }
+
+  /* Variant: Animated Stripes */
+  .leli-progress:where([data-variant~="animated"], .leli-progress-animated) .leli-progress-bar {
+    animation: leliProgressStripes 1s linear infinite;
+  }
+
+  /* Variant: Indeterminate */
+  .leli-progress:where([data-variant~="indeterminate"], .leli-progress-indeterminate) .leli-progress-bar {
+    position: absolute;
+    inline-size: 40%;
+    animation: leliProgressIndeterminate 1.4s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+  }
+
+  @keyframes leliProgressStripes {
+    from {
+      background-position: 1.25rem 0;
+    }
+    to {
+      background-position: 0 0;
+    }
+  }
+
+  @keyframes leliProgressIndeterminate {
+    0% {
+      inset-inline-start: -40%;
+    }
+    100% {
+      inset-inline-start: 100%;
+    }
+  }
+}

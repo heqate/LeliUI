@@ -1,0 +1,283 @@
+/* ==========================================================================
+   leliUI - Core Design System & Tokens
+   Refined Pastel Sakura & Rose-Quartz Theme + Dark Mode Default
+   ========================================================================== */
+
+@layer base, theme, components, utilities;
+
+@layer base {
+  :root {
+    /* MANDATORY: Automatically adapt native UI to user system preferences */
+    color-scheme: dark light;
+
+    /* Typography */
+    --leli-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    --leli-font-mono: 'JetBrains Mono', 'Fira Code', Consolas, Monaco, monospace;
+
+    /* Spacing & Sizing */
+    --leli-radius-xs: 0.225rem;
+    --leli-radius-sm: 0.35rem;
+    --leli-radius-md: 0.5rem;
+    --leli-radius-lg: 0.675rem;
+    --leli-radius-xl: 0.95rem;
+    --leli-radius-full: 9999px;
+
+    /* Transitions */
+    --leli-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --leli-duration: 170ms;
+
+    /* Raw Light/Dark Surface Tokens (Warm Plum-Tinted Dark & Clean Rose-White Light) */
+    --leli-bg-light: #fffcfd;
+    --leli-bg-dark: #0c0a0e;
+
+    --leli-surface-light: #ffffff;
+    --leli-surface-dark: #141118;
+
+    --leli-surface-1-light: #ffffff;
+    --leli-surface-1-dark: #15111a;
+
+    --leli-surface-2-light: #fdf2f7;
+    --leli-surface-2-dark: #1f1926;
+
+    --leli-surface-3-light: #f5e4ee;
+    --leli-surface-3-dark: #2a2233;
+
+    --leli-surface-glass-light: rgba(255, 252, 253, 0.86);
+    --leli-surface-glass-dark: rgba(20, 17, 24, 0.84);
+
+    --leli-text-light: #181116;
+    --leli-text-dark: #faf7f9;
+
+    --leli-text-muted-light: #756670;
+    --leli-text-muted-dark: #a89ba4;
+
+    --leli-border-light: #efe2e8;
+    --leli-border-dark: #2a2230;
+
+    --leli-border-strong-light: #d65c90;
+    --leli-border-strong-dark: #f48fb1;
+
+    /* Refined Pastel Sakura / Rose-Quartz Primary Palette */
+    --leli-primary-light: #d84b8a;
+    --leli-primary-dark: #f472b6;
+    --leli-primary-hover-light: #c23876;
+    --leli-primary-hover-dark: #f9a8d4;
+    --leli-primary-fg-light: #ffffff;
+    --leli-primary-fg-dark: #190b12;
+    --leli-primary-soft-light: rgba(216, 75, 138, 0.1);
+    --leli-primary-soft-dark: rgba(244, 114, 182, 0.13);
+
+    /* Secondary & Semantic Colors */
+    --leli-secondary-light: #a855f7;
+    --leli-secondary-dark: #c084fc;
+    --leli-secondary-soft-light: rgba(168, 85, 247, 0.1);
+    --leli-secondary-soft-dark: rgba(192, 132, 252, 0.14);
+
+    --leli-success-light: #16a34a;
+    --leli-success-dark: #4ade80;
+    --leli-success-soft-light: rgba(22, 163, 74, 0.1);
+    --leli-success-soft-dark: rgba(74, 222, 128, 0.13);
+
+    --leli-warning-light: #d97706;
+    --leli-warning-dark: #fbbf24;
+    --leli-warning-soft-light: rgba(217, 119, 6, 0.1);
+    --leli-warning-soft-dark: rgba(251, 191, 36, 0.13);
+
+    --leli-danger-light: #e11d48;
+    --leli-danger-dark: #fb7185;
+    --leli-danger-soft-light: rgba(225, 29, 72, 0.1);
+    --leli-danger-soft-dark: rgba(251, 113, 133, 0.14);
+
+    --leli-info-light: #0284c7;
+    --leli-info-dark: #38bdf8;
+    --leli-info-soft-light: rgba(2, 132, 199, 0.1);
+    --leli-info-soft-dark: rgba(56, 189, 248, 0.14);
+
+    /* Default Active Tokens (Dark Mode by Default) */
+    --leli-bg: var(--leli-bg-dark);
+    --leli-surface: var(--leli-surface-dark);
+    --leli-surface-1: var(--leli-surface-1-dark);
+    --leli-surface-2: var(--leli-surface-2-dark);
+    --leli-surface-3: var(--leli-surface-3-dark);
+    --leli-surface-glass: var(--leli-surface-glass-dark);
+    --leli-text: var(--leli-text-dark);
+    --leli-text-muted: var(--leli-text-muted-dark);
+    --leli-border: var(--leli-border-dark);
+    --leli-border-strong: var(--leli-border-strong-dark);
+
+    --leli-primary: var(--leli-primary-dark);
+    --leli-primary-hover: var(--leli-primary-hover-dark);
+    --leli-primary-fg: var(--leli-primary-fg-dark);
+    --leli-primary-soft: var(--leli-primary-soft-dark);
+    --leli-secondary: var(--leli-secondary-dark);
+    --leli-secondary-soft: var(--leli-secondary-soft-dark);
+    --leli-success: var(--leli-success-dark);
+    --leli-success-soft: var(--leli-success-soft-dark);
+    --leli-warning: var(--leli-warning-dark);
+    --leli-warning-soft: var(--leli-warning-soft-dark);
+    --leli-danger: var(--leli-danger-dark);
+    --leli-danger-soft: var(--leli-danger-soft-dark);
+    --leli-info: var(--leli-info-dark);
+    --leli-info-soft: var(--leli-info-soft-dark);
+
+    --leli-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.35);
+    --leli-shadow-md: 0 6px 16px -3px rgba(0, 0, 0, 0.45);
+    --leli-shadow-lg: 0 14px 32px -4px rgba(0, 0, 0, 0.6);
+    --leli-shadow-brutal: 3px 3px 0px var(--leli-border-strong);
+
+    accent-color: var(--leli-primary);
+  }
+
+  /* Explicit manual theme overrides via data-theme */
+  :root[data-theme="light"],
+  [data-theme="light"] {
+    color-scheme: light;
+    --leli-bg: var(--leli-bg-light);
+    --leli-surface: var(--leli-surface-light);
+    --leli-surface-1: var(--leli-surface-1-light);
+    --leli-surface-2: var(--leli-surface-2-light);
+    --leli-surface-3: var(--leli-surface-3-light);
+    --leli-surface-glass: var(--leli-surface-glass-light);
+    --leli-text: var(--leli-text-light);
+    --leli-text-muted: var(--leli-text-muted-light);
+    --leli-border: var(--leli-border-light);
+    --leli-border-strong: var(--leli-border-strong-light);
+    --leli-primary: var(--leli-primary-light);
+    --leli-primary-hover: var(--leli-primary-hover-light);
+    --leli-primary-fg: var(--leli-primary-fg-light);
+    --leli-primary-soft: var(--leli-primary-soft-light);
+    --leli-shadow-sm: 0 1px 2px 0 rgba(24, 17, 22, 0.04);
+    --leli-shadow-md: 0 4px 12px -2px rgba(24, 17, 22, 0.06);
+    --leli-shadow-lg: 0 12px 26px -4px rgba(24, 17, 22, 0.09);
+  }
+
+  :root[data-theme="dark"],
+  [data-theme="dark"] {
+    color-scheme: dark;
+    --leli-bg: var(--leli-bg-dark);
+    --leli-surface: var(--leli-surface-dark);
+    --leli-surface-1: var(--leli-surface-1-dark);
+    --leli-surface-2: var(--leli-surface-2-dark);
+    --leli-surface-3: var(--leli-surface-3-dark);
+    --leli-surface-glass: var(--leli-surface-glass-dark);
+    --leli-text: var(--leli-text-dark);
+    --leli-text-muted: var(--leli-text-muted-dark);
+    --leli-border: var(--leli-border-dark);
+    --leli-border-strong: var(--leli-border-strong-dark);
+    --leli-primary: var(--leli-primary-dark);
+    --leli-primary-hover: var(--leli-primary-hover-dark);
+    --leli-primary-fg: var(--leli-primary-fg-dark);
+    --leli-primary-soft: var(--leli-primary-soft-dark);
+  }
+
+  body {
+    font-family: var(--leli-font-sans);
+    background-color: var(--leli-bg);
+    color: var(--leli-text);
+    line-height: 1.5;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer utilities {
+  /* Universal Color Accent Modifiers */
+  :where([data-accent="primary"], [data-accent="pink"], .leli-accent-primary) {
+    --leli-accent: var(--leli-primary);
+    --leli-accent-fg: var(--leli-primary-fg);
+    --leli-accent-soft: var(--leli-primary-soft);
+  }
+  :where([data-accent="secondary"], .leli-accent-secondary) {
+    --leli-accent: var(--leli-secondary);
+    --leli-accent-fg: #ffffff;
+    --leli-accent-soft: var(--leli-secondary-soft);
+  }
+  :where([data-accent="success"], .leli-accent-success) {
+    --leli-accent: var(--leli-success);
+    --leli-accent-fg: #091910;
+    --leli-accent-soft: var(--leli-success-soft);
+  }
+  :where([data-accent="warning"], .leli-accent-warning) {
+    --leli-accent: var(--leli-warning);
+    --leli-accent-fg: #1c1304;
+    --leli-accent-soft: var(--leli-warning-soft);
+  }
+  :where([data-accent="danger"], .leli-accent-danger) {
+    --leli-accent: var(--leli-danger);
+    --leli-accent-fg: #ffffff;
+    --leli-accent-soft: var(--leli-danger-soft);
+  }
+  :where([data-accent="info"], .leli-accent-info) {
+    --leli-accent: var(--leli-info);
+    --leli-accent-fg: #061824;
+    --leli-accent-soft: var(--leli-info-soft);
+  }
+
+  /* Badge Helper */
+  .leli-badge {
+    --leli-accent: var(--leli-primary);
+    --leli-accent-soft: var(--leli-primary-soft);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding-block: 0.18rem;
+    padding-inline: 0.6rem;
+    font-size: 0.74rem;
+    font-weight: 600;
+    border-radius: var(--leli-radius-full);
+    background-color: var(--leli-accent-soft);
+    color: var(--leli-accent);
+    border: 1px solid color-mix(in srgb, var(--leli-accent) 26%, transparent);
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+
+  /* Button Helper */
+  .leli-btn {
+    --leli-accent: var(--leli-primary);
+    --leli-accent-fg: var(--leli-primary-fg);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding-block: 0.45rem;
+    padding-inline: 0.95rem;
+    font-family: inherit;
+    font-size: 0.84rem;
+    font-weight: 600;
+    border-radius: var(--leli-radius-md);
+    border: 1px solid var(--leli-border);
+    background-color: var(--leli-surface-2);
+    color: var(--leli-text);
+    cursor: pointer;
+    transition: background-color var(--leli-duration) var(--leli-ease),
+                border-color var(--leli-duration) var(--leli-ease),
+                color var(--leli-duration) var(--leli-ease),
+                box-shadow var(--leli-duration) var(--leli-ease);
+    text-decoration: none;
+
+    &:hover:not(:disabled) {
+      border-color: var(--leli-accent);
+      color: var(--leli-accent);
+    }
+
+    &.leli-btn-primary {
+      background: linear-gradient(135deg, #f472b6, #e11d74);
+      border-color: rgba(244, 114, 182, 0.4);
+      color: #ffffff;
+      box-shadow: 0 2px 10px -2px rgba(244, 114, 182, 0.4);
+
+      &:hover:not(:disabled) {
+        filter: brightness(1.08);
+        color: #ffffff;
+        box-shadow: 0 4px 14px -2px rgba(244, 114, 182, 0.55);
+      }
+    }
+
+    &.leli-btn-sm {
+      padding-block: 0.3rem;
+      padding-inline: 0.7rem;
+      font-size: 0.775rem;
+    }
+  }
+}

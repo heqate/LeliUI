@@ -1,0 +1,3789 @@
+/*!
+ * leliUI v1.0.12 - Complete Multi-Variant UI Library
+ * Zero-Dependency Modern CSS & JS Framework
+ * Built: 2026-10-23T18:51:00.845Z
+ */
+
+/* ==========================================================================
+   leliUI - Core Design System & Tokens
+   Refined Pastel Sakura & Rose-Quartz Theme + Dark Mode Default
+   ========================================================================== */
+
+@layer base, theme, components, utilities;
+
+@layer base {
+  :root {
+    /* MANDATORY: Automatically adapt native UI to user system preferences */
+    color-scheme: dark light;
+
+    /* Typography */
+    --leli-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    --leli-font-mono: 'JetBrains Mono', 'Fira Code', Consolas, Monaco, monospace;
+
+    /* Spacing & Sizing */
+    --leli-radius-xs: 0.225rem;
+    --leli-radius-sm: 0.35rem;
+    --leli-radius-md: 0.5rem;
+    --leli-radius-lg: 0.675rem;
+    --leli-radius-xl: 0.95rem;
+    --leli-radius-full: 9999px;
+
+    /* Transitions */
+    --leli-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --leli-duration: 170ms;
+
+    /* Raw Light/Dark Surface Tokens (Warm Plum-Tinted Dark & Clean Rose-White Light) */
+    --leli-bg-light: #fffcfd;
+    --leli-bg-dark: #0c0a0e;
+
+    --leli-surface-light: #ffffff;
+    --leli-surface-dark: #141118;
+
+    --leli-surface-1-light: #ffffff;
+    --leli-surface-1-dark: #15111a;
+
+    --leli-surface-2-light: #fdf2f7;
+    --leli-surface-2-dark: #1f1926;
+
+    --leli-surface-3-light: #f5e4ee;
+    --leli-surface-3-dark: #2a2233;
+
+    --leli-surface-glass-light: rgba(255, 252, 253, 0.86);
+    --leli-surface-glass-dark: rgba(20, 17, 24, 0.84);
+
+    --leli-text-light: #181116;
+    --leli-text-dark: #faf7f9;
+
+    --leli-text-muted-light: #756670;
+    --leli-text-muted-dark: #a89ba4;
+
+    --leli-border-light: #efe2e8;
+    --leli-border-dark: #2a2230;
+
+    --leli-border-strong-light: #d65c90;
+    --leli-border-strong-dark: #f48fb1;
+
+    /* Refined Pastel Sakura / Rose-Quartz Primary Palette */
+    --leli-primary-light: #d84b8a;
+    --leli-primary-dark: #f472b6;
+    --leli-primary-hover-light: #c23876;
+    --leli-primary-hover-dark: #f9a8d4;
+    --leli-primary-fg-light: #ffffff;
+    --leli-primary-fg-dark: #190b12;
+    --leli-primary-soft-light: rgba(216, 75, 138, 0.1);
+    --leli-primary-soft-dark: rgba(244, 114, 182, 0.13);
+
+    /* Secondary & Semantic Colors */
+    --leli-secondary-light: #a855f7;
+    --leli-secondary-dark: #c084fc;
+    --leli-secondary-soft-light: rgba(168, 85, 247, 0.1);
+    --leli-secondary-soft-dark: rgba(192, 132, 252, 0.14);
+
+    --leli-success-light: #16a34a;
+    --leli-success-dark: #4ade80;
+    --leli-success-soft-light: rgba(22, 163, 74, 0.1);
+    --leli-success-soft-dark: rgba(74, 222, 128, 0.13);
+
+    --leli-warning-light: #d97706;
+    --leli-warning-dark: #fbbf24;
+    --leli-warning-soft-light: rgba(217, 119, 6, 0.1);
+    --leli-warning-soft-dark: rgba(251, 191, 36, 0.13);
+
+    --leli-danger-light: #e11d48;
+    --leli-danger-dark: #fb7185;
+    --leli-danger-soft-light: rgba(225, 29, 72, 0.1);
+    --leli-danger-soft-dark: rgba(251, 113, 133, 0.14);
+
+    --leli-info-light: #0284c7;
+    --leli-info-dark: #38bdf8;
+    --leli-info-soft-light: rgba(2, 132, 199, 0.1);
+    --leli-info-soft-dark: rgba(56, 189, 248, 0.14);
+
+    /* Default Active Tokens (Dark Mode by Default) */
+    --leli-bg: var(--leli-bg-dark);
+    --leli-surface: var(--leli-surface-dark);
+    --leli-surface-1: var(--leli-surface-1-dark);
+    --leli-surface-2: var(--leli-surface-2-dark);
+    --leli-surface-3: var(--leli-surface-3-dark);
+    --leli-surface-glass: var(--leli-surface-glass-dark);
+    --leli-text: var(--leli-text-dark);
+    --leli-text-muted: var(--leli-text-muted-dark);
+    --leli-border: var(--leli-border-dark);
+    --leli-border-strong: var(--leli-border-strong-dark);
+
+    --leli-primary: var(--leli-primary-dark);
+    --leli-primary-hover: var(--leli-primary-hover-dark);
+    --leli-primary-fg: var(--leli-primary-fg-dark);
+    --leli-primary-soft: var(--leli-primary-soft-dark);
+    --leli-secondary: var(--leli-secondary-dark);
+    --leli-secondary-soft: var(--leli-secondary-soft-dark);
+    --leli-success: var(--leli-success-dark);
+    --leli-success-soft: var(--leli-success-soft-dark);
+    --leli-warning: var(--leli-warning-dark);
+    --leli-warning-soft: var(--leli-warning-soft-dark);
+    --leli-danger: var(--leli-danger-dark);
+    --leli-danger-soft: var(--leli-danger-soft-dark);
+    --leli-info: var(--leli-info-dark);
+    --leli-info-soft: var(--leli-info-soft-dark);
+
+    --leli-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.35);
+    --leli-shadow-md: 0 6px 16px -3px rgba(0, 0, 0, 0.45);
+    --leli-shadow-lg: 0 14px 32px -4px rgba(0, 0, 0, 0.6);
+    --leli-shadow-brutal: 3px 3px 0px var(--leli-border-strong);
+
+    accent-color: var(--leli-primary);
+  }
+
+  /* Explicit manual theme overrides via data-theme */
+  :root[data-theme="light"],
+  [data-theme="light"] {
+    color-scheme: light;
+    --leli-bg: var(--leli-bg-light);
+    --leli-surface: var(--leli-surface-light);
+    --leli-surface-1: var(--leli-surface-1-light);
+    --leli-surface-2: var(--leli-surface-2-light);
+    --leli-surface-3: var(--leli-surface-3-light);
+    --leli-surface-glass: var(--leli-surface-glass-light);
+    --leli-text: var(--leli-text-light);
+    --leli-text-muted: var(--leli-text-muted-light);
+    --leli-border: var(--leli-border-light);
+    --leli-border-strong: var(--leli-border-strong-light);
+    --leli-primary: var(--leli-primary-light);
+    --leli-primary-hover: var(--leli-primary-hover-light);
+    --leli-primary-fg: var(--leli-primary-fg-light);
+    --leli-primary-soft: var(--leli-primary-soft-light);
+    --leli-shadow-sm: 0 1px 2px 0 rgba(24, 17, 22, 0.04);
+    --leli-shadow-md: 0 4px 12px -2px rgba(24, 17, 22, 0.06);
+    --leli-shadow-lg: 0 12px 26px -4px rgba(24, 17, 22, 0.09);
+  }
+
+  :root[data-theme="dark"],
+  [data-theme="dark"] {
+    color-scheme: dark;
+    --leli-bg: var(--leli-bg-dark);
+    --leli-surface: var(--leli-surface-dark);
+    --leli-surface-1: var(--leli-surface-1-dark);
+    --leli-surface-2: var(--leli-surface-2-dark);
+    --leli-surface-3: var(--leli-surface-3-dark);
+    --leli-surface-glass: var(--leli-surface-glass-dark);
+    --leli-text: var(--leli-text-dark);
+    --leli-text-muted: var(--leli-text-muted-dark);
+    --leli-border: var(--leli-border-dark);
+    --leli-border-strong: var(--leli-border-strong-dark);
+    --leli-primary: var(--leli-primary-dark);
+    --leli-primary-hover: var(--leli-primary-hover-dark);
+    --leli-primary-fg: var(--leli-primary-fg-dark);
+    --leli-primary-soft: var(--leli-primary-soft-dark);
+  }
+
+  body {
+    font-family: var(--leli-font-sans);
+    background-color: var(--leli-bg);
+    color: var(--leli-text);
+    line-height: 1.5;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer utilities {
+  /* Universal Color Accent Modifiers */
+  :where([data-accent="primary"], [data-accent="pink"], .leli-accent-primary) {
+    --leli-accent: var(--leli-primary);
+    --leli-accent-fg: var(--leli-primary-fg);
+    --leli-accent-soft: var(--leli-primary-soft);
+  }
+  :where([data-accent="secondary"], .leli-accent-secondary) {
+    --leli-accent: var(--leli-secondary);
+    --leli-accent-fg: #ffffff;
+    --leli-accent-soft: var(--leli-secondary-soft);
+  }
+  :where([data-accent="success"], .leli-accent-success) {
+    --leli-accent: var(--leli-success);
+    --leli-accent-fg: #091910;
+    --leli-accent-soft: var(--leli-success-soft);
+  }
+  :where([data-accent="warning"], .leli-accent-warning) {
+    --leli-accent: var(--leli-warning);
+    --leli-accent-fg: #1c1304;
+    --leli-accent-soft: var(--leli-warning-soft);
+  }
+  :where([data-accent="danger"], .leli-accent-danger) {
+    --leli-accent: var(--leli-danger);
+    --leli-accent-fg: #ffffff;
+    --leli-accent-soft: var(--leli-danger-soft);
+  }
+  :where([data-accent="info"], .leli-accent-info) {
+    --leli-accent: var(--leli-info);
+    --leli-accent-fg: #061824;
+    --leli-accent-soft: var(--leli-info-soft);
+  }
+
+  /* Badge Helper */
+  .leli-badge {
+    --leli-accent: var(--leli-primary);
+    --leli-accent-soft: var(--leli-primary-soft);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding-block: 0.18rem;
+    padding-inline: 0.6rem;
+    font-size: 0.74rem;
+    font-weight: 600;
+    border-radius: var(--leli-radius-full);
+    background-color: var(--leli-accent-soft);
+    color: var(--leli-accent);
+    border: 1px solid color-mix(in srgb, var(--leli-accent) 26%, transparent);
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+
+  /* Button Helper */
+  .leli-btn {
+    --leli-accent: var(--leli-primary);
+    --leli-accent-fg: var(--leli-primary-fg);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding-block: 0.45rem;
+    padding-inline: 0.95rem;
+    font-family: inherit;
+    font-size: 0.84rem;
+    font-weight: 600;
+    border-radius: var(--leli-radius-md);
+    border: 1px solid var(--leli-border);
+    background-color: var(--leli-surface-2);
+    color: var(--leli-text);
+    cursor: pointer;
+    transition: background-color var(--leli-duration) var(--leli-ease),
+                border-color var(--leli-duration) var(--leli-ease),
+                color var(--leli-duration) var(--leli-ease),
+                box-shadow var(--leli-duration) var(--leli-ease);
+    text-decoration: none;
+
+    &:hover:not(:disabled) {
+      border-color: var(--leli-accent);
+      color: var(--leli-accent);
+    }
+
+    &.leli-btn-primary {
+      background: linear-gradient(135deg, #f472b6, #e11d74);
+      border-color: rgba(244, 114, 182, 0.4);
+      color: #ffffff;
+      box-shadow: 0 2px 10px -2px rgba(244, 114, 182, 0.4);
+
+      &:hover:not(:disabled) {
+        filter: brightness(1.08);
+        color: #ffffff;
+        box-shadow: 0 4px 14px -2px rgba(244, 114, 182, 0.55);
+      }
+    }
+
+    &.leli-btn-sm {
+      padding-block: 0.3rem;
+      padding-inline: 0.7rem;
+      font-size: 0.775rem;
+    }
+  }
+}
+
+
+/* --- Component: grid --- */
+/* ==========================================================================
+   leliUI - Comprehensive Layout, Grid & Page Skeleton Architecture
+   Includes:
+   1. Containers (sm, md, lg, xl, 2xl, narrow, fluid)
+   2. 12-Column Flexbox Grid (.leli-row, .leli-col-*, .leli-row-cols-*, offsets, order)
+   3. CSS Grid & Auto-Fit Responsive Grid (.leli-grid, .leli-grid-auto-sm/md/lg)
+   4. Bento Grid System (.leli-bento, .leli-bento-wide, .leli-bento-tall, .leli-bento-hero)
+   5. Page Layout Shells (Holy Grail, Sidebar + Main, Split Screen)
+   6. Stack & Cluster Helpers (.leli-stack, .leli-cluster, .leli-divider)
+   ========================================================================== */
+
+@layer components {
+  /* ========================================================================
+     1. CONTAINERS (Sayfayı Ortalar ve Maksimum Genişliği Belirler)
+     ======================================================================== */
+  .leli-container,
+  .leli-container-narrow,
+  .leli-container-sm,
+  .leli-container-md,
+  .leli-container-lg,
+  .leli-container-xl,
+  .leli-container-2xl,
+  .leli-container-fluid {
+    --leli-gutter-x: 1.5rem;
+    --leli-gutter-y: 0;
+    inline-size: 100%;
+    padding-inline: calc(var(--leli-gutter-x) * 0.5);
+    margin-inline: auto;
+    box-sizing: border-box;
+  }
+
+  .leli-container-narrow { max-inline-size: 680px; }
+
+  @media (min-width: 576px) {
+    .leli-container, .leli-container-sm { max-inline-size: 540px; }
+  }
+  @media (min-width: 768px) {
+    .leli-container, .leli-container-sm, .leli-container-md { max-inline-size: 720px; }
+  }
+  @media (min-width: 992px) {
+    .leli-container, .leli-container-sm, .leli-container-md, .leli-container-lg { max-inline-size: 960px; }
+  }
+  @media (min-width: 1200px) {
+    .leli-container, .leli-container-sm, .leli-container-md, .leli-container-lg, .leli-container-xl { max-inline-size: 1140px; }
+  }
+  @media (min-width: 1400px) {
+    .leli-container, .leli-container-sm, .leli-container-md, .leli-container-lg, .leli-container-xl, .leli-container-2xl { max-inline-size: 1320px; }
+  }
+
+  /* ========================================================================
+     2. 12-COLUMN FLEXBOX GRID (.leli-row & .leli-col-*)
+     ======================================================================== */
+  .leli-row {
+    --leli-gutter-x: 1.25rem;
+    --leli-gutter-y: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    margin-block-start: calc(-1 * var(--leli-gutter-y));
+    margin-inline: calc(-0.5 * var(--leli-gutter-x));
+    box-sizing: border-box;
+
+    & > * {
+      box-sizing: border-box;
+      flex-shrink: 0;
+      inline-size: 100%;
+      max-inline-size: 100%;
+      padding-inline: calc(var(--leli-gutter-x) * 0.5);
+      margin-block-start: var(--leli-gutter-y);
+    }
+  }
+
+  /* Row Columns (Satır başı otomatik sütun sayısı: .leli-row-cols-1 ... 6) */
+  .leli-row-cols-1 > * { flex: 0 0 auto; inline-size: 100%; }
+  .leli-row-cols-2 > * { flex: 0 0 auto; inline-size: 50%; }
+  .leli-row-cols-3 > * { flex: 0 0 auto; inline-size: 33.333333%; }
+  .leli-row-cols-4 > * { flex: 0 0 auto; inline-size: 25%; }
+  .leli-row-cols-5 > * { flex: 0 0 auto; inline-size: 20%; }
+  .leli-row-cols-6 > * { flex: 0 0 auto; inline-size: 16.666667%; }
+
+  /* Gutter (Sütun Boşluğu) Sınıfları */
+  .leli-g-0  { --leli-gutter-x: 0rem;    --leli-gutter-y: 0rem; }
+  .leli-g-1  { --leli-gutter-x: 0.5rem;  --leli-gutter-y: 0.5rem; }
+  .leli-g-2  { --leli-gutter-x: 1rem;    --leli-gutter-y: 1rem; }
+  .leli-g-3  { --leli-gutter-x: 1.5rem;  --leli-gutter-y: 1.5rem; }
+  .leli-g-4  { --leli-gutter-x: 2.25rem; --leli-gutter-y: 2.25rem; }
+  .leli-gx-0 { --leli-gutter-x: 0rem; }
+  .leli-gx-2 { --leli-gutter-x: 1rem; }
+  .leli-gx-4 { --leli-gutter-x: 2.25rem; }
+  .leli-gy-0 { --leli-gutter-y: 0rem; }
+  .leli-gy-2 { --leli-gutter-y: 1rem; }
+  .leli-gy-4 { --leli-gutter-y: 2.25rem; }
+
+  /* Sütun Genişlikleri (1 - 12) */
+  .leli-col      { flex: 1 0 0%; }
+  .leli-col-auto { flex: 0 0 auto; inline-size: auto; }
+  .leli-col-1    { flex: 0 0 auto; inline-size: 8.333333%; }
+  .leli-col-2    { flex: 0 0 auto; inline-size: 16.666667%; }
+  .leli-col-3    { flex: 0 0 auto; inline-size: 25%; }
+  .leli-col-4    { flex: 0 0 auto; inline-size: 33.333333%; }
+  .leli-col-5    { flex: 0 0 auto; inline-size: 41.666667%; }
+  .leli-col-6    { flex: 0 0 auto; inline-size: 50%; }
+  .leli-col-7    { flex: 0 0 auto; inline-size: 58.333333%; }
+  .leli-col-8    { flex: 0 0 auto; inline-size: 66.666667%; }
+  .leli-col-9    { flex: 0 0 auto; inline-size: 75%; }
+  .leli-col-10   { flex: 0 0 auto; inline-size: 83.333333%; }
+  .leli-col-11   { flex: 0 0 auto; inline-size: 91.666667%; }
+  .leli-col-12   { flex: 0 0 auto; inline-size: 100%; }
+
+  /* Offsets (Soldan Boşluk Bırakma) */
+  .leli-offset-1  { margin-inline-start: 8.333333%; }
+  .leli-offset-2  { margin-inline-start: 16.666667%; }
+  .leli-offset-3  { margin-inline-start: 25%; }
+  .leli-offset-4  { margin-inline-start: 33.333333%; }
+  .leli-offset-6  { margin-inline-start: 50%; }
+
+  /* Order (Sıralama Değiştirme) */
+  .leli-order-first { order: -1; }
+  .leli-order-last  { order: 13; }
+  .leli-order-1     { order: 1; }
+  .leli-order-2     { order: 2; }
+  .leli-order-3     { order: 3; }
+
+  /* Responsive: sm (>= 576px) */
+  @media (min-width: 576px) {
+    .leli-row-cols-sm-1 > * { flex: 0 0 auto; inline-size: 100%; }
+    .leli-row-cols-sm-2 > * { flex: 0 0 auto; inline-size: 50%; }
+    .leli-row-cols-sm-3 > * { flex: 0 0 auto; inline-size: 33.333333%; }
+    .leli-col-sm      { flex: 1 0 0%; }
+    .leli-col-sm-auto { flex: 0 0 auto; inline-size: auto; }
+    .leli-col-sm-1    { flex: 0 0 auto; inline-size: 8.333333%; }
+    .leli-col-sm-2    { flex: 0 0 auto; inline-size: 16.666667%; }
+    .leli-col-sm-3    { flex: 0 0 auto; inline-size: 25%; }
+    .leli-col-sm-4    { flex: 0 0 auto; inline-size: 33.333333%; }
+    .leli-col-sm-5    { flex: 0 0 auto; inline-size: 41.666667%; }
+    .leli-col-sm-6    { flex: 0 0 auto; inline-size: 50%; }
+    .leli-col-sm-7    { flex: 0 0 auto; inline-size: 58.333333%; }
+    .leli-col-sm-8    { flex: 0 0 auto; inline-size: 66.666667%; }
+    .leli-col-sm-9    { flex: 0 0 auto; inline-size: 75%; }
+    .leli-col-sm-10   { flex: 0 0 auto; inline-size: 83.333333%; }
+    .leli-col-sm-11   { flex: 0 0 auto; inline-size: 91.666667%; }
+    .leli-col-sm-12   { flex: 0 0 auto; inline-size: 100%; }
+  }
+
+  /* Responsive: md (>= 768px) */
+  @media (min-width: 768px) {
+    .leli-row-cols-md-2 > * { flex: 0 0 auto; inline-size: 50%; }
+    .leli-row-cols-md-3 > * { flex: 0 0 auto; inline-size: 33.333333%; }
+    .leli-row-cols-md-4 > * { flex: 0 0 auto; inline-size: 25%; }
+    .leli-col-md      { flex: 1 0 0%; }
+    .leli-col-md-auto { flex: 0 0 auto; inline-size: auto; }
+    .leli-col-md-1    { flex: 0 0 auto; inline-size: 8.333333%; }
+    .leli-col-md-2    { flex: 0 0 auto; inline-size: 16.666667%; }
+    .leli-col-md-3    { flex: 0 0 auto; inline-size: 25%; }
+    .leli-col-md-4    { flex: 0 0 auto; inline-size: 33.333333%; }
+    .leli-col-md-5    { flex: 0 0 auto; inline-size: 41.666667%; }
+    .leli-col-md-6    { flex: 0 0 auto; inline-size: 50%; }
+    .leli-col-md-7    { flex: 0 0 auto; inline-size: 58.333333%; }
+    .leli-col-md-8    { flex: 0 0 auto; inline-size: 66.666667%; }
+    .leli-col-md-9    { flex: 0 0 auto; inline-size: 75%; }
+    .leli-col-md-10   { flex: 0 0 auto; inline-size: 83.333333%; }
+    .leli-col-md-11   { flex: 0 0 auto; inline-size: 91.666667%; }
+    .leli-col-md-12   { flex: 0 0 auto; inline-size: 100%; }
+  }
+
+  /* Responsive: lg (>= 992px) */
+  @media (min-width: 992px) {
+    .leli-row-cols-lg-3 > * { flex: 0 0 auto; inline-size: 33.333333%; }
+    .leli-row-cols-lg-4 > * { flex: 0 0 auto; inline-size: 25%; }
+    .leli-row-cols-lg-6 > * { flex: 0 0 auto; inline-size: 16.666667%; }
+    .leli-col-lg      { flex: 1 0 0%; }
+    .leli-col-lg-auto { flex: 0 0 auto; inline-size: auto; }
+    .leli-col-lg-1    { flex: 0 0 auto; inline-size: 8.333333%; }
+    .leli-col-lg-2    { flex: 0 0 auto; inline-size: 16.666667%; }
+    .leli-col-lg-3    { flex: 0 0 auto; inline-size: 25%; }
+    .leli-col-lg-4    { flex: 0 0 auto; inline-size: 33.333333%; }
+    .leli-col-lg-5    { flex: 0 0 auto; inline-size: 41.666667%; }
+    .leli-col-lg-6    { flex: 0 0 auto; inline-size: 50%; }
+    .leli-col-lg-7    { flex: 0 0 auto; inline-size: 58.333333%; }
+    .leli-col-lg-8    { flex: 0 0 auto; inline-size: 66.666667%; }
+    .leli-col-lg-9    { flex: 0 0 auto; inline-size: 75%; }
+    .leli-col-lg-10   { flex: 0 0 auto; inline-size: 83.333333%; }
+    .leli-col-lg-11   { flex: 0 0 auto; inline-size: 91.666667%; }
+    .leli-col-lg-12   { flex: 0 0 auto; inline-size: 100%; }
+  }
+
+  /* ========================================================================
+     3. CSS GRID & AUTO-FIT RESPONSIVE GRIDS (Medya Sorgusuz Akıllı Izgara)
+     ======================================================================== */
+  .leli-grid {
+    --leli-grid-cols: 12;
+    --leli-grid-gap: 1.25rem;
+    display: grid;
+    grid-template-columns: repeat(var(--leli-grid-cols), minmax(0, 1fr));
+    gap: var(--leli-grid-gap);
+  }
+
+  .leli-grid-cols-1  { --leli-grid-cols: 1; }
+  .leli-grid-cols-2  { --leli-grid-cols: 2; }
+  .leli-grid-cols-3  { --leli-grid-cols: 3; }
+  .leli-grid-cols-4  { --leli-grid-cols: 4; }
+  .leli-grid-cols-6  { --leli-grid-cols: 6; }
+  .leli-grid-cols-12 { --leli-grid-cols: 12; }
+
+  /* Auto-Fit Grids: Ekran genişliğine göre sütun sayısını otomatik ayarlar */
+  .leli-grid-auto-sm {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 180px), 1fr));
+    gap: 1rem;
+  }
+
+  .leli-grid-auto-md {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: 1.25rem;
+  }
+
+  .leli-grid-auto-lg {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+    gap: 1.5rem;
+  }
+
+  /* Sütun ve Satır Yayılma (Span) Sınıfları */
+  .leli-span-1    { grid-column: span 1 / span 1; }
+  .leli-span-2    { grid-column: span 2 / span 2; }
+  .leli-span-3    { grid-column: span 3 / span 3; }
+  .leli-span-4    { grid-column: span 4 / span 4; }
+  .leli-span-6    { grid-column: span 6 / span 6; }
+  .leli-span-8    { grid-column: span 8 / span 8; }
+  .leli-span-12   { grid-column: span 12 / span 12; }
+  .leli-span-full { grid-column: 1 / -1; }
+
+  .leli-row-span-2 { grid-row: span 2 / span 2; }
+  .leli-row-span-3 { grid-row: span 3 / span 3; }
+
+  /* ========================================================================
+     4. BENTO GRID SYSTEM (Apple / Modern Dashboard Tarzı Kutu Düzeni)
+     ======================================================================== */
+  .leli-bento {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: minmax(140px, auto);
+    gap: 1.25rem;
+  }
+
+  .leli-bento-item {
+    background-color: var(--leli-surface);
+    border: 1px solid var(--leli-border);
+    border-radius: var(--leli-radius-lg);
+    padding: 1.35rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: border-color var(--leli-duration) var(--leli-ease);
+
+    &:hover {
+      border-color: var(--leli-primary);
+    }
+  }
+
+  .leli-bento-wide { grid-column: span 2; }
+  .leli-bento-tall { grid-row: span 2; }
+  .leli-bento-hero { grid-column: span 2; grid-row: span 2; }
+  .leli-bento-full { grid-column: 1 / -1; }
+
+  @media (width < 768px) {
+    .leli-bento {
+      grid-template-columns: 1fr;
+    }
+    .leli-bento-wide,
+    .leli-bento-tall,
+    .leli-bento-hero {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+  }
+
+  /* ========================================================================
+     5. PAGE LAYOUT SHELLS (Hazır Sayfa İskeleti Kalıpları)
+     ======================================================================== */
+  /* A) Sol Sidebar + Sağ Ana İçerik (Admin / Dashboard İskeleti) */
+  .leli-layout-sidebar {
+    --sidebar-width: 250px;
+    display: grid;
+    grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+    min-block-size: 100%;
+    gap: 1.5rem;
+
+    @media (width < 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* B) Sağ Sidebar + Sol Ana İçerik (Blog / Makale İskeleti) */
+  .leli-layout-sidebar-right {
+    --sidebar-width: 280px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--sidebar-width);
+    gap: 2rem;
+
+    @media (width < 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* C) Holy Grail Layout (Sol Menü + Orta İçerik + Sağ Panel) */
+  .leli-layout-holy-grail {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr) 220px;
+    gap: 1.5rem;
+
+    @media (width < 992px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* D) Split Screen (50% / 50% Giriş / Tanıtım Ekranı İskeleti) */
+  .leli-layout-split {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+    align-items: center;
+
+    @media (width < 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ========================================================================
+     6. STACK, CLUSTER & FLEX HELPERS (Dikey Yığın & Yatay Küme)
+     ======================================================================== */
+  /* Dikey Yığın (.leli-stack): Alt alta elemanlar arası eşit boşluk */
+  .leli-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--stack-gap, 1rem);
+  }
+  .leli-stack-sm { --stack-gap: 0.5rem; }
+  .leli-stack-lg { --stack-gap: 1.75rem; }
+
+  /* Yatay Küme (.leli-cluster): Yan yana sığdıkça dizilen, taşarsa alt satıra geçen grup */
+  .leli-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--cluster-gap, 0.75rem);
+  }
+
+  /* Bölüm Ayırıcı Çizgi (.leli-divider) */
+  .leli-divider {
+    border: none;
+    border-block-start: 1px solid var(--leli-border);
+    margin-block: 1.5rem;
+    inline-size: 100%;
+  }
+
+  /* Flex Utilities */
+  .leli-d-flex          { display: flex; }
+  .leli-flex-row        { flex-direction: row; }
+  .leli-flex-col        { flex-direction: column; }
+  .leli-flex-wrap       { flex-wrap: wrap; }
+  .leli-justify-start   { justify-content: flex-start; }
+  .leli-justify-center  { justify-content: center; }
+  .leli-justify-between { justify-content: space-between; }
+  .leli-justify-end     { justify-content: flex-end; }
+  .leli-items-start     { align-items: flex-start; }
+  .leli-items-center    { align-items: center; }
+  .leli-items-end       { align-items: flex-end; }
+  .leli-gap-1           { gap: 0.5rem; }
+  .leli-gap-2           { gap: 1rem; }
+  .leli-gap-3           { gap: 1.5rem; }
+  .leli-gap-4           { gap: 2.25rem; }
+}
+
+
+/* --- Component: navbar --- */
+/* ==========================================================================
+   leliUI - Header & Navbar Component (Multi-Variant)
+   Variants: default, glass, floating, bordered, dark, minimal
+   Positions: sticky, fixed, static
+   ========================================================================== */
+
+@layer components {
+  .leli-navbar {
+    --leli-accent: var(--leli-primary);
+    --navbar-height: 4rem;
+    --navbar-px: 1.5rem;
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    inline-size: 100%;
+    min-block-size: var(--navbar-height);
+    padding-inline: var(--navbar-px);
+    background-color: var(--leli-surface);
+    color: var(--leli-text);
+    border-block-end: 1px solid var(--leli-border);
+    box-sizing: border-box;
+    z-index: 40;
+    transition: background-color var(--leli-duration) var(--leli-ease),
+                border-color var(--leli-duration) var(--leli-ease),
+                box-shadow var(--leli-duration) var(--leli-ease);
+
+    /* Inner Container Alignment */
+    & > .leli-container,
+    & > .leli-container-fluid,
+    & > .leli-navbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      inline-size: 100%;
+      gap: 1.5rem;
+    }
+
+    /* Sticky & Fixed Modifiers */
+    &:where([data-position="sticky"], .leli-navbar-sticky) {
+      position: sticky;
+      inset-block-start: 0;
+    }
+
+    /* Size Modifiers */
+    &:where([data-size="sm"], .leli-navbar-sm) {
+      --navbar-height: 3.25rem;
+    }
+    &:where([data-size="lg"], .leli-navbar-lg) {
+      --navbar-height: 4.75rem;
+    }
+
+    /* Variant: Glass (Blurred translucent topbar) */
+    &:where([data-variant="glass"], .leli-navbar-glass) {
+      background-color: var(--leli-surface-glass);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+    }
+
+    /* Variant: Elevated (Shadow, no border) */
+    &:where([data-variant="elevated"], .leli-navbar-elevated) {
+      border-block-end-color: transparent;
+      box-shadow: var(--leli-shadow-md);
+    }
+
+    /* Variant: Floating Pill / Island Header */
+    &:where([data-variant="floating"], .leli-navbar-floating) {
+      border: 1px solid var(--leli-border);
+      border-radius: var(--leli-radius-xl);
+      box-shadow: var(--leli-shadow-md);
+      background-color: var(--leli-surface-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    /* Variant: Brutal */
+    &:where([data-variant="brutal"], .leli-navbar-brutal) {
+      border: 2px solid var(--leli-border-strong);
+      box-shadow: var(--leli-shadow-brutal);
+    }
+
+    /* Variant: Inverted / Contrast Dark */
+    &:where([data-variant="contrast"], .leli-navbar-contrast) {
+      background-color: #09090b;
+      color: #fafafa;
+      border-block-end-color: #27272a;
+
+      & .leli-navbar-brand,
+      & .leli-nav-link.is-active {
+        color: #fafafa;
+      }
+
+      & .leli-nav-link {
+        color: #a1a1aa;
+        &:hover {
+          color: #fafafa;
+          background-color: #18181b;
+        }
+      }
+    }
+  }
+
+  /* Brand / Logo Area */
+  .leli-navbar-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--leli-text);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  /* Navigation Links Group */
+  .leli-navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .leli-nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.8rem;
+    border-radius: var(--leli-radius-sm);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--leli-text-muted);
+    text-decoration: none;
+    transition: color var(--leli-duration) var(--leli-ease),
+                background-color var(--leli-duration) var(--leli-ease);
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+
+    &:hover {
+      color: var(--leli-text);
+      background-color: var(--leli-surface-2);
+    }
+
+    &.is-active,
+    &[aria-current="page"] {
+      color: var(--leli-text);
+      font-weight: 600;
+      background-color: var(--leli-surface-2);
+    }
+  }
+
+  /* Right Actions Area (Search, Buttons, Profile) */
+  .leli-navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  /* Search Input inside Navbar */
+  .leli-navbar-search {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.38rem 0.75rem;
+    border-radius: var(--leli-radius-md);
+    border: 1px solid var(--leli-border);
+    background-color: var(--leli-surface-2);
+    color: var(--leli-text-muted);
+    font-size: 0.8125rem;
+    min-inline-size: 200px;
+
+    & input {
+      border: none;
+      background: transparent;
+      color: var(--leli-text);
+      font-family: inherit;
+      font-size: 0.8125rem;
+      inline-size: 100%;
+      outline: none;
+
+      &::placeholder {
+        color: var(--leli-text-muted);
+      }
+    }
+
+    & kbd {
+      font-family: var(--leli-font-mono);
+      font-size: 0.7rem;
+      padding: 0.1rem 0.35rem;
+      border-radius: var(--leli-radius-xs);
+      background-color: var(--leli-surface);
+      border: 1px solid var(--leli-border);
+      color: var(--leli-text-muted);
+    }
+  }
+}
+
+
+/* --- Component: button --- */
+/* ==========================================================================
+   leliUI - Button Component (Multi-Variant & Multi-Size)
+   Variants: solid, outlined, soft, ghost, glass, gradient, brutal, link
+   Sizes: sm, md, lg, xl, icon
+   ========================================================================== */
+
+@layer components {
+  .leli-btn {
+    --leli-btn-bg: var(--leli-surface-2);
+    --leli-btn-color: var(--leli-text);
+    --leli-btn-border: var(--leli-border);
+    --leli-btn-px: 1rem;
+    --leli-btn-py: 0.5rem;
+    --leli-btn-font: 0.875rem;
+    --leli-btn-radius: var(--leli-radius-md);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-block: var(--leli-btn-py);
+    padding-inline: var(--leli-btn-px);
+    font-family: inherit;
+    font-size: var(--leli-btn-font);
+    font-weight: 600;
+    line-height: 1.25;
+    border-radius: var(--leli-btn-radius);
+    border: 1px solid var(--leli-btn-border);
+    background-color: var(--leli-btn-bg);
+    color: var(--leli-btn-color);
+    cursor: pointer;
+    text-decoration: none;
+    user-select: none;
+    white-space: nowrap;
+    transition: all var(--leli-duration) var(--leli-ease);
+
+    &:hover:not(:disabled) {
+      border-color: var(--leli-primary);
+      color: var(--leli-primary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--leli-primary);
+      outline-offset: 2px;
+    }
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* Loading State */
+    &.is-loading {
+      position: relative;
+      color: transparent !important;
+      pointer-events: none;
+
+      &::after {
+        content: "";
+        position: absolute;
+        inline-size: 1rem;
+        block-size: 1rem;
+        border: 2px solid currentColor;
+        border-inline-end-color: transparent;
+        border-radius: 50%;
+        color: var(--leli-btn-color);
+        animation: leliBtnSpin 600ms linear infinite;
+      }
+    }
+
+    /* Size Modifiers */
+    &:where([data-size="sm"], .leli-btn-sm) {
+      --leli-btn-py: 0.35rem;
+      --leli-btn-px: 0.75rem;
+      --leli-btn-font: 0.78rem;
+    }
+    &:where([data-size="lg"], .leli-btn-lg) {
+      --leli-btn-py: 0.65rem;
+      --leli-btn-px: 1.25rem;
+      --leli-btn-font: 1rem;
+    }
+    &:where([data-size="xl"], .leli-btn-xl) {
+      --leli-btn-py: 0.85rem;
+      --leli-btn-px: 1.65rem;
+      --leli-btn-font: 1.125rem;
+    }
+    &:where([data-size="icon"], .leli-btn-icon) {
+      padding: 0.5rem;
+      inline-size: 2.25rem;
+      block-size: 2.25rem;
+    }
+
+    /* Variant: Solid (Primary Brand / Filled) */
+    &:where([data-variant="solid"], .leli-btn-primary) {
+      --leli-btn-bg: var(--leli-primary);
+      --leli-btn-border: var(--leli-primary);
+      --leli-btn-color: #ffffff;
+      box-shadow: 0 2px 10px -2px rgba(244, 114, 182, 0.4);
+
+      &:hover:not(:disabled) {
+        background-color: var(--leli-primary-hover);
+        border-color: var(--leli-primary-hover);
+        color: #ffffff;
+        box-shadow: 0 4px 14px -2px rgba(244, 114, 182, 0.55);
+      }
+    }
+
+    /* Variant: Outlined */
+    &:where([data-variant="outlined"], .leli-btn-outlined) {
+      --leli-btn-bg: transparent;
+      --leli-btn-border: var(--leli-border);
+      --leli-btn-color: var(--leli-text);
+
+      &:hover:not(:disabled) {
+        border-color: var(--leli-primary);
+        color: var(--leli-primary);
+        background-color: var(--leli-primary-soft);
+      }
+    }
+
+    /* Variant: Soft / Subtle */
+    &:where([data-variant="soft"], .leli-btn-soft) {
+      --leli-btn-bg: var(--leli-primary-soft);
+      --leli-btn-border: transparent;
+      --leli-btn-color: var(--leli-primary);
+
+      &:hover:not(:disabled) {
+        background-color: color-mix(in srgb, var(--leli-primary-soft) 80%, var(--leli-primary));
+        color: #ffffff;
+      }
+    }
+
+    /* Variant: Ghost (No border, transparent) */
+    &:where([data-variant="ghost"], .leli-btn-ghost) {
+      --leli-btn-bg: transparent;
+      --leli-btn-border: transparent;
+      --leli-btn-color: var(--leli-text);
+
+      &:hover:not(:disabled) {
+        background-color: var(--leli-surface-2);
+        color: var(--leli-primary);
+      }
+    }
+
+    /* Variant: Glass */
+    &:where([data-variant="glass"], .leli-btn-glass) {
+      --leli-btn-bg: var(--leli-surface-glass);
+      --leli-btn-border: color-mix(in srgb, var(--leli-border) 80%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+
+      &:hover:not(:disabled) {
+        border-color: var(--leli-primary);
+      }
+    }
+
+    /* Variant: Gradient */
+    &:where([data-variant="gradient"], .leli-btn-gradient) {
+      background: linear-gradient(135deg, #f472b6, #db2777);
+      border-color: transparent;
+      color: #ffffff;
+      box-shadow: 0 4px 14px -3px rgba(244, 114, 182, 0.5);
+
+      &:hover:not(:disabled) {
+        filter: brightness(1.1);
+        color: #ffffff;
+      }
+    }
+
+    /* Variant: Brutal */
+    &:where([data-variant="brutal"], .leli-btn-brutal) {
+      border: 2px solid var(--leli-border-strong);
+      border-radius: var(--leli-radius-xs);
+      box-shadow: 3px 3px 0px var(--leli-border-strong);
+
+      &:hover:not(:disabled) {
+        transform: translate(-1px, -1px);
+        box-shadow: 4px 4px 0px var(--leli-primary);
+        border-color: var(--leli-primary);
+      }
+    }
+  }
+
+  @keyframes leliBtnSpin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Button Group (.leli-btn-group) */
+  .leli-btn-group {
+    display: inline-flex;
+    align-items: center;
+
+    & > .leli-btn {
+      border-radius: 0;
+      margin-inline-start: -1px;
+
+      &:first-child {
+        border-start-start-radius: var(--leli-radius-md);
+        border-end-start-radius: var(--leli-radius-md);
+        margin-inline-start: 0;
+      }
+
+      &:last-child {
+        border-start-end-radius: var(--leli-radius-md);
+        border-end-end-radius: var(--leli-radius-md);
+      }
+
+      &:hover {
+        z-index: 2;
+      }
+    }
+  }
+}
+
+
+/* --- Component: input --- */
+/* ==========================================================================
+   leliUI - Form Inputs, Textareas, Selects & Floating Labels
+   Modern CSS: :user-valid, :user-invalid, :has(), @layer components
+   ========================================================================== */
+
+@layer components {
+  /* --- 1. Form Field Container --- */
+  .leli-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    margin-block-end: 1.25rem;
+    position: relative;
+    width: 100%;
+  }
+
+  .leli-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--leli-text);
+    user-select: none;
+
+    & .leli-required {
+      color: var(--leli-danger, #f43f5e);
+    }
+  }
+
+  .leli-hint {
+    font-size: 0.775rem;
+    color: var(--leli-text-muted);
+    line-height: 1.4;
+  }
+
+  .leli-error-msg {
+    display: none;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.775rem;
+    font-weight: 500;
+    color: var(--leli-danger, #f43f5e);
+    margin-block-start: 0.15rem;
+    animation: leliFadeIn 150ms ease-out;
+  }
+
+  .leli-success-msg {
+    display: none;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.775rem;
+    font-weight: 500;
+    color: var(--leli-success, #10b981);
+    margin-block-start: 0.15rem;
+    animation: leliFadeIn 150ms ease-out;
+  }
+
+  /* --- 2. Base Input & Textarea --- */
+  .leli-input,
+  .leli-textarea,
+  .leli-select {
+    --leli-input-bg: var(--leli-surface-1);
+    --leli-input-border: var(--leli-border);
+    --leli-input-color: var(--leli-text);
+    --leli-input-placeholder: var(--leli-text-dim);
+    --leli-input-radius: var(--leli-radius-md);
+    --leli-input-py: 0.6rem;
+    --leli-input-px: 0.875rem;
+    --leli-input-font: 0.9rem;
+
+    width: 100%;
+    padding-block: var(--leli-input-py);
+    padding-inline: var(--leli-input-px);
+    font-family: inherit;
+    font-size: var(--leli-input-font);
+    line-height: 1.5;
+    color: var(--leli-input-color);
+    background-color: var(--leli-input-bg);
+    border: 1px solid var(--leli-input-border);
+    border-radius: var(--leli-input-radius);
+    outline: none;
+    transition: border-color var(--leli-duration) var(--leli-ease),
+                box-shadow var(--leli-duration) var(--leli-ease),
+                background-color var(--leli-duration) var(--leli-ease);
+
+    &::placeholder {
+      color: var(--leli-input-placeholder);
+      opacity: 0.7;
+    }
+
+    &:hover:not(:disabled):not(:read-only) {
+      border-color: color-mix(in srgb, var(--leli-primary) 50%, var(--leli-border));
+    }
+
+    &:focus-visible {
+      border-color: var(--leli-primary);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--leli-primary) 25%, transparent);
+    }
+
+    &:disabled {
+      opacity: 0.55;
+      background-color: var(--leli-surface-2);
+      cursor: not-allowed;
+    }
+
+    &:read-only:not(:disabled) {
+      background-color: var(--leli-surface-2);
+      border-color: var(--leli-border);
+      cursor: default;
+    }
+  }
+
+  .leli-textarea {
+    min-block-size: 5rem;
+    resize: vertical;
+  }
+
+  /* --- 3. Select Dropdown --- */
+  .leli-select {
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%23f472b6' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+    background-position: right 0.75rem center;
+    background-repeat: no-repeat;
+    background-size: 1.25rem 1.25rem;
+    padding-inline-end: 2.25rem;
+
+    & option {
+      background-color: var(--leli-surface-1);
+      color: var(--leli-text);
+      padding: 0.5rem;
+    }
+  }
+
+  /* --- 4. Sizes --- */
+  .leli-input[data-size="sm"],
+  .leli-select[data-size="sm"],
+  .leli-input-sm {
+    --leli-input-py: 0.35rem;
+    --leli-input-px: 0.65rem;
+    --leli-input-font: 0.8rem;
+    --leli-input-radius: var(--leli-radius-sm);
+  }
+
+  .leli-input[data-size="lg"],
+  .leli-select[data-size="lg"],
+  .leli-input-lg {
+    --leli-input-py: 0.85rem;
+    --leli-input-px: 1.15rem;
+    --leli-input-font: 1.05rem;
+    --leli-input-radius: var(--leli-radius-lg);
+  }
+
+  /* --- 5. Variants (Glass, Outlined, Soft, Brutal) --- */
+  .leli-input[data-variant="glass"],
+  .leli-textarea[data-variant="glass"],
+  .leli-select[data-variant="glass"] {
+    background-color: var(--leli-surface-glass);
+    backdrop-filter: blur(12px);
+    border-color: color-mix(in srgb, var(--leli-border) 80%, transparent);
+  }
+
+  .leli-input[data-variant="soft"],
+  .leli-textarea[data-variant="soft"] {
+    background-color: var(--leli-surface-2);
+    border-color: transparent;
+
+    &:focus-visible {
+      background-color: var(--leli-surface-1);
+      border-color: var(--leli-primary);
+    }
+  }
+
+  .leli-input[data-variant="brutal"],
+  .leli-textarea[data-variant="brutal"],
+  .leli-select[data-variant="brutal"] {
+    border: 2px solid var(--leli-border-strong);
+    border-radius: var(--leli-radius-xs);
+    box-shadow: 2px 2px 0 var(--leli-border-strong);
+
+    &:focus-visible {
+      box-shadow: 4px 4px 0 var(--leli-primary);
+      transform: translate(-1px, -1px);
+    }
+  }
+
+  /* --- 6. Input Groups & Addons --- */
+  .leli-input-group {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    position: relative;
+
+    & > .leli-input,
+    & > .leli-select {
+      flex: 1 1 auto;
+      min-width: 0;
+
+      &:not(:first-child) {
+        border-start-start-radius: 0;
+        border-end-start-radius: 0;
+        margin-inline-start: -1px;
+      }
+      &:not(:last-child) {
+        border-start-end-radius: 0;
+        border-end-end-radius: 0;
+      }
+      &:focus-visible {
+        z-index: 2;
+      }
+    }
+
+    & .leli-addon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding-inline: 0.85rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--leli-text-muted);
+      background-color: var(--leli-surface-2);
+      border: 1px solid var(--leli-input-border, var(--leli-border));
+      white-space: nowrap;
+
+      &:first-child {
+        border-start-start-radius: var(--leli-input-radius, var(--leli-radius-md));
+        border-end-start-radius: var(--leli-input-radius, var(--leli-radius-md));
+      }
+      &:last-child {
+        border-start-end-radius: var(--leli-input-radius, var(--leli-radius-md));
+        border-end-end-radius: var(--leli-input-radius, var(--leli-radius-md));
+        margin-inline-start: -1px;
+      }
+    }
+
+    & > .leli-btn {
+      &:first-child {
+        border-start-end-radius: 0;
+        border-end-end-radius: 0;
+      }
+      &:last-child {
+        border-start-start-radius: 0;
+        border-end-start-radius: 0;
+        margin-inline-start: -1px;
+      }
+      z-index: 1;
+      &:focus-visible {
+        z-index: 2;
+      }
+    }
+  }
+
+  /* Icon input with prefix/suffix position absolute */
+  .leli-input-wrap {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    & .leli-input-icon {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      inline-size: 2.25rem;
+      block-size: 100%;
+      color: var(--leli-text-muted);
+      pointer-events: none;
+      z-index: 1;
+
+      & svg {
+        inline-size: 1.15rem;
+        block-size: 1.15rem;
+      }
+    }
+
+    &.has-prefix .leli-input {
+      padding-inline-start: 2.5rem;
+    }
+    &.has-suffix .leli-input {
+      padding-inline-end: 2.5rem;
+    }
+    & .leli-prefix {
+      left: 0;
+    }
+    & .leli-suffix {
+      right: 0;
+    }
+  }
+
+  /* --- 7. Modern Validation States (:user-valid / :user-invalid) --- */
+  .leli-input:user-invalid,
+  .leli-textarea:user-invalid,
+  .leli-select:user-invalid,
+  .leli-input.is-invalid {
+    border-color: var(--leli-danger, #f43f5e) !important;
+    background-color: color-mix(in srgb, var(--leli-danger, #f43f5e) 6%, var(--leli-surface-1));
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--leli-danger, #f43f5e) 15%, transparent);
+  }
+
+  .leli-input:user-valid,
+  .leli-textarea:user-valid,
+  .leli-select:user-valid,
+  .leli-input.is-valid {
+    border-color: var(--leli-success, #10b981) !important;
+    background-color: color-mix(in srgb, var(--leli-success, #10b981) 4%, var(--leli-surface-1));
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--leli-success, #10b981) 12%, transparent);
+  }
+
+  /* Reveal error and success messages via adjacent selector or :has() */
+  .leli-input:user-invalid ~ .leli-error-msg,
+  .leli-input.is-invalid ~ .leli-error-msg,
+  .leli-field:has(.leli-input:user-invalid) .leli-error-msg,
+  .leli-field:has(.leli-input.is-invalid) .leli-error-msg {
+    display: flex;
+  }
+
+  .leli-input:user-valid ~ .leli-success-msg,
+  .leli-input.is-valid ~ .leli-success-msg,
+  .leli-field:has(.leli-input:user-valid) .leli-success-msg,
+  .leli-field:has(.leli-input.is-valid) .leli-success-msg {
+    display: flex;
+  }
+
+  /* --- 8. Floating Label Pattern --- */
+  .leli-field-floating {
+    position: relative;
+    margin-block-end: 1.25rem;
+
+    & .leli-input {
+      padding-block-start: 1.25rem;
+      padding-block-end: 0.35rem;
+      block-size: 3.25rem;
+
+      &::placeholder {
+        color: transparent;
+      }
+    }
+
+    & .leli-label {
+      position: absolute;
+      top: 0.85rem;
+      left: 0.875rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--leli-text-muted);
+      pointer-events: none;
+      transform-origin: 0 0;
+      transition: transform 180ms cubic-bezier(0.4, 0, 0.2, 1),
+                  color 180ms cubic-bezier(0.4, 0, 0.2, 1),
+                  top 180ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    & .leli-input:focus ~ .leli-label,
+    & .leli-input:not(:placeholder-shown) ~ .leli-label {
+      top: 0.35rem;
+      transform: scale(0.75);
+      color: var(--leli-primary);
+      font-weight: 600;
+    }
+  }
+}
+
+
+/* --- Component: form-controls --- */
+/* ==========================================================================
+   leliUI - Form Controls (Switch, Checkbox, Radio)
+   Accessible, Zero-JS native enhancements with Sakura Pink theme
+   ========================================================================== */
+
+@layer components {
+  /* --- 1. Toggle Switch --- */
+  .leli-switch {
+    --leli-switch-w: 2.75rem;
+    --leli-switch-h: 1.5rem;
+    --leli-switch-thumb: 1.15rem;
+    --leli-switch-bg: var(--leli-surface-3);
+    --leli-switch-active-bg: var(--leli-primary);
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    user-select: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--leli-text);
+
+    & input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      position: relative;
+      inline-size: var(--leli-switch-w);
+      block-size: var(--leli-switch-h);
+      background-color: var(--leli-switch-bg);
+      border-radius: 9999px;
+      border: 1px solid var(--leli-border);
+      cursor: pointer;
+      outline: none;
+      margin: 0;
+      transition: background-color var(--leli-duration) var(--leli-ease),
+                  border-color var(--leli-duration) var(--leli-ease),
+                  box-shadow var(--leli-duration) var(--leli-ease);
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 2px;
+        transform: translateY(-50%);
+        inline-size: var(--leli-switch-thumb);
+        block-size: var(--leli-switch-thumb);
+        border-radius: 50%;
+        background-color: #ffffff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        transition: transform var(--leli-duration) cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      &:checked {
+        background-color: var(--leli-switch-active-bg);
+        border-color: var(--leli-switch-active-bg);
+        box-shadow: 0 0 12px color-mix(in srgb, var(--leli-primary) 40%, transparent);
+
+        &::after {
+          transform: translateY(-50%) translateX(calc(var(--leli-switch-w) - var(--leli-switch-thumb) - 6px));
+        }
+      }
+
+      &:focus-visible {
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--leli-primary) 30%, transparent);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    &:has(input:disabled) {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+  }
+
+  /* Switch Sizes */
+  .leli-switch[data-size="sm"],
+  .leli-switch-sm {
+    --leli-switch-w: 2.1rem;
+    --leli-switch-h: 1.2rem;
+    --leli-switch-thumb: 0.9rem;
+    font-size: 0.8rem;
+  }
+
+  .leli-switch[data-size="lg"],
+  .leli-switch-lg {
+    --leli-switch-w: 3.5rem;
+    --leli-switch-h: 1.9rem;
+    --leli-switch-thumb: 1.5rem;
+    font-size: 1rem;
+  }
+
+  /* Switch Brutal Variant */
+  .leli-switch[data-variant="brutal"] input[type="checkbox"] {
+    border-radius: 4px;
+    border: 2px solid var(--leli-border-strong);
+    box-shadow: 2px 2px 0 var(--leli-border-strong);
+
+    &::after {
+      border-radius: 2px;
+      border: 1px solid var(--leli-border-strong);
+    }
+    &:checked {
+      box-shadow: 3px 3px 0 var(--leli-primary);
+    }
+  }
+
+  /* --- 2. Custom Checkbox --- */
+  .leli-checkbox {
+    --leli-checkbox-size: 1.25rem;
+    --leli-checkbox-bg: var(--leli-surface-1);
+    --leli-checkbox-border: var(--leli-border);
+    --leli-checkbox-active-bg: var(--leli-primary);
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    cursor: pointer;
+    user-select: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--leli-text);
+
+    & input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      position: relative;
+      inline-size: var(--leli-checkbox-size);
+      block-size: var(--leli-checkbox-size);
+      background-color: var(--leli-checkbox-bg);
+      border: 1.5px solid var(--leli-checkbox-border);
+      border-radius: var(--leli-radius-sm);
+      cursor: pointer;
+      outline: none;
+      margin: 0;
+      flex-shrink: 0;
+      display: grid;
+      place-content: center;
+      transition: all var(--leli-duration) var(--leli-ease);
+
+      &::after {
+        content: "";
+        inline-size: 0.45rem;
+        block-size: 0.75rem;
+        border: solid #ffffff;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg) scale(0);
+        margin-top: -2px;
+        transition: transform 140ms cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      &:checked {
+        background-color: var(--leli-checkbox-active-bg);
+        border-color: var(--leli-checkbox-active-bg);
+        box-shadow: 0 2px 8px color-mix(in srgb, var(--leli-primary) 35%, transparent);
+
+        &::after {
+          transform: rotate(45deg) scale(1);
+        }
+      }
+
+      &:indeterminate {
+        background-color: var(--leli-checkbox-active-bg);
+        border-color: var(--leli-checkbox-active-bg);
+
+        &::after {
+          inline-size: 0.65rem;
+          block-size: 0.15rem;
+          background-color: #ffffff;
+          border: none;
+          transform: scale(1);
+          margin-top: 0;
+        }
+      }
+
+      &:focus-visible {
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--leli-primary) 30%, transparent);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    &:has(input:disabled) {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+  }
+
+  /* --- 3. Custom Radio Button --- */
+  .leli-radio {
+    --leli-radio-size: 1.25rem;
+    --leli-radio-bg: var(--leli-surface-1);
+    --leli-radio-border: var(--leli-border);
+    --leli-radio-active-bg: var(--leli-primary);
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    cursor: pointer;
+    user-select: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--leli-text);
+
+    & input[type="radio"] {
+      appearance: none;
+      -webkit-appearance: none;
+      position: relative;
+      inline-size: var(--leli-radio-size);
+      block-size: var(--leli-radio-size);
+      background-color: var(--leli-radio-bg);
+      border: 1.5px solid var(--leli-radio-border);
+      border-radius: 50%;
+      cursor: pointer;
+      outline: none;
+      margin: 0;
+      flex-shrink: 0;
+      display: grid;
+      place-content: center;
+      transition: all var(--leli-duration) var(--leli-ease);
+
+      &::after {
+        content: "";
+        inline-size: 0.55rem;
+        block-size: 0.55rem;
+        border-radius: 50%;
+        background-color: #ffffff;
+        transform: scale(0);
+        transition: transform 140ms cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      &:checked {
+        background-color: var(--leli-radio-active-bg);
+        border-color: var(--leli-radio-active-bg);
+        box-shadow: 0 2px 8px color-mix(in srgb, var(--leli-primary) 35%, transparent);
+
+        &::after {
+          transform: scale(1);
+        }
+      }
+
+      &:focus-visible {
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--leli-primary) 30%, transparent);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    &:has(input:disabled) {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+  }
+
+  /* --- 4. Selection Card Option (Checkbox/Radio as Interactive Card) --- */
+  .leli-choice-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: 1rem 1.15rem;
+    background-color: var(--leli-surface-1);
+    border: 1px solid var(--leli-border);
+    border-radius: var(--leli-radius-md);
+    cursor: pointer;
+    transition: all var(--leli-duration) var(--leli-ease);
+
+    &:hover {
+      border-color: color-mix(in srgb, var(--leli-primary) 40%, var(--leli-border));
+      background-color: var(--leli-surface-2);
+    }
+
+    &:has(input:checked) {
+      border-color: var(--leli-primary);
+      background-color: color-mix(in srgb, var(--leli-primary) 8%, var(--leli-surface-1));
+      box-shadow: 0 0 0 1px var(--leli-primary);
+    }
+
+    & .leli-choice-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--leli-text);
+      display: block;
+      margin-block-end: 0.2rem;
+    }
+
+    & .leli-choice-desc {
+      font-size: 0.825rem;
+      color: var(--leli-text-muted);
+      display: block;
+      line-height: 1.4;
+    }
+  }
+}
+
+
+/* --- Component: badge --- */
+/* ==========================================================================
+   leliUI - Badge, Tag & Status Indicator Component
+   Multi-variant: solid, soft, outlined, glass, brutal, status dot
+   ========================================================================== */
+
+@layer components {
+  /* --- 1. Base Badge --- */
+  .leli-badge {
+    --leli-badge-bg: var(--leli-surface-2);
+    --leli-badge-color: var(--leli-text);
+    --leli-badge-border: var(--leli-border);
+    --leli-badge-font: 0.75rem;
+    --leli-badge-py: 0.2rem;
+    --leli-badge-px: 0.55rem;
+    --leli-badge-radius: var(--leli-radius-sm);
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding-block: var(--leli-badge-py);
+    padding-inline: var(--leli-badge-px);
+    font-size: var(--leli-badge-font);
+    font-weight: 600;
+    line-height: 1.2;
+    border-radius: var(--leli-badge-radius);
+    background-color: var(--leli-badge-bg);
+    color: var(--leli-badge-color);
+    border: 1px solid var(--leli-badge-border);
+    white-space: nowrap;
+    user-select: none;
+    vertical-align: middle;
+
+    /* Pill Shape */
+    &.is-pill,
+    &[data-shape="pill"] {
+      border-radius: 9999px;
+      padding-inline: 0.75rem;
+    }
+
+    /* Size variants */
+    &[data-size="sm"],
+    &.leli-badge-sm {
+      --leli-badge-font: 0.68rem;
+      --leli-badge-py: 0.1rem;
+      --leli-badge-px: 0.4rem;
+    }
+    &[data-size="lg"],
+    &.leli-badge-lg {
+      --leli-badge-font: 0.85rem;
+      --leli-badge-py: 0.35rem;
+      --leli-badge-px: 0.75rem;
+    }
+
+    /* Variants */
+    /* Solid / Primary Brand */
+    &[data-variant="solid"],
+    &.leli-badge-primary {
+      --leli-badge-bg: var(--leli-primary);
+      --leli-badge-color: #ffffff;
+      --leli-badge-border: var(--leli-primary);
+    }
+
+    /* Soft / Pastel */
+    &[data-variant="soft"] {
+      --leli-badge-bg: var(--leli-primary-soft);
+      --leli-badge-color: var(--leli-primary);
+      --leli-badge-border: transparent;
+    }
+
+    /* Outlined */
+    &[data-variant="outlined"] {
+      --leli-badge-bg: transparent;
+      --leli-badge-color: var(--leli-primary);
+      --leli-badge-border: var(--leli-primary);
+    }
+
+    /* Glass */
+    &[data-variant="glass"] {
+      --leli-badge-bg: var(--leli-surface-glass);
+      --leli-badge-color: var(--leli-text);
+      --leli-badge-border: color-mix(in srgb, var(--leli-primary) 30%, var(--leli-border));
+      backdrop-filter: blur(8px);
+    }
+
+    /* Brutal */
+    &[data-variant="brutal"] {
+      --leli-badge-bg: var(--leli-surface-1);
+      --leli-badge-color: var(--leli-text);
+      --leli-badge-border: var(--leli-border-strong);
+      border-width: 1.5px;
+      border-radius: 2px;
+      box-shadow: 2px 2px 0 var(--leli-border-strong);
+    }
+
+    /* Semantic Accents */
+    &[data-accent="success"],
+    &.leli-badge-success {
+      --leli-badge-bg: color-mix(in srgb, var(--leli-success, #10b981) 15%, transparent);
+      --leli-badge-color: var(--leli-success, #10b981);
+      --leli-badge-border: color-mix(in srgb, var(--leli-success, #10b981) 40%, transparent);
+    }
+    &[data-accent="warning"],
+    &.leli-badge-warning {
+      --leli-badge-bg: color-mix(in srgb, var(--leli-warning, #f59e0b) 15%, transparent);
+      --leli-badge-color: var(--leli-warning, #f59e0b);
+      --leli-badge-border: color-mix(in srgb, var(--leli-warning, #f59e0b) 40%, transparent);
+    }
+    &[data-accent="danger"],
+    &.leli-badge-danger {
+      --leli-badge-bg: color-mix(in srgb, var(--leli-danger, #f43f5e) 15%, transparent);
+      --leli-badge-color: var(--leli-danger, #f43f5e);
+      --leli-badge-border: color-mix(in srgb, var(--leli-danger, #f43f5e) 40%, transparent);
+    }
+    &[data-accent="info"],
+    &.leli-badge-info {
+      --leli-badge-bg: color-mix(in srgb, var(--leli-info, #38bdf8) 15%, transparent);
+      --leli-badge-color: var(--leli-info, #38bdf8);
+      --leli-badge-border: color-mix(in srgb, var(--leli-info, #38bdf8) 40%, transparent);
+    }
+
+    /* Status Dot Inside Badge */
+    & .leli-dot {
+      display: inline-block;
+      inline-size: 0.45rem;
+      block-size: 0.45rem;
+      border-radius: 50%;
+      background-color: currentColor;
+      box-shadow: 0 0 6px currentColor;
+    }
+
+    /* Close / Remove button inside badge tag */
+    & .leli-badge-remove {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-inline-start: 0.2rem;
+      border: none;
+      background: transparent;
+      color: inherit;
+      opacity: 0.7;
+      cursor: pointer;
+      padding: 0;
+      font-size: 0.9em;
+      line-height: 1;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  /* Standalone Status Pulse Dot */
+  .leli-status-dot {
+    display: inline-block;
+    position: relative;
+    inline-size: 0.65rem;
+    block-size: 0.65rem;
+    border-radius: 50%;
+    background-color: var(--leli-primary);
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 50%;
+      border: 2px solid currentColor;
+      color: inherit;
+      animation: leliDotPulse 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+      opacity: 0.75;
+    }
+  }
+}
+
+@keyframes leliDotPulse {
+  0% { transform: scale(0.9); opacity: 0.9; }
+  70% { transform: scale(2.2); opacity: 0; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+
+/* --- Component: modal --- */
+/* ==========================================================================
+   leliUI - Modal & Dialog Component
+   Modern HTML5 <dialog> with @starting-style, transition-behavior: allow-discrete,
+   light dismiss (closedby="any"), and Sakura Pink accents
+   ========================================================================== */
+
+@layer components {
+  /* --- 1. Dialog Base --- */
+  dialog.leli-modal {
+    --leli-modal-max-w: 34rem;
+    --leli-modal-bg: var(--leli-surface-1);
+    --leli-modal-border: var(--leli-border);
+    --leli-modal-radius: var(--leli-radius-lg);
+    --leli-modal-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.5), 0 0 20px -5px rgba(244, 114, 182, 0.15);
+
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    padding: 0;
+    width: min(90vw, var(--leli-modal-max-w));
+    max-height: 85vh;
+    background-color: var(--leli-modal-bg);
+    border: 1px solid var(--leli-modal-border);
+    border-radius: var(--leli-modal-radius);
+    color: var(--leli-text);
+    box-shadow: var(--leli-modal-shadow);
+    overflow: hidden;
+    flex-direction: column;
+
+    /* Base closed state for discrete transition */
+    opacity: 0;
+    transform: scale(0.94) translateY(8px);
+    transition-property: opacity, transform, display, overlay;
+    transition-duration: 220ms;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    transition-behavior: allow-discrete;
+
+    &[open] {
+      display: flex;
+      opacity: 1;
+      transform: scale(1) translateY(0);
+
+      /* Modern entry animation */
+      @starting-style {
+        opacity: 0;
+        transform: scale(0.94) translateY(8px);
+      }
+    }
+
+    /* Backdrop Styling & Animation */
+    &::backdrop {
+      background-color: rgba(0, 0, 0, 0);
+      backdrop-filter: blur(0px);
+      transition-property: background-color, backdrop-filter, display, overlay;
+      transition-duration: 220ms;
+      transition-timing-function: ease-out;
+      transition-behavior: allow-discrete;
+    }
+
+    &[open]::backdrop {
+      background-color: rgba(12, 10, 14, 0.75);
+      backdrop-filter: blur(8px);
+
+      @starting-style {
+        background-color: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(0px);
+      }
+    }
+  }
+
+  /* Closing state fallback for browsers without allow-discrete on display */
+  dialog.leli-modal[data-closing] {
+    opacity: 0 !important;
+    transform: scale(0.94) translateY(8px) !important;
+  }
+  dialog.leli-modal[data-closing]::backdrop {
+    background-color: rgba(0, 0, 0, 0) !important;
+    backdrop-filter: blur(0px) !important;
+  }
+
+  /* --- 2. Modal Structure --- */
+  .leli-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.15rem 1.5rem;
+    border-bottom: 1px solid var(--leli-border);
+    background-color: var(--leli-surface-2);
+
+    & .leli-modal-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--leli-text);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    & .leli-modal-close {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      inline-size: 2rem;
+      block-size: 2rem;
+      border-radius: var(--leli-radius-sm);
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--leli-text-muted);
+      cursor: pointer;
+      font-size: 1.25rem;
+      line-height: 1;
+      padding: 0;
+      transition: all var(--leli-duration) var(--leli-ease);
+
+      &:hover {
+        background-color: var(--leli-surface-3);
+        color: var(--leli-primary);
+        border-color: var(--leli-border);
+      }
+    }
+  }
+
+  .leli-modal-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+    font-size: 0.925rem;
+    line-height: 1.6;
+    color: var(--leli-text-muted);
+
+    & > *:first-child { margin-top: 0; }
+    & > *:last-child { margin-bottom: 0; }
+  }
+
+  .leli-modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--leli-border);
+    background-color: var(--leli-surface-1);
+  }
+
+  /* --- 3. Modal Sizes --- */
+  dialog.leli-modal[data-size="sm"],
+  dialog.leli-modal.leli-modal-sm {
+    --leli-modal-max-w: 24rem;
+  }
+  dialog.leli-modal[data-size="lg"],
+  dialog.leli-modal.leli-modal-lg {
+    --leli-modal-max-w: 48rem;
+  }
+  dialog.leli-modal[data-size="xl"],
+  dialog.leli-modal.leli-modal-xl {
+    --leli-modal-max-w: 64rem;
+  }
+  dialog.leli-modal[data-size="full"],
+  dialog.leli-modal.leli-modal-full {
+    --leli-modal-max-w: 100vw;
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  /* --- 4. Variants --- */
+  /* Glass Modal */
+  dialog.leli-modal[data-variant="glass"] {
+    background-color: var(--leli-surface-glass);
+    backdrop-filter: blur(20px);
+    border-color: color-mix(in srgb, var(--leli-primary) 30%, var(--leli-border));
+
+    & .leli-modal-header {
+      background-color: transparent;
+    }
+    & .leli-modal-footer {
+      background-color: transparent;
+    }
+  }
+
+  /* Brutal Modal */
+  dialog.leli-modal[data-variant="brutal"] {
+    border: 3px solid var(--leli-border-strong);
+    border-radius: 4px;
+    box-shadow: 6px 6px 0 var(--leli-border-strong);
+
+    & .leli-modal-header {
+      border-bottom: 2px solid var(--leli-border-strong);
+    }
+    & .leli-modal-footer {
+      border-top: 2px solid var(--leli-border-strong);
+    }
+  }
+
+  /* Accent Top Border Modal */
+  dialog.leli-modal[data-variant="accent"] {
+    border-top: 4px solid var(--leli-primary);
+  }
+
+  /* Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    dialog.leli-modal,
+    dialog.leli-modal::backdrop {
+      transform: none !important;
+      transition-duration: 0.05s !important;
+    }
+  }
+}
+
+
+/* --- Component: toast --- */
+/* ==========================================================================
+   leliUI - Toast Notification Component
+   Fixed notification toasts with auto-dismiss progress bar and Sakura Pink styling
+   ========================================================================== */
+
+@layer components {
+  /* --- 1. Toast Container --- */
+  .leli-toast-container {
+    position: fixed;
+    z-index: 100000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    pointer-events: none;
+    width: min(26rem, calc(100vw - 2rem));
+    max-width: 100%;
+
+    /* Top positions clear the sticky navbar (height ~3.5rem + margins) */
+    &.position-top-right {
+      top: 4.75rem;
+      right: 1rem;
+    }
+    &.position-top-left {
+      top: 4.75rem;
+      left: 1rem;
+    }
+    &.position-top-center {
+      top: 4.75rem;
+      left: 50%;
+      transform: translateX(-50%);
+      align-items: center;
+    }
+
+    /* Bottom positions */
+    &.position-bottom-right {
+      bottom: 1rem;
+      right: 1rem;
+    }
+    &.position-bottom-left {
+      bottom: 1rem;
+      left: 1rem;
+    }
+    &.position-bottom-center {
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      align-items: center;
+    }
+  }
+
+  /* --- 2. Toast Item --- */
+  .leli-toast {
+    box-sizing: border-box;
+    --leli-toast-bg: var(--leli-surface-1, #16121c);
+    --leli-toast-border: var(--leli-border);
+    --leli-toast-color: var(--leli-text);
+    --leli-toast-accent: var(--leli-primary);
+
+    pointer-events: auto;
+    width: 100%;
+    background-color: var(--leli-toast-bg);
+    border: 1px solid var(--leli-toast-border);
+    border-radius: var(--leli-radius-md);
+    box-shadow: 0 16px 40px -6px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    padding: 0.95rem 1.15rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    position: relative;
+    overflow: hidden;
+    color: var(--leli-toast-color);
+    transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+    animation: leliToastIn 260ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+    &.is-leaving {
+      opacity: 0;
+      transform: translateY(-8px) scale(0.96);
+      pointer-events: none;
+    }
+
+    & .leli-toast-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      inline-size: 1.5rem;
+      block-size: 1.5rem;
+      color: var(--leli-toast-accent);
+      margin-top: 0.15rem;
+
+      & svg {
+        inline-size: 1.35rem;
+        block-size: 1.35rem;
+      }
+    }
+
+    & .leli-toast-content {
+      flex: 1 1 auto;
+      min-width: 0;
+
+      & .leli-toast-title {
+        font-size: 0.925rem;
+        font-weight: 700;
+        color: var(--leli-text);
+        margin: 0 0 0.25rem 0;
+        line-height: 1.3;
+        letter-spacing: -0.01em;
+      }
+
+      & .leli-toast-message {
+        font-size: 0.84rem;
+        color: var(--leli-text-muted);
+        margin: 0;
+        line-height: 1.45;
+      }
+    }
+
+    & .leli-toast-close {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      inline-size: 1.65rem;
+      block-size: 1.65rem;
+      border: none;
+      background: transparent;
+      color: var(--leli-text-muted);
+      cursor: pointer;
+      border-radius: var(--leli-radius-xs);
+      padding: 0;
+      font-size: 1.25rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: -0.1rem;
+      margin-inline-end: -0.25rem;
+      transition: all var(--leli-duration) var(--leli-ease);
+
+      &:hover {
+        background-color: var(--leli-surface-3);
+        color: var(--leli-text);
+      }
+    }
+
+    /* Auto-dismiss countdown bar */
+    & .leli-toast-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      width: 100%;
+      background-color: var(--leli-toast-accent);
+      transform-origin: left;
+      animation: leliToastProgress linear forwards;
+    }
+  }
+
+  /* --- 3. Toast Variants --- */
+  .leli-toast[data-variant="primary"],
+  .leli-toast-primary {
+    --leli-toast-accent: var(--leli-primary);
+    border-inline-start: 4px solid var(--leli-primary);
+  }
+
+  .leli-toast[data-variant="success"],
+  .leli-toast-success {
+    --leli-toast-accent: var(--leli-success, #10b981);
+    border-inline-start: 4px solid var(--leli-success, #10b981);
+  }
+
+  .leli-toast[data-variant="warning"],
+  .leli-toast-warning {
+    --leli-toast-accent: var(--leli-warning, #f59e0b);
+    border-inline-start: 4px solid var(--leli-warning, #f59e0b);
+  }
+
+  .leli-toast[data-variant="danger"],
+  .leli-toast-danger {
+    --leli-toast-accent: var(--leli-danger, #f43f5e);
+    border-inline-start: 4px solid var(--leli-danger, #f43f5e);
+  }
+
+  .leli-toast[data-variant="glass"] {
+    background-color: color-mix(in srgb, var(--leli-surface-1, #16121c) 88%, transparent);
+    backdrop-filter: blur(20px);
+    border-color: color-mix(in srgb, var(--leli-primary) 30%, var(--leli-border));
+  }
+
+  .leli-toast[data-variant="brutal"] {
+    border: 3px solid var(--leli-border-strong);
+    border-radius: 4px;
+    box-shadow: 5px 5px 0 var(--leli-border-strong);
+  }
+}
+
+@keyframes leliToastIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes leliToastProgress {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}
+
+
+/* --- Component: card --- */
+/* ==========================================================================
+   leliUI - Card Component (Multi-Variant)
+   Variants: elevated, outlined, glass, gradient, brutal, interactive, horizontal
+   Sizes: sm, md, lg
+   ========================================================================== */
+
+@layer components {
+  .leli-card {
+    --leli-accent: var(--leli-primary);
+    --leli-accent-soft: var(--leli-primary-soft);
+    --card-padding: 1.5rem;
+    --card-radius: var(--leli-radius-lg);
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--leli-surface);
+    color: var(--leli-text);
+    border-radius: var(--card-radius);
+    border: 1px solid var(--leli-border);
+    box-shadow: var(--leli-shadow-sm);
+    overflow: hidden;
+    transition: transform var(--leli-duration) var(--leli-ease),
+                box-shadow var(--leli-duration) var(--leli-ease),
+                border-color var(--leli-duration) var(--leli-ease);
+
+    /* Size Modifiers */
+    &:where([data-size="sm"], .leli-card-sm) {
+      --card-padding: 1rem;
+      --card-radius: var(--leli-radius-md);
+    }
+
+    &:where([data-size="lg"], .leli-card-lg) {
+      --card-padding: 2rem;
+      --card-radius: var(--leli-radius-xl);
+    }
+
+    /* Variant: Elevated (Default enhanced shadow) */
+    &:where([data-variant="elevated"], .leli-card-elevated) {
+      border-color: transparent;
+      box-shadow: var(--leli-shadow-md);
+    }
+
+    /* Variant: Outlined (Minimal crisp border, no shadow) */
+    &:where([data-variant="outlined"], .leli-card-outlined) {
+      box-shadow: none;
+      border-width: 1.5px;
+    }
+
+    /* Variant: Soft / Subtle */
+    &:where([data-variant="soft"], .leli-card-soft) {
+      background-color: var(--leli-surface-2);
+      border-color: transparent;
+      box-shadow: none;
+    }
+
+    /* Variant: Glassmorphism */
+    &:where([data-variant="glass"], .leli-card-glass) {
+      background-color: var(--leli-surface-glass);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid color-mix(in srgb, var(--leli-text) 12%, transparent);
+      box-shadow: var(--leli-shadow-md);
+    }
+
+    /* Variant: Gradient Border / Glow */
+    &:where([data-variant="gradient"], .leli-card-gradient) {
+      background:
+        linear-gradient(var(--leli-surface), var(--leli-surface)) padding-box,
+        linear-gradient(135deg, var(--leli-accent), var(--leli-secondary), var(--leli-info)) border-box;
+      border: 2px solid transparent;
+      box-shadow: 0 8px 24px -6px var(--leli-accent-soft);
+    }
+
+    /* Variant: Neo-Brutalist */
+    &:where([data-variant="brutal"], .leli-card-brutal) {
+      border: 2.5px solid var(--leli-border-strong);
+      border-radius: var(--leli-radius-sm);
+      box-shadow: var(--leli-shadow-brutal);
+
+      &:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0px var(--leli-border-strong);
+      }
+    }
+
+    /* Variant: Accent Top Bar */
+    &:where([data-variant="accent-top"], .leli-card-accent-top) {
+      border-block-start: 4px solid var(--leli-accent);
+    }
+
+    /* Interactive Modifier */
+    &:where([data-interactive="true"], .leli-card-interactive) {
+      cursor: pointer;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--leli-shadow-lg);
+        border-color: color-mix(in srgb, var(--leli-accent) 50%, var(--leli-border));
+      }
+    }
+
+    /* Horizontal Layout */
+    &:where([data-layout="horizontal"], .leli-card-horizontal) {
+      flex-direction: row;
+      align-items: stretch;
+
+      & .leli-card-media {
+        inline-size: 38%;
+        min-inline-size: 140px;
+        aspect-ratio: auto;
+      }
+
+      @media (width < 560px) {
+        flex-direction: column;
+        & .leli-card-media {
+          inline-size: 100%;
+        }
+      }
+    }
+  }
+
+  .leli-card-media {
+    position: relative;
+    inline-size: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background-color: var(--leli-surface-2);
+
+    & img,
+    & video {
+      inline-size: 100%;
+      block-size: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 400ms var(--leli-ease);
+    }
+  }
+
+  .leli-card:hover .leli-card-media img {
+    transform: scale(1.04);
+  }
+
+  .leli-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block-start: var(--card-padding);
+    padding-inline: var(--card-padding);
+  }
+
+  .leli-card-title {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--leli-text);
+  }
+
+  .leli-card-subtitle {
+    margin-block-start: 0.25rem;
+    margin-block-end: 0;
+    font-size: 0.85rem;
+    color: var(--leli-text-muted);
+  }
+
+  .leli-card-body {
+    padding: var(--card-padding);
+    flex: 1 1 auto;
+    font-size: 0.925rem;
+    color: var(--leli-text-muted);
+
+    .leli-card-header + & {
+      padding-block-start: 0.875rem;
+    }
+  }
+
+  .leli-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-block: calc(var(--card-padding) * 0.75);
+    padding-inline: var(--card-padding);
+    border-block-start: 1px solid var(--leli-border);
+    background-color: color-mix(in srgb, var(--leli-surface-2) 45%, transparent);
+  }
+}
+
+
+/* --- Component: tabs --- */
+/* ==========================================================================
+   leliUI - Tabs Component (Multi-Variant)
+   Variants: underline, pills, segmented, boxed, lifted, brutal, vertical
+   ========================================================================== */
+
+@layer components {
+  .leli-tabs {
+    --leli-accent: var(--leli-primary);
+    --leli-accent-soft: var(--leli-primary-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    inline-size: 100%;
+
+    /* Vertical Orientation */
+    &:where([data-orientation="vertical"], .leli-tabs-vertical) {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 1.5rem;
+
+      & .leli-tab-list {
+        flex-direction: column;
+        align-items: stretch;
+        min-inline-size: 200px;
+        border-block-end: none;
+        border-inline-end: 1px solid var(--leli-border);
+      }
+
+      & .leli-tab[aria-selected="true"]::after {
+        inset-block: 0;
+        inset-inline-start: auto;
+        inset-inline-end: -1px;
+        inline-size: 2.5px;
+        block-size: 100%;
+      }
+
+      @media (width < 640px) {
+        flex-direction: column;
+        & .leli-tab-list {
+          flex-direction: row;
+          inline-size: 100%;
+          border-inline-end: none;
+          border-block-end: 1px solid var(--leli-border);
+        }
+      }
+    }
+  }
+
+  .leli-tab-list {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    border-block-end: 1px solid var(--leli-border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .leli-tab {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-block: 0.65rem;
+    padding-inline: 1.125rem;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--leli-text-muted);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color var(--leli-duration) var(--leli-ease),
+                background-color var(--leli-duration) var(--leli-ease),
+                box-shadow var(--leli-duration) var(--leli-ease);
+    user-select: none;
+
+    &:hover:not(:disabled) {
+      color: var(--leli-text);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--leli-accent);
+      outline-offset: -2px;
+      border-radius: var(--leli-radius-sm);
+    }
+
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    &[aria-selected="true"],
+    &.is-active {
+      color: var(--leli-accent);
+
+      &::after {
+        content: "";
+        position: absolute;
+        inset-inline: 0;
+        inset-block-end: -1px;
+        block-size: 2.5px;
+        background-color: var(--leli-accent);
+        border-radius: var(--leli-radius-full);
+      }
+    }
+  }
+
+  /* Variant: Pills */
+  .leli-tabs:where([data-variant="pills"], .leli-tabs-pills) {
+    & .leli-tab-list {
+      border-block-end: none;
+      gap: 0.5rem;
+    }
+
+    & .leli-tab {
+      border-radius: var(--leli-radius-full);
+      padding-block: 0.5rem;
+      padding-inline: 1.15rem;
+
+      &:hover:not(:disabled) {
+        background-color: var(--leli-surface-2);
+      }
+
+      &[aria-selected="true"],
+      &.is-active {
+        background-color: var(--leli-accent);
+        color: var(--leli-primary-fg, #ffffff);
+        box-shadow: var(--leli-shadow-sm);
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  /* Variant: Segmented Control (iOS / macOS style) */
+  .leli-tabs:where([data-variant="segmented"], .leli-tabs-segmented) {
+    & .leli-tab-list {
+      border-block-end: none;
+      background-color: var(--leli-surface-2);
+      padding: 0.3rem;
+      border-radius: var(--leli-radius-md);
+      display: inline-flex;
+      inline-size: fit-content;
+      max-inline-size: 100%;
+    }
+
+    & .leli-tab {
+      border-radius: calc(var(--leli-radius-md) - 2px);
+      padding-block: 0.45rem;
+      padding-inline: 1rem;
+
+      &[aria-selected="true"],
+      &.is-active {
+        background-color: var(--leli-surface);
+        color: var(--leli-text);
+        box-shadow: var(--leli-shadow-sm);
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  /* Variant: Soft Boxed */
+  .leli-tabs:where([data-variant="soft"], .leli-tabs-soft) {
+    & .leli-tab-list {
+      border-block-end: none;
+      gap: 0.375rem;
+    }
+
+    & .leli-tab {
+      border-radius: var(--leli-radius-md);
+
+      &[aria-selected="true"],
+      &.is-active {
+        background-color: var(--leli-accent-soft);
+        color: var(--leli-accent);
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  /* Variant: Lifted / Folder Style */
+  .leli-tabs:where([data-variant="lifted"], .leli-tabs-lifted) {
+    & .leli-tab-list {
+      padding-inline-start: 0.5rem;
+      gap: 0.25rem;
+    }
+
+    & .leli-tab {
+      border: 1px solid transparent;
+      border-block-end: none;
+      border-start-start-radius: var(--leli-radius-md);
+      border-start-end-radius: var(--leli-radius-md);
+      margin-block-end: -1px;
+
+      &[aria-selected="true"],
+      &.is-active {
+        background-color: var(--leli-surface);
+        border-color: var(--leli-border);
+        color: var(--leli-accent);
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  /* Variant: Brutal */
+  .leli-tabs:where([data-variant="brutal"], .leli-tabs-brutal) {
+    & .leli-tab-list {
+      border-block-end: none;
+      gap: 0.5rem;
+    }
+
+    & .leli-tab {
+      border: 2px solid var(--leli-border-strong);
+      border-radius: var(--leli-radius-xs);
+      background-color: var(--leli-surface);
+      color: var(--leli-text);
+
+      &[aria-selected="true"],
+      &.is-active {
+        background-color: var(--leli-accent);
+        color: #ffffff;
+        box-shadow: 3px 3px 0px var(--leli-border-strong);
+        transform: translate(-1px, -1px);
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  /* Tab Panels - Important: Do NOT set display:none on [hidden="until-found"] directly */
+  .leli-tab-panel {
+    flex: 1 1 auto;
+    animation: leliTabFadeIn var(--leli-duration) var(--leli-ease);
+  }
+
+  .leli-tab-panel-inner {
+    padding: 1.25rem;
+    border-radius: var(--leli-radius-md);
+    background-color: var(--leli-surface);
+    border: 1px solid var(--leli-border);
+  }
+
+  @keyframes leliTabFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+
+/* --- Component: accordion --- */
+/* ==========================================================================
+   leliUI - Accordion Component (Multi-Variant)
+   Uses native <details> & <summary> with optional [name] exclusive groups
+   Variants: bordered, separated, flush, soft, glass, brutal
+   ========================================================================== */
+
+@layer components {
+  .leli-accordion {
+    --leli-accent: var(--leli-primary);
+    --leli-accent-soft: var(--leli-primary-soft);
+    display: flex;
+    flex-direction: column;
+    inline-size: 100%;
+    border-radius: var(--leli-radius-lg);
+    border: 1px solid var(--leli-border);
+    background-color: var(--leli-surface);
+    overflow: hidden;
+
+    /* Variant: Separated Cards */
+    &:where([data-variant="separated"], .leli-accordion-separated) {
+      border: none;
+      background: transparent;
+      gap: 0.75rem;
+      overflow: visible;
+
+      & .leli-accordion-item {
+        border: 1px solid var(--leli-border);
+        border-radius: var(--leli-radius-md);
+        background-color: var(--leli-surface);
+        box-shadow: var(--leli-shadow-sm);
+        transition: border-color var(--leli-duration) var(--leli-ease),
+                    box-shadow var(--leli-duration) var(--leli-ease);
+
+        &[open] {
+          border-color: var(--leli-accent);
+          box-shadow: 0 4px 16px -4px var(--leli-accent-soft);
+        }
+      }
+    }
+
+    /* Variant: Flush (No outer border, only bottom dividers) */
+    &:where([data-variant="flush"], .leli-accordion-flush) {
+      border: none;
+      border-radius: 0;
+      background: transparent;
+    }
+
+    /* Variant: Soft Filled */
+    &:where([data-variant="soft"], .leli-accordion-soft) {
+      border: none;
+      background: transparent;
+      gap: 0.5rem;
+
+      & .leli-accordion-item {
+        border: none;
+        border-radius: var(--leli-radius-md);
+        background-color: var(--leli-surface-2);
+
+        &[open] {
+          background-color: var(--leli-accent-soft);
+        }
+      }
+    }
+
+    /* Variant: Glass */
+    &:where([data-variant="glass"], .leli-accordion-glass) {
+      background-color: var(--leli-surface-glass);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid color-mix(in srgb, var(--leli-text) 12%, transparent);
+    }
+
+    /* Variant: Brutal */
+    &:where([data-variant="brutal"], .leli-accordion-brutal) {
+      border: none;
+      background: transparent;
+      gap: 0.75rem;
+      overflow: visible;
+
+      & .leli-accordion-item {
+        border: 2px solid var(--leli-border-strong);
+        border-radius: var(--leli-radius-xs);
+        background-color: var(--leli-surface);
+        box-shadow: 3px 3px 0px var(--leli-border-strong);
+
+        &[open] {
+          box-shadow: 5px 5px 0px var(--leli-accent);
+        }
+      }
+    }
+  }
+
+  .leli-accordion-item {
+    margin: 0;
+
+    &:not(:last-child) {
+      border-block-end: 1px solid var(--leli-border);
+    }
+  }
+
+  .leli-accordion-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1rem;
+    padding-inline: 1.25rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--leli-text);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    transition: background-color var(--leli-duration) var(--leli-ease),
+                color var(--leli-duration) var(--leli-ease);
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &:hover {
+      color: var(--leli-accent);
+      background-color: color-mix(in srgb, var(--leli-surface-2) 50%, transparent);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--leli-accent);
+      outline-offset: -2px;
+    }
+
+    &::after {
+      content: "";
+      inline-size: 0.55rem;
+      block-size: 0.55rem;
+      border-inline-end: 2px solid currentColor;
+      border-block-end: 2px solid currentColor;
+      transform: rotate(45deg);
+      transition: transform var(--leli-duration) var(--leli-ease);
+      flex-shrink: 0;
+      margin-inline-end: 0.25rem;
+    }
+  }
+
+  .leli-accordion-item[open] > .leli-accordion-trigger {
+    color: var(--leli-accent);
+
+    &::after {
+      transform: rotate(-135deg);
+    }
+  }
+
+  .leli-accordion-content {
+    padding-block-start: 0.25rem;
+    padding-block-end: 1.25rem;
+    padding-inline: 1.25rem;
+    font-size: 0.9rem;
+    color: var(--leli-text-muted);
+    line-height: 1.6;
+    border-block-start: 1px dashed color-mix(in srgb, var(--leli-border) 60%, transparent);
+  }
+}
+
+
+/* --- Component: table --- */
+/* ==========================================================================
+   leliUI - Table Component (Multi-Variant & Container Query Responsive)
+   Variants: default, striped, bordered, hoverable, compact, glass, brutal
+   ========================================================================== */
+
+@layer components {
+  .leli-table-wrapper {
+    --leli-accent: var(--leli-primary);
+    --leli-accent-soft: var(--leli-primary-soft);
+    overflow: auto;
+    max-inline-size: 100%;
+    max-block-size: min(560px, 80vh);
+    container-type: inline-size;
+    border-radius: var(--leli-radius-lg);
+    border: 1px solid var(--leli-border);
+    background-color: var(--leli-surface);
+    box-shadow: var(--leli-shadow-sm);
+
+    &:focus-visible {
+      outline: 2px solid var(--leli-accent);
+      outline-offset: 2px;
+    }
+
+    /* Variant: Glass */
+    &:where([data-variant="glass"], .leli-table-glass) {
+      background-color: var(--leli-surface-glass);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    /* Variant: Brutal */
+    &:where([data-variant="brutal"], .leli-table-brutal) {
+      border: 2.5px solid var(--leli-border-strong);
+      border-radius: var(--leli-radius-xs);
+      box-shadow: var(--leli-shadow-brutal);
+    }
+  }
+
+  .leli-table {
+    inline-size: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.875rem;
+    text-align: start;
+    color: var(--leli-text);
+
+    & caption {
+      padding: 0.85rem 1.25rem;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--leli-text-muted);
+      text-align: start;
+      border-block-end: 1px solid var(--leli-border);
+      background-color: color-mix(in srgb, var(--leli-surface-2) 40%, transparent);
+    }
+
+    /* Sticky column headers (desktop) */
+    & thead {
+      position: sticky;
+      inset-block-start: 0;
+      z-index: 2;
+      background-color: var(--leli-surface-2);
+    }
+
+    & thead th {
+      padding-block: 0.875rem;
+      padding-inline: 1.15rem;
+      font-weight: 700;
+      font-size: 0.775rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--leli-text-muted);
+      background-color: var(--leli-surface-2);
+      border-block-end: 1px solid var(--leli-border);
+      white-space: nowrap;
+      user-select: none;
+
+      &[data-sortable="true"] {
+        cursor: pointer;
+        transition: color var(--leli-duration) var(--leli-ease);
+
+        &:hover {
+          color: var(--leli-accent);
+        }
+
+        &::after {
+          content: " ↕";
+          opacity: 0.45;
+          font-size: 0.75rem;
+        }
+
+        &[aria-sort="ascending"]::after {
+          content: " ↑";
+          opacity: 1;
+          color: var(--leli-accent);
+        }
+
+        &[aria-sort="descending"]::after {
+          content: " ↓";
+          opacity: 1;
+          color: var(--leli-accent);
+        }
+      }
+    }
+
+    /* Sticky row headers (desktop) */
+    & tbody th {
+      position: sticky;
+      inset-inline-start: 0;
+      z-index: 1;
+      font-weight: 600;
+      color: var(--leli-text);
+      background-color: var(--leli-surface);
+      padding-block: 0.875rem;
+      padding-inline: 1.15rem;
+      border-block-end: 1px solid var(--leli-border);
+    }
+
+    & tbody td {
+      padding-block: 0.875rem;
+      padding-inline: 1.15rem;
+      color: var(--leli-text-muted);
+      border-block-end: 1px solid var(--leli-border);
+      transition: background-color 150ms ease;
+    }
+
+    & tbody tr:last-child :is(th, td) {
+      border-block-end: none;
+    }
+
+    /* Variant: Striped */
+    &:where([data-variant~="striped"], .leli-table-striped) tbody tr:nth-child(even) :is(th, td) {
+      background-color: color-mix(in srgb, var(--leli-surface-2) 55%, var(--leli-surface));
+    }
+
+    /* Variant: Hoverable */
+    &:where([data-variant~="hoverable"], .leli-table-hoverable) tbody tr:hover :is(th, td) {
+      background-color: var(--leli-accent-soft);
+      color: var(--leli-text);
+    }
+
+    /* Variant: Bordered Cells */
+    &:where([data-variant~="bordered"], .leli-table-bordered) :is(th, td):not(:last-child) {
+      border-inline-end: 1px solid var(--leli-border);
+    }
+
+    /* Size: Compact */
+    &:where([data-size="sm"], .leli-table-compact) :is(th, td) {
+      padding-block: 0.5rem;
+      padding-inline: 0.85rem;
+      font-size: 0.8125rem;
+    }
+
+    /* Size: Spacious */
+    &:where([data-size="lg"], .leli-table-lg) :is(th, td) {
+      padding-block: 1.15rem;
+      padding-inline: 1.5rem;
+      font-size: 0.95rem;
+    }
+  }
+
+  /* Responsive Stacked Layout via Container Queries (< 600px) */
+  @container (width < 600px) {
+    .leli-table:not([data-responsive="false"]),
+    .leli-table:not([data-responsive="false"]) :is(thead, tbody, tr, th, td) {
+      display: block;
+    }
+
+    .leli-table:not([data-responsive="false"]) thead {
+      /* MANDATORY: Hide column header from layout and screen readers. */
+      display: none;
+    }
+
+    .leli-table:not([data-responsive="false"]) tbody tr {
+      margin: 0.75rem;
+      border: 1px solid var(--leli-border);
+      border-radius: var(--leli-radius-md);
+      overflow: hidden;
+      box-shadow: var(--leli-shadow-sm);
+    }
+
+    .leli-table:not([data-responsive="false"]) tbody th {
+      position: sticky;
+      inset-block-start: 0;
+      z-index: 2;
+      background-color: var(--leli-surface-2);
+      border-block-end: 1px solid var(--leli-border);
+    }
+
+    .leli-table:not([data-responsive="false"]) tbody td {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      text-align: end;
+    }
+
+    .leli-table:not([data-responsive="false"]) tbody td:nth-child(2)::before {
+      content: var(--label-2, attr(data-label)) ": ";
+      font-weight: 600;
+      color: var(--leli-text);
+      text-align: start;
+    }
+    .leli-table:not([data-responsive="false"]) tbody td:nth-child(3)::before {
+      content: var(--label-3, attr(data-label)) ": ";
+      font-weight: 600;
+      color: var(--leli-text);
+      text-align: start;
+    }
+    .leli-table:not([data-responsive="false"]) tbody td:nth-child(4)::before {
+      content: var(--label-4, attr(data-label)) ": ";
+      font-weight: 600;
+      color: var(--leli-text);
+      text-align: start;
+    }
+    .leli-table:not([data-responsive="false"]) tbody td:nth-child(5)::before {
+      content: var(--label-5, attr(data-label)) ": ";
+      font-weight: 600;
+      color: var(--leli-text);
+      text-align: start;
+    }
+    .leli-table:not([data-responsive="false"]) tbody td:nth-child(6)::before {
+      content: var(--label-6, attr(data-label)) ": ";
+      font-weight: 600;
+      color: var(--leli-text);
+      text-align: start;
+    }
+  }
+}
+
+
+/* --- Component: pagination --- */
+/* ==========================================================================
+   leliUI - Pagination Component (Multi-Variant)
+   Variants: default, pills, outlined, minimal, joined, brutal
+   Sizes: sm, md, lg
+   ========================================================================== */
+
+@layer components {
+  .leli-pagination {
+    --leli-accent: var(--leli-primary);
+    --leli-accent-soft: var(--leli-primary-soft);
+    --page-size: 2.35rem;
+    --page-font: 0.875rem;
+    --page-radius: var(--leli-radius-md);
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    /* Size Modifiers */
+    &:where([data-size="sm"], .leli-pagination-sm) {
+      --page-size: 1.9rem;
+      --page-font: 0.775rem;
+      --page-radius: var(--leli-radius-sm);
+    }
+
+    &:where([data-size="lg"], .leli-pagination-lg) {
+      --page-size: 2.85rem;
+      --page-font: 1rem;
+      --page-radius: var(--leli-radius-lg);
+    }
+
+    /* Variant: Pills / Circular */
+    &:where([data-variant="pills"], .leli-pagination-pills) {
+      --page-radius: var(--leli-radius-full);
+    }
+
+    /* Variant: Minimal / Ghost */
+    &:where([data-variant="minimal"], .leli-pagination-minimal) .leli-page-item {
+      border-color: transparent;
+      background-color: transparent;
+
+      &:hover:not(:disabled):not([aria-current="page"]) {
+        background-color: var(--leli-surface-2);
+      }
+
+      &:where([aria-current="page"], .is-active) {
+        background-color: var(--leli-accent-soft);
+        color: var(--leli-accent);
+        box-shadow: none;
+      }
+    }
+
+    /* Variant: Outlined */
+    &:where([data-variant="outlined"], .leli-pagination-outlined) .leli-page-item {
+      background-color: transparent;
+
+      &:where([aria-current="page"], .is-active) {
+        background-color: transparent;
+        border-color: var(--leli-accent);
+        border-width: 2px;
+        color: var(--leli-accent);
+        box-shadow: none;
+      }
+    }
+
+    /* Variant: Joined / Segmented Group */
+    &:where([data-variant="joined"], .leli-pagination-joined) {
+      gap: 0;
+      display: inline-flex;
+      border-radius: var(--page-radius);
+      border: 1px solid var(--leli-border);
+      overflow: hidden;
+      background-color: var(--leli-surface);
+
+      & .leli-page-item {
+        border: none;
+        border-radius: 0;
+
+        &:not(:last-child) {
+          border-inline-end: 1px solid var(--leli-border);
+        }
+      }
+    }
+
+    /* Variant: Brutal */
+    &:where([data-variant="brutal"], .leli-pagination-brutal) .leli-page-item {
+      border: 2px solid var(--leli-border-strong);
+      border-radius: var(--leli-radius-xs);
+      box-shadow: 2px 2px 0px var(--leli-border-strong);
+
+      &:hover:not(:disabled) {
+        transform: translate(-1px, -1px);
+        box-shadow: 3px 3px 0px var(--leli-border-strong);
+      }
+
+      &:where([aria-current="page"], .is-active) {
+        background-color: var(--leli-accent);
+        color: #ffffff;
+        border-color: var(--leli-border-strong);
+      }
+    }
+  }
+
+  .leli-page-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-inline-size: var(--page-size);
+    block-size: var(--page-size);
+    padding-inline: 0.65rem;
+    font-family: inherit;
+    font-size: var(--page-font);
+    font-weight: 600;
+    color: var(--leli-text);
+    background-color: var(--leli-surface);
+    border: 1px solid var(--leli-border);
+    border-radius: var(--page-radius);
+    cursor: pointer;
+    text-decoration: none;
+    user-select: none;
+    transition: all var(--leli-duration) var(--leli-ease);
+
+    &:hover:not(:disabled):not([aria-current="page"]):not(.is-active):not(.is-ellipsis) {
+      border-color: var(--leli-accent);
+      color: var(--leli-accent);
+      background-color: var(--leli-accent-soft);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--leli-accent);
+      outline-offset: 2px;
+    }
+
+    &:where([aria-current="page"], .is-active) {
+      background-color: var(--leli-accent);
+      border-color: var(--leli-accent);
+      color: var(--leli-primary-fg, #ffffff);
+      box-shadow: var(--leli-shadow-sm);
+    }
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    &.is-ellipsis {
+      border-color: transparent;
+      background: transparent;
+      cursor: default;
+      color: var(--leli-text-muted);
+    }
+  }
+}
+
+
+/* --- Component: progress --- */
+/* ==========================================================================
+   leliUI - Progress Bar Component (Multi-Variant)
+   Variants: solid, gradient, striped, animated, indeterminate, glow, brutal
+   Sizes: xs, sm, md, lg, xl
+   ========================================================================== */
+
+@layer components {
+  .leli-progress-group {
+    --leli-accent: var(--leli-primary);
+    --leli-accent-soft: var(--leli-primary-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    inline-size: 100%;
+  }
+
+  .leli-progress-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--leli-text);
+  }
+
+  .leli-progress-value {
+    font-family: var(--leli-font-mono);
+    font-size: 0.8rem;
+    color: var(--leli-text-muted);
+  }
+
+  .leli-progress {
+    --leli-accent: var(--leli-primary);
+    --leli-accent-soft: var(--leli-primary-soft);
+    --progress-height: 0.65rem;
+    --progress-radius: var(--leli-radius-full);
+    --progress-value: 50%;
+
+    position: relative;
+    inline-size: 100%;
+    block-size: var(--progress-height);
+    background-color: var(--leli-surface-2);
+    border-radius: var(--progress-radius);
+    overflow: hidden;
+
+    /* Sizes */
+    &:where([data-size="xs"], .leli-progress-xs) {
+      --progress-height: 0.25rem;
+    }
+    &:where([data-size="sm"], .leli-progress-sm) {
+      --progress-height: 0.45rem;
+    }
+    &:where([data-size="lg"], .leli-progress-lg) {
+      --progress-height: 1rem;
+    }
+    &:where([data-size="xl"], .leli-progress-xl) {
+      --progress-height: 1.45rem;
+      --progress-radius: var(--leli-radius-md);
+    }
+
+    /* Variant: Brutal */
+    &:where([data-variant~="brutal"], .leli-progress-brutal) {
+      --progress-radius: var(--leli-radius-xs);
+      border: 2px solid var(--leli-border-strong);
+      background-color: var(--leli-surface);
+      box-shadow: 2px 2px 0px var(--leli-border-strong);
+
+      & .leli-progress-bar {
+        border-inline-end: 2px solid var(--leli-border-strong);
+      }
+    }
+
+    /* Variant: Glow */
+    &:where([data-variant~="glow"], .leli-progress-glow) {
+      overflow: visible;
+
+      & .leli-progress-bar {
+        box-shadow: 0 0 14px var(--leli-accent);
+      }
+    }
+  }
+
+  .leli-progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--progress-value);
+    block-size: 100%;
+    background-color: var(--leli-accent);
+    border-radius: inherit;
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    transition: inline-size 400ms var(--leli-ease),
+                background-color var(--leli-duration) var(--leli-ease);
+  }
+
+  /* Variant: Gradient */
+  .leli-progress:where([data-variant~="gradient"], .leli-progress-gradient) .leli-progress-bar {
+    background-image: linear-gradient(90deg, var(--leli-accent), var(--leli-secondary), var(--leli-info));
+  }
+
+  /* Variant: Striped */
+  .leli-progress:where([data-variant~="striped"], .leli-progress-striped) .leli-progress-bar {
+    background-image: linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.22) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.22) 50%,
+      rgba(255, 255, 255, 0.22) 75%,
+      transparent 75%,
+      transparent
+    );
+    background-size: 1.25rem 1.25rem;
+  }
+
+  /* Variant: Animated Stripes */
+  .leli-progress:where([data-variant~="animated"], .leli-progress-animated) .leli-progress-bar {
+    animation: leliProgressStripes 1s linear infinite;
+  }
+
+  /* Variant: Indeterminate */
+  .leli-progress:where([data-variant~="indeterminate"], .leli-progress-indeterminate) .leli-progress-bar {
+    position: absolute;
+    inline-size: 40%;
+    animation: leliProgressIndeterminate 1.4s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+  }
+
+  @keyframes leliProgressStripes {
+    from {
+      background-position: 1.25rem 0;
+    }
+    to {
+      background-position: 0 0;
+    }
+  }
+
+  @keyframes leliProgressIndeterminate {
+    0% {
+      inset-inline-start: -40%;
+    }
+    100% {
+      inset-inline-start: 100%;
+    }
+  }
+}
+
+
+/* --- Component: skeleton --- */
+/* ==========================================================================
+   leliUI - Skeleton Loader Component (Multi-Variant)
+   Shapes: text, title, circle, rect, button, card
+   Animations: shimmer, pulse, wave, static
+   ========================================================================== */
+
+@layer components {
+  .leli-skeleton {
+    --skeleton-base: color-mix(in srgb, var(--leli-text-muted) 16%, var(--leli-surface));
+    --skeleton-highlight: color-mix(in srgb, var(--leli-text-muted) 28%, var(--leli-surface));
+
+    display: block;
+    inline-size: 100%;
+    block-size: 1rem;
+    border-radius: var(--leli-radius-sm);
+    background-color: var(--skeleton-base);
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    pointer-events: none;
+
+    /* Default Shimmer Effect */
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      transform: translateX(-100%);
+      background-image: linear-gradient(
+        90deg,
+        transparent 0%,
+        var(--skeleton-highlight) 50%,
+        transparent 100%
+      );
+      animation: leliSkeletonShimmer 1.6s infinite;
+    }
+
+    /* Variant: Pulse */
+    &:where([data-variant="pulse"], .leli-skeleton-pulse) {
+      animation: leliSkeletonPulse 1.6s ease-in-out infinite;
+      &::after {
+        display: none;
+      }
+    }
+
+    /* Variant: Static (No animation) */
+    &:where([data-variant="static"], .leli-skeleton-static)::after {
+      display: none;
+    }
+
+    /* Variant: Brutal */
+    &:where([data-variant="brutal"], .leli-skeleton-brutal) {
+      border: 1.5px solid var(--leli-border-strong);
+      border-radius: 2px;
+    }
+
+    /* Shape Modifiers */
+    &:where([data-shape="title"], .leli-skeleton-title) {
+      block-size: 1.5rem;
+      inline-size: 65%;
+      border-radius: var(--leli-radius-md);
+    }
+
+    &:where([data-shape="text"], .leli-skeleton-text) {
+      block-size: 0.875rem;
+    }
+
+    &:where([data-shape="circle"], .leli-skeleton-circle) {
+      inline-size: 3rem;
+      block-size: 3rem;
+      border-radius: var(--leli-radius-full);
+      flex-shrink: 0;
+    }
+
+    &:where([data-shape="media"], .leli-skeleton-media) {
+      block-size: 10rem;
+      border-radius: var(--leli-radius-md);
+    }
+
+    &:where([data-shape="button"], .leli-skeleton-button) {
+      inline-size: 7rem;
+      block-size: 2.35rem;
+      border-radius: var(--leli-radius-md);
+    }
+  }
+
+  @keyframes leliSkeletonShimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes leliSkeletonPulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.45;
+    }
+  }
+}
+
+
+/* --- Component: avatar --- */
+/* ==========================================================================
+   leliUI - Avatar & Avatar Group Component (Multi-Variant)
+   Shapes: circle, rounded, squircle, square
+   Variants: solid, soft, outlined, ring, gradient, brutal
+   Sizes: xs, sm, md, lg, xl, 2xl
+   Status indicators: online, offline, busy, away
+   ========================================================================== */
+
+@layer components {
+  .leli-avatar {
+    --leli-accent: var(--leli-primary);
+    --leli-accent-soft: var(--leli-primary-soft);
+    --avatar-size: 2.75rem;
+    --avatar-font: 0.95rem;
+    --avatar-radius: var(--leli-radius-full);
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--avatar-size);
+    block-size: var(--avatar-size);
+    border-radius: var(--avatar-radius);
+    background-color: var(--leli-accent-soft);
+    color: var(--leli-accent);
+    font-weight: 700;
+    font-size: var(--avatar-font);
+    text-transform: uppercase;
+    user-select: none;
+    flex-shrink: 0;
+    transition: transform var(--leli-duration) var(--leli-ease),
+                box-shadow var(--leli-duration) var(--leli-ease);
+
+    & img {
+      inline-size: 100%;
+      block-size: 100%;
+      object-fit: cover;
+      border-radius: inherit;
+      display: block;
+    }
+
+    /* Size Modifiers */
+    &:where([data-size="xs"], .leli-avatar-xs) {
+      --avatar-size: 1.75rem;
+      --avatar-font: 0.65rem;
+    }
+    &:where([data-size="sm"], .leli-avatar-sm) {
+      --avatar-size: 2.25rem;
+      --avatar-font: 0.775rem;
+    }
+    &:where([data-size="md"], .leli-avatar-md) {
+      --avatar-size: 2.75rem;
+      --avatar-font: 0.95rem;
+    }
+    &:where([data-size="lg"], .leli-avatar-lg) {
+      --avatar-size: 3.5rem;
+      --avatar-font: 1.15rem;
+    }
+    &:where([data-size="xl"], .leli-avatar-xl) {
+      --avatar-size: 4.5rem;
+      --avatar-font: 1.45rem;
+    }
+
+    /* Shape Modifiers */
+    &:where([data-shape="rounded"], .leli-avatar-rounded) {
+      --avatar-radius: var(--leli-radius-md);
+    }
+    &:where([data-shape="squircle"], .leli-avatar-squircle) {
+      --avatar-radius: 32%;
+    }
+    &:where([data-shape="square"], .leli-avatar-square) {
+      --avatar-radius: var(--leli-radius-xs);
+    }
+
+    /* Style Variants */
+    &:where([data-variant="solid"], .leli-avatar-solid) {
+      background-color: var(--leli-accent);
+      color: var(--leli-primary-fg, #ffffff);
+    }
+
+    &:where([data-variant="outlined"], .leli-avatar-outlined) {
+      background-color: transparent;
+      border: 2px solid var(--leli-accent);
+      color: var(--leli-accent);
+    }
+
+    &:where([data-variant="ring"], .leli-avatar-ring) {
+      box-shadow: 0 0 0 2px var(--leli-surface), 0 0 0 4px var(--leli-accent);
+    }
+
+    &:where([data-variant="gradient"], .leli-avatar-gradient) {
+      background-image: linear-gradient(135deg, var(--leli-accent), var(--leli-secondary));
+      color: #ffffff;
+    }
+
+    &:where([data-variant="brutal"], .leli-avatar-brutal) {
+      border: 2px solid var(--leli-border-strong);
+      box-shadow: 2px 2px 0px var(--leli-border-strong);
+    }
+
+    /* Status Indicator Dot */
+    &[data-status]::after {
+      content: "";
+      position: absolute;
+      inset-block-end: 2%;
+      inset-inline-end: 2%;
+      inline-size: max(0.65rem, calc(var(--avatar-size) * 0.25));
+      block-size: max(0.65rem, calc(var(--avatar-size) * 0.25));
+      border-radius: var(--leli-radius-full);
+      border: 2px solid var(--leli-surface);
+      background-color: var(--leli-text-muted);
+    }
+
+    &[data-status="online"]::after {
+      background-color: var(--leli-success);
+    }
+    &[data-status="busy"]::after {
+      background-color: var(--leli-danger);
+    }
+    &[data-status="away"]::after {
+      background-color: var(--leli-warning);
+    }
+    &[data-status="offline"]::after {
+      background-color: var(--leli-text-muted);
+    }
+  }
+
+  /* Avatar Group (Stacked Avatars) */
+  .leli-avatar-group {
+    display: inline-flex;
+    align-items: center;
+
+    & .leli-avatar {
+      border: 2.5px solid var(--leli-surface);
+      margin-inline-start: -0.75rem;
+
+      &:first-child {
+        margin-inline-start: 0;
+      }
+
+      &:hover {
+        transform: translateY(-4px) scale(1.06);
+        z-index: 5;
+      }
+    }
+  }
+}
+

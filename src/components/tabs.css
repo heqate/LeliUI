@@ -1,0 +1,268 @@
+/* ==========================================================================
+   leliUI - Tabs Component (Multi-Variant)
+   Variants: underline, pills, segmented, boxed, lifted, brutal, vertical
+   ========================================================================== */
+
+@layer components {
+  .leli-tabs {
+    --leli-accent: var(--leli-primary);
+    --leli-accent-soft: var(--leli-primary-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    inline-size: 100%;
+
+    /* Vertical Orientation */
+    &:where([data-orientation="vertical"], .leli-tabs-vertical) {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 1.5rem;
+
+      & .leli-tab-list {
+        flex-direction: column;
+        align-items: stretch;
+        min-inline-size: 200px;
+        border-block-end: none;
+        border-inline-end: 1px solid var(--leli-border);
+      }
+
+      & .leli-tab[aria-selected="true"]::after {
+        inset-block: 0;
+        inset-inline-start: auto;
+        inset-inline-end: -1px;
+        inline-size: 2.5px;
+        block-size: 100%;
+      }
+
+      @media (width < 640px) {
+        flex-direction: column;
+        & .leli-tab-list {
+          flex-direction: row;
+          inline-size: 100%;
+          border-inline-end: none;
+          border-block-end: 1px solid var(--leli-border);
+        }
+      }
+    }
+  }
+
+  .leli-tab-list {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    border-block-end: 1px solid var(--leli-border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .leli-tab {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-block: 0.65rem;
+    padding-inline: 1.125rem;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--leli-text-muted);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color var(--leli-duration) var(--leli-ease),
+                background-color var(--leli-duration) var(--leli-ease),
+                box-shadow var(--leli-duration) var(--leli-ease);
+    user-select: none;
+
+    &:hover:not(:disabled) {
+      color: var(--leli-text);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--leli-accent);
+      outline-offset: -2px;
+      border-radius: var(--leli-radius-sm);
+    }
+
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    &[aria-selected="true"],
+    &.is-active {
+      color: var(--leli-accent);
+
+      &::after {
+        content: "";
+        position: absolute;
+        inset-inline: 0;
+        inset-block-end: -1px;
+        block-size: 2.5px;
+        background-color: var(--leli-accent);
+        border-radius: var(--leli-radius-full);
+      }
+    }
+  }
+
+  /* Variant: Pills */
+  .leli-tabs:where([data-variant="pills"], .leli-tabs-pills) {
+    & .leli-tab-list {
+      border-block-end: none;
+      gap: 0.5rem;
+    }
+
+    & .leli-tab {
+      border-radius: var(--leli-radius-full);
+      padding-block: 0.5rem;
+      padding-inline: 1.15rem;
+
+      &:hover:not(:disabled) {
+        background-color: var(--leli-surface-2);
+      }
+
+      &[aria-selected="true"],
+      &.is-active {
+        background-color: var(--leli-accent);
+        color: var(--leli-primary-fg, #ffffff);
+        box-shadow: var(--leli-shadow-sm);
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  /* Variant: Segmented Control (iOS / macOS style) */
+  .leli-tabs:where([data-variant="segmented"], .leli-tabs-segmented) {
+    & .leli-tab-list {
+      border-block-end: none;
+      background-color: var(--leli-surface-2);
+      padding: 0.3rem;
+      border-radius: var(--leli-radius-md);
+      display: inline-flex;
+      inline-size: fit-content;
+      max-inline-size: 100%;
+    }
+
+    & .leli-tab {
+      border-radius: calc(var(--leli-radius-md) - 2px);
+      padding-block: 0.45rem;
+      padding-inline: 1rem;
+
+      &[aria-selected="true"],
+      &.is-active {
+        background-color: var(--leli-surface);
+        color: var(--leli-text);
+        box-shadow: var(--leli-shadow-sm);
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  /* Variant: Soft Boxed */
+  .leli-tabs:where([data-variant="soft"], .leli-tabs-soft) {
+    & .leli-tab-list {
+      border-block-end: none;
+      gap: 0.375rem;
+    }
+
+    & .leli-tab {
+      border-radius: var(--leli-radius-md);
+
+      &[aria-selected="true"],
+      &.is-active {
+        background-color: var(--leli-accent-soft);
+        color: var(--leli-accent);
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  /* Variant: Lifted / Folder Style */
+  .leli-tabs:where([data-variant="lifted"], .leli-tabs-lifted) {
+    & .leli-tab-list {
+      padding-inline-start: 0.5rem;
+      gap: 0.25rem;
+    }
+
+    & .leli-tab {
+      border: 1px solid transparent;
+      border-block-end: none;
+      border-start-start-radius: var(--leli-radius-md);
+      border-start-end-radius: var(--leli-radius-md);
+      margin-block-end: -1px;
+
+      &[aria-selected="true"],
+      &.is-active {
+        background-color: var(--leli-surface);
+        border-color: var(--leli-border);
+        color: var(--leli-accent);
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  /* Variant: Brutal */
+  .leli-tabs:where([data-variant="brutal"], .leli-tabs-brutal) {
+    & .leli-tab-list {
+      border-block-end: none;
+      gap: 0.5rem;
+    }
+
+    & .leli-tab {
+      border: 2px solid var(--leli-border-strong);
+      border-radius: var(--leli-radius-xs);
+      background-color: var(--leli-surface);
+      color: var(--leli-text);
+
+      &[aria-selected="true"],
+      &.is-active {
+        background-color: var(--leli-accent);
+        color: #ffffff;
+        box-shadow: 3px 3px 0px var(--leli-border-strong);
+        transform: translate(-1px, -1px);
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  /* Tab Panels - Important: Do NOT set display:none on [hidden="until-found"] directly */
+  .leli-tab-panel {
+    flex: 1 1 auto;
+    animation: leliTabFadeIn var(--leli-duration) var(--leli-ease);
+  }
+
+  .leli-tab-panel-inner {
+    padding: 1.25rem;
+    border-radius: var(--leli-radius-md);
+    background-color: var(--leli-surface);
+    border: 1px solid var(--leli-border);
+  }
+
+  @keyframes leliTabFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

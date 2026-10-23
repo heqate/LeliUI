@@ -1,0 +1,208 @@
+/* ==========================================================================
+   leliUI - Toast Notification Component
+   Fixed notification toasts with auto-dismiss progress bar and Sakura Pink styling
+   ========================================================================== */
+
+@layer components {
+  /* --- 1. Toast Container --- */
+  .leli-toast-container {
+    position: fixed;
+    z-index: 100000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    pointer-events: none;
+    width: min(26rem, calc(100vw - 2rem));
+    max-width: 100%;
+
+    /* Top positions clear the sticky navbar (height ~3.5rem + margins) */
+    &.position-top-right {
+      top: 4.75rem;
+      right: 1rem;
+    }
+    &.position-top-left {
+      top: 4.75rem;
+      left: 1rem;
+    }
+    &.position-top-center {
+      top: 4.75rem;
+      left: 50%;
+      transform: translateX(-50%);
+      align-items: center;
+    }
+
+    /* Bottom positions */
+    &.position-bottom-right {
+      bottom: 1rem;
+      right: 1rem;
+    }
+    &.position-bottom-left {
+      bottom: 1rem;
+      left: 1rem;
+    }
+    &.position-bottom-center {
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      align-items: center;
+    }
+  }
+
+  /* --- 2. Toast Item --- */
+  .leli-toast {
+    box-sizing: border-box;
+    --leli-toast-bg: var(--leli-surface-1, #16121c);
+    --leli-toast-border: var(--leli-border);
+    --leli-toast-color: var(--leli-text);
+    --leli-toast-accent: var(--leli-primary);
+
+    pointer-events: auto;
+    width: 100%;
+    background-color: var(--leli-toast-bg);
+    border: 1px solid var(--leli-toast-border);
+    border-radius: var(--leli-radius-md);
+    box-shadow: 0 16px 40px -6px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    padding: 0.95rem 1.15rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    position: relative;
+    overflow: hidden;
+    color: var(--leli-toast-color);
+    transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+    animation: leliToastIn 260ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+    &.is-leaving {
+      opacity: 0;
+      transform: translateY(-8px) scale(0.96);
+      pointer-events: none;
+    }
+
+    & .leli-toast-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      inline-size: 1.5rem;
+      block-size: 1.5rem;
+      color: var(--leli-toast-accent);
+      margin-top: 0.15rem;
+
+      & svg {
+        inline-size: 1.35rem;
+        block-size: 1.35rem;
+      }
+    }
+
+    & .leli-toast-content {
+      flex: 1 1 auto;
+      min-width: 0;
+
+      & .leli-toast-title {
+        font-size: 0.925rem;
+        font-weight: 700;
+        color: var(--leli-text);
+        margin: 0 0 0.25rem 0;
+        line-height: 1.3;
+        letter-spacing: -0.01em;
+      }
+
+      & .leli-toast-message {
+        font-size: 0.84rem;
+        color: var(--leli-text-muted);
+        margin: 0;
+        line-height: 1.45;
+      }
+    }
+
+    & .leli-toast-close {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      inline-size: 1.65rem;
+      block-size: 1.65rem;
+      border: none;
+      background: transparent;
+      color: var(--leli-text-muted);
+      cursor: pointer;
+      border-radius: var(--leli-radius-xs);
+      padding: 0;
+      font-size: 1.25rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: -0.1rem;
+      margin-inline-end: -0.25rem;
+      transition: all var(--leli-duration) var(--leli-ease);
+
+      &:hover {
+        background-color: var(--leli-surface-3);
+        color: var(--leli-text);
+      }
+    }
+
+    /* Auto-dismiss countdown bar */
+    & .leli-toast-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      width: 100%;
+      background-color: var(--leli-toast-accent);
+      transform-origin: left;
+      animation: leliToastProgress linear forwards;
+    }
+  }
+
+  /* --- 3. Toast Variants --- */
+  .leli-toast[data-variant="primary"],
+  .leli-toast-primary {
+    --leli-toast-accent: var(--leli-primary);
+    border-inline-start: 4px solid var(--leli-primary);
+  }
+
+  .leli-toast[data-variant="success"],
+  .leli-toast-success {
+    --leli-toast-accent: var(--leli-success, #10b981);
+    border-inline-start: 4px solid var(--leli-success, #10b981);
+  }
+
+  .leli-toast[data-variant="warning"],
+  .leli-toast-warning {
+    --leli-toast-accent: var(--leli-warning, #f59e0b);
+    border-inline-start: 4px solid var(--leli-warning, #f59e0b);
+  }
+
+  .leli-toast[data-variant="danger"],
+  .leli-toast-danger {
+    --leli-toast-accent: var(--leli-danger, #f43f5e);
+    border-inline-start: 4px solid var(--leli-danger, #f43f5e);
+  }
+
+  .leli-toast[data-variant="glass"] {
+    background-color: color-mix(in srgb, var(--leli-surface-1, #16121c) 88%, transparent);
+    backdrop-filter: blur(20px);
+    border-color: color-mix(in srgb, var(--leli-primary) 30%, var(--leli-border));
+  }
+
+  .leli-toast[data-variant="brutal"] {
+    border: 3px solid var(--leli-border-strong);
+    border-radius: 4px;
+    box-shadow: 5px 5px 0 var(--leli-border-strong);
+  }
+}
+
+@keyframes leliToastIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes leliToastProgress {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}

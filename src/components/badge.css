@@ -1,0 +1,178 @@
+/* ==========================================================================
+   leliUI - Badge, Tag & Status Indicator Component
+   Multi-variant: solid, soft, outlined, glass, brutal, status dot
+   ========================================================================== */
+
+@layer components {
+  /* --- 1. Base Badge --- */
+  .leli-badge {
+    --leli-badge-bg: var(--leli-surface-2);
+    --leli-badge-color: var(--leli-text);
+    --leli-badge-border: var(--leli-border);
+    --leli-badge-font: 0.75rem;
+    --leli-badge-py: 0.2rem;
+    --leli-badge-px: 0.55rem;
+    --leli-badge-radius: var(--leli-radius-sm);
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding-block: var(--leli-badge-py);
+    padding-inline: var(--leli-badge-px);
+    font-size: var(--leli-badge-font);
+    font-weight: 600;
+    line-height: 1.2;
+    border-radius: var(--leli-badge-radius);
+    background-color: var(--leli-badge-bg);
+    color: var(--leli-badge-color);
+    border: 1px solid var(--leli-badge-border);
+    white-space: nowrap;
+    user-select: none;
+    vertical-align: middle;
+
+    /* Pill Shape */
+    &.is-pill,
+    &[data-shape="pill"] {
+      border-radius: 9999px;
+      padding-inline: 0.75rem;
+    }
+
+    /* Size variants */
+    &[data-size="sm"],
+    &.leli-badge-sm {
+      --leli-badge-font: 0.68rem;
+      --leli-badge-py: 0.1rem;
+      --leli-badge-px: 0.4rem;
+    }
+    &[data-size="lg"],
+    &.leli-badge-lg {
+      --leli-badge-font: 0.85rem;
+      --leli-badge-py: 0.35rem;
+      --leli-badge-px: 0.75rem;
+    }
+
+    /* Variants */
+    /* Solid / Primary Brand */
+    &[data-variant="solid"],
+    &.leli-badge-primary {
+      --leli-badge-bg: var(--leli-primary);
+      --leli-badge-color: #ffffff;
+      --leli-badge-border: var(--leli-primary);
+    }
+
+    /* Soft / Pastel */
+    &[data-variant="soft"] {
+      --leli-badge-bg: var(--leli-primary-soft);
+      --leli-badge-color: var(--leli-primary);
+      --leli-badge-border: transparent;
+    }
+
+    /* Outlined */
+    &[data-variant="outlined"] {
+      --leli-badge-bg: transparent;
+      --leli-badge-color: var(--leli-primary);
+      --leli-badge-border: var(--leli-primary);
+    }
+
+    /* Glass */
+    &[data-variant="glass"] {
+      --leli-badge-bg: var(--leli-surface-glass);
+      --leli-badge-color: var(--leli-text);
+      --leli-badge-border: color-mix(in srgb, var(--leli-primary) 30%, var(--leli-border));
+      backdrop-filter: blur(8px);
+    }
+
+    /* Brutal */
+    &[data-variant="brutal"] {
+      --leli-badge-bg: var(--leli-surface-1);
+      --leli-badge-color: var(--leli-text);
+      --leli-badge-border: var(--leli-border-strong);
+      border-width: 1.5px;
+      border-radius: 2px;
+      box-shadow: 2px 2px 0 var(--leli-border-strong);
+    }
+
+    /* Semantic Accents */
+    &[data-accent="success"],
+    &.leli-badge-success {
+      --leli-badge-bg: color-mix(in srgb, var(--leli-success, #10b981) 15%, transparent);
+      --leli-badge-color: var(--leli-success, #10b981);
+      --leli-badge-border: color-mix(in srgb, var(--leli-success, #10b981) 40%, transparent);
+    }
+    &[data-accent="warning"],
+    &.leli-badge-warning {
+      --leli-badge-bg: color-mix(in srgb, var(--leli-warning, #f59e0b) 15%, transparent);
+      --leli-badge-color: var(--leli-warning, #f59e0b);
+      --leli-badge-border: color-mix(in srgb, var(--leli-warning, #f59e0b) 40%, transparent);
+    }
+    &[data-accent="danger"],
+    &.leli-badge-danger {
+      --leli-badge-bg: color-mix(in srgb, var(--leli-danger, #f43f5e) 15%, transparent);
+      --leli-badge-color: var(--leli-danger, #f43f5e);
+      --leli-badge-border: color-mix(in srgb, var(--leli-danger, #f43f5e) 40%, transparent);
+    }
+    &[data-accent="info"],
+    &.leli-badge-info {
+      --leli-badge-bg: color-mix(in srgb, var(--leli-info, #38bdf8) 15%, transparent);
+      --leli-badge-color: var(--leli-info, #38bdf8);
+      --leli-badge-border: color-mix(in srgb, var(--leli-info, #38bdf8) 40%, transparent);
+    }
+
+    /* Status Dot Inside Badge */
+    & .leli-dot {
+      display: inline-block;
+      inline-size: 0.45rem;
+      block-size: 0.45rem;
+      border-radius: 50%;
+      background-color: currentColor;
+      box-shadow: 0 0 6px currentColor;
+    }
+
+    /* Close / Remove button inside badge tag */
+    & .leli-badge-remove {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-inline-start: 0.2rem;
+      border: none;
+      background: transparent;
+      color: inherit;
+      opacity: 0.7;
+      cursor: pointer;
+      padding: 0;
+      font-size: 0.9em;
+      line-height: 1;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  /* Standalone Status Pulse Dot */
+  .leli-status-dot {
+    display: inline-block;
+    position: relative;
+    inline-size: 0.65rem;
+    block-size: 0.65rem;
+    border-radius: 50%;
+    background-color: var(--leli-primary);
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 50%;
+      border: 2px solid currentColor;
+      color: inherit;
+      animation: leliDotPulse 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+      opacity: 0.75;
+    }
+  }
+}
+
+@keyframes leliDotPulse {
+  0% { transform: scale(0.9); opacity: 0.9; }
+  70% { transform: scale(2.2); opacity: 0; }
+  100% { transform: scale(2.2); opacity: 0; }
+}

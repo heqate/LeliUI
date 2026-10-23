@@ -1,0 +1,229 @@
+/* ==========================================================================
+   leliUI - Table Component (Multi-Variant & Container Query Responsive)
+   Variants: default, striped, bordered, hoverable, compact, glass, brutal
+   ========================================================================== */
+
+@layer components {
+  .leli-table-wrapper {
+    --leli-accent: var(--leli-primary);
+    --leli-accent-soft: var(--leli-primary-soft);
+    overflow: auto;
+    max-inline-size: 100%;
+    max-block-size: min(560px, 80vh);
+    container-type: inline-size;
+    border-radius: var(--leli-radius-lg);
+    border: 1px solid var(--leli-border);
+    background-color: var(--leli-surface);
+    box-shadow: var(--leli-shadow-sm);
+
+    &:focus-visible {
+      outline: 2px solid var(--leli-accent);
+      outline-offset: 2px;
+    }
+
+    /* Variant: Glass */
+    &:where([data-variant="glass"], .leli-table-glass) {
+      background-color: var(--leli-surface-glass);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    /* Variant: Brutal */
+    &:where([data-variant="brutal"], .leli-table-brutal) {
+      border: 2.5px solid var(--leli-border-strong);
+      border-radius: var(--leli-radius-xs);
+      box-shadow: var(--leli-shadow-brutal);
+    }
+  }
+
+  .leli-table {
+    inline-size: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.875rem;
+    text-align: start;
+    color: var(--leli-text);
+
+    & caption {
+      padding: 0.85rem 1.25rem;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--leli-text-muted);
+      text-align: start;
+      border-block-end: 1px solid var(--leli-border);
+      background-color: color-mix(in srgb, var(--leli-surface-2) 40%, transparent);
+    }
+
+    /* Sticky column headers (desktop) */
+    & thead {
+      position: sticky;
+      inset-block-start: 0;
+      z-index: 2;
+      background-color: var(--leli-surface-2);
+    }
+
+    & thead th {
+      padding-block: 0.875rem;
+      padding-inline: 1.15rem;
+      font-weight: 700;
+      font-size: 0.775rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--leli-text-muted);
+      background-color: var(--leli-surface-2);
+      border-block-end: 1px solid var(--leli-border);
+      white-space: nowrap;
+      user-select: none;
+
+      &[data-sortable="true"] {
+        cursor: pointer;
+        transition: color var(--leli-duration) var(--leli-ease);
+
+        &:hover {
+          color: var(--leli-accent);
+        }
+
+        &::after {
+          content: " ↕";
+          opacity: 0.45;
+          font-size: 0.75rem;
+        }
+
+        &[aria-sort="ascending"]::after {
+          content: " ↑";
+          opacity: 1;
+          color: var(--leli-accent);
+        }
+
+        &[aria-sort="descending"]::after {
+          content: " ↓";
+          opacity: 1;
+          color: var(--leli-accent);
+        }
+      }
+    }
+
+    /* Sticky row headers (desktop) */
+    & tbody th {
+      position: sticky;
+      inset-inline-start: 0;
+      z-index: 1;
+      font-weight: 600;
+      color: var(--leli-text);
+      background-color: var(--leli-surface);
+      padding-block: 0.875rem;
+      padding-inline: 1.15rem;
+      border-block-end: 1px solid var(--leli-border);
+    }
+
+    & tbody td {
+      padding-block: 0.875rem;
+      padding-inline: 1.15rem;
+      color: var(--leli-text-muted);
+      border-block-end: 1px solid var(--leli-border);
+      transition: background-color 150ms ease;
+    }
+
+    & tbody tr:last-child :is(th, td) {
+      border-block-end: none;
+    }
+
+    /* Variant: Striped */
+    &:where([data-variant~="striped"], .leli-table-striped) tbody tr:nth-child(even) :is(th, td) {
+      background-color: color-mix(in srgb, var(--leli-surface-2) 55%, var(--leli-surface));
+    }
+
+    /* Variant: Hoverable */
+    &:where([data-variant~="hoverable"], .leli-table-hoverable) tbody tr:hover :is(th, td) {
+      background-color: var(--leli-accent-soft);
+      color: var(--leli-text);
+    }
+
+    /* Variant: Bordered Cells */
+    &:where([data-variant~="bordered"], .leli-table-bordered) :is(th, td):not(:last-child) {
+      border-inline-end: 1px solid var(--leli-border);
+    }
+
+    /* Size: Compact */
+    &:where([data-size="sm"], .leli-table-compact) :is(th, td) {
+      padding-block: 0.5rem;
+      padding-inline: 0.85rem;
+      font-size: 0.8125rem;
+    }
+
+    /* Size: Spacious */
+    &:where([data-size="lg"], .leli-table-lg) :is(th, td) {
+      padding-block: 1.15rem;
+      padding-inline: 1.5rem;
+      font-size: 0.95rem;
+    }
+  }
+
+  /* Responsive Stacked Layout via Container Queries (< 600px) */
+  @container (width < 600px) {
+    .leli-table:not([data-responsive="false"]),
+    .leli-table:not([data-responsive="false"]) :is(thead, tbody, tr, th, td) {
+      display: block;
+    }
+
+    .leli-table:not([data-responsive="false"]) thead {
+      /* MANDATORY: Hide column header from layout and screen readers. */
+      display: none;
+    }
+
+    .leli-table:not([data-responsive="false"]) tbody tr {
+      margin: 0.75rem;
+      border: 1px solid var(--leli-border);
+      border-radius: var(--leli-radius-md);
+      overflow: hidden;
+      box-shadow: var(--leli-shadow-sm);
+    }
+
+    .leli-table:not([data-responsive="false"]) tbody th {
+      position: sticky;
+      inset-block-start: 0;
+      z-index: 2;
+      background-color: var(--leli-surface-2);
+      border-block-end: 1px solid var(--leli-border);
+    }
+
+    .leli-table:not([data-responsive="false"]) tbody td {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      text-align: end;
+    }
+
+    .leli-table:not([data-responsive="false"]) tbody td:nth-child(2)::before {
+      content: var(--label-2, attr(data-label)) ": ";
+      font-weight: 600;
+      color: var(--leli-text);
+      text-align: start;
+    }
+    .leli-table:not([data-responsive="false"]) tbody td:nth-child(3)::before {
+      content: var(--label-3, attr(data-label)) ": ";
+      font-weight: 600;
+      color: var(--leli-text);
+      text-align: start;
+    }
+    .leli-table:not([data-responsive="false"]) tbody td:nth-child(4)::before {
+      content: var(--label-4, attr(data-label)) ": ";
+      font-weight: 600;
+      color: var(--leli-text);
+      text-align: start;
+    }
+    .leli-table:not([data-responsive="false"]) tbody td:nth-child(5)::before {
+      content: var(--label-5, attr(data-label)) ": ";
+      font-weight: 600;
+      color: var(--leli-text);
+      text-align: start;
+    }
+    .leli-table:not([data-responsive="false"]) tbody td:nth-child(6)::before {
+      content: var(--label-6, attr(data-label)) ": ";
+      font-weight: 600;
+      color: var(--leli-text);
+      text-align: start;
+    }
+  }
+}

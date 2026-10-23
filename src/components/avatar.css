@@ -1,0 +1,147 @@
+/* ==========================================================================
+   leliUI - Avatar & Avatar Group Component (Multi-Variant)
+   Shapes: circle, rounded, squircle, square
+   Variants: solid, soft, outlined, ring, gradient, brutal
+   Sizes: xs, sm, md, lg, xl, 2xl
+   Status indicators: online, offline, busy, away
+   ========================================================================== */
+
+@layer components {
+  .leli-avatar {
+    --leli-accent: var(--leli-primary);
+    --leli-accent-soft: var(--leli-primary-soft);
+    --avatar-size: 2.75rem;
+    --avatar-font: 0.95rem;
+    --avatar-radius: var(--leli-radius-full);
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--avatar-size);
+    block-size: var(--avatar-size);
+    border-radius: var(--avatar-radius);
+    background-color: var(--leli-accent-soft);
+    color: var(--leli-accent);
+    font-weight: 700;
+    font-size: var(--avatar-font);
+    text-transform: uppercase;
+    user-select: none;
+    flex-shrink: 0;
+    transition: transform var(--leli-duration) var(--leli-ease),
+                box-shadow var(--leli-duration) var(--leli-ease);
+
+    & img {
+      inline-size: 100%;
+      block-size: 100%;
+      object-fit: cover;
+      border-radius: inherit;
+      display: block;
+    }
+
+    /* Size Modifiers */
+    &:where([data-size="xs"], .leli-avatar-xs) {
+      --avatar-size: 1.75rem;
+      --avatar-font: 0.65rem;
+    }
+    &:where([data-size="sm"], .leli-avatar-sm) {
+      --avatar-size: 2.25rem;
+      --avatar-font: 0.775rem;
+    }
+    &:where([data-size="md"], .leli-avatar-md) {
+      --avatar-size: 2.75rem;
+      --avatar-font: 0.95rem;
+    }
+    &:where([data-size="lg"], .leli-avatar-lg) {
+      --avatar-size: 3.5rem;
+      --avatar-font: 1.15rem;
+    }
+    &:where([data-size="xl"], .leli-avatar-xl) {
+      --avatar-size: 4.5rem;
+      --avatar-font: 1.45rem;
+    }
+
+    /* Shape Modifiers */
+    &:where([data-shape="rounded"], .leli-avatar-rounded) {
+      --avatar-radius: var(--leli-radius-md);
+    }
+    &:where([data-shape="squircle"], .leli-avatar-squircle) {
+      --avatar-radius: 32%;
+    }
+    &:where([data-shape="square"], .leli-avatar-square) {
+      --avatar-radius: var(--leli-radius-xs);
+    }
+
+    /* Style Variants */
+    &:where([data-variant="solid"], .leli-avatar-solid) {
+      background-color: var(--leli-accent);
+      color: var(--leli-primary-fg, #ffffff);
+    }
+
+    &:where([data-variant="outlined"], .leli-avatar-outlined) {
+      background-color: transparent;
+      border: 2px solid var(--leli-accent);
+      color: var(--leli-accent);
+    }
+
+    &:where([data-variant="ring"], .leli-avatar-ring) {
+      box-shadow: 0 0 0 2px var(--leli-surface), 0 0 0 4px var(--leli-accent);
+    }
+
+    &:where([data-variant="gradient"], .leli-avatar-gradient) {
+      background-image: linear-gradient(135deg, var(--leli-accent), var(--leli-secondary));
+      color: #ffffff;
+    }
+
+    &:where([data-variant="brutal"], .leli-avatar-brutal) {
+      border: 2px solid var(--leli-border-strong);
+      box-shadow: 2px 2px 0px var(--leli-border-strong);
+    }
+
+    /* Status Indicator Dot */
+    &[data-status]::after {
+      content: "";
+      position: absolute;
+      inset-block-end: 2%;
+      inset-inline-end: 2%;
+      inline-size: max(0.65rem, calc(var(--avatar-size) * 0.25));
+      block-size: max(0.65rem, calc(var(--avatar-size) * 0.25));
+      border-radius: var(--leli-radius-full);
+      border: 2px solid var(--leli-surface);
+      background-color: var(--leli-text-muted);
+    }
+
+    &[data-status="online"]::after {
+      background-color: var(--leli-success);
+    }
+    &[data-status="busy"]::after {
+      background-color: var(--leli-danger);
+    }
+    &[data-status="away"]::after {
+      background-color: var(--leli-warning);
+    }
+    &[data-status="offline"]::after {
+      background-color: var(--leli-text-muted);
+    }
+  }
+
+  /* Avatar Group (Stacked Avatars) */
+  .leli-avatar-group {
+    display: inline-flex;
+    align-items: center;
+
+    & .leli-avatar {
+      border: 2.5px solid var(--leli-surface);
+      margin-inline-start: -0.75rem;
+
+      &:first-child {
+        margin-inline-start: 0;
+      }
+
+      &:hover {
+        transform: translateY(-4px) scale(1.06);
+        z-index: 5;
+      }
+    }
+  }
+}

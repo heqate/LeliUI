@@ -1,0 +1,189 @@
+/* ==========================================================================
+   leliUI - Card Component (Multi-Variant)
+   Variants: elevated, outlined, glass, gradient, brutal, interactive, horizontal
+   Sizes: sm, md, lg
+   ========================================================================== */
+
+@layer components {
+  .leli-card {
+    --leli-accent: var(--leli-primary);
+    --leli-accent-soft: var(--leli-primary-soft);
+    --card-padding: 1.5rem;
+    --card-radius: var(--leli-radius-lg);
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--leli-surface);
+    color: var(--leli-text);
+    border-radius: var(--card-radius);
+    border: 1px solid var(--leli-border);
+    box-shadow: var(--leli-shadow-sm);
+    overflow: hidden;
+    transition: transform var(--leli-duration) var(--leli-ease),
+                box-shadow var(--leli-duration) var(--leli-ease),
+                border-color var(--leli-duration) var(--leli-ease);
+
+    /* Size Modifiers */
+    &:where([data-size="sm"], .leli-card-sm) {
+      --card-padding: 1rem;
+      --card-radius: var(--leli-radius-md);
+    }
+
+    &:where([data-size="lg"], .leli-card-lg) {
+      --card-padding: 2rem;
+      --card-radius: var(--leli-radius-xl);
+    }
+
+    /* Variant: Elevated (Default enhanced shadow) */
+    &:where([data-variant="elevated"], .leli-card-elevated) {
+      border-color: transparent;
+      box-shadow: var(--leli-shadow-md);
+    }
+
+    /* Variant: Outlined (Minimal crisp border, no shadow) */
+    &:where([data-variant="outlined"], .leli-card-outlined) {
+      box-shadow: none;
+      border-width: 1.5px;
+    }
+
+    /* Variant: Soft / Subtle */
+    &:where([data-variant="soft"], .leli-card-soft) {
+      background-color: var(--leli-surface-2);
+      border-color: transparent;
+      box-shadow: none;
+    }
+
+    /* Variant: Glassmorphism */
+    &:where([data-variant="glass"], .leli-card-glass) {
+      background-color: var(--leli-surface-glass);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid color-mix(in srgb, var(--leli-text) 12%, transparent);
+      box-shadow: var(--leli-shadow-md);
+    }
+
+    /* Variant: Gradient Border / Glow */
+    &:where([data-variant="gradient"], .leli-card-gradient) {
+      background:
+        linear-gradient(var(--leli-surface), var(--leli-surface)) padding-box,
+        linear-gradient(135deg, var(--leli-accent), var(--leli-secondary), var(--leli-info)) border-box;
+      border: 2px solid transparent;
+      box-shadow: 0 8px 24px -6px var(--leli-accent-soft);
+    }
+
+    /* Variant: Neo-Brutalist */
+    &:where([data-variant="brutal"], .leli-card-brutal) {
+      border: 2.5px solid var(--leli-border-strong);
+      border-radius: var(--leli-radius-sm);
+      box-shadow: var(--leli-shadow-brutal);
+
+      &:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0px var(--leli-border-strong);
+      }
+    }
+
+    /* Variant: Accent Top Bar */
+    &:where([data-variant="accent-top"], .leli-card-accent-top) {
+      border-block-start: 4px solid var(--leli-accent);
+    }
+
+    /* Interactive Modifier */
+    &:where([data-interactive="true"], .leli-card-interactive) {
+      cursor: pointer;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--leli-shadow-lg);
+        border-color: color-mix(in srgb, var(--leli-accent) 50%, var(--leli-border));
+      }
+    }
+
+    /* Horizontal Layout */
+    &:where([data-layout="horizontal"], .leli-card-horizontal) {
+      flex-direction: row;
+      align-items: stretch;
+
+      & .leli-card-media {
+        inline-size: 38%;
+        min-inline-size: 140px;
+        aspect-ratio: auto;
+      }
+
+      @media (width < 560px) {
+        flex-direction: column;
+        & .leli-card-media {
+          inline-size: 100%;
+        }
+      }
+    }
+  }
+
+  .leli-card-media {
+    position: relative;
+    inline-size: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background-color: var(--leli-surface-2);
+
+    & img,
+    & video {
+      inline-size: 100%;
+      block-size: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 400ms var(--leli-ease);
+    }
+  }
+
+  .leli-card:hover .leli-card-media img {
+    transform: scale(1.04);
+  }
+
+  .leli-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block-start: var(--card-padding);
+    padding-inline: var(--card-padding);
+  }
+
+  .leli-card-title {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--leli-text);
+  }
+
+  .leli-card-subtitle {
+    margin-block-start: 0.25rem;
+    margin-block-end: 0;
+    font-size: 0.85rem;
+    color: var(--leli-text-muted);
+  }
+
+  .leli-card-body {
+    padding: var(--card-padding);
+    flex: 1 1 auto;
+    font-size: 0.925rem;
+    color: var(--leli-text-muted);
+
+    .leli-card-header + & {
+      padding-block-start: 0.875rem;
+    }
+  }
+
+  .leli-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-block: calc(var(--card-padding) * 0.75);
+    padding-inline: var(--card-padding);
+    border-block-start: 1px solid var(--leli-border);
+    background-color: color-mix(in srgb, var(--leli-surface-2) 45%, transparent);
+  }
+}

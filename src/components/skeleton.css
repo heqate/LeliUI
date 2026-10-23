@@ -1,0 +1,100 @@
+/* ==========================================================================
+   leliUI - Skeleton Loader Component (Multi-Variant)
+   Shapes: text, title, circle, rect, button, card
+   Animations: shimmer, pulse, wave, static
+   ========================================================================== */
+
+@layer components {
+  .leli-skeleton {
+    --skeleton-base: color-mix(in srgb, var(--leli-text-muted) 16%, var(--leli-surface));
+    --skeleton-highlight: color-mix(in srgb, var(--leli-text-muted) 28%, var(--leli-surface));
+
+    display: block;
+    inline-size: 100%;
+    block-size: 1rem;
+    border-radius: var(--leli-radius-sm);
+    background-color: var(--skeleton-base);
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    pointer-events: none;
+
+    /* Default Shimmer Effect */
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      transform: translateX(-100%);
+      background-image: linear-gradient(
+        90deg,
+        transparent 0%,
+        var(--skeleton-highlight) 50%,
+        transparent 100%
+      );
+      animation: leliSkeletonShimmer 1.6s infinite;
+    }
+
+    /* Variant: Pulse */
+    &:where([data-variant="pulse"], .leli-skeleton-pulse) {
+      animation: leliSkeletonPulse 1.6s ease-in-out infinite;
+      &::after {
+        display: none;
+      }
+    }
+
+    /* Variant: Static (No animation) */
+    &:where([data-variant="static"], .leli-skeleton-static)::after {
+      display: none;
+    }
+
+    /* Variant: Brutal */
+    &:where([data-variant="brutal"], .leli-skeleton-brutal) {
+      border: 1.5px solid var(--leli-border-strong);
+      border-radius: 2px;
+    }
+
+    /* Shape Modifiers */
+    &:where([data-shape="title"], .leli-skeleton-title) {
+      block-size: 1.5rem;
+      inline-size: 65%;
+      border-radius: var(--leli-radius-md);
+    }
+
+    &:where([data-shape="text"], .leli-skeleton-text) {
+      block-size: 0.875rem;
+    }
+
+    &:where([data-shape="circle"], .leli-skeleton-circle) {
+      inline-size: 3rem;
+      block-size: 3rem;
+      border-radius: var(--leli-radius-full);
+      flex-shrink: 0;
+    }
+
+    &:where([data-shape="media"], .leli-skeleton-media) {
+      block-size: 10rem;
+      border-radius: var(--leli-radius-md);
+    }
+
+    &:where([data-shape="button"], .leli-skeleton-button) {
+      inline-size: 7rem;
+      block-size: 2.35rem;
+      border-radius: var(--leli-radius-md);
+    }
+  }
+
+  @keyframes leliSkeletonShimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes leliSkeletonPulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.45;
+    }
+  }
+}

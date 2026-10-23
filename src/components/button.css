@@ -1,0 +1,215 @@
+/* ==========================================================================
+   leliUI - Button Component (Multi-Variant & Multi-Size)
+   Variants: solid, outlined, soft, ghost, glass, gradient, brutal, link
+   Sizes: sm, md, lg, xl, icon
+   ========================================================================== */
+
+@layer components {
+  .leli-btn {
+    --leli-btn-bg: var(--leli-surface-2);
+    --leli-btn-color: var(--leli-text);
+    --leli-btn-border: var(--leli-border);
+    --leli-btn-px: 1rem;
+    --leli-btn-py: 0.5rem;
+    --leli-btn-font: 0.875rem;
+    --leli-btn-radius: var(--leli-radius-md);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-block: var(--leli-btn-py);
+    padding-inline: var(--leli-btn-px);
+    font-family: inherit;
+    font-size: var(--leli-btn-font);
+    font-weight: 600;
+    line-height: 1.25;
+    border-radius: var(--leli-btn-radius);
+    border: 1px solid var(--leli-btn-border);
+    background-color: var(--leli-btn-bg);
+    color: var(--leli-btn-color);
+    cursor: pointer;
+    text-decoration: none;
+    user-select: none;
+    white-space: nowrap;
+    transition: all var(--leli-duration) var(--leli-ease);
+
+    &:hover:not(:disabled) {
+      border-color: var(--leli-primary);
+      color: var(--leli-primary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--leli-primary);
+      outline-offset: 2px;
+    }
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* Loading State */
+    &.is-loading {
+      position: relative;
+      color: transparent !important;
+      pointer-events: none;
+
+      &::after {
+        content: "";
+        position: absolute;
+        inline-size: 1rem;
+        block-size: 1rem;
+        border: 2px solid currentColor;
+        border-inline-end-color: transparent;
+        border-radius: 50%;
+        color: var(--leli-btn-color);
+        animation: leliBtnSpin 600ms linear infinite;
+      }
+    }
+
+    /* Size Modifiers */
+    &:where([data-size="sm"], .leli-btn-sm) {
+      --leli-btn-py: 0.35rem;
+      --leli-btn-px: 0.75rem;
+      --leli-btn-font: 0.78rem;
+    }
+    &:where([data-size="lg"], .leli-btn-lg) {
+      --leli-btn-py: 0.65rem;
+      --leli-btn-px: 1.25rem;
+      --leli-btn-font: 1rem;
+    }
+    &:where([data-size="xl"], .leli-btn-xl) {
+      --leli-btn-py: 0.85rem;
+      --leli-btn-px: 1.65rem;
+      --leli-btn-font: 1.125rem;
+    }
+    &:where([data-size="icon"], .leli-btn-icon) {
+      padding: 0.5rem;
+      inline-size: 2.25rem;
+      block-size: 2.25rem;
+    }
+
+    /* Variant: Solid (Primary Brand / Filled) */
+    &:where([data-variant="solid"], .leli-btn-primary) {
+      --leli-btn-bg: var(--leli-primary);
+      --leli-btn-border: var(--leli-primary);
+      --leli-btn-color: #ffffff;
+      box-shadow: 0 2px 10px -2px rgba(244, 114, 182, 0.4);
+
+      &:hover:not(:disabled) {
+        background-color: var(--leli-primary-hover);
+        border-color: var(--leli-primary-hover);
+        color: #ffffff;
+        box-shadow: 0 4px 14px -2px rgba(244, 114, 182, 0.55);
+      }
+    }
+
+    /* Variant: Outlined */
+    &:where([data-variant="outlined"], .leli-btn-outlined) {
+      --leli-btn-bg: transparent;
+      --leli-btn-border: var(--leli-border);
+      --leli-btn-color: var(--leli-text);
+
+      &:hover:not(:disabled) {
+        border-color: var(--leli-primary);
+        color: var(--leli-primary);
+        background-color: var(--leli-primary-soft);
+      }
+    }
+
+    /* Variant: Soft / Subtle */
+    &:where([data-variant="soft"], .leli-btn-soft) {
+      --leli-btn-bg: var(--leli-primary-soft);
+      --leli-btn-border: transparent;
+      --leli-btn-color: var(--leli-primary);
+
+      &:hover:not(:disabled) {
+        background-color: color-mix(in srgb, var(--leli-primary-soft) 80%, var(--leli-primary));
+        color: #ffffff;
+      }
+    }
+
+    /* Variant: Ghost (No border, transparent) */
+    &:where([data-variant="ghost"], .leli-btn-ghost) {
+      --leli-btn-bg: transparent;
+      --leli-btn-border: transparent;
+      --leli-btn-color: var(--leli-text);
+
+      &:hover:not(:disabled) {
+        background-color: var(--leli-surface-2);
+        color: var(--leli-primary);
+      }
+    }
+
+    /* Variant: Glass */
+    &:where([data-variant="glass"], .leli-btn-glass) {
+      --leli-btn-bg: var(--leli-surface-glass);
+      --leli-btn-border: color-mix(in srgb, var(--leli-border) 80%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+
+      &:hover:not(:disabled) {
+        border-color: var(--leli-primary);
+      }
+    }
+
+    /* Variant: Gradient */
+    &:where([data-variant="gradient"], .leli-btn-gradient) {
+      background: linear-gradient(135deg, #f472b6, #db2777);
+      border-color: transparent;
+      color: #ffffff;
+      box-shadow: 0 4px 14px -3px rgba(244, 114, 182, 0.5);
+
+      &:hover:not(:disabled) {
+        filter: brightness(1.1);
+        color: #ffffff;
+      }
+    }
+
+    /* Variant: Brutal */
+    &:where([data-variant="brutal"], .leli-btn-brutal) {
+      border: 2px solid var(--leli-border-strong);
+      border-radius: var(--leli-radius-xs);
+      box-shadow: 3px 3px 0px var(--leli-border-strong);
+
+      &:hover:not(:disabled) {
+        transform: translate(-1px, -1px);
+        box-shadow: 4px 4px 0px var(--leli-primary);
+        border-color: var(--leli-primary);
+      }
+    }
+  }
+
+  @keyframes leliBtnSpin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Button Group (.leli-btn-group) */
+  .leli-btn-group {
+    display: inline-flex;
+    align-items: center;
+
+    & > .leli-btn {
+      border-radius: 0;
+      margin-inline-start: -1px;
+
+      &:first-child {
+        border-start-start-radius: var(--leli-radius-md);
+        border-end-start-radius: var(--leli-radius-md);
+        margin-inline-start: 0;
+      }
+
+      &:last-child {
+        border-start-end-radius: var(--leli-radius-md);
+        border-end-end-radius: var(--leli-radius-md);
+      }
+
+      &:hover {
+        z-index: 2;
+      }
+    }
+  }
+}

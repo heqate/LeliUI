@@ -1,0 +1,47 @@
+{
+  "name": "leli-ui",
+  "version": "1.0.12",
+  "description": "Zero-dependency, multi-variant, AI-first HTML/CSS/JS UI library with Sakura Pink & Dark Mode aesthetics",
+  "main": "dist/leli.js",
+  "style": "dist/leli.css",
+  "bin": {
+    "leli-ui": "./bin/leli.js",
+    "leli": "./bin/leli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heqate/LeliUI.git"
+  },
+  "homepage": "http://34.2.63.150:5000",
+  "bugs": {
+    "url": "https://github.com/heqate/LeliUI/issues"
+  },
+  "scripts": {
+    "build": "node scripts/build.js",
+    "cli": "node bin/leli.js",
+    "serve": "node scripts/serve.js"
+  },
+  "keywords": [
+    "leli-ui",
+    "ui-library",
+    "components",
+    "css-framework",
+    "design-system",
+    "ai-ready",
+    "llms-txt",
+    "zero-dependency",
+    "sakura-pink",
+    "grid",
+    "navbar",
+    "button",
+    "input",
+    "modal",
+    "toast",
+    "card",
+    "tabs",
+    "accordion",
+    "table"
+  ],
+  "author": "heqate",
+  "license": "MIT"
+}

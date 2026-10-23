@@ -1,0 +1,363 @@
+/* ==========================================================================
+   leliUI - Form Inputs, Textareas, Selects & Floating Labels
+   Modern CSS: :user-valid, :user-invalid, :has(), @layer components
+   ========================================================================== */
+
+@layer components {
+  /* --- 1. Form Field Container --- */
+  .leli-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    margin-block-end: 1.25rem;
+    position: relative;
+    width: 100%;
+  }
+
+  .leli-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--leli-text);
+    user-select: none;
+
+    & .leli-required {
+      color: var(--leli-danger, #f43f5e);
+    }
+  }
+
+  .leli-hint {
+    font-size: 0.775rem;
+    color: var(--leli-text-muted);
+    line-height: 1.4;
+  }
+
+  .leli-error-msg {
+    display: none;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.775rem;
+    font-weight: 500;
+    color: var(--leli-danger, #f43f5e);
+    margin-block-start: 0.15rem;
+    animation: leliFadeIn 150ms ease-out;
+  }
+
+  .leli-success-msg {
+    display: none;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.775rem;
+    font-weight: 500;
+    color: var(--leli-success, #10b981);
+    margin-block-start: 0.15rem;
+    animation: leliFadeIn 150ms ease-out;
+  }
+
+  /* --- 2. Base Input & Textarea --- */
+  .leli-input,
+  .leli-textarea,
+  .leli-select {
+    --leli-input-bg: var(--leli-surface-1);
+    --leli-input-border: var(--leli-border);
+    --leli-input-color: var(--leli-text);
+    --leli-input-placeholder: var(--leli-text-dim);
+    --leli-input-radius: var(--leli-radius-md);
+    --leli-input-py: 0.6rem;
+    --leli-input-px: 0.875rem;
+    --leli-input-font: 0.9rem;
+
+    width: 100%;
+    padding-block: var(--leli-input-py);
+    padding-inline: var(--leli-input-px);
+    font-family: inherit;
+    font-size: var(--leli-input-font);
+    line-height: 1.5;
+    color: var(--leli-input-color);
+    background-color: var(--leli-input-bg);
+    border: 1px solid var(--leli-input-border);
+    border-radius: var(--leli-input-radius);
+    outline: none;
+    transition: border-color var(--leli-duration) var(--leli-ease),
+                box-shadow var(--leli-duration) var(--leli-ease),
+                background-color var(--leli-duration) var(--leli-ease);
+
+    &::placeholder {
+      color: var(--leli-input-placeholder);
+      opacity: 0.7;
+    }
+
+    &:hover:not(:disabled):not(:read-only) {
+      border-color: color-mix(in srgb, var(--leli-primary) 50%, var(--leli-border));
+    }
+
+    &:focus-visible {
+      border-color: var(--leli-primary);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--leli-primary) 25%, transparent);
+    }
+
+    &:disabled {
+      opacity: 0.55;
+      background-color: var(--leli-surface-2);
+      cursor: not-allowed;
+    }
+
+    &:read-only:not(:disabled) {
+      background-color: var(--leli-surface-2);
+      border-color: var(--leli-border);
+      cursor: default;
+    }
+  }
+
+  .leli-textarea {
+    min-block-size: 5rem;
+    resize: vertical;
+  }
+
+  /* --- 3. Select Dropdown --- */
+  .leli-select {
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%23f472b6' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+    background-position: right 0.75rem center;
+    background-repeat: no-repeat;
+    background-size: 1.25rem 1.25rem;
+    padding-inline-end: 2.25rem;
+
+    & option {
+      background-color: var(--leli-surface-1);
+      color: var(--leli-text);
+      padding: 0.5rem;
+    }
+  }
+
+  /* --- 4. Sizes --- */
+  .leli-input[data-size="sm"],
+  .leli-select[data-size="sm"],
+  .leli-input-sm {
+    --leli-input-py: 0.35rem;
+    --leli-input-px: 0.65rem;
+    --leli-input-font: 0.8rem;
+    --leli-input-radius: var(--leli-radius-sm);
+  }
+
+  .leli-input[data-size="lg"],
+  .leli-select[data-size="lg"],
+  .leli-input-lg {
+    --leli-input-py: 0.85rem;
+    --leli-input-px: 1.15rem;
+    --leli-input-font: 1.05rem;
+    --leli-input-radius: var(--leli-radius-lg);
+  }
+
+  /* --- 5. Variants (Glass, Outlined, Soft, Brutal) --- */
+  .leli-input[data-variant="glass"],
+  .leli-textarea[data-variant="glass"],
+  .leli-select[data-variant="glass"] {
+    background-color: var(--leli-surface-glass);
+    backdrop-filter: blur(12px);
+    border-color: color-mix(in srgb, var(--leli-border) 80%, transparent);
+  }
+
+  .leli-input[data-variant="soft"],
+  .leli-textarea[data-variant="soft"] {
+    background-color: var(--leli-surface-2);
+    border-color: transparent;
+
+    &:focus-visible {
+      background-color: var(--leli-surface-1);
+      border-color: var(--leli-primary);
+    }
+  }
+
+  .leli-input[data-variant="brutal"],
+  .leli-textarea[data-variant="brutal"],
+  .leli-select[data-variant="brutal"] {
+    border: 2px solid var(--leli-border-strong);
+    border-radius: var(--leli-radius-xs);
+    box-shadow: 2px 2px 0 var(--leli-border-strong);
+
+    &:focus-visible {
+      box-shadow: 4px 4px 0 var(--leli-primary);
+      transform: translate(-1px, -1px);
+    }
+  }
+
+  /* --- 6. Input Groups & Addons --- */
+  .leli-input-group {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    position: relative;
+
+    & > .leli-input,
+    & > .leli-select {
+      flex: 1 1 auto;
+      min-width: 0;
+
+      &:not(:first-child) {
+        border-start-start-radius: 0;
+        border-end-start-radius: 0;
+        margin-inline-start: -1px;
+      }
+      &:not(:last-child) {
+        border-start-end-radius: 0;
+        border-end-end-radius: 0;
+      }
+      &:focus-visible {
+        z-index: 2;
+      }
+    }
+
+    & .leli-addon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding-inline: 0.85rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--leli-text-muted);
+      background-color: var(--leli-surface-2);
+      border: 1px solid var(--leli-input-border, var(--leli-border));
+      white-space: nowrap;
+
+      &:first-child {
+        border-start-start-radius: var(--leli-input-radius, var(--leli-radius-md));
+        border-end-start-radius: var(--leli-input-radius, var(--leli-radius-md));
+      }
+      &:last-child {
+        border-start-end-radius: var(--leli-input-radius, var(--leli-radius-md));
+        border-end-end-radius: var(--leli-input-radius, var(--leli-radius-md));
+        margin-inline-start: -1px;
+      }
+    }
+
+    & > .leli-btn {
+      &:first-child {
+        border-start-end-radius: 0;
+        border-end-end-radius: 0;
+      }
+      &:last-child {
+        border-start-start-radius: 0;
+        border-end-start-radius: 0;
+        margin-inline-start: -1px;
+      }
+      z-index: 1;
+      &:focus-visible {
+        z-index: 2;
+      }
+    }
+  }
+
+  /* Icon input with prefix/suffix position absolute */
+  .leli-input-wrap {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    & .leli-input-icon {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      inline-size: 2.25rem;
+      block-size: 100%;
+      color: var(--leli-text-muted);
+      pointer-events: none;
+      z-index: 1;
+
+      & svg {
+        inline-size: 1.15rem;
+        block-size: 1.15rem;
+      }
+    }
+
+    &.has-prefix .leli-input {
+      padding-inline-start: 2.5rem;
+    }
+    &.has-suffix .leli-input {
+      padding-inline-end: 2.5rem;
+    }
+    & .leli-prefix {
+      left: 0;
+    }
+    & .leli-suffix {
+      right: 0;
+    }
+  }
+
+  /* --- 7. Modern Validation States (:user-valid / :user-invalid) --- */
+  .leli-input:user-invalid,
+  .leli-textarea:user-invalid,
+  .leli-select:user-invalid,
+  .leli-input.is-invalid {
+    border-color: var(--leli-danger, #f43f5e) !important;
+    background-color: color-mix(in srgb, var(--leli-danger, #f43f5e) 6%, var(--leli-surface-1));
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--leli-danger, #f43f5e) 15%, transparent);
+  }
+
+  .leli-input:user-valid,
+  .leli-textarea:user-valid,
+  .leli-select:user-valid,
+  .leli-input.is-valid {
+    border-color: var(--leli-success, #10b981) !important;
+    background-color: color-mix(in srgb, var(--leli-success, #10b981) 4%, var(--leli-surface-1));
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--leli-success, #10b981) 12%, transparent);
+  }
+
+  /* Reveal error and success messages via adjacent selector or :has() */
+  .leli-input:user-invalid ~ .leli-error-msg,
+  .leli-input.is-invalid ~ .leli-error-msg,
+  .leli-field:has(.leli-input:user-invalid) .leli-error-msg,
+  .leli-field:has(.leli-input.is-invalid) .leli-error-msg {
+    display: flex;
+  }
+
+  .leli-input:user-valid ~ .leli-success-msg,
+  .leli-input.is-valid ~ .leli-success-msg,
+  .leli-field:has(.leli-input:user-valid) .leli-success-msg,
+  .leli-field:has(.leli-input.is-valid) .leli-success-msg {
+    display: flex;
+  }
+
+  /* --- 8. Floating Label Pattern --- */
+  .leli-field-floating {
+    position: relative;
+    margin-block-end: 1.25rem;
+
+    & .leli-input {
+      padding-block-start: 1.25rem;
+      padding-block-end: 0.35rem;
+      block-size: 3.25rem;
+
+      &::placeholder {
+        color: transparent;
+      }
+    }
+
+    & .leli-label {
+      position: absolute;
+      top: 0.85rem;
+      left: 0.875rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--leli-text-muted);
+      pointer-events: none;
+      transform-origin: 0 0;
+      transition: transform 180ms cubic-bezier(0.4, 0, 0.2, 1),
+                  color 180ms cubic-bezier(0.4, 0, 0.2, 1),
+                  top 180ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    & .leli-input:focus ~ .leli-label,
+    & .leli-input:not(:placeholder-shown) ~ .leli-label {
+      top: 0.35rem;
+      transform: scale(0.75);
+      color: var(--leli-primary);
+      font-weight: 600;
+    }
+  }
+}

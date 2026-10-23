@@ -1,0 +1,373 @@
+/* ==========================================================================
+   leliUI - Comprehensive Layout, Grid & Page Skeleton Architecture
+   Includes:
+   1. Containers (sm, md, lg, xl, 2xl, narrow, fluid)
+   2. 12-Column Flexbox Grid (.leli-row, .leli-col-*, .leli-row-cols-*, offsets, order)
+   3. CSS Grid & Auto-Fit Responsive Grid (.leli-grid, .leli-grid-auto-sm/md/lg)
+   4. Bento Grid System (.leli-bento, .leli-bento-wide, .leli-bento-tall, .leli-bento-hero)
+   5. Page Layout Shells (Holy Grail, Sidebar + Main, Split Screen)
+   6. Stack & Cluster Helpers (.leli-stack, .leli-cluster, .leli-divider)
+   ========================================================================== */
+
+@layer components {
+  /* ========================================================================
+     1. CONTAINERS (Sayfayı Ortalar ve Maksimum Genişliği Belirler)
+     ======================================================================== */
+  .leli-container,
+  .leli-container-narrow,
+  .leli-container-sm,
+  .leli-container-md,
+  .leli-container-lg,
+  .leli-container-xl,
+  .leli-container-2xl,
+  .leli-container-fluid {
+    --leli-gutter-x: 1.5rem;
+    --leli-gutter-y: 0;
+    inline-size: 100%;
+    padding-inline: calc(var(--leli-gutter-x) * 0.5);
+    margin-inline: auto;
+    box-sizing: border-box;
+  }
+
+  .leli-container-narrow { max-inline-size: 680px; }
+
+  @media (min-width: 576px) {
+    .leli-container, .leli-container-sm { max-inline-size: 540px; }
+  }
+  @media (min-width: 768px) {
+    .leli-container, .leli-container-sm, .leli-container-md { max-inline-size: 720px; }
+  }
+  @media (min-width: 992px) {
+    .leli-container, .leli-container-sm, .leli-container-md, .leli-container-lg { max-inline-size: 960px; }
+  }
+  @media (min-width: 1200px) {
+    .leli-container, .leli-container-sm, .leli-container-md, .leli-container-lg, .leli-container-xl { max-inline-size: 1140px; }
+  }
+  @media (min-width: 1400px) {
+    .leli-container, .leli-container-sm, .leli-container-md, .leli-container-lg, .leli-container-xl, .leli-container-2xl { max-inline-size: 1320px; }
+  }
+
+  /* ========================================================================
+     2. 12-COLUMN FLEXBOX GRID (.leli-row & .leli-col-*)
+     ======================================================================== */
+  .leli-row {
+    --leli-gutter-x: 1.25rem;
+    --leli-gutter-y: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    margin-block-start: calc(-1 * var(--leli-gutter-y));
+    margin-inline: calc(-0.5 * var(--leli-gutter-x));
+    box-sizing: border-box;
+
+    & > * {
+      box-sizing: border-box;
+      flex-shrink: 0;
+      inline-size: 100%;
+      max-inline-size: 100%;
+      padding-inline: calc(var(--leli-gutter-x) * 0.5);
+      margin-block-start: var(--leli-gutter-y);
+    }
+  }
+
+  /* Row Columns (Satır başı otomatik sütun sayısı: .leli-row-cols-1 ... 6) */
+  .leli-row-cols-1 > * { flex: 0 0 auto; inline-size: 100%; }
+  .leli-row-cols-2 > * { flex: 0 0 auto; inline-size: 50%; }
+  .leli-row-cols-3 > * { flex: 0 0 auto; inline-size: 33.333333%; }
+  .leli-row-cols-4 > * { flex: 0 0 auto; inline-size: 25%; }
+  .leli-row-cols-5 > * { flex: 0 0 auto; inline-size: 20%; }
+  .leli-row-cols-6 > * { flex: 0 0 auto; inline-size: 16.666667%; }
+
+  /* Gutter (Sütun Boşluğu) Sınıfları */
+  .leli-g-0  { --leli-gutter-x: 0rem;    --leli-gutter-y: 0rem; }
+  .leli-g-1  { --leli-gutter-x: 0.5rem;  --leli-gutter-y: 0.5rem; }
+  .leli-g-2  { --leli-gutter-x: 1rem;    --leli-gutter-y: 1rem; }
+  .leli-g-3  { --leli-gutter-x: 1.5rem;  --leli-gutter-y: 1.5rem; }
+  .leli-g-4  { --leli-gutter-x: 2.25rem; --leli-gutter-y: 2.25rem; }
+  .leli-gx-0 { --leli-gutter-x: 0rem; }
+  .leli-gx-2 { --leli-gutter-x: 1rem; }
+  .leli-gx-4 { --leli-gutter-x: 2.25rem; }
+  .leli-gy-0 { --leli-gutter-y: 0rem; }
+  .leli-gy-2 { --leli-gutter-y: 1rem; }
+  .leli-gy-4 { --leli-gutter-y: 2.25rem; }
+
+  /* Sütun Genişlikleri (1 - 12) */
+  .leli-col      { flex: 1 0 0%; }
+  .leli-col-auto { flex: 0 0 auto; inline-size: auto; }
+  .leli-col-1    { flex: 0 0 auto; inline-size: 8.333333%; }
+  .leli-col-2    { flex: 0 0 auto; inline-size: 16.666667%; }
+  .leli-col-3    { flex: 0 0 auto; inline-size: 25%; }
+  .leli-col-4    { flex: 0 0 auto; inline-size: 33.333333%; }
+  .leli-col-5    { flex: 0 0 auto; inline-size: 41.666667%; }
+  .leli-col-6    { flex: 0 0 auto; inline-size: 50%; }
+  .leli-col-7    { flex: 0 0 auto; inline-size: 58.333333%; }
+  .leli-col-8    { flex: 0 0 auto; inline-size: 66.666667%; }
+  .leli-col-9    { flex: 0 0 auto; inline-size: 75%; }
+  .leli-col-10   { flex: 0 0 auto; inline-size: 83.333333%; }
+  .leli-col-11   { flex: 0 0 auto; inline-size: 91.666667%; }
+  .leli-col-12   { flex: 0 0 auto; inline-size: 100%; }
+
+  /* Offsets (Soldan Boşluk Bırakma) */
+  .leli-offset-1  { margin-inline-start: 8.333333%; }
+  .leli-offset-2  { margin-inline-start: 16.666667%; }
+  .leli-offset-3  { margin-inline-start: 25%; }
+  .leli-offset-4  { margin-inline-start: 33.333333%; }
+  .leli-offset-6  { margin-inline-start: 50%; }
+
+  /* Order (Sıralama Değiştirme) */
+  .leli-order-first { order: -1; }
+  .leli-order-last  { order: 13; }
+  .leli-order-1     { order: 1; }
+  .leli-order-2     { order: 2; }
+  .leli-order-3     { order: 3; }
+
+  /* Responsive: sm (>= 576px) */
+  @media (min-width: 576px) {
+    .leli-row-cols-sm-1 > * { flex: 0 0 auto; inline-size: 100%; }
+    .leli-row-cols-sm-2 > * { flex: 0 0 auto; inline-size: 50%; }
+    .leli-row-cols-sm-3 > * { flex: 0 0 auto; inline-size: 33.333333%; }
+    .leli-col-sm      { flex: 1 0 0%; }
+    .leli-col-sm-auto { flex: 0 0 auto; inline-size: auto; }
+    .leli-col-sm-1    { flex: 0 0 auto; inline-size: 8.333333%; }
+    .leli-col-sm-2    { flex: 0 0 auto; inline-size: 16.666667%; }
+    .leli-col-sm-3    { flex: 0 0 auto; inline-size: 25%; }
+    .leli-col-sm-4    { flex: 0 0 auto; inline-size: 33.333333%; }
+    .leli-col-sm-5    { flex: 0 0 auto; inline-size: 41.666667%; }
+    .leli-col-sm-6    { flex: 0 0 auto; inline-size: 50%; }
+    .leli-col-sm-7    { flex: 0 0 auto; inline-size: 58.333333%; }
+    .leli-col-sm-8    { flex: 0 0 auto; inline-size: 66.666667%; }
+    .leli-col-sm-9    { flex: 0 0 auto; inline-size: 75%; }
+    .leli-col-sm-10   { flex: 0 0 auto; inline-size: 83.333333%; }
+    .leli-col-sm-11   { flex: 0 0 auto; inline-size: 91.666667%; }
+    .leli-col-sm-12   { flex: 0 0 auto; inline-size: 100%; }
+  }
+
+  /* Responsive: md (>= 768px) */
+  @media (min-width: 768px) {
+    .leli-row-cols-md-2 > * { flex: 0 0 auto; inline-size: 50%; }
+    .leli-row-cols-md-3 > * { flex: 0 0 auto; inline-size: 33.333333%; }
+    .leli-row-cols-md-4 > * { flex: 0 0 auto; inline-size: 25%; }
+    .leli-col-md      { flex: 1 0 0%; }
+    .leli-col-md-auto { flex: 0 0 auto; inline-size: auto; }
+    .leli-col-md-1    { flex: 0 0 auto; inline-size: 8.333333%; }
+    .leli-col-md-2    { flex: 0 0 auto; inline-size: 16.666667%; }
+    .leli-col-md-3    { flex: 0 0 auto; inline-size: 25%; }
+    .leli-col-md-4    { flex: 0 0 auto; inline-size: 33.333333%; }
+    .leli-col-md-5    { flex: 0 0 auto; inline-size: 41.666667%; }
+    .leli-col-md-6    { flex: 0 0 auto; inline-size: 50%; }
+    .leli-col-md-7    { flex: 0 0 auto; inline-size: 58.333333%; }
+    .leli-col-md-8    { flex: 0 0 auto; inline-size: 66.666667%; }
+    .leli-col-md-9    { flex: 0 0 auto; inline-size: 75%; }
+    .leli-col-md-10   { flex: 0 0 auto; inline-size: 83.333333%; }
+    .leli-col-md-11   { flex: 0 0 auto; inline-size: 91.666667%; }
+    .leli-col-md-12   { flex: 0 0 auto; inline-size: 100%; }
+  }
+
+  /* Responsive: lg (>= 992px) */
+  @media (min-width: 992px) {
+    .leli-row-cols-lg-3 > * { flex: 0 0 auto; inline-size: 33.333333%; }
+    .leli-row-cols-lg-4 > * { flex: 0 0 auto; inline-size: 25%; }
+    .leli-row-cols-lg-6 > * { flex: 0 0 auto; inline-size: 16.666667%; }
+    .leli-col-lg      { flex: 1 0 0%; }
+    .leli-col-lg-auto { flex: 0 0 auto; inline-size: auto; }
+    .leli-col-lg-1    { flex: 0 0 auto; inline-size: 8.333333%; }
+    .leli-col-lg-2    { flex: 0 0 auto; inline-size: 16.666667%; }
+    .leli-col-lg-3    { flex: 0 0 auto; inline-size: 25%; }
+    .leli-col-lg-4    { flex: 0 0 auto; inline-size: 33.333333%; }
+    .leli-col-lg-5    { flex: 0 0 auto; inline-size: 41.666667%; }
+    .leli-col-lg-6    { flex: 0 0 auto; inline-size: 50%; }
+    .leli-col-lg-7    { flex: 0 0 auto; inline-size: 58.333333%; }
+    .leli-col-lg-8    { flex: 0 0 auto; inline-size: 66.666667%; }
+    .leli-col-lg-9    { flex: 0 0 auto; inline-size: 75%; }
+    .leli-col-lg-10   { flex: 0 0 auto; inline-size: 83.333333%; }
+    .leli-col-lg-11   { flex: 0 0 auto; inline-size: 91.666667%; }
+    .leli-col-lg-12   { flex: 0 0 auto; inline-size: 100%; }
+  }
+
+  /* ========================================================================
+     3. CSS GRID & AUTO-FIT RESPONSIVE GRIDS (Medya Sorgusuz Akıllı Izgara)
+     ======================================================================== */
+  .leli-grid {
+    --leli-grid-cols: 12;
+    --leli-grid-gap: 1.25rem;
+    display: grid;
+    grid-template-columns: repeat(var(--leli-grid-cols), minmax(0, 1fr));
+    gap: var(--leli-grid-gap);
+  }
+
+  .leli-grid-cols-1  { --leli-grid-cols: 1; }
+  .leli-grid-cols-2  { --leli-grid-cols: 2; }
+  .leli-grid-cols-3  { --leli-grid-cols: 3; }
+  .leli-grid-cols-4  { --leli-grid-cols: 4; }
+  .leli-grid-cols-6  { --leli-grid-cols: 6; }
+  .leli-grid-cols-12 { --leli-grid-cols: 12; }
+
+  /* Auto-Fit Grids: Ekran genişliğine göre sütun sayısını otomatik ayarlar */
+  .leli-grid-auto-sm {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 180px), 1fr));
+    gap: 1rem;
+  }
+
+  .leli-grid-auto-md {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: 1.25rem;
+  }
+
+  .leli-grid-auto-lg {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+    gap: 1.5rem;
+  }
+
+  /* Sütun ve Satır Yayılma (Span) Sınıfları */
+  .leli-span-1    { grid-column: span 1 / span 1; }
+  .leli-span-2    { grid-column: span 2 / span 2; }
+  .leli-span-3    { grid-column: span 3 / span 3; }
+  .leli-span-4    { grid-column: span 4 / span 4; }
+  .leli-span-6    { grid-column: span 6 / span 6; }
+  .leli-span-8    { grid-column: span 8 / span 8; }
+  .leli-span-12   { grid-column: span 12 / span 12; }
+  .leli-span-full { grid-column: 1 / -1; }
+
+  .leli-row-span-2 { grid-row: span 2 / span 2; }
+  .leli-row-span-3 { grid-row: span 3 / span 3; }
+
+  /* ========================================================================
+     4. BENTO GRID SYSTEM (Apple / Modern Dashboard Tarzı Kutu Düzeni)
+     ======================================================================== */
+  .leli-bento {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: minmax(140px, auto);
+    gap: 1.25rem;
+  }
+
+  .leli-bento-item {
+    background-color: var(--leli-surface);
+    border: 1px solid var(--leli-border);
+    border-radius: var(--leli-radius-lg);
+    padding: 1.35rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: border-color var(--leli-duration) var(--leli-ease);
+
+    &:hover {
+      border-color: var(--leli-primary);
+    }
+  }
+
+  .leli-bento-wide { grid-column: span 2; }
+  .leli-bento-tall { grid-row: span 2; }
+  .leli-bento-hero { grid-column: span 2; grid-row: span 2; }
+  .leli-bento-full { grid-column: 1 / -1; }
+
+  @media (width < 768px) {
+    .leli-bento {
+      grid-template-columns: 1fr;
+    }
+    .leli-bento-wide,
+    .leli-bento-tall,
+    .leli-bento-hero {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+  }
+
+  /* ========================================================================
+     5. PAGE LAYOUT SHELLS (Hazır Sayfa İskeleti Kalıpları)
+     ======================================================================== */
+  /* A) Sol Sidebar + Sağ Ana İçerik (Admin / Dashboard İskeleti) */
+  .leli-layout-sidebar {
+    --sidebar-width: 250px;
+    display: grid;
+    grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+    min-block-size: 100%;
+    gap: 1.5rem;
+
+    @media (width < 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* B) Sağ Sidebar + Sol Ana İçerik (Blog / Makale İskeleti) */
+  .leli-layout-sidebar-right {
+    --sidebar-width: 280px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--sidebar-width);
+    gap: 2rem;
+
+    @media (width < 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* C) Holy Grail Layout (Sol Menü + Orta İçerik + Sağ Panel) */
+  .leli-layout-holy-grail {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr) 220px;
+    gap: 1.5rem;
+
+    @media (width < 992px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* D) Split Screen (50% / 50% Giriş / Tanıtım Ekranı İskeleti) */
+  .leli-layout-split {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+    align-items: center;
+
+    @media (width < 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ========================================================================
+     6. STACK, CLUSTER & FLEX HELPERS (Dikey Yığın & Yatay Küme)
+     ======================================================================== */
+  /* Dikey Yığın (.leli-stack): Alt alta elemanlar arası eşit boşluk */
+  .leli-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--stack-gap, 1rem);
+  }
+  .leli-stack-sm { --stack-gap: 0.5rem; }
+  .leli-stack-lg { --stack-gap: 1.75rem; }
+
+  /* Yatay Küme (.leli-cluster): Yan yana sığdıkça dizilen, taşarsa alt satıra geçen grup */
+  .leli-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--cluster-gap, 0.75rem);
+  }
+
+  /* Bölüm Ayırıcı Çizgi (.leli-divider) */
+  .leli-divider {
+    border: none;
+    border-block-start: 1px solid var(--leli-border);
+    margin-block: 1.5rem;
+    inline-size: 100%;
+  }
+
+  /* Flex Utilities */
+  .leli-d-flex          { display: flex; }
+  .leli-flex-row        { flex-direction: row; }
+  .leli-flex-col        { flex-direction: column; }
+  .leli-flex-wrap       { flex-wrap: wrap; }
+  .leli-justify-start   { justify-content: flex-start; }
+  .leli-justify-center  { justify-content: center; }
+  .leli-justify-between { justify-content: space-between; }
+  .leli-justify-end     { justify-content: flex-end; }
+  .leli-items-start     { align-items: flex-start; }
+  .leli-items-center    { align-items: center; }
+  .leli-items-end       { align-items: flex-end; }
+  .leli-gap-1           { gap: 0.5rem; }
+  .leli-gap-2           { gap: 1rem; }
+  .leli-gap-3           { gap: 1.5rem; }
+  .leli-gap-4           { gap: 2.25rem; }
+}

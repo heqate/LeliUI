@@ -1,0 +1,201 @@
+/* ==========================================================================
+   leliUI - Header & Navbar Component (Multi-Variant)
+   Variants: default, glass, floating, bordered, dark, minimal
+   Positions: sticky, fixed, static
+   ========================================================================== */
+
+@layer components {
+  .leli-navbar {
+    --leli-accent: var(--leli-primary);
+    --navbar-height: 4rem;
+    --navbar-px: 1.5rem;
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    inline-size: 100%;
+    min-block-size: var(--navbar-height);
+    padding-inline: var(--navbar-px);
+    background-color: var(--leli-surface);
+    color: var(--leli-text);
+    border-block-end: 1px solid var(--leli-border);
+    box-sizing: border-box;
+    z-index: 40;
+    transition: background-color var(--leli-duration) var(--leli-ease),
+                border-color var(--leli-duration) var(--leli-ease),
+                box-shadow var(--leli-duration) var(--leli-ease);
+
+    /* Inner Container Alignment */
+    & > .leli-container,
+    & > .leli-container-fluid,
+    & > .leli-navbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      inline-size: 100%;
+      gap: 1.5rem;
+    }
+
+    /* Sticky & Fixed Modifiers */
+    &:where([data-position="sticky"], .leli-navbar-sticky) {
+      position: sticky;
+      inset-block-start: 0;
+    }
+
+    /* Size Modifiers */
+    &:where([data-size="sm"], .leli-navbar-sm) {
+      --navbar-height: 3.25rem;
+    }
+    &:where([data-size="lg"], .leli-navbar-lg) {
+      --navbar-height: 4.75rem;
+    }
+
+    /* Variant: Glass (Blurred translucent topbar) */
+    &:where([data-variant="glass"], .leli-navbar-glass) {
+      background-color: var(--leli-surface-glass);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+    }
+
+    /* Variant: Elevated (Shadow, no border) */
+    &:where([data-variant="elevated"], .leli-navbar-elevated) {
+      border-block-end-color: transparent;
+      box-shadow: var(--leli-shadow-md);
+    }
+
+    /* Variant: Floating Pill / Island Header */
+    &:where([data-variant="floating"], .leli-navbar-floating) {
+      border: 1px solid var(--leli-border);
+      border-radius: var(--leli-radius-xl);
+      box-shadow: var(--leli-shadow-md);
+      background-color: var(--leli-surface-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    /* Variant: Brutal */
+    &:where([data-variant="brutal"], .leli-navbar-brutal) {
+      border: 2px solid var(--leli-border-strong);
+      box-shadow: var(--leli-shadow-brutal);
+    }
+
+    /* Variant: Inverted / Contrast Dark */
+    &:where([data-variant="contrast"], .leli-navbar-contrast) {
+      background-color: #09090b;
+      color: #fafafa;
+      border-block-end-color: #27272a;
+
+      & .leli-navbar-brand,
+      & .leli-nav-link.is-active {
+        color: #fafafa;
+      }
+
+      & .leli-nav-link {
+        color: #a1a1aa;
+        &:hover {
+          color: #fafafa;
+          background-color: #18181b;
+        }
+      }
+    }
+  }
+
+  /* Brand / Logo Area */
+  .leli-navbar-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--leli-text);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  /* Navigation Links Group */
+  .leli-navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .leli-nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.8rem;
+    border-radius: var(--leli-radius-sm);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--leli-text-muted);
+    text-decoration: none;
+    transition: color var(--leli-duration) var(--leli-ease),
+                background-color var(--leli-duration) var(--leli-ease);
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+
+    &:hover {
+      color: var(--leli-text);
+      background-color: var(--leli-surface-2);
+    }
+
+    &.is-active,
+    &[aria-current="page"] {
+      color: var(--leli-text);
+      font-weight: 600;
+      background-color: var(--leli-surface-2);
+    }
+  }
+
+  /* Right Actions Area (Search, Buttons, Profile) */
+  .leli-navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  /* Search Input inside Navbar */
+  .leli-navbar-search {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.38rem 0.75rem;
+    border-radius: var(--leli-radius-md);
+    border: 1px solid var(--leli-border);
+    background-color: var(--leli-surface-2);
+    color: var(--leli-text-muted);
+    font-size: 0.8125rem;
+    min-inline-size: 200px;
+
+    & input {
+      border: none;
+      background: transparent;
+      color: var(--leli-text);
+      font-family: inherit;
+      font-size: 0.8125rem;
+      inline-size: 100%;
+      outline: none;
+
+      &::placeholder {
+        color: var(--leli-text-muted);
+      }
+    }
+
+    & kbd {
+      font-family: var(--leli-font-mono);
+      font-size: 0.7rem;
+      padding: 0.1rem 0.35rem;
+      border-radius: var(--leli-radius-xs);
+      background-color: var(--leli-surface);
+      border: 1px solid var(--leli-border);
+      color: var(--leli-text-muted);
+    }
+  }
+}

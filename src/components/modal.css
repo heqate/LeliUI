@@ -1,0 +1,210 @@
+/* ==========================================================================
+   leliUI - Modal & Dialog Component
+   Modern HTML5 <dialog> with @starting-style, transition-behavior: allow-discrete,
+   light dismiss (closedby="any"), and Sakura Pink accents
+   ========================================================================== */
+
+@layer components {
+  /* --- 1. Dialog Base --- */
+  dialog.leli-modal {
+    --leli-modal-max-w: 34rem;
+    --leli-modal-bg: var(--leli-surface-1);
+    --leli-modal-border: var(--leli-border);
+    --leli-modal-radius: var(--leli-radius-lg);
+    --leli-modal-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.5), 0 0 20px -5px rgba(244, 114, 182, 0.15);
+
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    padding: 0;
+    width: min(90vw, var(--leli-modal-max-w));
+    max-height: 85vh;
+    background-color: var(--leli-modal-bg);
+    border: 1px solid var(--leli-modal-border);
+    border-radius: var(--leli-modal-radius);
+    color: var(--leli-text);
+    box-shadow: var(--leli-modal-shadow);
+    overflow: hidden;
+    flex-direction: column;
+
+    /* Base closed state for discrete transition */
+    opacity: 0;
+    transform: scale(0.94) translateY(8px);
+    transition-property: opacity, transform, display, overlay;
+    transition-duration: 220ms;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    transition-behavior: allow-discrete;
+
+    &[open] {
+      display: flex;
+      opacity: 1;
+      transform: scale(1) translateY(0);
+
+      /* Modern entry animation */
+      @starting-style {
+        opacity: 0;
+        transform: scale(0.94) translateY(8px);
+      }
+    }
+
+    /* Backdrop Styling & Animation */
+    &::backdrop {
+      background-color: rgba(0, 0, 0, 0);
+      backdrop-filter: blur(0px);
+      transition-property: background-color, backdrop-filter, display, overlay;
+      transition-duration: 220ms;
+      transition-timing-function: ease-out;
+      transition-behavior: allow-discrete;
+    }
+
+    &[open]::backdrop {
+      background-color: rgba(12, 10, 14, 0.75);
+      backdrop-filter: blur(8px);
+
+      @starting-style {
+        background-color: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(0px);
+      }
+    }
+  }
+
+  /* Closing state fallback for browsers without allow-discrete on display */
+  dialog.leli-modal[data-closing] {
+    opacity: 0 !important;
+    transform: scale(0.94) translateY(8px) !important;
+  }
+  dialog.leli-modal[data-closing]::backdrop {
+    background-color: rgba(0, 0, 0, 0) !important;
+    backdrop-filter: blur(0px) !important;
+  }
+
+  /* --- 2. Modal Structure --- */
+  .leli-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.15rem 1.5rem;
+    border-bottom: 1px solid var(--leli-border);
+    background-color: var(--leli-surface-2);
+
+    & .leli-modal-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--leli-text);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    & .leli-modal-close {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      inline-size: 2rem;
+      block-size: 2rem;
+      border-radius: var(--leli-radius-sm);
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--leli-text-muted);
+      cursor: pointer;
+      font-size: 1.25rem;
+      line-height: 1;
+      padding: 0;
+      transition: all var(--leli-duration) var(--leli-ease);
+
+      &:hover {
+        background-color: var(--leli-surface-3);
+        color: var(--leli-primary);
+        border-color: var(--leli-border);
+      }
+    }
+  }
+
+  .leli-modal-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+    font-size: 0.925rem;
+    line-height: 1.6;
+    color: var(--leli-text-muted);
+
+    & > *:first-child { margin-top: 0; }
+    & > *:last-child { margin-bottom: 0; }
+  }
+
+  .leli-modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--leli-border);
+    background-color: var(--leli-surface-1);
+  }
+
+  /* --- 3. Modal Sizes --- */
+  dialog.leli-modal[data-size="sm"],
+  dialog.leli-modal.leli-modal-sm {
+    --leli-modal-max-w: 24rem;
+  }
+  dialog.leli-modal[data-size="lg"],
+  dialog.leli-modal.leli-modal-lg {
+    --leli-modal-max-w: 48rem;
+  }
+  dialog.leli-modal[data-size="xl"],
+  dialog.leli-modal.leli-modal-xl {
+    --leli-modal-max-w: 64rem;
+  }
+  dialog.leli-modal[data-size="full"],
+  dialog.leli-modal.leli-modal-full {
+    --leli-modal-max-w: 100vw;
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  /* --- 4. Variants --- */
+  /* Glass Modal */
+  dialog.leli-modal[data-variant="glass"] {
+    background-color: var(--leli-surface-glass);
+    backdrop-filter: blur(20px);
+    border-color: color-mix(in srgb, var(--leli-primary) 30%, var(--leli-border));
+
+    & .leli-modal-header {
+      background-color: transparent;
+    }
+    & .leli-modal-footer {
+      background-color: transparent;
+    }
+  }
+
+  /* Brutal Modal */
+  dialog.leli-modal[data-variant="brutal"] {
+    border: 3px solid var(--leli-border-strong);
+    border-radius: 4px;
+    box-shadow: 6px 6px 0 var(--leli-border-strong);
+
+    & .leli-modal-header {
+      border-bottom: 2px solid var(--leli-border-strong);
+    }
+    & .leli-modal-footer {
+      border-top: 2px solid var(--leli-border-strong);
+    }
+  }
+
+  /* Accent Top Border Modal */
+  dialog.leli-modal[data-variant="accent"] {
+    border-top: 4px solid var(--leli-primary);
+  }
+
+  /* Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    dialog.leli-modal,
+    dialog.leli-modal::backdrop {
+      transform: none !important;
+      transition-duration: 0.05s !important;
+    }
+  }
+}

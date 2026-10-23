@@ -1,0 +1,259 @@
+{
+  "schema_version": "1.0",
+  "name_for_human": "leliUI Component Library",
+  "name_for_model": "leli_ui",
+  "version": "1.0.12",
+  "description_for_model": "Zero-dependency multi-variant HTML/CSS/JS UI component library with Sakura Pink theme and dark mode default. Use leliUI classes (.leli-container, .leli-row, .leli-col-*, .leli-bento, .leli-navbar, .leli-btn, .leli-input, .leli-switch, .leli-checkbox, .leli-badge, .leli-modal, .leli-toast, .leli-card, .leli-tabs, .leli-accordion, .leli-table, .leli-pagination, .leli-progress, .leli-skeleton, .leli-avatar) and data-variant attributes to build clean responsive interfaces.",
+  "endpoints": {
+    "llms_txt": "http://34.2.63.150:5000/llms.txt",
+    "llms_full_txt": "http://34.2.63.150:5000/llms-full.txt",
+    "registry_json": "http://34.2.63.150:5000/registry/components.json",
+    "css_bundle": "http://34.2.63.150:5000/dist/leli.css",
+    "js_bundle": "http://34.2.63.150:5000/dist/leli.js"
+  },
+  "components": [
+    {
+      "name": "grid",
+      "title": "Grid & Layout System",
+      "category": "Layout & Structure",
+      "variants": [
+        "container",
+        "12-col",
+        "responsive (sm/md/lg/xl)",
+        "gutters",
+        "css-grid",
+        "bento",
+        "flex-layouts"
+      ],
+      "jsRequired": false,
+      "css_url": "http://34.2.63.150:5000/src/components/grid.css"
+    },
+    {
+      "name": "navbar",
+      "title": "Header & Navigation Bar",
+      "category": "Layout & Structure",
+      "variants": [
+        "default",
+        "glass",
+        "elevated",
+        "floating",
+        "contrast",
+        "brutal"
+      ],
+      "jsRequired": false,
+      "css_url": "http://34.2.63.150:5000/src/components/navbar.css"
+    },
+    {
+      "name": "button",
+      "title": "Button & Button Group",
+      "category": "Forms & Actions",
+      "variants": [
+        "solid",
+        "outlined",
+        "soft",
+        "ghost",
+        "glass",
+        "gradient",
+        "brutal",
+        "link"
+      ],
+      "jsRequired": false,
+      "css_url": "http://34.2.63.150:5000/src/components/button.css"
+    },
+    {
+      "name": "input",
+      "title": "Form Inputs & Floating Labels",
+      "category": "Forms & Actions",
+      "variants": [
+        "default",
+        "glass",
+        "soft",
+        "brutal",
+        "floating-label",
+        "input-group"
+      ],
+      "jsRequired": true,
+      "css_url": "http://34.2.63.150:5000/src/components/input.css"
+    },
+    {
+      "name": "form-controls",
+      "title": "Switch, Checkbox & Radio",
+      "category": "Forms & Actions",
+      "variants": [
+        "switch",
+        "checkbox",
+        "radio",
+        "choice-card",
+        "brutal"
+      ],
+      "jsRequired": false,
+      "css_url": "http://34.2.63.150:5000/src/components/form-controls.css"
+    },
+    {
+      "name": "badge",
+      "title": "Badge & Status Indicator",
+      "category": "Data & Display",
+      "variants": [
+        "solid",
+        "soft",
+        "outlined",
+        "glass",
+        "brutal",
+        "pill",
+        "dot"
+      ],
+      "jsRequired": false,
+      "css_url": "http://34.2.63.150:5000/src/components/badge.css"
+    },
+    {
+      "name": "modal",
+      "title": "Modal & Dialog",
+      "category": "Overlays & Feedback",
+      "variants": [
+        "default",
+        "glass",
+        "brutal",
+        "accent-top"
+      ],
+      "jsRequired": true,
+      "css_url": "http://34.2.63.150:5000/src/components/modal.css"
+    },
+    {
+      "name": "toast",
+      "title": "Toast Notification",
+      "category": "Overlays & Feedback",
+      "variants": [
+        "primary",
+        "success",
+        "warning",
+        "danger",
+        "glass",
+        "brutal"
+      ],
+      "jsRequired": true,
+      "css_url": "http://34.2.63.150:5000/src/components/toast.css"
+    },
+    {
+      "name": "card",
+      "title": "Card Component",
+      "category": "Data & Display",
+      "variants": [
+        "elevated",
+        "outlined",
+        "soft",
+        "glass",
+        "gradient",
+        "brutal",
+        "accent-top",
+        "horizontal"
+      ],
+      "jsRequired": false,
+      "css_url": "http://34.2.63.150:5000/src/components/card.css"
+    },
+    {
+      "name": "tabs",
+      "title": "Tabs Navigation",
+      "category": "Data & Display",
+      "variants": [
+        "underline",
+        "pills",
+        "segmented",
+        "soft",
+        "lifted",
+        "brutal",
+        "vertical"
+      ],
+      "jsRequired": true,
+      "css_url": "http://34.2.63.150:5000/src/components/tabs.css"
+    },
+    {
+      "name": "accordion",
+      "title": "Accordion & Collapse",
+      "category": "Data & Display",
+      "variants": [
+        "bordered",
+        "separated",
+        "flush",
+        "soft",
+        "glass",
+        "brutal"
+      ],
+      "jsRequired": false,
+      "css_url": "http://34.2.63.150:5000/src/components/accordion.css"
+    },
+    {
+      "name": "table",
+      "title": "Responsive Data Table",
+      "category": "Data & Display",
+      "variants": [
+        "default",
+        "striped",
+        "hoverable",
+        "bordered",
+        "glass",
+        "brutal"
+      ],
+      "jsRequired": true,
+      "css_url": "http://34.2.63.150:5000/src/components/table.css"
+    },
+    {
+      "name": "pagination",
+      "title": "Pagination Bar",
+      "category": "Data & Display",
+      "variants": [
+        "default",
+        "pills",
+        "outlined",
+        "minimal",
+        "joined",
+        "brutal"
+      ],
+      "jsRequired": true,
+      "css_url": "http://34.2.63.150:5000/src/components/pagination.css"
+    },
+    {
+      "name": "progress",
+      "title": "Progress Bar",
+      "category": "Data & Display",
+      "variants": [
+        "solid",
+        "gradient",
+        "striped",
+        "animated",
+        "indeterminate",
+        "glow",
+        "brutal"
+      ],
+      "jsRequired": false,
+      "css_url": "http://34.2.63.150:5000/src/components/progress.css"
+    },
+    {
+      "name": "skeleton",
+      "title": "Skeleton Loader",
+      "category": "Data & Display",
+      "variants": [
+        "shimmer",
+        "pulse",
+        "static",
+        "brutal"
+      ],
+      "jsRequired": false,
+      "css_url": "http://34.2.63.150:5000/src/components/skeleton.css"
+    },
+    {
+      "name": "avatar",
+      "title": "Avatar & Avatar Group",
+      "category": "Data & Display",
+      "variants": [
+        "soft",
+        "solid",
+        "outlined",
+        "ring",
+        "gradient",
+        "brutal"
+      ],
+      "jsRequired": false,
+      "css_url": "http://34.2.63.150:5000/src/components/avatar.css"
+    }
+  ]
+}

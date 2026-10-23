@@ -1,0 +1,161 @@
+/* ==========================================================================
+   leliUI - Accordion Component (Multi-Variant)
+   Uses native <details> & <summary> with optional [name] exclusive groups
+   Variants: bordered, separated, flush, soft, glass, brutal
+   ========================================================================== */
+
+@layer components {
+  .leli-accordion {
+    --leli-accent: var(--leli-primary);
+    --leli-accent-soft: var(--leli-primary-soft);
+    display: flex;
+    flex-direction: column;
+    inline-size: 100%;
+    border-radius: var(--leli-radius-lg);
+    border: 1px solid var(--leli-border);
+    background-color: var(--leli-surface);
+    overflow: hidden;
+
+    /* Variant: Separated Cards */
+    &:where([data-variant="separated"], .leli-accordion-separated) {
+      border: none;
+      background: transparent;
+      gap: 0.75rem;
+      overflow: visible;
+
+      & .leli-accordion-item {
+        border: 1px solid var(--leli-border);
+        border-radius: var(--leli-radius-md);
+        background-color: var(--leli-surface);
+        box-shadow: var(--leli-shadow-sm);
+        transition: border-color var(--leli-duration) var(--leli-ease),
+                    box-shadow var(--leli-duration) var(--leli-ease);
+
+        &[open] {
+          border-color: var(--leli-accent);
+          box-shadow: 0 4px 16px -4px var(--leli-accent-soft);
+        }
+      }
+    }
+
+    /* Variant: Flush (No outer border, only bottom dividers) */
+    &:where([data-variant="flush"], .leli-accordion-flush) {
+      border: none;
+      border-radius: 0;
+      background: transparent;
+    }
+
+    /* Variant: Soft Filled */
+    &:where([data-variant="soft"], .leli-accordion-soft) {
+      border: none;
+      background: transparent;
+      gap: 0.5rem;
+
+      & .leli-accordion-item {
+        border: none;
+        border-radius: var(--leli-radius-md);
+        background-color: var(--leli-surface-2);
+
+        &[open] {
+          background-color: var(--leli-accent-soft);
+        }
+      }
+    }
+
+    /* Variant: Glass */
+    &:where([data-variant="glass"], .leli-accordion-glass) {
+      background-color: var(--leli-surface-glass);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid color-mix(in srgb, var(--leli-text) 12%, transparent);
+    }
+
+    /* Variant: Brutal */
+    &:where([data-variant="brutal"], .leli-accordion-brutal) {
+      border: none;
+      background: transparent;
+      gap: 0.75rem;
+      overflow: visible;
+
+      & .leli-accordion-item {
+        border: 2px solid var(--leli-border-strong);
+        border-radius: var(--leli-radius-xs);
+        background-color: var(--leli-surface);
+        box-shadow: 3px 3px 0px var(--leli-border-strong);
+
+        &[open] {
+          box-shadow: 5px 5px 0px var(--leli-accent);
+        }
+      }
+    }
+  }
+
+  .leli-accordion-item {
+    margin: 0;
+
+    &:not(:last-child) {
+      border-block-end: 1px solid var(--leli-border);
+    }
+  }
+
+  .leli-accordion-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1rem;
+    padding-inline: 1.25rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--leli-text);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    transition: background-color var(--leli-duration) var(--leli-ease),
+                color var(--leli-duration) var(--leli-ease);
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &:hover {
+      color: var(--leli-accent);
+      background-color: color-mix(in srgb, var(--leli-surface-2) 50%, transparent);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--leli-accent);
+      outline-offset: -2px;
+    }
+
+    &::after {
+      content: "";
+      inline-size: 0.55rem;
+      block-size: 0.55rem;
+      border-inline-end: 2px solid currentColor;
+      border-block-end: 2px solid currentColor;
+      transform: rotate(45deg);
+      transition: transform var(--leli-duration) var(--leli-ease);
+      flex-shrink: 0;
+      margin-inline-end: 0.25rem;
+    }
+  }
+
+  .leli-accordion-item[open] > .leli-accordion-trigger {
+    color: var(--leli-accent);
+
+    &::after {
+      transform: rotate(-135deg);
+    }
+  }
+
+  .leli-accordion-content {
+    padding-block-start: 0.25rem;
+    padding-block-end: 1.25rem;
+    padding-inline: 1.25rem;
+    font-size: 0.9rem;
+    color: var(--leli-text-muted);
+    line-height: 1.6;
+    border-block-start: 1px dashed color-mix(in srgb, var(--leli-border) 60%, transparent);
+  }
+}
